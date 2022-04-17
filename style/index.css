@@ -1,1 +1,24 @@
+* {
+	text-align: center;
+}
 
+img {
+	--size: 10rem;
+	
+	display: block;
+	
+	width: var(--size);
+	height: var(--size);
+	
+	border-radius: var(--size);
+	
+	margin: 5px auto;
+}
+
+.icon-links a {
+	color: var(--text)!important;
+}
+
+h2 {
+	margin-top: 0.5rem;
+}
