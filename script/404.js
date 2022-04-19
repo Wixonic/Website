@@ -1,7 +1,7 @@
 onload = () => {
 	const xhr = new XMLHttpRequest();
 	
-	xhr.open("GET","/sitelinks.json",false);
+	xhr.open("GET","/sitelinks.json",true);
 	
 	xhr.responseType = "json";
 	
