@@ -5,3 +5,50 @@
 h2 {
 	margin-top: 0.5rem;
 }
+
+#results {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-auto-rows: 1fr;
+	
+	margin: 0.5rem 0 0 0;
+	padding: 0;
+}
+
+.result {
+	--border-radius: 1rem;
+	
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: repeat(2,1fr);
+	
+	background: var(--background-element);
+	color: var(--text);
+	border: 0.1rem solid var(--background);
+	
+	padding: 0.2rem;
+}
+
+.result:hover {
+	background: var(--element);
+	text-decoration: none;
+}
+
+.result > name {
+	font-weight: 600;
+	font-weight: bold;
+}
+
+.result > ref {
+	color: var(--gray);
+}
+
+#results > .result:first-child {
+	border-top-left-radius: var(--border-radius);
+	border-top-right-radius: var(--border-radius);
+}
+
+#results > .result:last-child {
+	border-bottom-left-radius: var(--border-radius);
+	border-bottom-right-radius: var(--border-radius);
+}
