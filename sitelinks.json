@@ -1,7 +1,9 @@
 {
 	"Home": "/",
+	
 	"WixCertif": "/Certif/",
-	"Homelife": "/Homelife/",
-	"File Lister": "/File-Lister/",
-	"Logger": "/Logger/"
+	"Logger": "/Logger/",
+	
+	"Homelife": "https://www.roblox.com/games/9154714033",
+	"File Lister": "https://github.com/marketplace/actions/file-lister"
 }
