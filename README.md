@@ -1,13 +1,13 @@
 ## File Lister
 <!-- File Lister Display -->
-> **Last Update**: 04/05/2022 12:29:37 UTC
+> **Last Update**: 07/05/2022 10:24:29 UTC
 
 ```
-─── (82 KB) 
+─── (81.9 KB) 
     └── 404.html (2.1 KB)
     └── assets (73 KB) 
         └── logo.jpg (73 KB)
-    └── index.html (2.5 KB)
+    └── index.html (2.4 KB)
     └── script (1.3 KB) 
         └── 404.js (1.3 KB)
         └── index.js (1 B)
