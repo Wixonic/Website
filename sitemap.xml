@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+	
+	<url>
+		
+		<loc>https://wixonic.github.io</loc>
+		
+		<changefreq>monthly</changefreq>
+		
+		<priority>1</priority>
+		
+	</url>
+	
+	<url>
+		
+		<loc>https://wixonic.github.io/Logger</loc>
+		
+		<lastmod>2021-10-28</lastmod>
+		
+		<changefreq>never</changefreq>
+		
+		<priority>0.5</priority>
+		
+	</url>
+	
+	
+	<url>
+		
+		<loc>https://github.com/Wixonic</loc>
+		
+		<priority>0.3</priority>
+		
+	</url>
+	
+	<url>
+		
+		<loc>https://github.com/marketplace/actions/file-lister</loc>
+		
+		<priority>0.2</priority>
+		
+	</url>
+	
+	<url>
+		
+		<loc>https://github.com/Wixonic/File-Lister</loc>
+		
+		<priority>0.1</priority>
+		
+	</url>
+	
+	<url>
+		
+		<loc>https://github.com/Wixonic/Logger</loc>
+		
+		<changefreq>never</changefreq>
+		
+		<priority>0.1</priority>
+		
+	</url>
+	
+</urlset>
