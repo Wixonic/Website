@@ -15,6 +15,15 @@ img {
 	margin: 5px auto;
 }
 
+img.icon {
+	display: inline-block;
+	
+	width: 1rem;
+	height: 1rem;
+	
+	border-radius: 0;
+}
+
 .icon-links a {
 	color: var(--text)!important;
 }
