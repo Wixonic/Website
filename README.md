@@ -1,6 +1,6 @@
 ## File Lister
 <!-- File Lister Display -->
-> **Last Update**: 31/05/2022 18:48:28 UTC
+> **Last Update**: 31/05/2022 18:48:52 UTC
 
 ```
 ─── (2.4 MB) 
@@ -14,7 +14,7 @@
         └── three.js (596.1 KB)
     └── script (1.3 KB) 
         └── 404.js (1.3 KB)
-        └── index.js (1 B)
+        └── index.js (0 B)
     └── sitelinks.json (176 B)
     └── sitemap.xml (1.6 KB)
     └── style (2.9 KB) 
