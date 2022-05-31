@@ -1,6 +1,6 @@
 ## File Lister
 <!-- File Lister Display -->
-> **Last Update**: 31/05/2022 18:48:52 UTC
+> **Last Update**: 31/05/2022 18:49:17 UTC
 
 ```
 ─── (2.4 MB) 
@@ -17,9 +17,9 @@
         └── index.js (0 B)
     └── sitelinks.json (176 B)
     └── sitemap.xml (1.6 KB)
-    └── style (2.9 KB) 
+    └── style (3 KB) 
         └── 404.css (856 B)
-        └── index.css (246 B)
+        └── index.css (336 B)
         └── main.css (1.8 KB)
 ```
 <!-- File Lister Display -->
