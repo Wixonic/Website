@@ -1,6 +1,9 @@
 {
 	"Home": "/",
 	
+	"WebCraft": "/WebCraft",
+	"WebCraft Edit": "/WebCraft/Edit",
+	
 	"Logger": "/Logger",
 	
 	"File Lister": "https://github.com/marketplace/actions/file-lister"

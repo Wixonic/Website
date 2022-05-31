@@ -14,13 +14,63 @@
 	
 	<url>
 		
+		<loc>https://wixonic.github.io/WebCraft</loc>
+		
+		<changefreq>monthly</changefreq>
+		
+		<priority>0.5</priority>
+		
+	</url>
+	
+	<url>
+		
+		<loc>https://wixonic.github.io/WebCraft/Game</loc>
+		
+		<changefreq>monthly</changefreq>
+		
+		<priority>0.4</priority>
+		
+	</url>
+	
+	<url>
+		
+		<loc>https://wixonic.github.io/WebCraft/Edit</loc>
+		
+		<changefreq>monthly</changefreq>
+		
+		<priority>0.4</priority>
+		
+	</url>
+	
+	<url>
+		
+		<loc>https://wixonic.github.io/WebCraft/Edit/Map</loc>
+		
+		<changefreq>monthly</changefreq>
+		
+		<priority>0.4</priority>
+		
+	</url>
+	
+	<url>
+		
+		<loc>https://wixonic.github.io/WebCraft/Edit/Textures</loc>
+		
+		<changefreq>monthly</changefreq>
+		
+		<priority>0.4</priority>
+		
+	</url>
+	
+	<url>
+		
 		<loc>https://wixonic.github.io/Logger</loc>
 		
 		<lastmod>2021-10-28</lastmod>
 		
 		<changefreq>never</changefreq>
 		
-		<priority>0.5</priority>
+		<priority>0.3</priority>
 		
 	</url>
 	
@@ -29,7 +79,7 @@
 		
 		<loc>https://github.com/Wixonic</loc>
 		
-		<priority>0.3</priority>
+		<priority>0.2</priority>
 		
 	</url>
 	
