@@ -1,12 +1,13 @@
 ## File Lister
 <!-- File Lister Display -->
-> **Last Update**: 31/05/2022 18:48:10 UTC
+> **Last Update**: 31/05/2022 18:48:28 UTC
 
 ```
 ─── (2.4 MB) 
     └── 404.html (2.1 KB)
-    └── assets (73 KB) 
+    └── assets (73.4 KB) 
         └── logo.jpg (73 KB)
+        └── roblox-logo.svg (358 B)
     └── index.html (2.4 KB)
     └── libraries (2.3 MB) 
         └── fontawesome.js (1.7 MB)
