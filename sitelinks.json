@@ -1,10 +1,10 @@
 {
-	"Home": "/",
+	"Home": "https://wixonic.fr",
 	
-	"WebCraft": "/WebCraft",
-	"WebCraft Edit": "/WebCraft/Edit",
+	"WebCraft": "https://webcraft.wixonic.fr",
+	"WebCraft Edit": "https://webcraft.wixonic.fr/edit",
 	
-	"Logger": "/Logger",
+	"Logger": "https://wixonic.github.io/Logger",
 	
-	"File Lister": "https://github.com/marketplace/actions/file-lister"
+	"Assets": "https://github.com/Wixonic/Assets"
 }
