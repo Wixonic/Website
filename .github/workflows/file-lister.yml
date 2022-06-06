@@ -1,7 +1,8 @@
 name: File Lister
 
 on:
-  push: ["Default"]
+  push:
+    branches: ["Default"]
 
 jobs:
   file-lister:
