@@ -10,7 +10,7 @@
 
 ## File Lister
 <!-- File Lister Display -->
-> **Last Update**: 06/06/2022 15:13:37 UTC
+> **Last Update**: 06/06/2022 15:15:42 UTC
 
 ```
 ─── (13.3 KB) 
@@ -23,7 +23,7 @@
     └── sitemap.xml (672 B)
     └── style (3 KB) 
         └── 404.css (856 B)
-        └── index.css (336 B)
+        └── index.css (370 B)
         └── main.css (1.8 KB)
 ```
 <!-- File Lister Display -->
