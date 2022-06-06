@@ -13,4 +13,4 @@ jobs:
         uses: Wixonic/File-Lister@1.0.1
         with:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          ignore: ".editorconfig,.gitattribute,.github,.gitignore,LICENSE.txt,README.md"
+          ignore: ".editorconfig,.gitattribute,.github,.gitignore,LICENSE.txt,README.md,CNAME"
