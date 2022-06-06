@@ -10,19 +10,13 @@
 
 ## File Lister
 <!-- File Lister Display -->
-> **Last Update**: 06/06/2022 08:53:46 UTC
+> **Last Update**: 06/06/2022 08:54:31 UTC
 
 ```
-─── (2.4 MB) 
+─── (9.8 KB) 
     └── 404.html (2.1 KB)
     └── CNAME (10 B)
-    └── assets (73.4 KB) 
-        └── logo.jpg (73 KB)
-        └── roblox-logo.svg (358 B)
     └── index.html (2.5 KB)
-    └── libraries (2.3 MB) 
-        └── fontawesome.js (1.7 MB)
-        └── three.js (596.1 KB)
     └── script (1.3 KB) 
         └── 404.js (1.3 KB)
         └── index.js (0 B)
