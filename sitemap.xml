@@ -4,7 +4,7 @@
 	
 	<url>
 		
-		<loc>https://wixonic.github.io</loc>
+		<loc>https://wixonic.fr</loc>
 		
 		<changefreq>monthly</changefreq>
 		
@@ -14,51 +14,21 @@
 	
 	<url>
 		
-		<loc>https://wixonic.github.io/WebCraft</loc>
+		<loc>https://webcraft.wixonic.fr</loc>
 		
-		<changefreq>monthly</changefreq>
+		<changefreq>weekly</changefreq>
 		
-		<priority>0.5</priority>
-		
-	</url>
-	
-	<url>
-		
-		<loc>https://wixonic.github.io/WebCraft/Game</loc>
-		
-		<changefreq>monthly</changefreq>
-		
-		<priority>0.4</priority>
+		<priority>0.9</priority>
 		
 	</url>
 	
 	<url>
 		
-		<loc>https://wixonic.github.io/WebCraft/Edit</loc>
+		<loc>https://webcraft.wixonic.fr/edit</loc>
 		
 		<changefreq>monthly</changefreq>
 		
-		<priority>0.4</priority>
-		
-	</url>
-	
-	<url>
-		
-		<loc>https://wixonic.github.io/WebCraft/Edit/Map</loc>
-		
-		<changefreq>monthly</changefreq>
-		
-		<priority>0.4</priority>
-		
-	</url>
-	
-	<url>
-		
-		<loc>https://wixonic.github.io/WebCraft/Edit/Textures</loc>
-		
-		<changefreq>monthly</changefreq>
-		
-		<priority>0.4</priority>
+		<priority>0.8</priority>
 		
 	</url>
 	
@@ -71,41 +41,6 @@
 		<changefreq>never</changefreq>
 		
 		<priority>0.3</priority>
-		
-	</url>
-	
-	
-	<url>
-		
-		<loc>https://github.com/Wixonic</loc>
-		
-		<priority>0.2</priority>
-		
-	</url>
-	
-	<url>
-		
-		<loc>https://github.com/marketplace/actions/file-lister</loc>
-		
-		<priority>0.2</priority>
-		
-	</url>
-	
-	<url>
-		
-		<loc>https://github.com/Wixonic/File-Lister</loc>
-		
-		<priority>0.1</priority>
-		
-	</url>
-	
-	<url>
-		
-		<loc>https://github.com/Wixonic/Logger</loc>
-		
-		<changefreq>never</changefreq>
-		
-		<priority>0.1</priority>
 		
 	</url>
 	
