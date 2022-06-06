@@ -10,12 +10,11 @@
 
 ## File Lister
 <!-- File Lister Display -->
-> **Last Update**: 06/06/2022 08:54:41 UTC
+> **Last Update**: 06/06/2022 08:55:05 UTC
 
 ```
 ─── (9.8 KB) 
     └── 404.html (2.1 KB)
-    └── CNAME (10 B)
     └── index.html (2.5 KB)
     └── script (1.3 KB) 
         └── 404.js (1.3 KB)
