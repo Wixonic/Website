@@ -14,22 +14,3 @@ img {
 	
 	margin: 5px auto;
 }
-
-img.icon {
-	display: inline-block;
-	
-	width: 1.5rem;
-	height: 1.5rem;
-	
-	border-radius: 0;
-	
-	vertical-align: baseline;
-}
-
-.icon-links a {
-	color: var(--text)!important;
-}
-
-h2 {
-	margin-top: 0.5rem;
-}
