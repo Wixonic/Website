@@ -10,20 +10,20 @@
 
 ## File Lister
 <!-- File Lister Display -->
-> **Last Update**: 06/06/2022 20:44:30 UTC
+> **Last Update**: 06/06/2022 20:45:27 UTC
 
 ```
-─── (13.3 KB) 
+─── (12.7 KB) 
     └── 404.html (3.9 KB)
-    └── index.html (4.3 KB)
+    └── index.html (3.8 KB)
     └── script (1.3 KB) 
         └── 404.js (1.3 KB)
         └── index.js (0 B)
     └── sitelinks.json (233 B)
     └── sitemap.xml (672 B)
-    └── style (3 KB) 
+    └── style (2.8 KB) 
         └── 404.css (856 B)
-        └── index.css (370 B)
+        └── index.css (167 B)
         └── main.css (1.8 KB)
 ```
 <!-- File Lister Display -->
