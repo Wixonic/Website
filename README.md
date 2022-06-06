@@ -10,12 +10,12 @@
 
 ## File Lister
 <!-- File Lister Display -->
-> **Last Update**: 06/06/2022 08:10:10 UTC
+> **Last Update**: 06/06/2022 08:11:44 UTC
 
 ```
 ─── (2.4 MB) 
     └── 404.html (2.1 KB)
-    └── CNAME (14 B)
+    └── CNAME (10 B)
     └── assets (73.4 KB) 
         └── logo.jpg (73 KB)
         └── roblox-logo.svg (358 B)
