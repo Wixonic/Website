@@ -1,8 +1,12 @@
 {
 	"Home": "https://wixonic.fr",
 	"WebCraft": "https://webcraft.wixonic.fr",
+	"Wix Productions": "https://productions.wixonic.fr",
 	
-	"Logger": "https://wixonic.github.io/Logger",
+	"Status": "https://status.wixonic.fr",
 	
-	"Assets": "https://github.com/Wixonic/Assets"
+	"File Lister": "https://file-lister.wixonic.fr",
+	"Logger": "https://logger.wixonic.fr",
+	
+	"Assets": "https://assets.wixonic.fr"
 }
