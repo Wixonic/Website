@@ -28,6 +28,12 @@
 	
 	<url>
 		
+		<loc>https://perftool.wixonic.fr</loc>
+		
+	</url>
+	
+	<url>
+		
 		<loc>https://file-lister.wixonic.fr</loc>
 		
 		<changefreq>never</changefreq>
