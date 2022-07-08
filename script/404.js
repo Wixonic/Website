@@ -1,7 +1,7 @@
 onload = () => {
 	const xhr = new XMLHttpRequest();
 	
-	xhr.open("GET","/sitelinks.json",true);
+	xhr.open("GET","https://wixonic.fr/sitelinks.json",true);
 	
 	xhr.responseType = "json";
 	
