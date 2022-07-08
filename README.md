@@ -7,10 +7,10 @@
 
 ## File Lister
 <!-- File Lister Display -->
-> **Last Update**: 08/07/2022 11:46:48 UTC
+> **Last Update**: 08/07/2022 21:21:18 UTC
 
 ```
-─── (9.3 KB) 
+─── (9.2 KB) 
     └── 404.html (1.9 KB)
     └── index.html (2 KB)
     └── script (1.3 KB) 
@@ -18,9 +18,9 @@
         └── index.js (0 B)
     └── sitelinks.json (355 B)
     └── sitemap.xml (944 B)
-    └── style (2.8 KB) 
+    └── style (2.7 KB) 
         └── 404.css (856 B)
         └── index.css (167 B)
-        └── main.css (1.8 KB)
+        └── main.css (1.7 KB)
 ```
 <!-- File Lister Display -->
