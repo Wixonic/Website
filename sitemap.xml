@@ -54,17 +54,25 @@
 	
 	<url>
 		
-		<loc>https://assets.wixonic.fr</loc>
+		<loc>https://status.wixonic.fr</loc>
 		
-		<changefreq>weekly</changefreq>
+		<changefreq>daily</changefreq>
 		
 	</url>
 	
 	<url>
 		
-		<loc>https://status.wixonic.fr</loc>
+		<loc>https://admin.webcraft.wixonic.fr</loc>
 		
-		<changefreq>daily</changefreq>
+		<changefreq>monthly</changefreq>
+		
+	</url>
+	
+	<url>
+		
+		<loc>https://assets.wixonic.fr</loc>
+		
+		<changefreq>weekly</changefreq>
 		
 	</url>
 	
