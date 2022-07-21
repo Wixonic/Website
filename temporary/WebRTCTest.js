@@ -28,14 +28,16 @@ onload = () => {
 	
 	document.getElementById("share").addEventListener("click",share);
 	
+	window.pc = new RTCPeerConnection();
+	
 	log("Ready");
 };
 
 const share = async () => {
 	log("Creating room...");
 	
-	const offer = await peerConnection.createOffer();
-	await peerConnection.setLocalDescription(offer);
+	const offer = await pc.createOffer();
+	await pc.setLocalDescription(offer);
 	
 	log("Offer created");
 	
