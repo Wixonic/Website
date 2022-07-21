@@ -26,14 +26,14 @@ onload = () => {
 	
 	window.db = getDatabase(app);
 	
-	document.getElementById("share").addEventListener("click",share);
+	document.getElementById("create").addEventListener("click",create);
 	
 	window.pc = new RTCPeerConnection();
 	
 	log("Ready");
 };
 
-const share = async () => {
+const create = async () => {
 	log("Creating room...");
 	
 	const offer = await pc.createOffer();
@@ -51,14 +51,18 @@ const share = async () => {
 	const roomRef = ref(db,`rooms/${Math.round(Math.random() * (Math.pow(36,8) - 1001) + 1000).toString(36)}`);
 	set(roomRef,roomWithOffer);
 	
-	log(`Room created (${roomRef.key})`);
+	log("Room created");
+    
+    setId(roomRef.key);
 	
 	roomRef.onSnapshot(async snapshot => {
 		const data = snapshot.data();
 		if (!pc.currentRemoteDescription && data.answer) {
-            console.log("Set remote description: ",data.answer);
+            log(`Set remote description: ${data.answer}`);
             const answer = new RTCSessionDescription(data.answer)
             await pc.setRemoteDescription(answer);
         }
     });
 };
+
+const setId = (id) => document.getElementById("header").innerHTML = `<span style="text-align: center;">${id}</span>`;
