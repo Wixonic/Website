@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.0/firebase-app.js";
-import { getDatabase, ref, set, push, onValue } from "https://www.gstatic.com/firebasejs/9.9.0/firebase-database.js";
+import { getDatabase, ref, get, set, update, push, onValue } from "https://www.gstatic.com/firebasejs/9.9.0/firebase-database.js";
 
 const log = (t) => {
 	const l = document.createElement("div");
@@ -27,6 +27,7 @@ onload = () => {
 	window.db = getDatabase(app);
 	
 	document.getElementById("create").addEventListener("click",create);
+	document.getElementById("join").addEventListener("click",join);
 	
 	window.pc = new RTCPeerConnection();
 	
@@ -61,6 +62,33 @@ const create = async () => {
             log(`Set remote description: ${data.answer}`);
             const answer = new RTCSessionDescription(data.answer)
             await pc.setRemoteDescription(answer);
+        }
+    });
+};
+
+const join = () => {
+    const roomRef = ref(db,`rooms/${document.getElementById("code").value}`);
+    
+    get(roomRef)
+    .then(async (snapshot) => {
+        if (snapshot.exists()) {
+            const offer = snapshot.data().offer;
+            await peerConnection.setRemoteDescription(offer);
+            const answer = await peerConnection.createAnswer();
+            await peerConnection.setLocalDescription(answer);
+            
+            const roomWithAnswer = {
+                answer: {
+                    type: answer.type,
+                    sdp: answer.sdp
+                }
+            };
+            
+            await update(roomRef,roomWithAnswer);
+            
+            setId(roomRef.key);
+        } else {
+            log("Room not found");
         }
     });
 };
