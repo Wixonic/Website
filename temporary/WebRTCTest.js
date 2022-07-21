@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.0/firebase-app.js";
-import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/9.9.0/firebase-database.js";
+import { getDatabase, ref, set, push, onValue } from "https://www.gstatic.com/firebasejs/9.9.0/firebase-database.js";
 
 const log = (t) => {
 	const l = document.createElement("div");
@@ -27,8 +27,12 @@ onload = () => {
 };
 
 const share = async () => {
+	log("Creating room...");
+	
 	const offer = await peerConnection.createOffer();
 	await peerConnection.setLocalDescription(offer);
+	
+	log("Offer created");
 	
 	const roomWithOffer = {
 		offer: {
@@ -36,4 +40,9 @@ const share = async () => {
 			sdp: offer.sdp
 		}
 	};
+	
+	const roomRef = push(ref(db,"rooms"));
+	set(roomRef,roomWithOffer);
+	
+	log(`Room created (${roomRef.key})`);
 };
