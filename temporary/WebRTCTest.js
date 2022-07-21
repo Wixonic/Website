@@ -12,7 +12,7 @@ onload = () => {
 	
 	log("Initializing Firebase");
 	
-	/* window.app = initializeApp({
+	window.app = initializeApp({
 		apiKey: "AIzaSyBOK-u-u6mx3ZdwTXBTuY61qox34baxkvs",
 		databaseURL: "https://wixonic-webrtc-test-default-rtdb.europe-west1.firebasedatabase.app",
 		projectId: "wixonic-webrtc-test",
@@ -21,7 +21,7 @@ onload = () => {
 	
 	log("Initializing Database");
 	
-	/* window.db = getDatabase(app);
+	window.db = getDatabase(app);
 	
 	log("Ready");
 };
@@ -35,5 +35,5 @@ const share = async () => {
 			type: offer.type,
 			sdp: offer.sdp
 		}
-	}; */
+	};
 };
