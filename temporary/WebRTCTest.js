@@ -26,6 +26,8 @@ onload = () => {
 	
 	window.db = getDatabase(app);
 	
+	document.getElementById("share").addEventListener("click",share);
+	
 	log("Ready");
 };
 
