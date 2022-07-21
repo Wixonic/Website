@@ -48,8 +48,17 @@ const share = async () => {
 		}
 	};
 	
-	const roomRef = push(ref(db,"rooms"));
+	const roomRef = ref(db,`rooms/${Math.round(Math.random() * (Math.pow(36,8) - 1001) + 1000).toString(36)}`);
 	set(roomRef,roomWithOffer);
 	
 	log(`Room created (${roomRef.key})`);
+	
+	roomRef.onSnapshot(async snapshot => {
+		const data = snapshot.data();
+		if (!pc.currentRemoteDescription && data.answer) {
+            console.log("Set remote description: ",data.answer);
+            const answer = new RTCSessionDescription(data.answer)
+            await pc.setRemoteDescription(answer);
+        }
+    });
 };
