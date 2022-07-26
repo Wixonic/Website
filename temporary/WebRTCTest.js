@@ -72,7 +72,7 @@ const join = () => {
     get(roomRef)
     .then(async (snapshot) => {
         if (snapshot.exists()) {
-            const offer = snapshot.data().offer;
+            const offer = snapshot.val().offer;
             await peerConnection.setRemoteDescription(offer);
             const answer = await peerConnection.createAnswer();
             await peerConnection.setLocalDescription(answer);
