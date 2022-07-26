@@ -40,7 +40,7 @@ const create = async () => {
 	const offer = await pc.createOffer();
 	await pc.setLocalDescription(offer);
 	
-	log("Offer created");
+	log("Offer created");	
 	
 	const roomWithOffer = {
 		offer: {
@@ -59,9 +59,9 @@ const create = async () => {
 	roomRef.onSnapshot(async snapshot => {
 		const data = snapshot.data();
 		if (!pc.currentRemoteDescription && data.answer) {
-            log(`Set remote description: ${data.answer}`);
-            const answer = new RTCSessionDescription(data.answer)
-            await pc.setRemoteDescription(answer);
+			log(`Set remote description: ${data.answer}`);
+			const answer = new RTCSessionDescription(data.answer)
+			await pc.setRemoteDescription(answer);
         }
     });
 };
@@ -73,9 +73,9 @@ const join = () => {
     .then(async (snapshot) => {
         if (snapshot.exists()) {
             const offer = snapshot.val().offer;
-            await peerConnection.setRemoteDescription(offer);
-            const answer = await peerConnection.createAnswer();
-            await peerConnection.setLocalDescription(answer);
+            await pc.setRemoteDescription(offer);
+            const answer = await pc.createAnswer();
+            await pc.setLocalDescription(answer);
             
             const roomWithAnswer = {
                 answer: {
