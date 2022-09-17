@@ -14,3 +14,9 @@ img {
 	
 	margin: 5px auto;
 }
+
+@media (prefers-color-scheme: dark) {
+	img {
+		fill: #FFF;
+	}
+}
