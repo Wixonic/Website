@@ -2,11 +2,34 @@
 	text-align: center;
 }
 
-a {
-	display: block;
+body {
+	margin: 0;
 }
 
-img {
+header {
+	margin-bottom: 0.5rem;
+}
+
+header a {
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+
+	width: 2rem;
+	height: 2rem;
+
+	background: var(--text);
+
+	color: var(--background);
+	font-size: 1.2rem;
+
+	border-radius: 1rem;
+
+	margin: 0.1rem;
+	padding: 0.2rem;
+}
+
+header #logo {
 	--size: 10rem;
 	
 	display: block;
@@ -19,8 +42,22 @@ img {
 	margin: 5px auto;
 }
 
+section {
+	display: block;
+
+	width: 100%;
+
+	padding: 0.5rem;
+}
+
+section[type="contrast"] {
+	background: var(--background-contrast);
+	
+	color: var(--text-contrast);
+}
+
 @media (prefers-color-scheme: dark) {
-	img {
+	header #logo path {
 		fill: #FFF;
 	}
 }

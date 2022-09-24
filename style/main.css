@@ -2,10 +2,12 @@
 
 * {
 	--background: #FFF;
+	--background-contrast: #000;
 	--background-element: #F3F3F8;
 	--element: #E8E8EC;
 	--text: #000;
-	--blue: #08F;
+	--text-contrast: #FFF;
+	--blue: #06F;
 	--green: #0F0;
 	--orange: #FC0;
 	--red: #F00;
@@ -36,9 +38,7 @@ body {
 	
 	color: var(--text);
 	font-family: "Inter", "Avenir Next", Avenir, Arial, Futura;
-	
-	transition: background 0.5s, color 0.5s;
-	
+		
 	margin: 0 0.5rem;
 }
 
@@ -95,9 +95,11 @@ input:focus {
 @media (prefers-color-scheme: dark) {
 	* {
 		--background: #000;
+		--background-contrast: #444;
 		--background-element: #222228;
 		--element: #333335;
 		--text: #FFF;
+		--blue: #08F;
 		--green: #0C0;
 		--orange: #DA0;
 		--gray: #666;

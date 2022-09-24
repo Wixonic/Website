@@ -75,5 +75,13 @@
 		<changefreq>weekly</changefreq>
 		
 	</url>
+
+	<url>
+		
+		<loc>https://tv.wixonic.fr</loc>
+		
+		<changefreq>daily</changefreq>
+		
+	</url>
 	
 </urlset>
