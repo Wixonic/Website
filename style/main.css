@@ -95,7 +95,7 @@ input:focus {
 @media (prefers-color-scheme: dark) {
 	* {
 		--background: #000;
-		--background-contrast: #444;
+		--background-contrast: #333;
 		--background-element: #222228;
 		--element: #333335;
 		--text: #FFF;
