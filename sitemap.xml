@@ -28,14 +28,6 @@
 	
 	<url>
 		
-		<loc>https://perftool.wixonic.fr</loc>
-
-		<changefreq>monthly</changefreq>
-		
-	</url>
-	
-	<url>
-		
 		<loc>https://file-lister.wixonic.fr</loc>
 		
 		<changefreq>never</changefreq>
@@ -73,14 +65,6 @@
 		<loc>https://assets.wixonic.fr</loc>
 		
 		<changefreq>weekly</changefreq>
-		
-	</url>
-
-	<url>
-		
-		<loc>https://tv.wixonic.fr</loc>
-		
-		<changefreq>daily</changefreq>
 		
 	</url>
 	
