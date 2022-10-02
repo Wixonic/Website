@@ -7,12 +7,12 @@
 
 ## File Lister
 <!-- File Lister Display -->
-> **Last Update**: 30/09/2022 16:01:40 UTC
+> **Last Update**: 02/10/2022 15:35:04 UTC
 
 ```
-─── (10.4 KB) 
-    └── 404.html (1.9 KB)
-    └── index.html (2.6 KB)
+─── (10.3 KB) 
+    └── 404.html (1.8 KB)
+    └── index.html (2.5 KB)
     └── script (1.3 KB) 
         └── 404.js (1.3 KB)
         └── index.js (0 B)
