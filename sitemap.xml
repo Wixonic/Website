@@ -28,6 +28,22 @@
 	
 	<url>
 		
+		<loc>https://motion.wixonic.fr</loc>
+		
+		<changefreq>weekly</changefreq>
+		
+	</url>
+	
+	<url>
+		
+		<loc>https://editor.motion.wixonic.fr</loc>
+		
+		<changefreq>monthly</changefreq>
+		
+	</url>
+	
+	<url>
+		
 		<loc>https://file-lister.wixonic.fr</loc>
 		
 		<changefreq>never</changefreq>
