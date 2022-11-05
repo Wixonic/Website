@@ -68,6 +68,8 @@ header #logo {
 	
 	width: 10rem;
 	height: 10rem;
+
+	fill: var(--blue);
 	
 	border-radius: 10rem;
 	

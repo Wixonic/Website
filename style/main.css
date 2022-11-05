@@ -99,9 +99,9 @@ input:focus {
 		--background: #000;
 		--background-contrast: #444;
 		--background-element: #222;
-		--background-contrast-element: #555;
+		--background-contrast-element: #333;
 		--element: #333;
-		--contrast-element: #666;
+		--contrast-element: #222;
 		--text: #FFF;
 		--blue: #08F;
 		--green: #0C0;
