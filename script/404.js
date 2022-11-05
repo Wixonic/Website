@@ -1,4 +1,19 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-analytics.js";
+
 onload = () => {
+	window.App = initializeApp({
+		apiKey: "AIzaSyBZ0ea1Gh-56E8qoDK1oCxwQWG4dqiDrDM",
+		authDomain: "website-wixonic.firebaseapp.com",
+		projectId: "website-wixonic",
+		storageBucket: "website-wixonic.appspot.com",
+		messagingSenderId: "595027315977",
+		appId: "1:595027315977:web:6f8db9ef2aa44614b457d8",
+		measurementId: "G-QVK9NE4M07"
+	});
+	
+	window.Analytics = getAnalytics(App);
+
 	const xhr = new XMLHttpRequest();
 	
 	xhr.open("GET","https://wixonic.fr/sitelinks.json",true);

@@ -3,15 +3,17 @@
 * {
 	--background: #FFF;
 	--background-contrast: #000;
-	--background-element: #F3F3F8;
-	--element: #E8E8EC;
+	--background-element: #EEE;
+	--background-contrast-element: #222;
+	--element: #DDD;
+	--contrast-element: #333;
 	--text: #000;
 	--text-contrast: #FFF;
-	--blue: #06F;
+	--blue: #07F;
 	--green: #0F0;
 	--orange: #FC0;
 	--red: #F00;
-	--gray: #BBB;
+	--gray: #AAA;
 	
 	-webkit-user-select: none;
 	-moz-user-select: none;
@@ -95,9 +97,11 @@ input:focus {
 @media (prefers-color-scheme: dark) {
 	* {
 		--background: #000;
-		--background-contrast: #333;
-		--background-element: #222228;
-		--element: #333335;
+		--background-contrast: #444;
+		--background-element: #222;
+		--background-contrast-element: #555;
+		--element: #333;
+		--contrast-element: #666;
 		--text: #FFF;
 		--blue: #08F;
 		--green: #0C0;

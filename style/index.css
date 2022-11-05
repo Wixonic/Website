@@ -7,7 +7,11 @@ body {
 }
 
 header {
-	margin-bottom: 0.5rem;
+	margin-bottom: 1rem;
+}
+
+header h1 {
+	margin-bottom: 1rem;
 }
 
 header a {
@@ -22,24 +26,50 @@ header a {
 
 	color: var(--background);
 	font-size: 1.2rem;
+	vertical-align: bottom;
 
 	border-radius: 1rem;
 
 	margin: 0.1rem;
 	padding: 0.2rem;
+
+	transition: transform 0.5s;
+}
+
+header a.instagram {
+	background: radial-gradient(circle farthest-corner at 35% 90%, #fec564, transparent 50%), radial-gradient(circle farthest-corner at 0 140%, #fec564, transparent 50%), radial-gradient(ellipse farthest-corner at 0 -25%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 20% -50%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 0, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 60% -20%, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 100%, #d9317a, transparent), linear-gradient(#6559ca, #bc318f 30%, #e33f5f 50%, #f77638 70%, #fec66d 100%);
+
+	color: #FFF;
+	font-size: 1.5rem;
+}
+
+header a.github {
+	background: #333;
+
+	color: #f5f5f5;
+	font-size: 1.3rem;
+}
+
+header a.discord {
+	background: #5865F2;
+
+	color: #FFF;
+	font-size: 1.1rem;
+}
+
+header a.youtube {
+	color: #FFF;
+
+	background: #F00;
 }
 
 header #logo {
-	--size: 10rem;
-	
 	display: block;
 	
-	width: var(--size);
-	height: var(--size);
-
-	background: #FFF;
+	width: 10rem;
+	height: 10rem;
 	
-	border-radius: var(--size);
+	border-radius: 10rem;
 	
 	margin: 5px auto;
 }
@@ -56,4 +86,128 @@ section[type="contrast"] {
 	background: var(--background-contrast);
 	
 	color: #FFF;
+}
+
+section h2 {
+	margin-bottom: 0.4rem;
+}
+
+section list {
+	display: grid;
+	grid-template-columns: 100%;
+	gap: 0.2rem;
+
+	width: min(25rem,95%);
+
+	background: var(--background-element);
+
+	border-radius: 0.5rem;
+	--border-radius: 0.5rem;
+
+	margin: 0 auto;
+	margin-bottom: 0.5rem;
+	padding: 0.75rem;
+}
+
+section[type="contrast"] list {
+	background: var(--background-contrast-element);
+}
+
+section list item {
+	background: var(--element);
+}
+
+section[type="contrast"] list item {
+	background: var(--contrast-element);
+}
+
+section > list > item:first-child {
+	border-top-left-radius: var(--border-radius);
+	border-top-right-radius: var(--border-radius);
+}
+
+section > list > item:last-child {
+	border-bottom-left-radius: var(--border-radius);
+	border-bottom-right-radius: var(--border-radius);
+}
+
+section list special {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	width: 100%;
+	height: 4rem;
+
+	font-style: italic;
+
+	border-radius: var(--border-radius);
+}
+
+section list#news item {
+	display: grid;
+	grid-template-columns: 2rem auto;
+	grid-template-rows: 2rem auto;
+
+	padding: 1rem;
+}
+
+section list#news item svg {
+	font-size: 1.5rem;
+
+	margin: auto;
+}
+
+section list#news item b {
+	font-size: 1.2rem;
+	text-align: left;
+
+	margin: auto 0;
+}
+
+section list#news item p {
+	grid-column: 1 / 3;
+
+	text-align: left;
+}
+
+section list#links {
+	grid-template-columns: repeat(3,33%);
+}
+
+section list#contact {
+	grid-template-columns: repeat(2,50%);
+}
+
+section list#links item,
+section list#contact item {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	border-radius: 0;
+
+	padding: 0.2rem;
+}
+
+section > list#links > item:first-child,
+section > list#contact > item:first-child {
+	border-radius: 0;
+	border-top-left-radius: var(--border-radius);
+}
+
+section > list#links > item:nth-child(3),
+section > list#contact > item:nth-child(2) {
+	border-top-right-radius: var(--border-radius);
+}
+
+section > list#links > item:nth-last-child(3),
+section > list#contact > item:nth-last-child(2) {
+	border-bottom-left-radius: var(--border-radius);
+}
+
+section > list#links > item:last-child,
+section > list#contact > item:last-child {
+	border-bottom-right-radius: var(--border-radius);
 }
