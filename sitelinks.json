@@ -1,15 +1,3 @@
 {
-	"Home": "https://wixonic.fr",
-	"WebCraft": "https://webcraft.wixonic.fr",
-	"Musical Motion": "https://motion.wixonic.fr",
-	"Editor | Musical Motion": "https://editor.motion.wixonic.fr",
-	"Wixonic Productions": "https://productions.wixonic.fr",
-	
-	"Status": "https://status.wixonic.fr",
-	
-	"File Lister": "https://file-lister.wixonic.fr",
-	"Logger": "https://logger.wixonic.fr",
-
-	"WebCraft Admin Console": "https://admin.webcraft.wixonic.fr",
-	"Assets": "https://assets.wixonic.fr"
+	"Home": "https://wixonic.fr"
 }
