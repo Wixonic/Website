@@ -12,72 +12,6 @@
 	
 	<url>
 		
-		<loc>https://webcraft.wixonic.fr</loc>
-		
-		<changefreq>weekly</changefreq>
-		
-	</url>
-	
-	<url>
-		
-		<loc>https://productions.wixonic.fr</loc>
-		
-		<changefreq>weekly</changefreq>
-		
-	</url>
-	
-	<url>
-		
-		<loc>https://motion.wixonic.fr</loc>
-		
-		<changefreq>weekly</changefreq>
-		
-	</url>
-	
-	<url>
-		
-		<loc>https://editor.motion.wixonic.fr</loc>
-		
-		<changefreq>monthly</changefreq>
-		
-	</url>
-	
-	<url>
-		
-		<loc>https://file-lister.wixonic.fr</loc>
-		
-		<changefreq>never</changefreq>
-		
-	</url>
-	
-	<url>
-		
-		<loc>https://logger.wixonic.fr</loc>
-		
-		<lastmod>2021-10-28</lastmod>
-		
-		<changefreq>never</changefreq>
-		
-	</url>
-	
-	<url>
-		
-		<loc>https://status.wixonic.fr</loc>
-		
-		<changefreq>daily</changefreq>
-		
-	</url>
-	
-	<url>
-		
-		<loc>https://admin.webcraft.wixonic.fr</loc>
-		
-		<changefreq>monthly</changefreq>
-		
-	</url>
-	
-	<url>
-		
 		<loc>https://assets.wixonic.fr</loc>
 		
 		<changefreq>weekly</changefreq>
@@ -99,6 +33,12 @@
 	<url>
 		
 		<loc>https://youtube.com/@wixonic</loc>
+		
+	</url>
+	
+	<url>
+		
+		<loc>https://github.com/Wixonic</loc>
 		
 	</url>
 	
