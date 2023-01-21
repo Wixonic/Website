@@ -1,10 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-analytics.js";
 
-const ads = {
-	news: `<ins class="adsbygoogle ads-feed" data-ad-format="fluid" data-ad-layout-key="-gw-3+1f-3d+2z" data-ad-client="ca-pub-8143969394318985" data-ad-slot="9750862352"></ins>`
-};
-
 window.App = initializeApp({
 	apiKey: "AIzaSyBZ0ea1Gh-56E8qoDK1oCxwQWG4dqiDrDM",
 	authDomain: "website-wixonic.firebaseapp.com",
@@ -29,19 +25,13 @@ xhr.onload = () => {
 		timestamps.forEach((timestamp,i) => {
 			const data = xhr.response[timestamp];
 
-			if (timestamps.length > 2 && i % 5 == 3) {
-				const item = document.createElement("item");
-				item.innerHTML = ads.news;
-				document.getElementById("news").prepend(item);
-			}
-
 			const item = document.createElement("item");
 			item.addEventListener("click",() => window.open(data.link,"_blank"));
 			item.innerHTML = `<i class="${data.icon}"></i><b>${data.title}</b><p>${data.description}</p>`;
 			document.getElementById("news").prepend(item);
 		});
 	} else {
-		document.getElementById("news").innerHTML = ads.news + "<special>No news</special>";
+		document.getElementById("news").innerHTML = "<special>No news</special>";
 	}
 
 	const links = [
