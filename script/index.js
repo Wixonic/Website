@@ -21,7 +21,7 @@ xhr.onload = () => {
 	if (xhr.response) {
 		const timestamps = Object.keys(xhr.response);
 		timestamps.sort();
-		document.getElementById("news").innerHTML = timestamps.length > 2 ? "" : `<item>${ads.news}</item>`;
+		document.getElementById("news").innerHTML = "";
 		timestamps.forEach((timestamp,i) => {
 			const data = xhr.response[timestamp];
 
