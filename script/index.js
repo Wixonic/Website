@@ -46,7 +46,7 @@ xhr.onload = () => {
 		},{
 			"title": "Discord",
 			"icon": "fa-brands fa-discord",
-			"link": "https://discord.gg/UREN5kUSXv"
+			"link": "https://discord.gg/DSkSPTUP95"
 		},{
 			"title": "YouTube",
 			"icon": "fa-brands fa-youtube",
