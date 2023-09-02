@@ -65,14 +65,14 @@ header a.youtube {
 
 header #logo {
 	display: block;
-	
+
 	width: 10rem;
 	height: 10rem;
 
 	fill: var(--blue);
-	
+
 	border-radius: 10rem;
-	
+
 	margin: 5px auto;
 }
 
@@ -86,7 +86,7 @@ section {
 
 section[type="contrast"] {
 	background: var(--background-contrast);
-	
+
 	color: #FFF;
 }
 
@@ -99,7 +99,7 @@ section list {
 	grid-template-columns: 100%;
 	gap: 0.2rem;
 
-	width: min(25rem,95%);
+	width: min(25rem, 95%);
 
 	background: var(--background-element);
 
@@ -123,12 +123,12 @@ section[type="contrast"] list item {
 	background: var(--contrast-element);
 }
 
-section > list > item:first-child {
+section>list>item:first-child {
 	border-top-left-radius: var(--border-radius);
 	border-top-right-radius: var(--border-radius);
 }
 
-section > list > item:last-child {
+section>list>item:last-child {
 	border-bottom-left-radius: var(--border-radius);
 	border-bottom-right-radius: var(--border-radius);
 }
@@ -174,11 +174,11 @@ section list#news item p {
 }
 
 section list#links {
-	grid-template-columns: repeat(3,33%);
+	grid-template-columns: repeat(3, 33%);
 }
 
 section list#contact {
-	grid-template-columns: repeat(2,50%);
+	grid-template-columns: repeat(2, 50%);
 }
 
 section list#links item,
@@ -193,23 +193,23 @@ section list#contact item {
 	padding: 0.2rem;
 }
 
-section > list#links > item:first-child,
-section > list#contact > item:first-child {
+section>list#links>item:first-child,
+section>list#contact>item:first-child {
 	border-radius: 0;
 	border-top-left-radius: var(--border-radius);
 }
 
-section > list#links > item:nth-child(3),
-section > list#contact > item:nth-child(2) {
+section>list#links>item:nth-child(3),
+section>list#contact>item:nth-child(2) {
 	border-top-right-radius: var(--border-radius);
 }
 
-section > list#links > item:nth-last-child(3),
-section > list#contact > item:nth-last-child(2) {
+section>list#links>item:nth-last-child(3),
+section>list#contact>item:nth-last-child(2) {
 	border-bottom-left-radius: var(--border-radius);
 }
 
-section > list#links > item:last-child,
-section > list#contact > item:last-child {
+section>list#links>item:last-child,
+section>list#contact>item:last-child {
 	border-bottom-right-radius: var(--border-radius);
 }
