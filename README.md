@@ -1,8 +1,5 @@
-# Website
-
 [![Wakatime](https://wakatime.com/badge/github/Wixonic/Website.svg?style=flat)](https://wakatime.com/badge/github/Wixonic/Website)
 
-- [Wiki](https://github.com/Wixonic/Website/wiki)
 - [Support](https://github.com/Wixonic/Website/blob/Default/.github/SUPPORT.md)
 - [Code of Conduct](https://github.com/Wixonic/Website/blob/Default/.github/CODE_OF_CONDUCT.md)
 
