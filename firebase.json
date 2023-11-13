@@ -1,0 +1,39 @@
+{
+	"hosting": {
+		"public": "public",
+		"ignore": [
+			".DS_Store"
+		]
+	},
+	"emulators": {
+		"auth": {
+			"port": 9000
+		},
+		"functions": {
+			"port": 5000
+		},
+		"firestore": {
+			"port": 8080
+		},
+		"database": {
+			"port": 6000
+		},
+		"hosting": {
+			"port": 3000
+		},
+		"pubsub": {
+			"port": 7000
+		},
+		"storage": {
+			"port": 4000
+		},
+		"eventarc": {
+			"port": 2000
+		},
+		"ui": {
+			"enabled": true,
+			"port": 443
+		},
+		"singleProjectMode": true
+	}
+}
