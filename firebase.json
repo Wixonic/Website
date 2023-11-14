@@ -6,34 +6,51 @@
 		]
 	},
 	"emulators": {
-		"auth": {
-			"port": 9000
-		},
-		"functions": {
-			"port": 5000
-		},
-		"firestore": {
-			"port": 8080
-		},
-		"database": {
-			"port": 6000
-		},
 		"hosting": {
 			"port": 3000
 		},
-		"pubsub": {
-			"port": 7000
+		"auth": {
+			"port": 3001
+		},
+		"firestore": {
+			"port": 3002
+		},
+		"functions": {
+			"port": 3003
 		},
 		"storage": {
-			"port": 4000
+			"port": 3004
 		},
-		"eventarc": {
-			"port": 2000
+		"database": {
+			"port": 3005
 		},
 		"ui": {
 			"enabled": true,
-			"port": 443
+			"port": 8080
 		},
 		"singleProjectMode": true
-	}
+	},
+	"database": {
+		"rules": "rules/database.json"
+	},
+	"firestore": {
+		"rules": "rules/firestore.rules",
+		"indexes": "rules/firestore.index"
+	},
+	"functions": [
+		{
+			"source": "functions",
+			"codebase": "default",
+			"ignore": [
+				"node_modules",
+				".git",
+				"firebase-debug.log",
+				"firebase-debug.*.log"
+			]
+		}
+	],
+	"storage": {
+		"rules": "rules/storage.rules"
+	},
+	"extensions": {}
 }
