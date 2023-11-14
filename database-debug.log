@@ -1,9 +1,0 @@
-14:18:56.865 [NamespaceSystem-akka.actor.default-dispatcher-4] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started
-14:18:56.945 [main] INFO com.firebase.server.forge.App$ - Listening at 127.0.0.1:3005
-14:19:02.253 [NamespaceSystem-akka.actor.default-dispatcher-4] INFO com.firebase.core.namespace.NamespaceActor - wixonic-website-2-default-rtdb successfully activated FBKV (SurveyIdle(0)) wait: 66ms, init: 0ms
-14:19:02.285 [NamespaceSystem-blocking-namespace-operation-dispatcher-6] INFO com.firebase.core.namespace.StateManager - Namespace wixonic-website-2-default-rtdb status Active to Active
-14:20:07.791 [FirebaseWorkerPool-1-4] WARN com.firebase.core.persistence.backend.dummy.EmulatorMetadataPersistence - Multiple projectIds are not recommended in single project mode. Requested 
-namespace wixonic-website-2, but the emulator is configured for wixonic-website-2-default-rtdb. To 
-opt-out of single project mode add/set the singleProjectMode: false property in 
-the firebase.json emulators config. 
-14:20:07.798 [NamespaceSystem-akka.actor.default-dispatcher-5] INFO com.firebase.core.namespace.NamespaceActor - wixonic-website-2 successfully activated FBKV (SurveyIdle(0)) wait: 2ms, init: 0ms
