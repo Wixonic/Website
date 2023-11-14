@@ -1,18 +1,18 @@
 {
-  "projects": {
-    "default": "wixonic-website-2"
-  },
-  "targets": {
-    "wixonic-website-2": {
-      "hosting": {
-        "beta": [
-          "beta-wixonic-website-2"
-        ],
-        "prod": [
-          "wixonic-website-2"
-        ]
-      }
-    }
-  },
-  "etags": {}
+	"projects": {
+		"default": "wixonic-website-2"
+	},
+	"targets": {
+		"wixonic-website-2": {
+			"hosting": {
+				"beta": [
+					"beta-wixonic-website-2"
+				],
+				"prod": [
+					"wixonic-website-2"
+				]
+			}
+		}
+	},
+	"etags": {}
 }
