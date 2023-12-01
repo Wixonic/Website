@@ -61,14 +61,13 @@
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 	<meta name="msapplication-navbutton-color" content="#666670" />
 
-	<script defer src="/cursor.js"></script>
-
 	<!-- Splash Screen -->
 	<style>
 		:root {
 			--background: #FFF;
 
 			--text-color: #000;
+			--font-family: "Inter", Arial;
 		}
 
 		@media (prefers-color-scheme: dark) {
@@ -85,27 +84,21 @@
 			-moz-user-select: none;
 			-webkit-user-select: none;
 
-			cursor: none;
+			font-family: var(--font-family);
+
+			cursor: default;
 		}
 
 		:root {
 			background: var(--background);
 			color: var(--text-color);
 		}
-
-		#cursor {
-			position: fixed;
-			top: 0;
-			left: 0;
-
-			width: 100%;
-			height: 100%;
-
-			background: none;
-
-			color: var(--text-color);
-		}
 	</style>
+
+	<link defer rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+	<link defer rel="stylesheet" href="index.css" />
+
+	<script defer src="loader.js"></script>
 
 </head>
 
@@ -113,7 +106,20 @@
 
 	<noscript>You need JavaScript to display this website.</noscript>
 
-	<canvas id="cursor"></canvas>
+	<div class="logo">
+
+		<img dark src="https://assets.wixonic.fr/file/icon/logo/with-character/dark.png"
+			alt="Wixonic's logo with his cute character" />
+		<img light src="https://assets.wixonic.fr/file/icon/logo/with-character/light.png"
+			alt="Wixonic's logo with his cute character" />
+
+	</div>
+
+	<div hidden="false">
+
+		<img src="" alt="" />
+
+	</div>
 
 </body>
 

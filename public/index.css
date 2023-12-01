@@ -1,0 +1,29 @@
+.logo img {
+	display: block;
+
+	max-width: 75vw;
+	max-height: 50vh;
+
+	background: var(--text-color);
+
+	color: var(--background);
+
+	border: 0.1rem solid var(--text-color);
+	border-radius: 50%;
+
+	margin: 1rem auto;
+}
+
+.logo img[dark] {
+	display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+	.logo img[light] {
+		display: none;
+	}
+
+	.logo img[dark] {
+		display: block;
+	}
+}
