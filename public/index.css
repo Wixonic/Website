@@ -4,12 +4,7 @@
 	max-width: 75vw;
 	max-height: 50vh;
 
-	background: var(--text-color);
-
 	color: var(--background);
-
-	border: 0.1rem solid var(--text-color);
-	border-radius: 50%;
 
 	margin: 1rem auto;
 }
