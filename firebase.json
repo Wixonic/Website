@@ -13,6 +13,36 @@
 			"ignore": [
 				".DS_Store"
 			]
+		},
+		{
+			"target": "discord",
+			"redirects": [
+				{
+					"source": "/**",
+					"destination": "https://discord.gg/BcXFAVKJZQ",
+					"type": 301
+				}
+			]
+		},
+		{
+			"target": "github",
+			"redirects": [
+				{
+					"source": "/**",
+					"destination": "https://github.com/Wixonic",
+					"type": 301
+				}
+			]
+		},
+		{
+			"target": "instagram",
+			"redirects": [
+				{
+					"source": "/**",
+					"destination": "https://www.instagram.com/wixonic12",
+					"type": 301
+				}
+			]
 		}
 	],
 	"emulators": {
