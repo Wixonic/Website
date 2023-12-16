@@ -15,32 +15,42 @@
 			]
 		},
 		{
-			"target": "discord",
+			"target": "redirects",
 			"redirects": [
 				{
-					"source": "/**",
+					"source": "/discord",
 					"destination": "https://discord.gg/BcXFAVKJZQ",
 					"type": 301
-				}
-			]
-		},
-		{
-			"target": "github",
-			"redirects": [
+				},
 				{
-					"source": "/**",
+					"source": "/discord/**",
+					"destination": "https://discord.gg/BcXFAVKJZQ",
+					"type": 301
+				},
+				{
+					"source": "/github",
 					"destination": "https://github.com/Wixonic",
 					"type": 301
-				}
-			]
-		},
-		{
-			"target": "instagram",
-			"redirects": [
+				},
 				{
-					"source": "/**",
+					"source": "/github/**",
+					"destination": "https://github.com/Wixonic",
+					"type": 301
+				},
+				{
+					"source": "/instagram",
 					"destination": "https://www.instagram.com/wixonic12",
 					"type": 301
+				},
+				{
+					"source": "/instagram/**",
+					"destination": "https://www.instagram.com/wixonic12",
+					"type": 301
+				},
+				{
+					"source": "/**",
+					"destination": "https://wixonic.fr",
+					"type": 302
 				}
 			]
 		}

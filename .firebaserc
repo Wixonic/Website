@@ -8,17 +8,8 @@
 				"beta": [
 					"beta-wixonic-website-2"
 				],
-				"prod": [
-					"wixonic-website-2"
-				],
-				"discord": [
-					"discord-wixonic-website-2"
-				],
-				"github": [
-					"github-wixonic-website-2"
-				],
-				"instagram": [
-					"instagram-wixonic-website-2"
+				"redirects": [
+					"redirect-wixonic-website-2"
 				]
 			}
 		}
