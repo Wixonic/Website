@@ -1,3 +1,17 @@
+[dark] {
+	display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+	[light] {
+		display: none;
+	}
+
+	[dark] {
+		display: block;
+	}
+}
+
 .logo img {
 	display: block;
 
@@ -7,20 +21,6 @@
 	color: var(--background);
 
 	margin: 0 auto;
-}
-
-.logo img[dark] {
-	display: none;
-}
-
-@media (prefers-color-scheme: dark) {
-	.logo img[light] {
-		display: none;
-	}
-
-	.logo img[dark] {
-		display: block;
-	}
 }
 
 .title {
