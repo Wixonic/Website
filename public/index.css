@@ -1,16 +1,4 @@
-[dark] {
-	display: none;
-}
-
-@media (prefers-color-scheme: dark) {
-	[light] {
-		display: none;
-	}
-
-	[dark] {
-		display: block;
-	}
-}
+@import url("/main.css");
 
 .logo img {
 	display: block;
@@ -18,9 +6,17 @@
 	max-width: 75vw;
 	max-height: 50vh;
 
-	color: var(--background);
-
 	margin: 0 auto;
+}
+
+.discord img {
+	display: block;
+
+	width: 100vw;
+}
+
+.discord p {
+	text-align: center;
 }
 
 .title {
