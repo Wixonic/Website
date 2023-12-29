@@ -78,7 +78,8 @@
 			"enabled": true,
 			"port": 8080
 		},
-		"singleProjectMode": true
+		"singleProjectMode": true,
+		"host": "localhost"
 	},
 	"database": {
 		"rules": "rules/database.json"

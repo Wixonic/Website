@@ -3,6 +3,8 @@
 .logo img {
 	display: block;
 
+	border-radius: 50%;
+
 	max-width: 75vw;
 	max-height: 50vh;
 

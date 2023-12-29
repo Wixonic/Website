@@ -18,3 +18,16 @@ a {
 		display: block !important;
 	}
 }
+
+.glass {
+	background: #BBB3;
+
+	border: 0.05rem solid #FFF3;
+	border-radius: 0.7rem;
+
+	box-shadow: 0 8px 32px 0 #2222;
+	backdrop-filter: blur(7px);
+	-webkit-backdrop-filter: blur(7px);
+
+	padding: 0.5rem;
+}
