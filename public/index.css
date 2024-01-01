@@ -1,5 +1,16 @@
 @import url("/main.css");
 
+main {
+	margin: auto;
+}
+
+section.glass {
+	max-width: fit-content;
+
+	margin: 0.5rem auto;
+	padding: 1rem;
+}
+
 .logo img {
 	display: block;
 
@@ -8,7 +19,8 @@
 	max-width: 75vw;
 	max-height: 50vh;
 
-	margin: 0 auto;
+	margin: 0.8rem auto;
+	padding: 0;
 }
 
 .discord img {
@@ -23,5 +35,13 @@
 
 .title {
 	font-size: 1.8rem;
+	text-shadow: 0 0.1rem 0.3rem #0006;
+	font-weight: 700;
 	text-align: center;
+}
+
+@media (prefers-color-scheme: dark) {
+	.title {
+		text-shadow: 0 0.1rem 0.2rem #FFF8;
+	}
 }

@@ -59,20 +59,8 @@
 		"hosting": {
 			"port": 3000
 		},
-		"auth": {
-			"port": 3001
-		},
-		"firestore": {
-			"port": 3002
-		},
-		"functions": {
-			"port": 3003
-		},
 		"storage": {
-			"port": 3004
-		},
-		"database": {
-			"port": 3005
+			"port": 3001
 		},
 		"ui": {
 			"enabled": true,
@@ -80,13 +68,6 @@
 		},
 		"singleProjectMode": true,
 		"host": "localhost"
-	},
-	"database": {
-		"rules": "rules/database.json"
-	},
-	"firestore": {
-		"rules": "rules/firestore.rules",
-		"indexes": "rules/firestore.index"
 	},
 	"storage": {
 		"rules": "rules/storage.rules"
