@@ -15,7 +15,7 @@ a {
 	border: 0.05rem solid #CCC5;
 	border-radius: 0.9rem;
 
-	box-shadow: 0 0.5rem 2rem 0 #2222;
+	box-shadow: 0 0 2rem 0 #2222;
 	backdrop-filter: blur(7px);
 	-webkit-backdrop-filter: blur(7px);
 
@@ -33,6 +33,7 @@ a {
 	}
 
 	.glass {
+		box-shadow: 0 0 0.8rem #8881;
 		border-color: #AAA2;
 	}
 }
