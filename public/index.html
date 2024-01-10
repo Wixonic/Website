@@ -55,7 +55,7 @@
 
 	<link rel="manifest" href="/manifest.json" />
 
-	<meta name="theme-color" content="#FFF" media="(prefers-color-scheme:light)" />
+	<meta name="theme-color" content="#EEE" media="(prefers-color-scheme:light)" />
 	<meta name="theme-color" content="#000" media="(prefers-color-scheme:dark)" />
 
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -86,12 +86,16 @@
 
 			font-family: var(--font-family);
 
-			cursor: default;
+			cursor: inherit;
+			pointer-events: inherit;
 		}
 
 		:root {
 			background: var(--background);
 			color: var(--text-color);
+
+			cursor: default;
+			pointer-events: none;
 		}
 	</style>
 
@@ -111,8 +115,10 @@
 
 			<div class="logo">
 
-				<img class="glass" dark src="https://assets.wixonic.fr/file/icon/logo/with-character/type-c.png" />
-				<img class="glass" light src="https://assets.wixonic.fr/file/icon/logo/with-character/type-d.png" />
+				<img class="glass" dark src="https://assets.wixonic.fr/file/icon/logo/with-character/type-c.png"
+					alt="Wixonic's logo with a Wixi" />
+				<img class="glass" light src="https://assets.wixonic.fr/file/icon/logo/with-character/type-d.png"
+					alt="Wixonic's logo with a Wixi" />
 
 			</div>
 
@@ -120,21 +126,24 @@
 
 		</section>
 
-		<section class="glass links">
+		<section class="links">
 
-			<div class="title">Accounts</div>
+			<div class="title">Links</div>
 
-			<section>
+			<a href="https://go.wixonic.fr/discord" class="discord glass">
 
-				<a href="https://go.wixonic.fr/instagram" class="instagram">
+				<img dark src="https://assets.wixonic.fr/file/icon/wixiland/dark.png" alt="WixiLand" />
+				<img light src="https://assets.wixonic.fr/file/icon/wixiland/light.png" alt="WixiLand" />
 
-					<img class="glass" src="https://assets.wixonic.fr/file/icon/instagram.png" alt="Instagram logo" />
+			</a>
 
-					<div class="title">@wixonic12</div>
+			<a href="https://go.wixonic.fr/instagram" class="instagram glass">
 
-				</a>
+				<img src="https://assets.wixonic.fr/file/icon/instagram.png" alt="Instagram logo" />
 
-			</section>
+				<div class="name">@wixonic12</div>
+
+			</a>
 
 		</section>
 

@@ -11,6 +11,13 @@
 
 	<url>
 		
+		<loc>https://discord.wixonic.fr</loc>
+		<changefreq>yearly</changefreq>
+		
+	</url>
+
+	<url>
+		
 		<loc>https://assets.wixonic.fr</loc>
 		<changefreq>yearly</changefreq>
 		
