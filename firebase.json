@@ -3,16 +3,12 @@
 		{
 			"target": "prod",
 			"public": "public",
-			"ignore": [
-				".DS_Store"
-			]
+			"ignore": [".DS_Store"]
 		},
 		{
 			"target": "beta",
 			"public": "public",
-			"ignore": [
-				".DS_Store"
-			]
+			"ignore": [".DS_Store"]
 		},
 		{
 			"target": "redirects",
@@ -58,13 +54,6 @@
 	"emulators": {
 		"hosting": {
 			"port": 3000
-		},
-		"storage": {
-			"port": 3001
-		},
-		"ui": {
-			"enabled": true,
-			"port": 8080
 		},
 		"singleProjectMode": true,
 		"host": "localhost"
