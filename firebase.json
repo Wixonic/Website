@@ -1,0 +1,64 @@
+{
+	"hosting": [
+		{
+			"target": "prod",
+			"public": "public",
+			"ignore": [".DS_Store"]
+		},
+		{
+			"target": "beta",
+			"public": "public",
+			"ignore": [".DS_Store"]
+		},
+		{
+			"target": "redirects",
+			"redirects": [
+				{
+					"source": "/discord",
+					"destination": "https://discord.gg/BcXFAVKJZQ",
+					"type": 301
+				},
+				{
+					"regex": "/discord/.*",
+					"destination": "https://discord.gg/BcXFAVKJZQ",
+					"type": 301
+				},
+				{
+					"source": "/github",
+					"destination": "https://github.com/Wixonic/",
+					"type": 301
+				},
+				{
+					"regex": "/github/(.*)",
+					"destination": "https://github.com/Wixonic/:1",
+					"type": 301
+				},
+				{
+					"source": "/instagram",
+					"destination": "https://www.instagram.com/wixonic12/",
+					"type": 301
+				},
+				{
+					"regex": "/instagram/(.*)",
+					"destination": "https://www.instagram.com/wixonic12/:1",
+					"type": 301
+				},
+				{
+					"regex": "/(.*)",
+					"destination": "https://wixonic.fr/:1",
+					"type": 301
+				}
+			]
+		}
+	],
+	"emulators": {
+		"hosting": {
+			"port": 3000
+		},
+		"singleProjectMode": true,
+		"host": "localhost"
+	},
+	"storage": {
+		"rules": "rules/storage.rules"
+	}
+}

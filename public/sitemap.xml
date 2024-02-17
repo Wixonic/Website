@@ -5,28 +5,21 @@
 	<url>
 		
 		<loc>https://wixonic.fr</loc>
-		<changefreq>monthly</changefreq>
+		<changefreq>daily</changefreq>
 		
 	</url>
 
 	<url>
 		
-		<loc>https://minecraft.wixonic.fr</loc>
-		<changefreq>monthly</changefreq>
-		
-	</url>
-
-	<url>
-		
-		<loc>https://server.wixonic.fr</loc>
-		<changefreq>monthly</changefreq>
+		<loc>https://discord.wixonic.fr</loc>
+		<changefreq>weekly</changefreq>
 		
 	</url>
 
 	<url>
 		
 		<loc>https://assets.wixonic.fr</loc>
-		<changefreq>monthly</changefreq>
+		<changefreq>yearly</changefreq>
 		
 	</url>
 	

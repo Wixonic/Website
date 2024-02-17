@@ -1,0 +1,20 @@
+@import url("https://rsms.me/inter/inter.css");
+
+a {
+	color: unset;
+	text-decoration: unset;
+}
+
+[dark] {
+	display: none !important;
+}
+
+@media (prefers-color-scheme: dark) {
+	[light] {
+		display: none !important;
+	}
+
+	[dark] {
+		display: block !important;
+	}
+}

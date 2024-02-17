@@ -1,0 +1,18 @@
+{
+	// These tasks will run in order when initializing your CodeSandbox project.
+	"setupTasks": [
+		{
+			"name": "Installing Dependencies",
+			"command": "npm i -g firebase-tools"
+		}
+	],
+
+	// These tasks can be run from CodeSandbox. Running one will open a log in the app.
+	"tasks": {
+		"hosting": {
+			"name": "Hosting",
+			"command": "firebase emulators:start --only hosting",
+			"runAtStart": true
+		}
+	}
+}
