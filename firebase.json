@@ -49,8 +49,7 @@
 		"hosting": {
 			"port": 3000
 		},
-		"singleProjectMode": true,
-		"host": "localhost"
+		"singleProjectMode": true
 	},
 	"storage": {
 		"rules": "rules/storage.rules"

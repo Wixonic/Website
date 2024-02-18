@@ -55,14 +55,14 @@
 
 	<link rel="manifest" href="/manifest.json" />
 
-	<meta name="theme-color" content="#EEE" media="(prefers-color-scheme:light)" />
+	<meta name="theme-color" content="#FFF" media="(prefers-color-scheme:light)" />
 	<meta name="theme-color" content="#000" media="(prefers-color-scheme:dark)" />
 
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 	<meta name="msapplication-navbutton-color" content="#666670" />
 
-	<!-- Splash Screen -->
 	<style>
+		/* Splash Screen */
 		:root {
 			--background: #FFF;
 
@@ -80,6 +80,10 @@
 
 		:root,
 		:root * {
+			appearance: none;
+			-moz-appearance: none;
+			-webkit-appearance: none;
+
 			user-select: none;
 			-moz-user-select: none;
 			-webkit-user-select: none;
@@ -98,11 +102,14 @@
 			cursor: default;
 			pointer-events: none;
 		}
+
+		/* Splash Screen */
 	</style>
 
-	<link defer rel="stylesheet" href="index.css" />
+	<link rel="stylesheet" href="/main.css" />
+	<link rel="stylesheet" href="index.css" />
 
-	<script defer src="main.js"></script>
+	<script defer type="module" src="index.js"></script>
 
 </head>
 
@@ -112,18 +119,20 @@
 
 	<canvas id="background"></canvas>
 
-	<section id="error">
+	<section id="error" class="fullscreen" hidden="true">
 
 		<div class="title">An error occured</div>
 		<div class="message"></div>
-		<div class="code"></div>
-		<div class="link"><a href="https://go.wixonic.fr/help">Contact us</a> with the error code!</div>
+		<a class="file link" download="report.json">Download log file</a>
+		<div class="contact">Contact me by <a class="link" href="https://go.wixonic.fr/help">creating a post</a>
+			with
+			the log file.</div>
 
 	</section>
 
-	<section id="resize">
+	<section id="loader" class="fullscreen" active="true">
 
-		<div class="Resizing..."></div>
+		<div class="title">Loading...</div>
 
 	</section>
 

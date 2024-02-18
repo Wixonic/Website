@@ -1,66 +1,14 @@
-@import url("/main.css");
-
 canvas#background {
 	position: fixed;
 	top: 0;
 	left: 0;
 
-	width: 100%;
-	height: 100%;
+	width: 100dvw;
+	height: 100dvh;
 
 	background: var(--background);
 
 	border: none;
 
 	z-index: -1;
-}
-
-section#error,
-section#resize {
-	display: none;
-	align-items: center;
-	justify-content: center;
-
-	position: fixed;
-	top: 0;
-	left: 0;
-
-	width: 100%;
-	height: 100%;
-
-	background: #8885;
-	backdrop-filter: none;
-
-	opacity: 0;
-
-	animation: disappear 1s;
-}
-
-section[active] {
-	display: flex;
-	backdrop-filter: blur(15px);
-
-	opacity: 1;
-
-	animation: appear 1s;
-}
-
-@keyframes appear {
-	from {
-		opacity: 0;
-	}
-}
-
-@keyframes disappear {
-	from {
-		opacity: 1;
-	}
-}
-
-section#error {
-	z-index: 2;
-}
-
-section#resize {
-	z-index: 1;
 }

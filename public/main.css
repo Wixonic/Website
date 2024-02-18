@@ -1,13 +1,13 @@
 @import url("https://rsms.me/inter/inter.css");
 
-.selectable {
-	user-select: none;
-	-moz-user-select: none;
-	-webkit-user-select: none;
-
+a,
+button,
+input,
+label,
+.button,
+.link {
 	cursor: pointer;
-	pointer-events: initial;
-	outline: initial;
+	pointer-events: all;
 }
 
 a {
@@ -15,16 +15,130 @@ a {
 	text-decoration: unset;
 }
 
-[dark] {
-	display: none !important;
+button {
+	background: unset;
+
+	border: unset;
 }
 
-@media (prefers-color-scheme: dark) {
-	[light] {
-		display: none !important;
-	}
+.button {
+	background: var(--background);
 
-	[dark] {
-		display: block !important;
-	}
+	color: var(--text-color);
+
+	border: 0.2rem solid var(--text-color);
+	border-radius: 0.8rem;
+
+	padding: 0.4rem 0.5rem;
+
+	transition: background 0.2s linear, border 0.2s linear, color 0.2s linear;
+}
+
+.button.primary {
+	background: #07F;
+
+	color: #FFF;
+
+	border-color: #07F;
+}
+
+.button.primary:hover {
+	border-color: #FFF;
+}
+
+.button.secondary {
+	background: var(--text-color);
+
+	color: var(--background);
+
+	border-color: var(--text-color);
+}
+
+.button.secondary:hover {
+	background: var(--background);
+
+	color: var(--text-color);
+}
+
+.link {
+	color: #07F;
+
+	border-bottom: 0.08rem solid transparent;
+
+	transition: border-color 0.2s linear;
+}
+
+.link:hover {
+	border-bottom-color: currentColor;
+}
+
+section.fullscreen {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	position: fixed;
+	top: 0;
+	left: 0;
+
+	width: 100dvw;
+	height: 100dvh;
+
+	background: transparent;
+	backdrop-filter: none;
+	-webkit-backdrop-filter: none;
+
+	text-align: center;
+
+	transition: backdrop-filter 0.5s ease-in-out, background 0.5s ease-in-out, opacity 0.5s ease-in-out;
+
+	pointer-events: visible;
+}
+
+section.fullscreen {
+	transition: opacity 0.5s ease-in-out;
+}
+
+section.fullscreen:not([active]),
+section.fullscreen:not([active]) * {
+	opacity: 0 !important;
+}
+
+section.fullscreen {
+	z-index: 1;
+}
+
+section.fullscreen[active] {
+	backdrop-filter: blur(0.8rem) saturate(70%);
+	-webkit-backdrop-filter: blur(0.8rem) saturate(70%);
+}
+
+section.fullscreen[hidden] {
+	visibility: hidden;
+}
+
+section.fullscreen .title {
+	font-size: 2rem;
+	font-weight: 600;
+
+	text-shadow: 0 0.2rem 0.1rem #888;
+
+	opacity: 0.5;
+}
+
+section#error {
+	z-index: 2;
+}
+
+section#error .title {
+	margin: auto auto 1rem auto;
+}
+
+section#error .file {
+	margin-top: 1rem;
+}
+
+section#error .contact {
+	margin: auto auto 0.5rem auto;
 }
