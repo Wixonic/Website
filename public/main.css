@@ -1,5 +1,15 @@
 @import url("https://rsms.me/inter/inter.css");
 
+.selectable {
+	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+
+	cursor: pointer;
+	pointer-events: initial;
+	outline: initial;
+}
+
 a {
 	color: unset;
 	text-decoration: unset;

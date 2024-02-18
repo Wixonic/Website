@@ -11,8 +11,11 @@
 	"tasks": {
 		"hosting": {
 			"name": "Hosting",
-			"command": "firebase emulators:start --only hosting",
-			"runAtStart": true
+			"command": "firebase emulators:start --only hosting:beta",
+			"runAtStart": true,
+			"preview": {
+				"port": 3000
+			}
 		}
 	}
 }

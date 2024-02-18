@@ -88,6 +88,7 @@
 
 			cursor: inherit;
 			pointer-events: inherit;
+			outline: none;
 		}
 
 		:root {
@@ -101,7 +102,7 @@
 
 	<link defer rel="stylesheet" href="index.css" />
 
-	<script defer src="loader.js"></script>
+	<script defer src="main.js"></script>
 
 </head>
 
@@ -109,47 +110,22 @@
 
 	<noscript>You need JavaScript to display this website.</noscript>
 
-	<main>
+	<canvas id="background"></canvas>
 
-		<section class="glass profile">
+	<section id="error">
 
-			<div class="logo">
+		<div class="title">An error occured</div>
+		<div class="message"></div>
+		<div class="code"></div>
+		<div class="link"><a href="https://go.wixonic.fr/help">Contact us</a> with the error code!</div>
 
-				<img class="glass" dark
-					src="https://assets.wixonic.fr/file/icon/logo/with-character/light-transparent.png"
-					alt="Wixonic's logo with a Wixi" />
-				<img class="glass" light
-					src="https://assets.wixonic.fr/file/icon/logo/with-character/dark-transparent.png"
-					alt="Wixonic's logo with a Wixi" />
+	</section>
 
-			</div>
+	<section id="resize">
 
-			<div class="title">Wixonic</div>
+		<div class="Resizing..."></div>
 
-		</section>
-
-		<section class="links">
-
-			<div class="title">Links</div>
-
-			<a href="https://go.wixonic.fr/discord" class="discord glass">
-
-				<img dark src="https://assets.wixonic.fr/file/icon/wixiland/dark.png" alt="WixiLand" />
-				<img light src="https://assets.wixonic.fr/file/icon/wixiland/light.png" alt="WixiLand" />
-
-			</a>
-
-			<a href="https://go.wixonic.fr/instagram" class="instagram glass">
-
-				<img src="https://assets.wixonic.fr/file/icon/instagram.png" alt="Instagram logo" />
-
-				<div class="name">@wixonic12</div>
-
-			</a>
-
-		</section>
-
-	</main>
+	</section>
 
 </body>
 

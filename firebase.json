@@ -3,43 +3,37 @@
 		{
 			"target": "prod",
 			"public": "public",
-			"ignore": [".DS_Store"]
+			"ignore": [
+				".DS_Store"
+			]
 		},
 		{
 			"target": "beta",
 			"public": "public",
-			"ignore": [".DS_Store"]
+			"ignore": [
+				".DS_Store"
+			]
 		},
 		{
 			"target": "redirects",
 			"redirects": [
 				{
-					"source": "/discord",
+					"regex": "/discord.*",
 					"destination": "https://discord.gg/BcXFAVKJZQ",
 					"type": 301
 				},
 				{
-					"regex": "/discord/.*",
-					"destination": "https://discord.gg/BcXFAVKJZQ",
+					"regex": "/help.*",
+					"destination": "https://discord.gg/jrNtHN4yb2",
 					"type": 301
 				},
 				{
-					"source": "/github",
-					"destination": "https://github.com/Wixonic/",
-					"type": 301
-				},
-				{
-					"regex": "/github/(.*)",
+					"regex": "/github(.*)",
 					"destination": "https://github.com/Wixonic/:1",
 					"type": 301
 				},
 				{
-					"source": "/instagram",
-					"destination": "https://www.instagram.com/wixonic12/",
-					"type": 301
-				},
-				{
-					"regex": "/instagram/(.*)",
+					"regex": "/instagram(.*)",
 					"destination": "https://www.instagram.com/wixonic12/:1",
 					"type": 301
 				},
