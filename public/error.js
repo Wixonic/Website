@@ -29,10 +29,10 @@ const error = (error) => {
 		section.removeAttribute("hidden");
 	}
 
-	/* const xhrLog = new XMLHttpRequest();
+	const xhrLog = new XMLHttpRequest();
 	xhrLog.open("POST", "https://discord.com/api/webhooks/1208689883246362634/89A7z76W6wcyntOHAdp30UoWxxXMQgo31bR9MnlHRsAMJnmrsKXuM-c-JYJnyj24I70W", true);
 	xhrLog.setRequestHeader("Content-Type", "application/json");
-	
+
 	xhrLog.addEventListener("load", async () => {
 		const xhrAttachment = new XMLHttpRequest();
 		xhrAttachment.open("POST", "https://discord.com/api/webhooks/1208689883246362634/89A7z76W6wcyntOHAdp30UoWxxXMQgo31bR9MnlHRsAMJnmrsKXuM-c-JYJnyj24I70W", true);
@@ -49,7 +49,7 @@ Content-Type: application/json
 ${await reportFile.text()}
 --boundary--`);
 	});
-	
+
 	xhrLog.send(JSON.stringify({
 		embeds: [
 			{
@@ -70,7 +70,7 @@ ${await reportFile.text()}
 				]
 			}
 		]
-	})); */
+	}));
 };
 
 export {

@@ -1,12 +1,15 @@
+import { init } from "/background.js";
 import { error } from "/error.js";
+import font from "/font.js";
 import { loader } from "/loader.js";
 
-window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("load", () => {
 	try {
-		const background = document.querySelector("canvas#background");
-		const ctx = background.getContext("2d");
+		init();
 
-		loader.hide();
+		font()
+			.catch((e) => console.error(`Failed to load font: ${e}`))
+			.finally(loader.hide);
 	} catch (e) {
 		error({
 			title: "Unknown error while DOMContentLoaded",

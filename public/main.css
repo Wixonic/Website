@@ -1,4 +1,39 @@
-@import url("https://rsms.me/inter/inter.css");
+:root,
+:root * {
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+
+	user-select: inherit;
+	-moz-user-select: inherit;
+	-webkit-user-select: inherit;
+
+	font-display: block;
+	font-family: inherit;
+
+	cursor: inherit;
+	pointer-events: inherit;
+	outline: inherit;
+}
+
+:root {
+	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+
+	background: var(--background);
+
+	color: var(--text-color);
+	font-family: var(--font-family);
+
+	cursor: default;
+	pointer-events: none;
+	outline: none;
+}
+
+body {
+	margin: 0;
+}
 
 a,
 button,
@@ -85,19 +120,18 @@ section.fullscreen {
 	width: 100dvw;
 	height: 100dvh;
 
-	background: transparent;
-	backdrop-filter: none;
-	-webkit-backdrop-filter: none;
+	backdrop-filter: blur(0) grayscale(0);
+	-webkit-backdrop-filter: blur(0) grayscale(0);
 
 	text-align: center;
 
-	transition: backdrop-filter 0.5s ease-in-out, background 0.5s ease-in-out, opacity 0.5s ease-in-out;
+	transition: backdrop-filter 0.5s linear, -webkit-backdrop-filter 0.5s linear, opacity 0.5s linear;
 
 	pointer-events: visible;
 }
 
-section.fullscreen {
-	transition: opacity 0.5s ease-in-out;
+section.fullscreen * {
+	transition: opacity 0.5s linear;
 }
 
 section.fullscreen:not([active]),
@@ -110,8 +144,8 @@ section.fullscreen {
 }
 
 section.fullscreen[active] {
-	backdrop-filter: blur(0.8rem) saturate(70%);
-	-webkit-backdrop-filter: blur(0.8rem) saturate(70%);
+	backdrop-filter: blur(0.4rem) grayscale(1);
+	-webkit-backdrop-filter: blur(0.4rem) grayscale(1);
 }
 
 section.fullscreen[hidden] {
@@ -141,4 +175,12 @@ section#error .file {
 
 section#error .contact {
 	margin: auto auto 0.5rem auto;
+}
+
+section#loader {
+	font-family: Arial, Helvetica, sans-serif !important;
+}
+
+main {
+	margin: 0.8rem 0.5rem 0.5rem 0;
 }

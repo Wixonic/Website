@@ -11,4 +11,6 @@ canvas#background {
 	border: none;
 
 	z-index: -1;
+
+	transition: width 0.2s ease, height 0.2s ease;
 }
