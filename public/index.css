@@ -1,16 +1,17 @@
-canvas#background {
-	position: fixed;
-	top: 0;
-	left: 0;
+main .logo {
+	width: min(20rem, calc(100vw - 1rem));
+	height: min(20rem, calc(100vw - 1rem));
 
-	width: 100dvw;
-	height: 100dvh;
+	background: #8881;
+	backdrop-filter: blur(0.3rem) grayscale(100%);
+	-webkit-backdrop-filter: blur(0.3rem) grayscale(100%);
 
-	background: var(--background);
+	border: 0.1rem solid #8882;
+	border-radius: 100%;
 
-	border: none;
+	margin: auto;
+}
 
-	z-index: -1;
-
-	transition: width 0.2s ease, height 0.2s ease;
+main .logo img {
+	width: 100%;
 }
