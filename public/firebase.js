@@ -1,8 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app-check.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 import { getStorage } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
 
@@ -18,16 +16,7 @@ const app = initializeApp({
 });
 
 const appAuth = getAuth(app);
-
-const appCheck = initializeAppCheck(app, {
-    provider: new ReCaptchaV3Provider("6Ldo4HgpAAAAAOQS51hI3MrKMUUK6WFh8oEPGXIp"),
-    isTokenAutoRefreshEnabled: true
-});
-
-const appAnalytics = getAnalytics(app);
-
 const appFirestore = getFirestore(app);
-
 const appStorage = getStorage(app);
 
 const init = async () => {
@@ -36,9 +25,7 @@ const init = async () => {
 
 export default {
     app,
-    appAnalytics,
     appAuth,
-    appCheck,
     appFirestore,
     init
 };
