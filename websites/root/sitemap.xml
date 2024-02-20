@@ -8,5 +8,19 @@
 		<changefreq>daily</changefreq>
 		
 	</url>
+
+	<url>
+		
+		<loc>https://accounts.wixonic.fr</loc>
+		<changefreq>weekly</changefreq>
+		
+	</url>
+
+	<url>
+		
+		<loc>https://discord.wixonic.fr</loc>
+		<changefreq>weekly</changefreq>
+		
+	</url>
 	
 </urlset>
