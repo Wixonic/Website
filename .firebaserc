@@ -1,21 +1,21 @@
 {
-  "projects": {
-    "default": "wixonic-website-2"
-  },
-  "targets": {
-    "wixonic-website-2": {
-      "hosting": {
-        "prod": [
-          "wixonic-website-2"
-        ],
-        "beta": [
-          "beta-wixonic-website-2"
-        ],
-        "redirects": [
-          "redirect-wixonic-website-2"
-        ]
-      }
-    }
-  },
-  "etags": {}
+	"projects": {
+		"default": "wixonic-website-2"
+	},
+	"targets": {
+		"wixonic-website-2": {
+			"hosting": {
+				"main": [
+					"wixonic-website-2"
+				],
+				"accounts": [
+					"accounts-wixonic-website-2"
+				],
+				"redirects": [
+					"redirect-wixonic-website-2"
+				]
+			}
+		}
+	},
+	"etags": {}
 }

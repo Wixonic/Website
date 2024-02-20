@@ -7,7 +7,7 @@ import loader from "/loader.js";
 window.addEventListener("load", async () => {
 	try {
 		background.init();
-		
+
 		try {
 			await firebase.init();
 		} catch (e) {
@@ -24,7 +24,7 @@ window.addEventListener("load", async () => {
 		} catch (e) {
 			console.error(`Failed to load font: ${e}`);
 		}
-		
+
 		loader.hide();
 	} catch (e) {
 		error({

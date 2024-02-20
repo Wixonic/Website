@@ -124,6 +124,6 @@
 		]
 	},
 	"name": "Wixonic",
-	"scope": "https://wixonic.fr",
-	"start_url": "https://wixonic.fr"
+	"scope": "/",
+	"start_url": "/"
 }
