@@ -1,57 +1,61 @@
 {
-	"hosting": [
-		{
-			"target": "prod",
-			"public": "public",
-			"ignore": [
-				".DS_Store"
-			]
-		},
-		{
-			"target": "beta",
-			"public": "public",
-			"ignore": [
-				".DS_Store"
-			]
-		},
-		{
-			"target": "redirects",
-			"redirects": [
-				{
-					"regex": "/discord.*",
-					"destination": "https://discord.gg/BcXFAVKJZQ",
-					"type": 301
-				},
-				{
-					"regex": "/help.*",
-					"destination": "https://discord.gg/jrNtHN4yb2",
-					"type": 301
-				},
-				{
-					"regex": "/github(.*)",
-					"destination": "https://github.com/Wixonic/:1",
-					"type": 301
-				},
-				{
-					"regex": "/instagram(.*)",
-					"destination": "https://www.instagram.com/wixonic12/:1",
-					"type": 301
-				},
-				{
-					"regex": "/(.*)",
-					"destination": "https://wixonic.fr/:1",
-					"type": 301
-				}
-			]
-		}
-	],
-	"emulators": {
-		"hosting": {
-			"port": 3000
-		},
-		"singleProjectMode": true
-	},
-	"storage": {
-		"rules": "rules/storage.rules"
-	}
+  "hosting": [
+    {
+      "target": "prod",
+      "public": "public",
+      "ignore": [
+        ".DS_Store"
+      ]
+    },
+    {
+      "target": "beta",
+      "public": "public",
+      "ignore": [
+        ".DS_Store"
+      ]
+    },
+    {
+      "target": "redirects",
+      "redirects": [
+        {
+          "regex": "/discord.*",
+          "destination": "https://discord.gg/BcXFAVKJZQ",
+          "type": 301
+        },
+        {
+          "regex": "/help.*",
+          "destination": "https://discord.gg/jrNtHN4yb2",
+          "type": 301
+        },
+        {
+          "regex": "/github(.*)",
+          "destination": "https://github.com/Wixonic/:1",
+          "type": 301
+        },
+        {
+          "regex": "/instagram(.*)",
+          "destination": "https://www.instagram.com/wixonic12/:1",
+          "type": 301
+        },
+        {
+          "regex": "/(.*)",
+          "destination": "https://wixonic.fr/:1",
+          "type": 301
+        }
+      ]
+    }
+  ],
+  "emulators": {
+    "hosting": {
+      "port": 3000
+    },
+    "singleProjectMode": true
+  },
+  "storage": {
+    "rules": "rules/storage.rules"
+  },
+  "firestore": {
+    "rules": "rules/firestore.rules",
+    "indexes": "rules/firestore.indexes.json"
+  }
 }

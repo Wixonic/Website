@@ -72,6 +72,6 @@ const init = () => {
 	}
 };
 
-export {
+export default {
 	init
 };

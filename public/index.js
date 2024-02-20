@@ -1,20 +1,36 @@
-import { init } from "/background.js";
-import { error } from "/error.js";
+import background from "/background.js";
+import error from "/error.js";
+import firebase from "/firebase.js";
 import font from "/font.js";
-import { loader } from "/loader.js";
+import loader from "/loader.js";
 
-window.addEventListener("load", () => {
+window.addEventListener("load", async () => {
 	try {
-		init();
+		background.init();
+		
+		try {
+			await firebase.init();
+		} catch (e) {
+			error({
+				title: "Failed to start firebase engine",
+				message: "Something wrong happened while loading dynamic resources",
+				code: 2,
+				details: e.message
+			});
+		}
 
-		font()
-			.catch((e) => console.error(`Failed to load font: ${e}`))
-			.finally(loader.hide);
+		try {
+			await font();
+		} catch (e) {
+			console.error(`Failed to load font: ${e}`);
+		}
+		
+		loader.hide();
 	} catch (e) {
 		error({
 			title: "Unknown error while DOMContentLoaded",
-			message: "Something happend while loading the website.",
-			code: 0,
+			message: "Something happend while loading the website",
+			code: 1,
 			details: e.message,
 		});
 	}

@@ -9,20 +9,20 @@
 /**
  * @param {ExtendedError} error 
  */
-const error = (error) => {
+const error = (e) => {
 	performance.mark("error");
 
 	const section = document.querySelector("section#error");
 
 	const reportFile = new Blob([JSON.stringify({
-		error,
+		e,
 		performance: performance.getEntries()
 	}, undefined, "\t")], {
 		type: "application/json"
 	});
 
 	if (section) {
-		section.querySelector(".message").innerHTML = `${error?.message ?? "unknown message"}<br /><br />Please reload the page.<br />If you still see this error after reloading the page, please contact us below.`;
+		section.querySelector(".message").innerHTML = `${e?.message ?? "unknown message"}<br /><br />Please reload the page.<br />If you still see this error after reloading the page, please contact us below.`;
 		section.querySelector(".file").href = URL.createObjectURL(reportFile);
 
 		section.setAttribute("active", "true");
@@ -53,16 +53,16 @@ ${await reportFile.text()}
 	xhrLog.send(JSON.stringify({
 		embeds: [
 			{
-				title: error?.title ?? "unknown title",
-				description: error?.message ?? "unknown message",
+				title: e?.title ?? "unknown title",
+				description: e?.message ?? "unknown message",
 				color: 0xFF0000,
 				fields: [
 					{
 						name: "Code",
-						value: error?.code ?? "unknown"
+						value: e?.code ?? "unknown"
 					}, {
 						name: "Error",
-						value: error?.details ?? "unknown"
+						value: e?.details ?? "unknown"
 					}, {
 						name: "User-Agent",
 						value: navigator.userAgent
@@ -73,6 +73,11 @@ ${await reportFile.text()}
 	}));
 };
 
-export {
-	error
-};
+window.addEventListener("error", (e) => error({
+	title: "Unhandled error",
+	message: "An unknown error occured somewhere",
+	code: 0,
+	details: e.message
+}));
+
+export default error;

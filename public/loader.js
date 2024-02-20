@@ -45,6 +45,4 @@ const loader = {
 
 window.addEventListener("DOMContentLoaded", () => internal.section = document.querySelector("section#loader"));
 
-export {
-	loader
-};
+export default loader;
