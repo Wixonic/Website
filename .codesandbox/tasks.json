@@ -3,7 +3,7 @@
 	"setupTasks": [
 		{
 			"name": "Installing Dependencies",
-			"command": "npm i -g firebase-tools"
+			"command": "npm i -g firebase-tools; apt-get install openjdk-17-jdk"
 		}
 	],
 
@@ -11,7 +11,7 @@
 	"tasks": {
 		"hosting": {
 			"name": "Hosting",
-			"command": "firebase emulators:start --only hosting:beta",
+			"command": "firebase emulators:start",
 			"runAtStart": true,
 			"preview": {
 				"port": 3000
