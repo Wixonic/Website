@@ -52,18 +52,15 @@ nav::before {
 }
 
 nav .page-button {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-
 	color: #8888;
 	border-top: 0.1rem solid transparent;
 
 	overflow: hidden;
 	text-overflow: ellipsis;
+	white-space: nowrap;
 
-	margin: 0.2rem 0 0.3rem 0;
-	padding: 0.1rem 0.3rem 0 0.3rem;
+	margin: 0.2rem 0.15rem 0.3rem 0.15rem;
+	padding: 0 0.3rem;
 
 	transition: color 0.2s linear, border-color 0.2s linear;
 
@@ -89,7 +86,7 @@ nav .page-button[displayed]:hover {
 
 main {
 	display: block;
-	
+
 	margin: 0.8rem 0 0 0;
 	padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }

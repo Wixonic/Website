@@ -1,7 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 
 import { getAuth, connectAuthEmulator } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-import { getFirestore, connectFirestoreEmulator } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { getFirestore, connectFirestoreEmulator, collection, doc, query, where, getDoc, getDocs, getDocFromCache, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 import { getStorage, connectStorageEmulator } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
 
 import { setStatus } from "/status.js"
@@ -26,7 +26,7 @@ if (location.hostname == "localhost") {
 	connectFirestoreEmulator(firestore, "localhost", 2002);
 	connectStorageEmulator(storage, "localhost", 2003);
 	setStatus({
-		gravity: "critical",
+		gravity: "log",
 		message: "Running in local emulated environment."
 	});
 } else if (location.hostname == "qvkq66-2004.csb.app") {
@@ -41,7 +41,28 @@ if (location.hostname == "localhost") {
 }
 
 const init = async () => {
-	
+	const statusDoc = await getDoc(doc(firestore, "status", "current").withConverter({
+		/**
+		 * @returns {import("./status").Status}
+		 */
+		fromFirestore: (snapshot, options) => {
+			const data = snapshot.data(options);
+			return {
+				message: data.message,
+				gravity: data.gravity,
+				startDate: data.startDate?.toDate(),
+				endDate: data.endDate?.toDate()
+			};
+		}
+	}));
+
+	if (statusDoc.exists()) {
+		/**
+		 * @type {import("./status").Status}
+		 */
+		const status = statusDoc.data();
+		setStatus(status);
+	}
 };
 
 export default {

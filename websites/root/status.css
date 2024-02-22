@@ -6,25 +6,25 @@ container.status {
 	position: fixed;
 	top: 0;
 	left: 0;
-	
+
 	display: block;
-	
+
 	width: 100%;
 	height: fit-content;
-	
+
 	z-index: 2;
 }
 
 container.status status {
 	display: block;
-	
+
 	background: #888;
-	
+
 	color: #FFF;
 	text-align: center;
-	
+
 	border-bottom: 0.1rem solid #8885;
-	
+
 	padding: 0.2rem max(0.2rem, env(safe-area-inset-right)) 0.2rem max(0.2rem, env(safe-area-inset-left));
 }
 
@@ -35,24 +35,24 @@ container.status status div.message {
 
 container.status status div.date {
 	font-weight: 600;
-	
+
 	opacity: 0.5;
 }
 
 container.status status[gravity="info"] {
 	background: #07F;
-	
+
 	color: #FFF;
 }
 
 container.status status[gravity="warn"] {
 	background: #F80;
-	
+
 	color: #000;
 }
 
 container.status status[gravity="critical"] {
 	background: #F00;
-	
+
 	color: #FFF;
 }

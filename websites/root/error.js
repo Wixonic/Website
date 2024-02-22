@@ -58,7 +58,7 @@ const error = (e) => {
 		section.removeAttribute("hidden");
 	}
 
-	if (location.hostname == "localhost") console.error(report);
+	if (location.hostname == "localhost" || location.hostname == "qvkq66-2004.csb.app") console.error(report);
 	else {
 		const xhrLog = new XMLHttpRequest();
 		xhrLog.open("POST", "https://discord.com/api/webhooks/1208689883246362634/89A7z76W6wcyntOHAdp30UoWxxXMQgo31bR9MnlHRsAMJnmrsKXuM-c-JYJnyj24I70W", true);
