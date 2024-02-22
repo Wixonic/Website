@@ -62,8 +62,8 @@ nav .page-button {
 	overflow: hidden;
 	text-overflow: ellipsis;
 
-	margin: 0 0.2rem;
-	padding: 0.3rem 0.1rem;
+	margin: 0.2rem 0 0.3rem 0;
+	padding: 0.1rem 0.3rem 0 0.3rem;
 
 	transition: color 0.2s linear, border-color 0.2s linear;
 
@@ -80,15 +80,18 @@ nav .page-button:hover {
 nav .page-button[displayed] {
 	color: #888;
 
-	border-top-color: #8882;
+	border-top-color: #8884;
 }
 
 nav .page-button[displayed]:hover {
-	border-top-color: #8888;
+	border-top-color: #888A;
 }
 
 main {
+	display: block;
+	
 	margin: 0.8rem 0 0 0;
+	padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 
 main container.pages page {

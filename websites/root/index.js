@@ -4,6 +4,7 @@ import firebase from "/firebase.js";
 import font from "/font.js";
 import footer from "/footer.js";
 import loader from "/loader.js";
+import status from "/status.js";
 import pages from "/pages.js";
 
 window.addEventListener("load", async () => {
@@ -18,6 +19,7 @@ window.addEventListener("load", async () => {
 
 		background.init();
 		footer.init();
+		status.init();
 
 		try {
 			await firebase.init();

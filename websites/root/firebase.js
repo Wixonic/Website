@@ -4,6 +4,8 @@ import { getAuth, connectAuthEmulator } from "https://www.gstatic.com/firebasejs
 import { getFirestore, connectFirestoreEmulator } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 import { getStorage, connectStorageEmulator } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
 
+import { setStatus } from "/status.js"
+
 const app = initializeApp({
 	apiKey: "AIzaSyAoAl-09tw3K0i8N2PnYKAjjZb19e4zEBk",
 	projectId: "wixonic-website-2",
@@ -23,10 +25,23 @@ if (location.hostname == "localhost") {
 	connectAuthEmulator(auth, "http://localhost:2001");
 	connectFirestoreEmulator(firestore, "localhost", 2002);
 	connectStorageEmulator(storage, "localhost", 2003);
+	setStatus({
+		gravity: "critical",
+		message: "Running in local emulated environment."
+	});
+} else if (location.hostname == "qvkq66-2004.csb.app") {
+	console.warn("Running in shared environment");
+	connectAuthEmulator(auth, "https://qvkq66-2001.csb.app");
+	connectFirestoreEmulator(firestore, "qvkq66-2002.csb.app", 443);
+	connectStorageEmulator(storage, "qvkq66-2003.csb.app", 443);
+	setStatus({
+		gravity: "warn",
+		message: "Running in shared emulated environment."
+	});
 }
 
 const init = async () => {
-
+	
 };
 
 export default {

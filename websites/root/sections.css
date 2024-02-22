@@ -53,7 +53,7 @@ section.fullscreen .title {
 }
 
 section#error {
-	z-index: 2;
+	z-index: 3;
 }
 
 section#error .title {
