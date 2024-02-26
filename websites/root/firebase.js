@@ -1,7 +1,11 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 
 import { getAuth, connectAuthEmulator } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-import { getFirestore, connectFirestoreEmulator, collection, doc, query, where, getDoc, getDocs, getDocFromCache, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { getFunctions, connectFunctionsEmulator } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-functions.js";
+import {
+	getFirestore, connectFirestoreEmulator, persistentLocalCache, persistentMultipleTabManager,
+	collection, doc, query, where, getDoc, getDocs, setDoc
+} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 import { getStorage, connectStorageEmulator } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
 
 import { setStatus } from "/status.js"
@@ -17,58 +21,85 @@ const app = initializeApp({
 });
 
 const auth = getAuth(app);
-const firestore = getFirestore(app);
+const firestore = getFirestore(app, {
+	localCache: persistentLocalCache({
+		tabManager: persistentMultipleTabManager()
+	})
+});
+const functions = getFunctions(app);
 const storage = getStorage(app);
 
-if (location.hostname == "localhost") {
-	console.warn("Running in local environment");
+if (!location.hostname.endsWith("wixonic.fr")) {
 	connectAuthEmulator(auth, "http://localhost:2001");
 	connectFirestoreEmulator(firestore, "localhost", 2002);
 	connectStorageEmulator(storage, "localhost", 2003);
+	connectFunctionsEmulator(functions, "localhost", 2004);
+
 	setStatus({
-		gravity: "log",
-		message: "Running in local emulated environment."
-	});
-} else if (location.hostname == "qvkq66-2004.csb.app") {
-	console.warn("Running in shared environment");
-	connectAuthEmulator(auth, "https://qvkq66-2001.csb.app");
-	connectFirestoreEmulator(firestore, "qvkq66-2002.csb.app", 443);
-	connectStorageEmulator(storage, "qvkq66-2003.csb.app", 443);
-	setStatus({
-		gravity: "warn",
-		message: "Running in shared emulated environment."
+		gravity: location.hostname == "localhost" ? "log" : "warn",
+		message: `Running in ${location.hostname == "localhost" ? "local" : "emulated"} environment.`
 	});
 }
 
-const init = async () => {
-	const statusDoc = await getDoc(doc(firestore, "status", "current").withConverter({
-		/**
-		 * @returns {import("./status").Status}
-		 */
-		fromFirestore: (snapshot, options) => {
-			const data = snapshot.data(options);
-			return {
-				message: data.message,
-				gravity: data.gravity,
-				startDate: data.startDate?.toDate(),
-				endDate: data.endDate?.toDate()
-			};
-		}
-	}));
+/**
+ * @typedef {function(Object): Object} FirestoreGetConverter
+ */
 
-	if (statusDoc.exists()) {
-		/**
-		 * @type {import("./status").Status}
-		 */
-		const status = statusDoc.data();
-		setStatus(status);
+/**
+ * @typedef {function(FirestoreGetConverter, ...string): Promise<Object>} FirestoreGetDoc
+ */
+
+/**
+ * @typedef {Object} FirestoreEngine
+ * @property {FirestoreGetDoc} getDoc
+ */
+
+/**
+ * @type {FirestoreEngine}
+ */
+const firestoreEngine = {
+	getDoc: async (converter, ...pathSegments) => {
+		const ref = doc(firestore, ...pathSegments).withConverter({
+			fromFirestore: (snapshot, options) => converter(snapshot.data(options))
+		});
+		const document = await getDoc(ref);
+
+		if (document.exists()) return document.data();
+		else return null;
+	},
+
+	getDocs: async (converter, ...pathSegments) => {
+		const ref = collection(firestore, ...pathSegments).withConverter({
+			fromFirestore: (snapshot, options) => converter(snapshot.data(options))
+		});
+
+		const documents = await getDocs(ref);
+	},
+
+	query: async (converter, ...pathSegments) => {
+		const ref = collection(firestore, ...pathSegments).withConverter({
+			fromFirestore: (snapshot, options) => converter(snapshot.data(options))
+		});
 	}
 };
 
+const init = async () => {
+	/**
+	 * @type {import("./status").Status?}
+	 */
+	const status = await firestoreEngine.getDoc((data) => {
+		return {
+			message: data.message,
+			gravity: data.gravity,
+			startDate: data.startDate?.toDate(),
+			endDate: data.endDate?.toDate()
+		};
+	}, "status", "current");
+
+	if (status) setStatus(status);
+};
+
 export default {
-	app,
-	auth,
-	firestore,
-	storage,
+	firestore: firestoreEngine,
 	init
 };

@@ -64,9 +64,13 @@
 			"host": "localhost",
 			"port": 2003
 		},
-		"hosting": {
+		"functions": {
 			"host": "localhost",
 			"port": 2004
+		},
+		"hosting": {
+			"host": "localhost",
+			"port": 2005
 		}
 	},
 	"storage": {
@@ -75,5 +79,17 @@
 	"firestore": {
 		"rules": "rules/firestore.rules",
 		"indexes": "rules/firestore.indexes.json"
-	}
+	},
+	"functions": [
+		{
+			"source": "functions",
+			"codebase": "default",
+			"ignore": [
+				"node_modules",
+				".git",
+				"firebase-debug.log",
+				"firebase-debug.*.log"
+			]
+		}
+	]
 }

@@ -1,4 +1,7 @@
-.firebase
-.DS_Store
+.firebase/
+node_modules/
 
 *.log
+.DS_Store
+config.js*
+package-lock.json

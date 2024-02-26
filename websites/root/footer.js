@@ -3,7 +3,9 @@ const links = [{
 	url: "https://wixonic.fr"
 }];
 
-const init = () => { };
+const init = () => {
+
+};
 
 export default {
 	init

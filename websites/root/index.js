@@ -32,6 +32,10 @@ window.addEventListener("load", async () => {
 			});
 		}
 
+		const news = await firebase.firestore.getDocs((data) => {
+			return {};
+		}, "news");
+
 		loader.hide();
 	} catch (e) {
 		error({
