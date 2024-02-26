@@ -21,23 +21,18 @@ const app = initializeApp({
 });
 
 const auth = getAuth(app);
-const firestore = getFirestore(app, {
-	localCache: persistentLocalCache({
-		tabManager: persistentMultipleTabManager()
-	})
-});
+const firestore = getFirestore(app);
 const functions = getFunctions(app);
 const storage = getStorage(app);
 
-if (!location.hostname.endsWith("wixonic.fr")) {
+if (location.hostname == "localhost") {
 	connectAuthEmulator(auth, "http://localhost:2001");
-	connectFirestoreEmulator(firestore, "localhost", 2002);
-	connectStorageEmulator(storage, "localhost", 2003);
-	connectFunctionsEmulator(functions, "localhost", 2004);
-
+	connectFirestoreEmulator(firestore, "localhostm", 2002);
+	connectStorageEmulator(firestore, "localhost", 2003);
+	connectFunctionsEmulator(firestore, "localhostm", 2004);
 	setStatus({
-		gravity: location.hostname == "localhost" ? "log" : "warn",
-		message: `Running in ${location.hostname == "localhost" ? "local" : "emulated"} environment.`
+		gravity: "log",
+		message: "Running in local environment."
 	});
 }
 
