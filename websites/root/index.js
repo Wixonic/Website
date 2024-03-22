@@ -32,9 +32,15 @@ window.addEventListener("load", async () => {
 			});
 		}
 
-		const news = await firebase.firestore.getDocs((data) => {
-			return {};
-		}, "news");
+		/* const news = await firebase.firestore.query((data) => {
+			return {
+				author: data.author,
+				content: data.content,
+				date: data.date?.toDate,
+				summary: data.summary,
+				title: data.title
+			};
+		}, [firebase.firestore.orderBy("date", "desc"), firebase.firestore.limit(5)], "news"); */
 
 		loader.hide();
 	} catch (e) {

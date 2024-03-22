@@ -4,7 +4,8 @@ import { getAuth, connectAuthEmulator } from "https://www.gstatic.com/firebasejs
 import { getFunctions, connectFunctionsEmulator } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-functions.js";
 import {
 	getFirestore, connectFirestoreEmulator, persistentLocalCache, persistentMultipleTabManager,
-	collection, doc, query, where, getDoc, getDocs, setDoc
+	collection, doc, getDoc, getDocs, setDoc,
+	query, where, orderBy, limit
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 import { getStorage, connectStorageEmulator } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
 
@@ -27,9 +28,10 @@ const storage = getStorage(app);
 
 if (location.hostname == "localhost") {
 	connectAuthEmulator(auth, "http://localhost:2001");
-	connectFirestoreEmulator(firestore, "localhostm", 2002);
-	connectStorageEmulator(firestore, "localhost", 2003);
-	connectFunctionsEmulator(firestore, "localhostm", 2004);
+	connectFirestoreEmulator(firestore, "localhost", 2002);
+	connectStorageEmulator(functions, "localhost", 2003);
+	connectFunctionsEmulator(storage, "localhost", 2004);
+
 	setStatus({
 		gravity: "log",
 		message: "Running in local environment."
@@ -37,16 +39,7 @@ if (location.hostname == "localhost") {
 }
 
 /**
- * @typedef {function(Object): Object} FirestoreGetConverter
- */
-
-/**
- * @typedef {function(FirestoreGetConverter, ...string): Promise<Object>} FirestoreGetDoc
- */
-
-/**
  * @typedef {Object} FirestoreEngine
- * @property {FirestoreGetDoc} getDoc
  */
 
 /**
@@ -68,14 +61,25 @@ const firestoreEngine = {
 			fromFirestore: (snapshot, options) => converter(snapshot.data(options))
 		});
 
+		const data = {};
+
 		const documents = await getDocs(ref);
+		documents.forEach((snapshot) => data[snapshot.id] = snapshot.data());
+
+		console.log(data);
+
+		return data;
 	},
 
-	query: async (converter, ...pathSegments) => {
+	query: async (converter, options, ...pathSegments) => {
 		const ref = collection(firestore, ...pathSegments).withConverter({
 			fromFirestore: (snapshot, options) => converter(snapshot.data(options))
 		});
-	}
+	},
+
+	where,
+	orderBy,
+	limit
 };
 
 const init = async () => {

@@ -20,7 +20,7 @@ container.status status {
 
 	background: #888;
 
-	color: #FFF;
+	color: #FFF !important;
 	text-align: center;
 
 	border-bottom: 0.1rem solid #8885;
@@ -42,17 +42,17 @@ container.status status div.date {
 container.status status[gravity="info"] {
 	background: #07F;
 
-	color: #FFF;
+	color: #FFF !important;
 }
 
 container.status status[gravity="warn"] {
 	background: #F80;
 
-	color: #000;
+	color: #000 !important;
 }
 
 container.status status[gravity="critical"] {
 	background: #F00;
 
-	color: #FFF;
+	color: #FFF !important;
 }

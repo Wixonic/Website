@@ -45,8 +45,8 @@ input,
 label,
 .button,
 .link {
-	cursor: pointer;
-	pointer-events: all;
+	cursor: pointer !important;
+	pointer-events: all !important;
 }
 
 a {
