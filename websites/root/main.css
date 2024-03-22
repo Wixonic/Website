@@ -50,7 +50,7 @@ label,
 }
 
 a {
-	color: unset;
+	color: #07F;
 	text-decoration: unset;
 }
 
@@ -100,8 +100,6 @@ button {
 }
 
 .link {
-	color: #07F;
-
 	border-bottom: 0.08rem solid transparent;
 
 	transition: border-color 0.2s linear;
