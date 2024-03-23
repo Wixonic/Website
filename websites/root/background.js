@@ -12,8 +12,8 @@ const init = () => {
 
 		const update = () => {
 			const n = Date.now(),
-				w = canvas.width = Number(getComputedStyle(canvas).width.replace("px", "")) * devicePixelRatio,
-				h = canvas.height = Number(getComputedStyle(canvas).height.replace("px", "")) * devicePixelRatio,
+				w = canvas.width = Number(getComputedStyle(canvas).width.replace("px", "")),
+				h = canvas.height = Number(getComputedStyle(canvas).height.replace("px", "")),
 				m = Math.min(w, h),
 				M = Math.max(w, h);
 
