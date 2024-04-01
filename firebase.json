@@ -38,6 +38,11 @@
 					"type": 301
 				},
 				{
+					"regex": "/youtube(.*)",
+					"destination": "https://www.youtube.com/channel/UCnPN_SkWcIDNL-BjJGeDzQA/:1",
+					"type": 301
+				},
+				{
 					"regex": "/(.*)",
 					"destination": "https://wixonic.fr/:1",
 					"type": 301

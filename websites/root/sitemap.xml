@@ -18,7 +18,14 @@
 
 	<url>
 		
-		<loc>https://discord.wixonic.fr</loc>
+		<loc>https://server.wixonic.fr/discord</loc>
+		<changefreq>weekly</changefreq>
+		
+	</url>
+
+	<url>
+		
+		<loc>https://server.wixonic.fr/brawldata</loc>
 		<changefreq>weekly</changefreq>
 		
 	</url>
