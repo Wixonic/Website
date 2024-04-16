@@ -10,10 +10,13 @@ main .logo {
 	border-radius: 100%;
 
 	margin: auto;
+
+	overflow: hidden;
 }
 
 main .logo img {
-	width: 100%;
+	min-width: 100%;
+	min-height: 100%;
 }
 
 main .name {
