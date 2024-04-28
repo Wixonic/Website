@@ -17,8 +17,6 @@ section.fullscreen {
 	text-align: center;
 
 	transition: backdrop-filter 0.5s linear, -webkit-backdrop-filter 0.5s linear, opacity 0.5s linear;
-
-	pointer-events: visible;
 }
 
 section.fullscreen * {
@@ -46,10 +44,6 @@ section.fullscreen[hidden] {
 section.fullscreen .title {
 	font-size: 2rem;
 	font-weight: 600;
-
-	text-shadow: 0 0.2rem 0.1rem #888;
-
-	opacity: 0.5;
 }
 
 section#error {
@@ -69,5 +63,7 @@ section#error .contact {
 }
 
 section#loader {
+	background: var(--background);
+
 	font-family: Arial, Helvetica, sans-serif !important;
 }

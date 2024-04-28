@@ -18,6 +18,13 @@
 
 	<url>
 		
+		<loc>https://admin.wixonic.fr</loc>
+		<changefreq>weekly</changefreq>
+		
+	</url>
+
+	<url>
+		
 		<loc>https://server.wixonic.fr/discord</loc>
 		<changefreq>weekly</changefreq>
 		

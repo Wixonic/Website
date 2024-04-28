@@ -32,6 +32,18 @@ container.status status * {
 	color: #FFF;
 }
 
+container.status status .link {
+	display: inline-block;
+
+	border-bottom-color: currentColor;
+
+	transition: transform 0.2s;
+}
+
+container.status status .link:hover {
+	transform: scale(0.9);
+}
+
 container.status status div.message {
 	font-size: 1.1rem;
 	font-weight: 650;

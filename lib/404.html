@@ -4,9 +4,9 @@
 
 <head>
 
-	<title>Wixonic</title>
-	<meta property="og:title" content="Wixonic" />
-	<meta name="apple-mobile-web-app-title" content="Wixonic" />
+	<title>Oops!</title>
+	<meta property="og:title" content="Oops!" />
+	<meta name="apple-mobile-web-app-title" content="Oops!" />
 
 	<meta charset="utf-8" />
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -17,17 +17,17 @@
 	<meta name="author" content="Wixonic, contact@wixonic.fr" />
 	<meta property="og:email" content="contact@wixonic.fr" />
 
-	<meta name="description" content="News about my projects, links to my social accounts and more!" />
-	<meta property="og:description" content="News about my projects, links to my social accounts and more!" />
+	<meta name="description" content="What are you searching for?" />
+	<meta property="og:description" content="What are you searching for?" />
 
-	<meta name="robots" content="index,follow" />
+	<meta name="robots" content="noindex,follow" />
 
 	<meta property="og:locale" content="en_US" />
 	<meta property="og:type" content="website" />
 
-	<meta rel="canonical" href="https://wixonic.fr" />
-	<meta property="og:url" content="https://wixonic.fr" />
-	<meta name="msapplication-starturl" href="https://wixonic.fr" />
+	<meta rel="canonical" href="/" />
+	<meta property="og:url" content="/" />
+	<meta name="msapplication-starturl" href="/" />
 
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 
@@ -84,17 +84,15 @@
 	</style>
 
 	<link rel="stylesheet" href="/lib/main.css" />
-	<link rel="stylesheet" href="index.css" />
+	<link rel="stylesheet" href="/lib/404.css" />
 
-	<script defer type="module" src="index.js"></script>
+	<script defer type="module" src="/lib/404.js"></script>
 
 </head>
 
 <body>
 
 	<noscript>You need JavaScript to display this website.</noscript>
-
-	<canvas id="background"></canvas>
 
 	<section id="error" class="fullscreen" hidden="true">
 
@@ -115,52 +113,16 @@
 
 	<main>
 
-		<div class="logo"></div>
+		<h1>What are you searching for?</h1>
 
-		<div class="name">Wixonic</div>
+		<p>
 
-		<nav>
+			Looks like this page took a vacation to the Bermuda Triangle.<br />
+			We're on a search mission, but in the meantime, why not <a href="/" class="link">explore elsewhere</a>?
 
-			<a class="page-button" href="#news">News</a>
-			<a class="page-button" href="#discord">Discord</a>
-			<a class="page-button" href="#github">GitHub</a>
+		</p>
 
-		</nav>
-
-		<container class="pages">
-
-			<page id="news">
-
-				<div id="news-container" class="news"></div>
-
-			</page>
-
-			<page id="discord">
-
-				<div class="links">
-
-					<a class="button primary" href="https://go.wixonic.fr/discord">Join WixiLand</a>
-					<a class="button secondary" href="https://server.wixonic.fr/discord">Member control panel</a>
-
-				</div>
-
-				<div id="discord-news" class="news"></div>
-
-			</page>
-
-			<page id="github">
-
-				<div class="links">
-
-					<a class="button secondary" href="https://go.wixonic.fr/github">GitHub profile</a>
-
-				</div>
-
-				<div id="repos"></div>
-
-			</page>
-
-		</container>
+		<img class="animation" src="/assets/file/images/notfound.png" alt="404 Animation" />
 
 	</main>
 

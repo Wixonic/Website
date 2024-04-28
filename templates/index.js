@@ -4,10 +4,10 @@ import firebase from "/lib/firebase.js";
 import font from "/lib/font.js";
 import footer from "/lib/footer.js";
 import loader from "/lib/loader.js";
+// import pages from "/lib/pages.js";
 import status from "/lib/status.js";
-import pages from "/lib/pages.js";
 
-import content from "./content.js";
+// import content from "./content.js";
 
 window.addEventListener("load", async () => {
 	try {
@@ -27,9 +27,9 @@ window.addEventListener("load", async () => {
 
 			try {
 				await background.init();
-				await content.init();
+				// await content.init();
 				await footer.init();
-				await pages.init();
+				// await pages.init();
 				await status.init();
 
 				loader.hide();

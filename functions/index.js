@@ -5,6 +5,11 @@ const { getStorage } = require("firebase-admin/storage");
 
 const functions = require("firebase-functions");
 
+if (process.env.FUNCTIONS_EMULATOR == true) {
+	console.log("Running in local environment");
+	process.env["FIRESTORE_EMULATOR_HOST"] = "localhost:2000";
+}
+
 const app = admin.initializeApp({
 	credential: admin.credential.cert(require("./config")),
 
@@ -22,31 +27,25 @@ const firestore = getFirestore();
 const storage = getStorage();
 
 exports.createAccount = functions.auth.user().onCreate(async (user, ctx) => {
-	const doc = firestore.doc(`/users/${user.uid}`);
 	const username = `user-${new Date(ctx.timestamp).getTime().toString(36)}`;
 
-	await doc.create({
-		creationDate: Timestamp.fromDate(new Date(ctx.timestamp)),
-		email: user.email,
-		permissions: [],
-		privacy: {
-			public: {
-				account: true,
-				email: false
-			}
-		},
-		username
-	})
+	await auth.setCustomUserClaims(user.uid, {
+		comment: true,
+		moderate: false,
+		status: false
+	});
 
-	await firestore.doc(`/usernames/${username}`).create({
-		user: doc
+	await firestore.doc(`/users/${user.uid}`).create({
+		joined: Timestamp.fromDate(new Date(ctx.timestamp)),
+		username
+	});
+
+	await firestore.doc(`/private-users/${user.uid}`).create({
+		email: user.email
 	});
 });
 
 exports.deleteAccount = functions.auth.user().onDelete(async (user) => {
-	const doc = firestore.doc(`/users/${user.uid}`);
-	const data = (await doc.get()).data();
-
-	await doc.delete();
-	await firestore.doc(`/usernames/${data.username}`).delete();
+	await firestore.doc(`/users/${user.uid}`).delete();
+	await firestore.doc(`/private-users/${user.uid}`).delete();
 });

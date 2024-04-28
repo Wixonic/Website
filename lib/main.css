@@ -1,6 +1,6 @@
-@import url("/status.css");
-@import url("/sections.css");
-@import url("/structures.css");
+@import url("status.css");
+@import url("sections.css");
+@import url("structures.css");
 
 :root,
 :root * {
@@ -31,7 +31,6 @@
 	font-family: var(--font-family);
 
 	cursor: default;
-	pointer-events: none;
 	outline: none;
 }
 
@@ -45,8 +44,7 @@ input,
 label,
 .button,
 .link {
-	cursor: pointer !important;
-	pointer-events: all !important;
+	cursor: pointer;
 }
 
 a {
@@ -82,7 +80,9 @@ button {
 }
 
 .button.primary:hover {
-	border-color: #FFF;
+	background: var(--background);
+
+	color: var(--text-color);
 }
 
 .button.secondary {

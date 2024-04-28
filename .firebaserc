@@ -5,11 +5,14 @@
 	"targets": {
 		"wixonic-website-2": {
 			"hosting": {
-				"main": [
+				"root": [
 					"wixonic-website-2"
 				],
 				"accounts": [
 					"accounts-wixonic-website-2"
+				],
+				"admin": [
+					"admin-wixonic-website-2"
 				],
 				"redirects": [
 					"redirect-wixonic-website-2"

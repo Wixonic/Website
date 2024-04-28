@@ -1,10 +1,28 @@
 {
 	"hosting": [
 		{
-			"target": "main",
+			"target": "root",
 			"public": "websites/root",
 			"ignore": [
 				".DS_Store"
+			],
+			"redirects": [
+				{
+					"regex": "/assets(.*)",
+					"destination": "https://assets.wixonic.fr/:1",
+					"type": 301
+				},
+				{
+					"regex": "/go(.*)",
+					"destination": "https://go.wixonic.fr/:1",
+					"type": 301
+				}
+			],
+			"rewrites": [
+				{
+					"source": "**",
+					"destination": "/lib/404.html"
+				}
 			]
 		},
 		{
@@ -12,6 +30,49 @@
 			"public": "websites/accounts",
 			"ignore": [
 				".DS_Store"
+			],
+			"redirects": [
+				{
+					"regex": "/assets(.*)",
+					"destination": "https://assets.wixonic.fr/:1",
+					"type": 301
+				},
+				{
+					"regex": "/go(.*)",
+					"destination": "https://go.wixonic.fr/:1",
+					"type": 301
+				}
+			],
+			"rewrites": [
+				{
+					"source": "**",
+					"destination": "/lib/404.html"
+				}
+			]
+		},
+		{
+			"target": "admin",
+			"public": "websites/admin",
+			"ignore": [
+				".DS_Store"
+			],
+			"redirects": [
+				{
+					"regex": "/assets(.*)",
+					"destination": "https://assets.wixonic.fr/:1",
+					"type": 301
+				},
+				{
+					"regex": "/go(.*)",
+					"destination": "https://go.wixonic.fr/:1",
+					"type": 301
+				}
+			],
+			"rewrites": [
+				{
+					"source": "**",
+					"destination": "/lib/404.html"
+				}
 			]
 		},
 		{

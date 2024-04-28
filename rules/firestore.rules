@@ -2,12 +2,39 @@ rules_version = "2";
 
 service cloud.firestore {
 	match /databases/{database}/documents {
-		match /news/{document} {
+		match /discord-news/{article} {
 			allow read: if true;
+			allow write: if request.auth.token.permissions.news.discord;
+
+			match /comments/{commentId} {
+				allow read: if true; 
+				allow write: if (request.auth.token.permissions.comment && request.auth.uid == resource.data.author) || request.auth.token.permissions.moderate;
+			}
+		}
+
+		match /news/{article} {
+			allow read: if true;
+			allow write: if request.auth.token.permissions.news;
+
+			match /comments/{commentId} {
+				allow read: if true;
+				allow write: if (request.auth.token.permissions.comment && request.auth.uid == resource.data.author) || request.auth.token.permissions.moderate;
+			}
 		}
 
 		match /status/current {
 			allow read: if true;
+			allow write: if request.auth.token.permissions.status;
+		}
+
+		match /private-users/{userId} {
+			allow read: if request.auth.uid == userId;
+			allow write: if request.auth.uid == userId;
+		}
+
+		match /users/{userId} {
+			allow read: if true;
+			allow write: if request.auth.uid == userId;
 		}
 	}
 }

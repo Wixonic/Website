@@ -1,0 +1,11 @@
+main {
+	text-align: center;
+}
+
+main .animation {
+	display: block;
+
+	width: 80%;
+
+	margin: auto;
+}
