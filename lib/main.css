@@ -1,6 +1,8 @@
-@import url("status.css");
-@import url("sections.css");
-@import url("structures.css");
+@import url("/lib/footer.css");
+@import url("/lib/header.css");
+@import url("/lib/sections.css");
+@import url("/lib/status.css");
+@import url("/lib/structures.css");
 
 :root,
 :root * {
