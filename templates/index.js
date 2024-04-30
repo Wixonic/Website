@@ -7,6 +7,7 @@ import header from "/lib/header.js";
 import loader from "/lib/loader.js";
 // import pages from "/lib/pages.js";
 import status from "/lib/status.js";
+// import storage from "/lib/storage.js";
 
 // import content from "./content.js";
 

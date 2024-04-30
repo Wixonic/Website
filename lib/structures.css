@@ -1,3 +1,10 @@
+body {
+	display: flex;
+	flex-direction: column;
+
+	min-height: 100vh;
+}
+
 canvas#background {
 	position: fixed;
 	top: 0;
@@ -13,6 +20,66 @@ canvas#background {
 	z-index: -3;
 
 	transition: width 0.2s ease, height 0.2s ease;
+}
+
+header {
+	position: fixed;
+
+	display: flex;
+	justify-content: space-between;
+
+	width: calc(100% - 2rem);
+
+	border-bottom: 0.1rem solid transparent;
+
+	padding: 1rem;
+
+	transition: background 0.15s linear, backdrop-filter 0.15s linear, border-color 0.15s linear;
+
+	z-index: 1;
+}
+
+header.active {
+	background: #8882;
+
+	backdrop-filter: blur(1rem) grayscale(50%);
+	-webkit-backdrop-filter: blur(1rem) grayscale(50%);
+
+	border-color: #8882;
+}
+
+header .logo {
+	padding: 0;
+}
+
+header .logo svg {
+	height: 2rem;
+}
+
+body.rootPage header .logo svg {
+	display: none;
+}
+
+main {
+	display: block;
+
+	flex-grow: 1;
+
+	padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+main .pages {
+	display: block;
+
+	margin: 0.3rem 0.3rem 0 0.3rem;
+}
+
+main .pages page {
+	display: none;
+}
+
+main .pages page[displayed] {
+	display: block;
 }
 
 nav {
@@ -83,25 +150,18 @@ nav .page-button[displayed]:hover {
 	border-top-color: #888A;
 }
 
-main {
+footer {
 	display: block;
 
-	margin: 0.8rem 0 0 0;
-	padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
-}
+	width: calc(100% - 2rem);
 
-main .pages {
-	display: block;
+	background: #8881;
 
-	margin: 0.3rem 0.3rem 0 0.3rem;
-}
+	backdrop-filter: blur(1rem) grayscale(50%);
+	-webkit-backdrop-filter: blur(1rem) grayscale(50%);
 
-main .pages page {
-	display: none;
-}
-
-main .pages page[displayed] {
-	display: block;
+	margin-top: auto;
+	padding: 1rem;
 }
 
 .empty-message {
@@ -113,6 +173,32 @@ main .pages page[displayed] {
 
 	margin: auto;
 	padding: 1rem;
+}
+
+.circle-redirect {
+	position: fixed;
+	top: 0;
+	left: 0;
+
+	width: 0;
+	height: 0;
+
+	background: var(--background);
+	box-shadow: 0 0 0.5rem #0005;
+
+	border-radius: 50%;
+
+	transform: translate(-50%, -50%);
+	z-index: 3;
+}
+
+@keyframes expand {
+	to {
+		width: 200vw;
+		height: 200vh;
+
+		border-radius: 0;
+	}
 }
 
 [dark] {

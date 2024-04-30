@@ -48,32 +48,42 @@ const init = () => new Promise(async (resolve, reject) => {
 				request("GET", "https://api.github.com/users/Wixonic/repos?sort=updated&per_page=100", "json", "application/vnd.github+json")
 					.then((xhr) => {
 						const repos = xhr.response;
+						const repoList = document.querySelector("div#repos");
 
-						if (!repos instanceof Array) reject(new Error(`Invalid reponse while fetching repositories - Status: ${xhr.status} - Reponse-Type: ${typeof repos}`));
-						else {
-							const repoList = document.querySelector("div#repos");
+						if (xhr.status == 403) {
+							const resetDate = new Date();
+							resetDate.setTime(Number(xhr.getResponseHeader("x-ratelimit-reset")) * 1000);
+							repoList.innerHTML = `<div class="empty-message">You are rate-limited. Rate limit resets at ${resetDate.toLocaleTimeString(navigator?.language ?? "en-US", { timeStyle: "short" })}.</div>`;
+							resolve()
+						} else {
+							if (!repos instanceof Array) reject(new Error(`Invalid reponse while fetching repositories - Status: ${xhr.status} - Reponse-Type: ${typeof repos}`));
+							else {
+								for (const repo of repos) {
+									const repoEl = document.createElement("a");
 
-							for (const repo of repos) {
-								const repoEl = document.createElement("a");
+									repoEl.classList.add("repo");
+									if (repo?.archived) repoEl.classList.add("archived");
 
-								repoEl.classList.add("repo");
-								if (repo?.archived) repoEl.classList.add("archived");
+									repoEl.href = repo?.html_url;
 
-								repoEl.href = repo?.html_url;
+									const owner = repo?.owner?.login ?? "unknown";
 
-								const owner = repo?.owner?.login ?? "unknown";
+									let topics = "";
+									for (const topic of repo?.topics ?? []) topics += `<a class="topic" href="https://github.com/topics/${topic}">${topic}</a>`;
 
-								let topics = "";
-								for (const topic of repo?.topics ?? []) topics += `<a class="topic" href="https://github.com/topics/${topic}">${topic}</a>`;
+									repoEl.innerHTML = `<a class="icon link" href="${repo?.owner?.html_url ?? "/go/github"}"><img src="${repo?.owner?.avatar_url ?? "/assets/file/images/icon/logo.svg"}" class="icon" alt="${owner}'${owner.endsWith("s") ? "" : "s"} avatar" /></a><div class="fullname"><a class="owner link" href="${repo?.owner?.html_url ?? "https://go.wixonic.fr/github"}">${owner}</a>/<span class="name">${repo?.name ?? "unknown"}</span></div><div class="description">${repo?.description}</div><div class="topics">${topics}</div>`;
 
-								repoEl.innerHTML = `<a class="icon link" href="${repo?.owner?.html_url ?? "/go/github"}"><img src="${repo?.owner?.avatar_url ?? "/assets/file/images/icon/logo.svg"}" class="icon" alt="${owner}'${owner.endsWith("s") ? "" : "s"} avatar" /></a><div class="fullname"><a class="owner link" href="${repo?.owner?.html_url ?? "https://go.wixonic.fr/github"}">${owner}</a>/<span class="name">${repo?.name ?? "unknown"}</span></div><div class="description">${repo?.description}</div><div class="topics">${topics}</div>`;
+									repoList.append(repoEl);
+								}
 
-								repoList.append(repoEl);
+								if (Object.values(repos).length == 0) repoList.innerHTML = `<div class="empty-message">Nothing new here..</div>`;
+
+								resolve();
 							}
-
-							resolve();
 						}
-					}).catch((e) => reject(new Error(`Failed to fetch GitHub repositories: ${e ?? "unknown error"}`)));
+					}).catch((e) => {
+						reject(new Error(`Failed to fetch GitHub repositories: ${e ?? "unknown error"}`));
+					});
 			}),
 			new Promise((resolve, reject) => {
 				const image = document.createElement("img");
