@@ -99,6 +99,16 @@ button {
 	--color: #07F;
 }
 
+.button.disabled {
+	background: #8885 !important;
+
+	color: #888 !important;
+
+	border-color: transparent !important;
+
+	transform: scale(1) !important;
+}
+
 .link {
 	border-bottom: 0.08rem solid transparent;
 

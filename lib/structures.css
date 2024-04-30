@@ -56,7 +56,7 @@ header .logo svg {
 	height: 2rem;
 }
 
-body.rootPage header .logo svg {
+body.noHeaderLogo header .logo svg {
 	display: none;
 }
 
@@ -184,7 +184,7 @@ footer {
 	height: 0;
 
 	background: var(--background);
-	box-shadow: 0 0 0.5rem #0005;
+	box-shadow: 0 0 2rem #8885;
 
 	border-radius: 50%;
 

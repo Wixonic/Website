@@ -4,9 +4,9 @@
 
 <head>
 
-	<title>TITLE</title>
-	<meta property="og:title" content="TITLE" />
-	<meta name="apple-mobile-web-app-title" content="SHORTTITLE" />
+	<title>Authentication | Wixonic</title>
+	<meta property="og:title" content="Authentication | Wixonic" />
+	<meta name="apple-mobile-web-app-title" content="Authentication" />
 
 	<meta charset="utf-8" />
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -20,7 +20,7 @@
 	<meta name="description" content="DESCRIPTION" />
 	<meta property="og:description" content="DESCRIPTION" />
 
-	<meta name="robots" content="index,follow" />
+	<meta name="robots" content="noindex,nofollow" />
 
 	<meta property="og:locale" content="en_US" />
 	<meta property="og:type" content="website" />
@@ -90,7 +90,7 @@
 
 </head>
 
-<body>
+<body class="noHeader">
 
 	<noscript>You need JavaScript to display this website.</noscript>
 
@@ -113,7 +113,45 @@
 
 	<header></header>
 
-	<main></main>
+	<main>
+
+		<container class="pages">
+
+			<page id="signIn">
+
+				<div class="form">
+
+					<input type="email" id="signInEmail" name="password" placeholder="Email" />
+					<input type="password" id="signInPassword" name="password" placeholder="Password" minlength="6" />
+
+					<button id="signInSubmit" class="button primary">Submit</button>
+
+					<button id="signUpView" class="button transparent">Don't have an account?</button>
+
+				</div>
+
+			</page>
+
+			<page id="signUp">
+
+				<div class="form">
+
+					<input type="email" id="signUpEmail" name="password" placeholder="Email" />
+					<input type="password" id="signUpPassword" name="password" placeholder="Password" minlength="6" />
+					<input type="password" id="signUpConfirmPassword" name="confirmPassword"
+						placeholder="Confirm password" minlength="6" />
+
+					<button id="signUpSubmit" class="button primary">Submit</button>
+
+					<button id="signInView" class="button transparent">Already have an account?</button>
+
+				</div>
+
+			</page>
+
+		</container>
+
+	</main>
 
 	<footer></footer>
 
