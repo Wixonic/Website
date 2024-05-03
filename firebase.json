@@ -76,37 +76,53 @@
 			]
 		},
 		{
-			"target": "redirects",
+			"target": "admin",
+			"public": "websites/admin",
+			"ignore": [
+				".DS_Store"
+			],
 			"redirects": [
 				{
-					"regex": "/discord.*",
-					"destination": "https://discord.gg/BcXFAVKJZQ",
+					"regex": "/assets(.*)",
+					"destination": "https://assets.wixonic.fr/:1",
 					"type": 301
 				},
 				{
-					"regex": "/help.*",
-					"destination": "https://discord.gg/jrNtHN4yb2",
+					"regex": "/go(.*)",
+					"destination": "https://go.wixonic.fr/:1",
 					"type": 301
+				}
+			],
+			"rewrites": [
+				{
+					"source": "**",
+					"destination": "/lib/404.html"
+				}
+			]
+		},
+		{
+			"target": "functions",
+			"rewrites": [
+				{
+					"source": "/",
+					"function": {
+						"functionId": "ping",
+						"region": "europe-west1"
+					}
 				},
 				{
-					"regex": "/github(.*)",
-					"destination": "https://github.com/Wixonic/:1",
-					"type": 301
+					"source": "/test",
+					"function": {
+						"functionId": "test",
+						"region": "europe-west1"
+					}
 				},
 				{
-					"regex": "/instagram(.*)",
-					"destination": "https://www.instagram.com/wixonic12/:1",
-					"type": 301
-				},
-				{
-					"regex": "/youtube(.*)",
-					"destination": "https://www.youtube.com/channel/UCnPN_SkWcIDNL-BjJGeDzQA/:1",
-					"type": 301
-				},
-				{
-					"regex": "/(.*)",
-					"destination": "https://wixonic.fr/:1",
-					"type": 301
+					"source": "/signInWithEmailAndPassword",
+					"function": {
+						"functionId": "signInWithEmailAndPassword",
+						"region": "europe-west1"
+					}
 				}
 			]
 		}

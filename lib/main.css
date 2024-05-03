@@ -118,3 +118,12 @@ button {
 .link:hover {
 	border-bottom-color: currentColor;
 }
+
+.input {}
+
+.input:hover {}
+
+.input:focus {}
+
+.input.invalid,
+.input:invalid {}

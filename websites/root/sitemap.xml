@@ -11,6 +11,13 @@
 
 	<url>
 		
+		<loc>https://wixonic.fr/news</loc>
+		<changefreq>daily</changefreq>
+		
+	</url>
+
+	<url>
+		
 		<loc>https://accounts.wixonic.fr</loc>
 		<changefreq>weekly</changefreq>
 		
@@ -19,20 +26,6 @@
 	<url>
 		
 		<loc>https://admin.wixonic.fr</loc>
-		<changefreq>weekly</changefreq>
-		
-	</url>
-
-	<url>
-		
-		<loc>https://server.wixonic.fr/discord</loc>
-		<changefreq>weekly</changefreq>
-		
-	</url>
-
-	<url>
-		
-		<loc>https://server.wixonic.fr/brawldata</loc>
 		<changefreq>weekly</changefreq>
 		
 	</url>

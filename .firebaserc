@@ -1,24 +1,27 @@
 {
-	"projects": {
-		"default": "wixonic-website-2"
-	},
-	"targets": {
-		"wixonic-website-2": {
-			"hosting": {
-				"root": [
-					"wixonic-website-2"
-				],
-				"accounts": [
-					"accounts-wixonic-website-2"
-				],
-				"admin": [
-					"admin-wixonic-website-2"
-				],
-				"redirects": [
-					"redirect-wixonic-website-2"
-				]
-			}
-		}
-	},
-	"etags": {}
+  "projects": {
+    "default": "wixonic-website-2"
+  },
+  "targets": {
+    "wixonic-website-2": {
+      "hosting": {
+        "root": [
+          "wixonic-website-2"
+        ],
+        "accounts": [
+          "accounts-wixonic-website-2"
+        ],
+        "admin": [
+          "admin-wixonic-website-2"
+        ],
+        "functions": [
+          "functions-wixonic-website-2"
+        ],
+        "redirects": [
+          "redirect-wixonic-website-2"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }

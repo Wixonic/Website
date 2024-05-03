@@ -17,7 +17,7 @@ const init = async () => {
 			const passwordField = document.querySelector("#signInPassword");
 
 			try {
-				await firebase.auth.signInWithEmail(emailField.value, passwordField.value);
+				await firebase.auth.signInWithEmailAndPassword(emailField.value, passwordField.value);
 			} catch (e) {
 				const invalid = () => {
 					passwordField.value = "";
