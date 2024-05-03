@@ -104,23 +104,9 @@
 			"target": "functions",
 			"rewrites": [
 				{
-					"source": "/",
+					"source": "**",
 					"function": {
-						"functionId": "ping",
-						"region": "europe-west1"
-					}
-				},
-				{
-					"source": "/test",
-					"function": {
-						"functionId": "test",
-						"region": "europe-west1"
-					}
-				},
-				{
-					"source": "/signInWithEmailAndPassword",
-					"function": {
-						"functionId": "signInWithEmailAndPassword",
+						"functionId": "httpServer",
 						"region": "europe-west1"
 					}
 				}

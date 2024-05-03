@@ -2,79 +2,130 @@ import error from "/lib/error.js";
 import firebase from "/lib/firebase.js";
 import pages from "/lib/pages.js";
 
+const redirect = () => {
+	const searchParams = new URLSearchParams(location.search);
+	const redirectUrl = searchParams.get("redirect");
+
+	if (redirectUrl) location.href = decodeURIComponent(redirectUrl);
+	else location.href = "/";
+};
+
 const init = async () => {
-	if (firebase.user) location.href = "/";
+	if (firebase.user) redirect();
 
 	document.querySelector("#signUpView").addEventListener("click", () => pages.display("signUp"));
 	document.querySelector("#signInView").addEventListener("click", () => pages.display("signIn"));
 
 	const signInSubmitButton = document.querySelector("#signInSubmit");
-	signInSubmitButton.addEventListener("click", async () => {
+	signInSubmitButton.addEventListener("click", () => {
 		if (!signInSubmitButton.classList.contains("disabled")) {
 			signInSubmitButton.classList.add("disabled");
 
 			const emailField = document.querySelector("#signInEmail");
 			const passwordField = document.querySelector("#signInPassword");
 
-			try {
-				await firebase.auth.signInWithEmailAndPassword(emailField.value, passwordField.value);
-			} catch (e) {
-				const invalid = () => {
-					passwordField.value = "";
+			const invalid = (...fields) => {
+				passwordField.value = "";
 
-					emailField.classList.add("invalid");
-					passwordField.classList.add("invalid");
-
-					emailField.addEventListener("change", () => emailField.classList.remove("invalid"), { once: true });
-					passwordField.addEventListener("change", () => passwordField.classList.remove("invalid"), { once: true });
-				};
-
-				switch (e?.code) {
-					case "auth/invalid-email":
-						invalid();
-						break;
-
-					case "auth/missing-password":
-						invalid();
-						break;
-
-					case "auth/user-not-found":
-						invalid();
-						break;
-
-					case "auth/invalid-credential":
-						invalid();
-						break;
-
-					default:
-						error(e);
-						break;
+				for (const field of fields) {
+					field.classList.add("invalid");
+					field.addEventListener("input", () => field.classList.remove("invalid"), { once: true });
 				}
-			}
+			};
 
-			signInSubmitButton.classList.remove("disabled");
+			firebase.auth.signInWithEmail(emailField.value, passwordField.value)
+				.catch((e) => {
+					switch (e) {
+						case "auth/invalid-credential":
+							invalid(emailField, passwordField);
+							break;
+
+						case "auth/invalid-email":
+							invalid(emailField);
+							break;
+
+						case "auth/missing-password":
+							invalid(passwordField);
+							break;
+
+						case "auth/wrong-password":
+							invalid(passwordField);
+							break;
+
+						case "auth/user-disabled":
+
+							break;
+
+						default:
+							error({
+								title: "Failed to sign-in",
+								details: {
+									message: e
+								}
+							});
+							break;
+					}
+				}).finally(() => signInSubmitButton.classList.remove("disabled"));
 		}
 	});
 
 	const signUpSubmitButton = document.querySelector("#signUpSubmit");
-	signUpSubmitButton.addEventListener("click", async () => {
+	signUpSubmitButton.addEventListener("click", () => {
 		if (!signUpSubmitButton.classList.contains("disabled")) {
 			signUpSubmitButton.classList.add("disabled");
 
+			const emailField = document.querySelector("#signUpEmail");
+			const passwordField = document.querySelector("#signUpPassword");
+			const confirmField = document.querySelector("#signUpConfirmPassword");
 
+			const invalid = (...fields) => {
+				passwordField.value = "";
+				confirmField.value = "";
 
-			signUpSubmitButton.classList.remove("disabled");
+				for (const field of fields) {
+					field.classList.add("invalid");
+					field.addEventListener("input", () => field.classList.remove("invalid"), { once: true });
+				}
+			};
+
+			firebase.auth.createUserWithEmail(emailField.value, passwordField.value, confirmField.value)
+				.catch((e) => {
+					switch (e.code) {
+						case "auth/invalid-email":
+							invalid(emailField);
+							break;
+
+						case "auth/missing-password":
+							invalid(passwordField);
+							break;
+
+						case "auth/weak-password":
+							invalid(passwordField, confirmField);
+							break;
+
+						case "auth/passwords-dont-match":
+							invalid(passwordField, confirmField);
+							break;
+
+						case "auth/email-already-in-use":
+							invalid(emailField);
+							break;
+
+						default:
+							error({
+								title: "Failed to sign-up",
+								details: {
+									message: e.code ?? e
+								}
+							});
+							break;
+					}
+				}).finally(() => signUpSubmitButton.classList.remove("disabled"));
 		}
 	});
 
 	firebase.auth.object.onAuthStateChanged((user) => {
-		if (user) {
-			const searchParams = new URLSearchParams(location.search);
-			const redirectUrl = searchParams.get("redirect");
-
-			if (redirectUrl) location.href = decodeURIComponent(redirectUrl);
-			else location.reload();
-		}
+		if (user) redirect();
 	});
 };
 

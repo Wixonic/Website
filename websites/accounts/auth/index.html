@@ -17,17 +17,19 @@
 	<meta name="author" content="Wixonic, contact@wixonic.fr" />
 	<meta property="og:email" content="contact@wixonic.fr" />
 
-	<meta name="description" content="DESCRIPTION" />
-	<meta property="og:description" content="DESCRIPTION" />
+	<meta name="description"
+		content="Sign-in to your existing account, or create a brand new account for the entire website." />
+	<meta property="og:description"
+		content="Sign-in to your existing account, or create a brand new account for the entire website." />
 
 	<meta name="robots" content="noindex,nofollow" />
 
 	<meta property="og:locale" content="en_US" />
 	<meta property="og:type" content="website" />
 
-	<meta rel="canonical" href="CANONICALURL" />
-	<meta property="og:url" content="CANONICALURL" />
-	<meta name="msapplication-starturl" href="CANONICALURL" />
+	<meta rel="canonical" href="https://accounts.wixonic.fr/auth" />
+	<meta property="og:url" content="https://accounts.wixonic.fr/auth" />
+	<meta name="msapplication-starturl" href="https://accounts.wixonic.fr/auth" />
 
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 
@@ -121,8 +123,10 @@
 
 				<div class="form">
 
-					<input type="email" id="signInEmail" name="password" placeholder="Email" />
-					<input type="password" id="signInPassword" name="password" placeholder="Password" minlength="6" />
+					<input type="email" id="signInEmail" name="password" placeholder="Email"
+						pattern="^[\w\.-]+@([\w-]+\.)+[\w-]{2,4}$|^$" />
+					<input type="password" id="signInPassword" name="password" placeholder="Password"
+						pattern="^.{6,25}$|^$" />
 
 					<button id="signInSubmit" class="button primary">Submit</button>
 
@@ -136,10 +140,12 @@
 
 				<div class="form">
 
-					<input type="email" id="signUpEmail" name="password" placeholder="Email" />
-					<input type="password" id="signUpPassword" name="password" placeholder="Password" minlength="6" />
+					<input type="email" id="signUpEmail" name="password" placeholder="Email"
+						pattern="^[\w\.-]+@([\w-]+\.)+[\w-]{2,4}$|^$" />
+					<input type="password" id="signUpPassword" name="password" placeholder="Password"
+						pattern="^.{6,25}$|^$" />
 					<input type="password" id="signUpConfirmPassword" name="confirmPassword"
-						placeholder="Confirm password" minlength="6" />
+						placeholder="Confirm password" pattern="^.{6,25}$|^$" />
 
 					<button id="signUpSubmit" class="button primary">Submit</button>
 

@@ -119,11 +119,40 @@ button {
 	border-bottom-color: currentColor;
 }
 
-.input {}
+input {
+	display: block;
 
-.input:hover {}
+	background: var(--background);
 
-.input:focus {}
+	color: var(--text-color);
+	font-size: 0.8rem;
 
-.input.invalid,
-.input:invalid {}
+	border: 0.1rem solid #8881;
+	border-radius: 0.5rem;
+
+	transition: background 0.2s cubic-bezier(0, 0.3, 0.7, 1), border-color 0.2s cubic-bezier(0, 0.3, 0.7, 1);
+
+	margin: 0.2rem;
+	padding: 0.2rem 0.4rem;
+
+	cursor: text !important;
+}
+
+input:hover {
+	border-color: #8882;
+
+	opacity: 1;
+}
+
+input:focus {
+	border-color: var(--text-color);
+
+	opacity: 1;
+}
+
+input.invalid,
+input:invalid {
+	border-color: #F00;
+
+	opacity: 1;
+}

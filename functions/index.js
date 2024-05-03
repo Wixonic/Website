@@ -3,13 +3,11 @@ const adminAuthLibrary = require("firebase-admin/auth");
 const adminFirestoreLibrary = require("firebase-admin/firestore");
 
 const adminFunctionsLibrary = require("firebase-functions");
-const { onRequest } = require("firebase-functions/v2/https");
 
 const clientAppLibrary = require("firebase/app");
 const clientAuthLibrary = require("firebase/auth");
 
-const localEnvironment = process.env.FUNCTIONS_EMULATOR == "true";
-// if (localEnvironment) process.env.FIRESTORE_EMULATOR_HOST = "localhost:2000";
+const localEnvironment = process.env.FUNCTIONS_EMULATOR === "true";
 
 const adminApp = adminAppLibrary.initializeApp({
 	credential: adminAppLibrary.cert(require("./config")),
@@ -25,18 +23,10 @@ const adminApp = adminAppLibrary.initializeApp({
 const adminAuth = adminAuthLibrary.getAuth(adminApp);
 const adminFirestore = adminFirestoreLibrary.getFirestore(adminApp);
 
-
 const adminFunctionsDefaultParams = adminFunctionsLibrary.runWith({
 	memory: "128MB",
 	timeoutSeconds: 30
 }).region("europe-west1");
-const adminHttpsFunctionsDefaultParams = {
-	cors: localEnvironment ? /^localhost:[0-9]{2,6}$/ : /\.wixonic\.fr$/,
-	memory: "128MB",
-	region: "europe-west1",
-	timeoutSeconds: 30
-};
-
 
 const clientApp = clientAppLibrary.initializeApp({
 	apiKey: "AIzaSyAoAl-09tw3K0i8N2PnYKAjjZb19e4zEBk",
@@ -98,14 +88,22 @@ exports.deleteAccount = adminFunctionsDefaultParams.auth.user().onDelete(async (
 });
 
 
-exports.test = onRequest(adminHttpsFunctionsDefaultParams, async (_, res) => {
-	res.send((await adminFirestore.collection("private-users").doc("test").set({
-		foo: "bar"
-	})));
-});
+const server = require("express")();
 
+server.use(require("cors")({
+	credentials: true,
+	origin: (origin, callback) => {
+		if (localEnvironment && origin.match(/localhost:\d{4,6}$/m)) return callback(null, true);
+		else if (origin.endsWith("wixonic.fr")) return callback(null, true);
 
-exports.ping = onRequest(adminHttpsFunctionsDefaultParams, (_, res) => {
+		return callback(new Error("Origin not allowed"));
+	},
+	optionsSuccessStatus: 200
+}));
+
+server.use(require("cookie-parser")());
+
+server.get("/", (_, res) => {
 	res.writeHead(200, {
 		"content-type": "text/plain"
 	}).write("pong");
@@ -113,7 +111,30 @@ exports.ping = onRequest(adminHttpsFunctionsDefaultParams, (_, res) => {
 	res.end();
 });
 
-exports.signInWithEmailAndPassword = onRequest(adminHttpsFunctionsDefaultParams, async (req, res) => {
+server.get("/session", async (req, res) => {
+	const sessionCookie = req.cookies.session;
+
+	if (sessionCookie) {
+		try {
+			const idToken = await adminAuth.verifySessionCookie(sessionCookie, true);
+
+			try {
+				const token = await adminAuth.createCustomToken(idToken.uid);
+
+				res.writeHead(200);
+				res.write(token);
+			} catch (e) {
+				res.writeHead(204);
+			}
+		} catch (e) {
+			res.writeHead(204);
+		}
+	} else res.writeHead(204);
+
+	res.end();
+});
+
+server.post("/email", async (req, res) => {
 	try {
 		const email = atob(req?.body?.email);
 		const password = atob(req?.body?.password);
@@ -131,43 +152,54 @@ exports.signInWithEmailAndPassword = onRequest(adminHttpsFunctionsDefaultParams,
 						expiresIn: cookieDuration
 					});
 
-					res.writeHead(204);
 					res.cookie("session", sessionCookie, {
+						httpOnly: true,
 						maxAge: cookieDuration,
+						sameSite: "none",
 						secure: !localEnvironment
 					});
+
+					res.writeHead(200);
+
 					const date = new Date();
 					date.setTime(Date.now() + cookieDuration);
-					res.write("Cookie valid until: " + date.toISOString());
-					res.end();
-				} catch (reason) {
-					res.writeHead(500, {
-						"content-type": "text/plain"
-					}).write(`Failed to create cookie: ${reason.code || reason || "Unknown reason"}`);
 
-					res.end();
+					console.info("Cookie valid until: " + date.toLocaleString("en-US", {
+						dateStyle: "short",
+						timeStyle: "short",
+						timeZoneName: "short"
+					}));
+					res.write("Cookie valid until: " + date.toLocaleString("en-US", {
+						dateStyle: "short",
+						timeStyle: "short",
+						timeZoneName: "short"
+					}));
+				} catch (reason) {
+					if (!res.headersSent) res.writeHead(500);
+					console.error(`Failed to create cookie: ${reason.code || reason || "Unknown reason"}`);
+					res.write(`Failed to create cookie: ${reason.code || reason || "Unknown reason"}`);
 				}
 			} catch (reason) {
-				res.writeHead(500, {
-					"content-type": "text/plain"
-				}).write(`Failed to create token: ${reason.code || reason || "Unknown reason"}`);
-
-				res.end();
+				if (!res.headersSent) res.writeHead(500);
+				console.error(`Failed to create token: ${reason.code || reason || "Unknown reason"}`);
+				res.write(`Failed to create token: ${reason.code || reason || "Unknown reason"}`);
 			}
 		} catch (reason) {
-			res.writeHead(401, {
-				"content-type": "text/plain"
-			});
-
+			if (!res.headersSent) res.writeHead(401);
+			console.error(`Failed to authenticate: ${reason.code || reason || "Unknown reason"}`);
 			res.write(`Failed to authenticate: ${reason.code || reason || "Unknown reason"}`);
 		}
-	} catch {
-		res.writeHead(401, {
-			"content-type": "text/plain"
-		});
-
-		res.write(`Failed to authenticate: invalid params`);
+	} catch (e) {
+		if (!res.headersSent) res.writeHead(401);
+		console.error(`Failed to authenticate: invalid params - ${e}`);
+		res.write(`Failed to authenticate: invalid params - ${e}`);
 	}
 
 	res.end();
 });
+
+exports.httpServer = require("firebase-functions/v2/https").onRequest({
+	memory: "128MB",
+	region: "europe-west1",
+	timeoutSeconds: 30
+}, server);
