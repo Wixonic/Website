@@ -115,7 +115,11 @@
 
 	<main>
 
-		<div class=""></div>
+		<label for="username">Username: </label><input type="text" id="username"
+			pattern="^(?:[0-9]|[A-z]|_|-){5,25}$" />
+		<label for="username">Email: </label><input type="email" id="email" pattern="^[\w\.-]+@([\w-]+\.)+[\w-]{2,}$" />
+
+		<button id="update" class="button primary disabled">Save changes</button>
 
 	</main>
 

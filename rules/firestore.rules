@@ -2,39 +2,45 @@ rules_version = "2";
 
 service cloud.firestore {
 	match /databases/{database}/documents {
-		match /discord-news/{article} {
-			allow read: if true;
-			allow write: if request.auth.token.permissions.news.discord;
+		function isValidEmail(value) {
+			return value.matches("^[\\w\\.-]+@([\\w-]+\\.)+[\\w-]{2,}$");
+		}
 
-			match /comments/{commentId} {
-				allow read: if true; 
-				allow write: if (request.auth.token.permissions.comment && request.auth.uid == resource.data.author) || request.auth.token.permissions.moderate;
-			}
+		function isValidUsername(value) {
+			return value.matches("^([0-9]|[A-z]|_|-){5,25}$");
+		}
+
+		function hasPermission(permission) {
+			return request.auth.token.permissions[permission];
+		}
+
+		function equal(value) {
+			return request.resource.data[value] == resource.data[value];
+		}
+
+		match /discord-news/{article} {
+			allow read;
+			allow write: if hasPermission("admin") || hasPermission("discord");
 		}
 
 		match /news/{article} {
-			allow read: if true;
-			allow write: if request.auth.token.permissions.news;
-
-			match /comments/{commentId} {
-				allow read: if true;
-				allow write: if (request.auth.token.permissions.comment && request.auth.uid == resource.data.author) || request.auth.token.permissions.moderate;
-			}
+			allow read;
+			allow write: if hasPermission("admin") || hasPermission("news");
 		}
 
 		match /status/current {
-			allow read: if true;
-			allow write: if request.auth.token.permissions.status;
+			allow get;
+			allow write: if hasPermission("admin") || hasPermission("status");
 		}
 
 		match /private-users/{userId} {
-			allow read: if request.auth.uid == userId;
-			allow write: if request.auth.uid == userId;
+			allow get: if hasPermission("admin") || request.auth.uid == userId;
+			allow update: if hasPermission("admin") || (request.auth.uid == userId && request.resource.data.keys().hasAll(["email"]) && request.resource.data.keys().hasOnly(["email"]) && isValidEmail(request.resource.data.email));
 		}
 
 		match /users/{userId} {
-			allow read: if true;
-			allow write: if request.auth.uid == userId;
+			allow get;
+			allow update: if hasPermission("admin") || (request.auth.uid == userId && request.resource.data.keys().hasAll(["joined", "username"]) && request.resource.data.keys().hasOnly(["joined", "username"]) && equal("joined") && isValidUsername(request.resource.data.username));
 		}
 	}
 }

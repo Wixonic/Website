@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: /
 
-Sitemap: https://wixonic.fr/sitemap.xml
+Sitemap: https://discord.wixonic.fr/sitemap.xml

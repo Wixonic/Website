@@ -34,6 +34,7 @@ const init = async () => {
 			};
 
 			firebase.auth.signInWithEmail(emailField.value, passwordField.value)
+				.then(redirect)
 				.catch((e) => {
 					switch (e) {
 						case "auth/invalid-credential":

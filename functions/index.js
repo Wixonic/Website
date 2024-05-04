@@ -123,13 +123,27 @@ server.get("/session", async (req, res) => {
 
 				res.writeHead(200);
 				res.write(token);
-			} catch (e) {
-				res.writeHead(204);
+			} catch (reason) {
+				reason = `Failed to create token: ${reason.code ?? reason ?? "Unknown reason"}`;
+				console.error(reason);
+
+				res.writeHead(500);
+				res.write(reason);
 			}
-		} catch (e) {
-			res.writeHead(204);
+		} catch (reason) {
+			reason = `Failed to verify cookie: ${reason.code ?? reason ?? "Unknown reason"}`;
+			console.error(reason);
+
+			res.writeHead(500);
+			res.write(reason);
 		}
-	} else res.writeHead(204);
+	} else {
+		const reason = "Session cookie not provided";
+		console.error(reason);
+
+		res.writeHead(401);
+		res.write(reason);
+	}
 
 	res.end();
 });
@@ -159,40 +173,111 @@ server.post("/email", async (req, res) => {
 						secure: !localEnvironment
 					});
 
-					res.writeHead(200);
-
-					const date = new Date();
-					date.setTime(Date.now() + cookieDuration);
-
-					console.info("Cookie valid until: " + date.toLocaleString("en-US", {
-						dateStyle: "short",
-						timeStyle: "short",
-						timeZoneName: "short"
-					}));
-					res.write("Cookie valid until: " + date.toLocaleString("en-US", {
-						dateStyle: "short",
-						timeStyle: "short",
-						timeZoneName: "short"
-					}));
+					res.writeHead(204);
 				} catch (reason) {
-					if (!res.headersSent) res.writeHead(500);
-					console.error(`Failed to create cookie: ${reason.code || reason || "Unknown reason"}`);
-					res.write(`Failed to create cookie: ${reason.code || reason || "Unknown reason"}`);
+					reason = reason.code || reason || "Unknown reason";
+					console.error(reason);
+
+					res.writeHead(500);
+					res.write(reason);
 				}
 			} catch (reason) {
-				if (!res.headersSent) res.writeHead(500);
-				console.error(`Failed to create token: ${reason.code || reason || "Unknown reason"}`);
-				res.write(`Failed to create token: ${reason.code || reason || "Unknown reason"}`);
+				reason = reason.code || reason || "Unknown reason";
+				console.error(reason);
+
+				res.writeHead(500);
+				res.write(reason);
 			}
 		} catch (reason) {
-			if (!res.headersSent) res.writeHead(401);
-			console.error(`Failed to authenticate: ${reason.code || reason || "Unknown reason"}`);
-			res.write(`Failed to authenticate: ${reason.code || reason || "Unknown reason"}`);
+			reason = reason.code || reason || "Unknown reason";
+			console.error(reason);
+
+			res.writeHead(500);
+			res.write(reason);
 		}
-	} catch (e) {
-		if (!res.headersSent) res.writeHead(401);
-		console.error(`Failed to authenticate: invalid params - ${e}`);
-		res.write(`Failed to authenticate: invalid params - ${e}`);
+	} catch (reason) {
+		console.error(`Failed to authenticate: auth/missing-params - ${reason}`);
+
+		res.writeHead(401);
+		res.write("auth/missing-params");
+	}
+
+	res.end();
+});
+
+server.post("/email/change", async (req, res) => {
+	try {
+		const email = atob(req?.body?.email);
+
+		if (/a/.test(email)) {
+			const sessionCookie = req.cookies.session;
+
+			if (sessionCookie) {
+				try {
+					const idToken = await adminAuth.verifySessionCookie(sessionCookie, true);
+
+					try {
+						const token = await adminAuth.createCustomToken(idToken.uid);
+
+						try {
+							const user = await clientAuthLibrary.signInWithCustomToken(clientAuth, token);
+
+							try {
+								await clientAuthLibrary.updateEmail(user, email);
+
+								try {
+									await adminFirestore.collection("private-users").doc(data.user.uid).update({
+										email: user.email
+									});
+								} catch (reason) {
+
+								}
+							} catch (reason) {
+								reason = `Failed to change email: ${reason.code ?? reason ?? "Unknown reason"}`;
+								console.error(reason);
+
+								res.writeHead(500);
+								res.write(reason);
+							}
+						} catch (reason) {
+							reason = `Failed to authenticate: ${reason.code ?? reason ?? "Unknown reason"}`;
+							console.error(reason);
+
+							res.writeHead(500);
+							res.write(reason);
+						}
+					} catch (reason) {
+						reason = `Failed to create token: ${reason.code ?? reason ?? "Unknown reason"}`;
+						console.error(reason);
+
+						res.writeHead(500);
+						res.write(reason);
+					}
+				} catch (reason) {
+					reason = `Failed to verify cookie: ${reason.code ?? reason ?? "Unknown reason"}`;
+					console.error(reason);
+
+					res.writeHead(500);
+					res.write(reason);
+				}
+			} else {
+				const reason = "Session cookie not provided";
+				console.error(reason);
+
+				res.writeHead(401);
+				res.write(reason);
+			}
+		} else {
+			console.error(`Failed to authenticate: auth/invalid-email`);
+
+			res.writeHead(401);
+			res.write("auth/invalid-email");
+		}
+	} catch (reason) {
+		console.error(`Failed to authenticate: auth/missing-params - ${reason ?? "Unknown reason"}`);
+
+		res.writeHead(401);
+		res.write("auth/missing-params");
 	}
 
 	res.end();
