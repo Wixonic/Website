@@ -1,3 +1,4 @@
+import error from "/lib/error.js";
 import firebase from "/lib/firebase.js";
 
 const init = async () => {
@@ -17,7 +18,7 @@ const init = async () => {
 			privateUser: {}
 		};
 
-		const updateStatus = () => updateField.classList.toggle("disabled", !((Object.values(changes.publicUser).length > 0 || Object.values(changes.privateUser).length > 0) && usernameField.checkValidity() && emailField.checkVisibility()));
+		const updateStatus = () => updateField.classList.toggle("disabled", !((Object.values(changes.publicUser).length > 0 || Object.values(changes.privateUser).length > 0 || changes.email) && usernameField.checkValidity() && emailField.checkValidity()));
 
 		if (publicUser) {
 			usernameField.value = publicUser.username;
@@ -55,12 +56,16 @@ const init = async () => {
 
 					location.reload();
 				} catch (e) {
-					console.error(e);
+					error(e);
 					if (!localEnvironment) location.reload();
 				}
 			}
 		});
-	} else location.href = `/auth?redirect=${encodeURIComponent("/")}`;
+
+		firebase.auth.object.onAuthStateChanged((user) => {
+			if (!user) location.href = `/auth/?redirect=${encodeURIComponent(location.pathname)}`;
+		});
+	} else location.href = `/auth/?redirect=${encodeURIComponent(location.pathname)}`;
 };
 
 export default {

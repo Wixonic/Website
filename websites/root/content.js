@@ -64,14 +64,14 @@ const init = () => new Promise(async (resolve, reject) => {
 									repoEl.classList.add("repo");
 									if (repo?.archived) repoEl.classList.add("archived");
 
-									repoEl.href = repo?.html_url;
+									repoEl.href = repo?.html_url ?? "/go/github";
 
 									const owner = repo?.owner?.login ?? "unknown";
 
 									let topics = "";
 									for (const topic of repo?.topics ?? []) topics += `<a class="topic" href="https://github.com/topics/${topic}">${topic}</a>`;
 
-									repoEl.innerHTML = `<a class="icon link" href="${repo?.owner?.html_url ?? "/go/github"}"><img src="${repo?.owner?.avatar_url ?? "/assets/file/images/icon/logo.svg"}" class="icon" alt="${owner}'${owner.endsWith("s") ? "" : "s"} avatar" /></a><div class="fullname"><a class="owner link" href="${repo?.owner?.html_url ?? "https://go.wixonic.fr/github"}">${owner}</a>/<span class="name">${repo?.name ?? "unknown"}</span></div><div class="description">${repo?.description}</div><div class="topics">${topics}</div>`;
+									repoEl.innerHTML = `<a class="icon link" href="${repo?.owner?.html_url ?? "/go/github"}"><img src="${repo?.owner?.avatar_url ?? "/assets/file/images/icon/logo.svg"}" class="icon" alt="${owner}'${owner.endsWith("s") ? "" : "s"} avatar" /></a><div class="fullname"><a class="owner link" href="${repo?.owner?.html_url ?? "https://go.wixonic.fr/github"}">${owner}</a>/<span class="name">${repo?.name ?? "unknown"}</span></div><div class="description">${repo?.description ?? "No description"}</div><div class="topics">${topics}</div>`;
 
 									repoList.append(repoEl);
 								}

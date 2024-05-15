@@ -35,7 +35,7 @@ service cloud.firestore {
 
 		match /private-users/{userId} {
 			allow get: if hasPermission("admin") || request.auth.uid == userId;
-			allow update: if hasPermission("admin") || (request.auth.uid == userId && request.resource.data.keys().hasAll(["email"]) && request.resource.data.keys().hasOnly(["email"]) && isValidEmail(request.resource.data.email));
+			allow update: if hasPermission("admin") || (request.auth.uid == userId && request.resource.data.keys().hasAll(["email"]) && request.resource.data.keys().hasOnly(["email"]) && equal("email"));
 		}
 
 		match /users/{userId} {

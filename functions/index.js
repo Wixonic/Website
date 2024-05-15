@@ -19,7 +19,7 @@ const adminApp = adminAppLibrary.initializeApp({
 	authDomain: "wixonic-website-2.firebaseapp.com",
 	messagingSenderId: "6198929588",
 	storageBucket: "wixonic-website-2.appspot.com"
-});
+}, "admin");
 const adminAuth = adminAuthLibrary.getAuth(adminApp);
 const adminFirestore = adminFirestoreLibrary.getFirestore(adminApp);
 
@@ -36,8 +36,8 @@ const clientApp = clientAppLibrary.initializeApp({
 	authDomain: "wixonic-website-2.firebaseapp.com",
 	messagingSenderId: "6198929588",
 	storageBucket: "wixonic-website-2.appspot.com"
-});
-const clientAuth = clientAuthLibrary.initializeAuth(clientApp);
+}, "client");
+const clientAuth = clientAuthLibrary.getAuth(clientApp);
 if (localEnvironment) clientAuthLibrary.connectAuthEmulator(clientAuth, "http://localhost:2001");
 
 
@@ -206,79 +206,85 @@ server.post("/email", async (req, res) => {
 });
 
 server.post("/email/change", async (req, res) => {
-	try {
-		const email = atob(req?.body?.email);
+	// try {
+	const email = atob(req?.body?.email);
 
-		if (/a/.test(email)) {
-			const sessionCookie = req.cookies.session;
+	if (/^[\w\.-]+@([\w-]+\.)+[\w-]{2,}$/.test(email)) {
+		const sessionCookie = req.cookies.session;
 
-			if (sessionCookie) {
-				try {
-					const idToken = await adminAuth.verifySessionCookie(sessionCookie, true);
+		if (sessionCookie) {
+			// try {
+			const idToken = await adminAuth.verifySessionCookie(sessionCookie, true);
 
-					try {
-						const token = await adminAuth.createCustomToken(idToken.uid);
+			// try {
+			const token = await adminAuth.createCustomToken(idToken.uid);
 
-						try {
-							const user = await clientAuthLibrary.signInWithCustomToken(clientAuth, token);
+			// try {
+			const user = await clientAuthLibrary.signInWithCustomToken(clientAuth, token);
 
-							try {
-								await clientAuthLibrary.updateEmail(user, email);
+			// try {
+			await clientAuthLibrary.updateEmail(user, email);
 
-								try {
-									await adminFirestore.collection("private-users").doc(data.user.uid).update({
-										email: user.email
-									});
-								} catch (reason) {
+			// try {
+			await adminFirestore.collection("private-users").doc(data.user.uid).update({
+				email: user.email
+			});
 
-								}
-							} catch (reason) {
-								reason = `Failed to change email: ${reason.code ?? reason ?? "Unknown reason"}`;
-								console.error(reason);
-
-								res.writeHead(500);
-								res.write(reason);
-							}
-						} catch (reason) {
-							reason = `Failed to authenticate: ${reason.code ?? reason ?? "Unknown reason"}`;
-							console.error(reason);
-
-							res.writeHead(500);
-							res.write(reason);
-						}
-					} catch (reason) {
-						reason = `Failed to create token: ${reason.code ?? reason ?? "Unknown reason"}`;
-						console.error(reason);
-
-						res.writeHead(500);
-						res.write(reason);
-					}
-				} catch (reason) {
-					reason = `Failed to verify cookie: ${reason.code ?? reason ?? "Unknown reason"}`;
-					console.error(reason);
-
-					res.writeHead(500);
-					res.write(reason);
-				}
-			} else {
-				const reason = "Session cookie not provided";
+			res.writeHead(204);
+			/* } catch (reason) {
+				reason = `Failed to change email: ${reason.code ?? reason ?? "Unknown reason"} - Step 2`;
 				console.error(reason);
 
-				res.writeHead(401);
+				res.writeHead(500);
 				res.write(reason);
 			}
-		} else {
-			console.error(`Failed to authenticate: auth/invalid-email`);
+		} catch (reason) {
+			reason = `Failed to change email: ${reason.code ?? reason ?? "Unknown reason"} - Step 1`;
+			console.error(reason);
 
-			res.writeHead(401);
-			res.write("auth/invalid-email");
+			res.writeHead(500);
+			res.write(reason);
 		}
 	} catch (reason) {
-		console.error(`Failed to authenticate: auth/missing-params - ${reason ?? "Unknown reason"}`);
+		reason = `Failed to authenticate: ${reason.code ?? reason ?? "Unknown reason"}`;
+		console.error(reason);
+
+		res.writeHead(500);
+		res.write(reason);
+	}
+} catch (reason) {
+	reason = `Failed to create token: ${reason.code ?? reason ?? "Unknown reason"}`;
+	console.error(reason);
+
+	res.writeHead(500);
+	res.write(reason);
+}
+} catch (reason) {
+reason = `Failed to verify cookie: ${reason.code ?? reason ?? "Unknown reason"}`;
+console.error(reason);
+
+res.writeHead(500);
+res.write(reason);
+} */
+		} else {
+			const reason = "Session cookie not provided";
+			console.error(reason);
+
+			res.writeHead(401);
+			res.write(reason);
+		}
+	} else {
+		console.error(`Failed to authenticate: auth/invalid-email`);
 
 		res.writeHead(401);
-		res.write("auth/missing-params");
+		res.write("auth/invalid-email");
 	}
+	/* } catch (reason) {
+		console.error(`Failed to authenticate: auth/missing-params - ${reason ?? "Unknown reason"}`);
+	
+		res.writeHead(401);
+		res.write("auth/missing-params");
+	} */
 
 	res.end();
 });

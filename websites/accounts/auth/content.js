@@ -2,6 +2,8 @@ import error from "/lib/error.js";
 import firebase from "/lib/firebase.js";
 import pages from "/lib/pages.js";
 
+let creatingAccount = false;
+
 const redirect = () => {
 	const searchParams = new URLSearchParams(location.search);
 	const redirectUrl = searchParams.get("redirect");
@@ -54,7 +56,7 @@ const init = async () => {
 							break;
 
 						case "auth/user-disabled":
-
+							invalid(emailField, passwordField);
 							break;
 
 						default:
@@ -74,6 +76,7 @@ const init = async () => {
 	signUpSubmitButton.addEventListener("click", () => {
 		if (!signUpSubmitButton.classList.contains("disabled")) {
 			signUpSubmitButton.classList.add("disabled");
+			creatingAccount = true;
 
 			const emailField = document.querySelector("#signUpEmail");
 			const passwordField = document.querySelector("#signUpPassword");
@@ -121,12 +124,12 @@ const init = async () => {
 							});
 							break;
 					}
-				}).finally(() => signUpSubmitButton.classList.remove("disabled"));
+				}).finally(redirect);
 		}
 	});
 
 	firebase.auth.object.onAuthStateChanged((user) => {
-		if (user) redirect();
+		if (user && !creatingAccount) redirect();
 	});
 };
 
