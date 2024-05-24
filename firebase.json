@@ -76,8 +76,8 @@
 			]
 		},
 		{
-			"target": "admin",
-			"public": "websites/admin",
+			"target": "discord",
+			"public": "websites/discord",
 			"ignore": [
 				".DS_Store"
 			],
