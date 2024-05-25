@@ -18,9 +18,31 @@
 	cursor: inherit;
 	pointer-events: inherit;
 	outline: inherit;
+
+	scroll-behavior: smooth;
+	scrollbar-color: var(--scrollbar-color) var(--scollbar-thumb-color);
 }
 
+:root::-webkit-scrollbar,
+:root *::-webkit-scrollbar {
+	width: 0.6rem;
+
+	background: var(--scrollbar-color);
+}
+
+:root::-webkit-scrollbar-thumb,
+:root *::-webkit-scrollbar-thumb {
+	background: var(--scrollbar-thumb-color);
+
+	border: 0.1rem solid var(--scrollbar-color);
+	border-radius: 0.8rem;
+}
+
+
 :root {
+	--scrollbar-color: var(--background);
+	--scrollbar-thumb-color: #000;
+
 	user-select: none;
 	-moz-user-select: none;
 	-webkit-user-select: none;
@@ -32,6 +54,14 @@
 
 	cursor: default;
 	outline: none;
+
+	overflow-y: scroll;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--scrollbar-thumb-color: #FFF;
+	}
 }
 
 body {

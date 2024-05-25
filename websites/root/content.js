@@ -54,7 +54,7 @@ const init = () => new Promise(async (resolve, reject) => {
 							const resetDate = new Date();
 							resetDate.setTime(Number(xhr.getResponseHeader("x-ratelimit-reset")) * 1000);
 							repoList.innerHTML = `<div class="empty-message">You are rate-limited. Rate limit resets at ${resetDate.toLocaleTimeString(navigator?.language ?? "en-US", { timeStyle: "short" })}.</div>`;
-							resolve()
+							resolve();
 						} else {
 							if (!repos instanceof Array) reject(new Error(`Invalid reponse while fetching repositories - Status: ${xhr.status} - Reponse-Type: ${typeof repos}`));
 							else {
@@ -65,13 +65,14 @@ const init = () => new Promise(async (resolve, reject) => {
 									if (repo?.archived) repoEl.classList.add("archived");
 
 									repoEl.href = repo?.html_url ?? "/go/github";
+									repoEl.target = "_blank";
 
 									const owner = repo?.owner?.login ?? "unknown";
 
 									let topics = "";
-									for (const topic of repo?.topics ?? []) topics += `<a class="topic" href="https://github.com/topics/${topic}">${topic}</a>`;
+									for (const topic of repo?.topics ?? []) topics += `<a class="topic" href="https://github.com/topics/${topic}" target="_blank">${topic}</a>`;
 
-									repoEl.innerHTML = `<a class="icon link" href="${repo?.owner?.html_url ?? "/go/github"}"><img src="${repo?.owner?.avatar_url ?? "/assets/file/images/icon/logo.svg"}" class="icon" alt="${owner}'${owner.endsWith("s") ? "" : "s"} avatar" /></a><div class="fullname"><a class="owner link" href="${repo?.owner?.html_url ?? "https://go.wixonic.fr/github"}">${owner}</a>/<span class="name">${repo?.name ?? "unknown"}</span></div><div class="description">${repo?.description ?? "No description"}</div><div class="topics">${topics}</div>`;
+									repoEl.innerHTML = `<a class="icon link" href="${repo?.owner?.html_url ?? "/go/github"}" target="_blank"><img src="${repo?.owner?.avatar_url ?? "/assets/file/images/icon/logo.svg"}" class="icon" alt="${owner}'${owner.endsWith("s") ? "" : "s"} avatar" /></a><div class="fullname"><a class="owner link" href="${repo?.owner?.html_url ?? "https://go.wixonic.fr/github"}" target="_blank">${owner}</a>/<span class="name">${repo?.name ?? "unknown"}</span></div><div class="description">${repo?.description ?? "No description"}</div><div class="topics">${topics}</div>`;
 
 									repoList.append(repoEl);
 								}

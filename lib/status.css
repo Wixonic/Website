@@ -55,8 +55,17 @@ container.status status div.date {
 	opacity: 0.5;
 }
 
+:root[status-gravity] {
+	--scrollbar-color: #888 !important;
+	--scrollbar-thumb-color: #FFF !important;
+}
+
 container.status status[gravity="info"] {
 	background: #07F;
+}
+
+:root[status-gravity="info"] {
+	--scrollbar-color: #07F !important;
 }
 
 container.status status[gravity="warn"] {
@@ -68,6 +77,15 @@ container.status status[gravity="warn"] * {
 	color: #000;
 }
 
+:root[status-gravity="warn"] {
+	--scrollbar-color: #F80 !important;
+	--scrollbar-thumb-color: #000 !important;
+}
+
 container.status status[gravity="critical"] {
 	background: #F00;
+}
+
+:root[status-gravity="critical"] {
+	--scrollbar-color: #F00 !important;
 }
