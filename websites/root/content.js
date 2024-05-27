@@ -42,10 +42,13 @@ const init = () => new Promise(async (resolve, reject) => {
 		reject(e);
 	}
 
+	const discordControlPanelLink = document.querySelector("#discord-control-panel");
+	discordControlPanelLink.href = window.localEnvironment ? "http://localhost:2012" : "https://discord.wixonic.fr";
+
 	try {
 		await Promise.all([
 			new Promise((resolve, reject) => {
-				request("GET", "https://api.github.com/users/Wixonic/repos?sort=updated&per_page=100", "json", "application/vnd.github+json")
+				request("GET", "https://api.github.com/users/Wixonic/repos?sort=updated&per_page=100", "json", "application/vnd.github+json", null, 500, false)
 					.then((xhr) => {
 						const repos = xhr.response;
 						const repoList = document.querySelector("div#repos");

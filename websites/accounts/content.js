@@ -22,9 +22,10 @@ const init = async () => {
 
 		if (publicUser) {
 			usernameField.value = publicUser.username;
+			usernameField.setAttribute("placeholder", publicUser.username);
 
 			usernameField.addEventListener("input", () => {
-				if (publicUser.username != usernameField.value) changes.publicUser.username = usernameField.value;
+				if (publicUser.username != usernameField.value && usernameField.value.length >= 5) changes.publicUser.username = usernameField.value;
 				else delete changes.publicUser.username;
 				updateStatus();
 			});
@@ -34,6 +35,7 @@ const init = async () => {
 
 		if (privateUser) {
 			emailField.value = privateUser.email;
+			emailField.setAttribute("placeholder", privateUser.email);
 
 			emailField.addEventListener("input", () => {
 				if (privateUser.email != emailField.value) changes.email = emailField.value;

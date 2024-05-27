@@ -68,7 +68,9 @@ const init = async () => {
 							});
 							break;
 					}
-				}).finally(() => signInSubmitButton.classList.remove("disabled"));
+
+					signInSubmitButton.classList.remove("disabled");
+				});
 		}
 	});
 
@@ -126,10 +128,6 @@ const init = async () => {
 					}
 				}).finally(redirect);
 		}
-	});
-
-	firebase.auth.object.onAuthStateChanged((user) => {
-		if (user && !creatingAccount) redirect();
 	});
 };
 

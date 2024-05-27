@@ -103,51 +103,6 @@ server.use(require("cors")({
 
 server.use(require("cookie-parser")());
 
-server.get("/", (_, res) => {
-	res.writeHead(200, {
-		"content-type": "text/plain"
-	}).write("pong");
-
-	res.end();
-});
-
-server.get("/session", async (req, res) => {
-	const sessionCookie = req.cookies.session;
-
-	if (sessionCookie) {
-		try {
-			const idToken = await adminAuth.verifySessionCookie(sessionCookie, true);
-
-			try {
-				const token = await adminAuth.createCustomToken(idToken.uid);
-
-				res.writeHead(200);
-				res.write(token);
-			} catch (reason) {
-				reason = `Failed to create token: ${reason.code ?? reason ?? "Unknown reason"}`;
-				console.error(reason);
-
-				res.writeHead(500);
-				res.write(reason);
-			}
-		} catch (reason) {
-			reason = `Failed to verify cookie: ${reason.code ?? reason ?? "Unknown reason"}`;
-			console.error(reason);
-
-			res.writeHead(500);
-			res.write(reason);
-		}
-	} else {
-		const reason = "Session cookie not provided";
-		console.error(reason);
-
-		res.writeHead(401);
-		res.write(reason);
-	}
-
-	res.end();
-});
-
 server.post("/email", async (req, res) => {
 	try {
 		const email = atob(req?.body?.email);
@@ -159,7 +114,7 @@ server.post("/email", async (req, res) => {
 			const data = await clientAuthLibrary.signInWithEmailAndPassword(clientAuth, email, password)
 
 			try {
-				const idToken = await data.user.getIdToken()
+				const idToken = await data.user.getIdToken();
 
 				try {
 					const sessionCookie = await adminAuth.createSessionCookie(idToken, {
@@ -178,27 +133,35 @@ server.post("/email", async (req, res) => {
 					reason = reason.code || reason || "Unknown reason";
 					console.error(reason);
 
-					res.writeHead(500);
+					res.writeHead(500, {
+						"content-type": "text/plain"
+					});
 					res.write(reason);
 				}
 			} catch (reason) {
 				reason = reason.code || reason || "Unknown reason";
 				console.error(reason);
 
-				res.writeHead(500);
+				res.writeHead(500, {
+					"content-type": "text/plain"
+				});
 				res.write(reason);
 			}
 		} catch (reason) {
 			reason = reason.code || reason || "Unknown reason";
 			console.error(reason);
 
-			res.writeHead(500);
+			res.writeHead(500, {
+				"content-type": "text/plain"
+			});
 			res.write(reason);
 		}
 	} catch (reason) {
 		console.error(`Failed to authenticate: auth/missing-params - ${reason}`);
 
-		res.writeHead(401);
+		res.writeHead(401, {
+			"content-type": "text/plain"
+		});
 		res.write("auth/missing-params");
 	}
 
@@ -206,85 +169,146 @@ server.post("/email", async (req, res) => {
 });
 
 server.post("/email/change", async (req, res) => {
-	// try {
-	const email = atob(req?.body?.email);
+	try {
+		const email = atob(req?.body?.email);
 
-	if (/^[\w\.-]+@([\w-]+\.)+[\w-]{2,}$/.test(email)) {
-		const sessionCookie = req.cookies.session;
+		if (/^[\w\.-]+@([\w-]+\.)+[\w-]{2,}$/.test(email)) {
+			const sessionCookie = req.cookies.session;
 
-		if (sessionCookie) {
-			// try {
-			const idToken = await adminAuth.verifySessionCookie(sessionCookie, true);
+			if (sessionCookie) {
+				try {
+					const idToken = await adminAuth.verifySessionCookie(sessionCookie, true);
 
-			// try {
-			const token = await adminAuth.createCustomToken(idToken.uid);
+					try {
+						const token = await adminAuth.createCustomToken(idToken.uid);
 
-			// try {
-			const user = await clientAuthLibrary.signInWithCustomToken(clientAuth, token);
+						try {
+							const user = await clientAuthLibrary.signInWithCustomToken(clientAuth, token);
 
-			// try {
-			await clientAuthLibrary.updateEmail(user, email);
+							try {
+								await clientAuthLibrary.updateEmail(user, email);
 
-			// try {
-			await adminFirestore.collection("private-users").doc(data.user.uid).update({
-				email: user.email
-			});
+								try {
+									await adminFirestore.collection("private-users").doc(data.user.uid).update({
+										email: user.email
+									});
 
-			res.writeHead(204);
-			/* } catch (reason) {
-				reason = `Failed to change email: ${reason.code ?? reason ?? "Unknown reason"} - Step 2`;
+									res.writeHead(204);
+								} catch (reason) {
+									reason = `Failed to change email: ${reason.code ?? reason ?? "Unknown reason"} - Step 2`;
+									console.error(reason);
+
+									res.writeHead(500, {
+										"content-type": "text/plain"
+									});
+									res.write(reason);
+								}
+							} catch (reason) {
+								reason = `Failed to change email: ${reason.code ?? reason ?? "Unknown reason"} - Step 1`;
+								console.error(reason);
+
+								res.writeHead(500, {
+									"content-type": "text/plain"
+								});
+								res.write(reason);
+							}
+						} catch (reason) {
+							reason = `Failed to authenticate: ${reason.code ?? reason ?? "Unknown reason"}`;
+							console.error(reason);
+
+							res.writeHead(500, {
+								"content-type": "text/plain"
+							});
+							res.write(reason);
+						}
+					} catch (reason) {
+						reason = `Failed to create token: ${reason.code ?? reason ?? "Unknown reason"}`;
+						console.error(reason);
+
+						res.writeHead(500, {
+							"content-type": "text/plain"
+						});
+						res.write(reason);
+					}
+				} catch (reason) {
+					reason = `Failed to verify cookie: ${reason.code ?? reason ?? "Unknown reason"}`;
+					console.error(reason);
+
+					res.writeHead(500, {
+						"content-type": "text/plain"
+					});
+					res.write(reason);
+				}
+			} else {
+				const reason = "Session cookie not provided";
 				console.error(reason);
 
-				res.writeHead(500);
+				res.writeHead(401, {
+					"content-type": "text/plain"
+				});
+				res.write(reason);
+			}
+		} else {
+			console.error(`Failed to authenticate: auth/invalid-email`);
+
+			res.writeHead(401, {
+				"content-type": "text/plain"
+			});
+			res.write("auth/invalid-email");
+		}
+	} catch (reason) {
+		console.error(`Failed to authenticate: auth/missing-params - ${reason ?? "Unknown reason"}`);
+
+		res.writeHead(401, {
+			"content-type": "text/plain"
+		});
+		res.write("auth/missing-params");
+	}
+
+	res.end();
+});
+
+server.get("/session", async (req, res) => {
+	const sessionCookie = req.cookies.session;
+
+	if (sessionCookie) {
+		try {
+			const idToken = await adminAuth.verifySessionCookie(sessionCookie, true);
+
+			try {
+				const token = await adminAuth.createCustomToken(idToken.uid);
+
+				res.writeHead(200, {
+					"content-type": "text/plain"
+				});
+				res.write(token);
+			} catch (reason) {
+				reason = `Failed to create token: ${reason.code ?? reason ?? "Unknown reason"}`;
+				console.error(reason);
+
+				res.writeHead(500, {
+					"content-type": "text/plain"
+				});
 				res.write(reason);
 			}
 		} catch (reason) {
-			reason = `Failed to change email: ${reason.code ?? reason ?? "Unknown reason"} - Step 1`;
+			reason = `Failed to verify cookie: ${reason.code ?? reason ?? "Unknown reason"}`;
 			console.error(reason);
 
-			res.writeHead(500);
-			res.write(reason);
-		}
-	} catch (reason) {
-		reason = `Failed to authenticate: ${reason.code ?? reason ?? "Unknown reason"}`;
-		console.error(reason);
-
-		res.writeHead(500);
-		res.write(reason);
-	}
-} catch (reason) {
-	reason = `Failed to create token: ${reason.code ?? reason ?? "Unknown reason"}`;
-	console.error(reason);
-
-	res.writeHead(500);
-	res.write(reason);
-}
-} catch (reason) {
-reason = `Failed to verify cookie: ${reason.code ?? reason ?? "Unknown reason"}`;
-console.error(reason);
-
-res.writeHead(500);
-res.write(reason);
-} */
-		} else {
-			const reason = "Session cookie not provided";
-			console.error(reason);
-
-			res.writeHead(401);
+			res.writeHead(500, {
+				"content-type": "text/plain"
+			});
 			res.write(reason);
 		}
 	} else {
-		console.error(`Failed to authenticate: auth/invalid-email`);
+		const reason = "Session cookie not provided";
+		console.error(reason);
 
-		res.writeHead(401);
-		res.write("auth/invalid-email");
+		res.writeHead(401, {
+			"content-type": "text/plain"
+		});
+		res.write(reason);
 	}
-	/* } catch (reason) {
-		console.error(`Failed to authenticate: auth/missing-params - ${reason ?? "Unknown reason"}`);
-	
-		res.writeHead(401);
-		res.write("auth/missing-params");
-	} */
 
 	res.end();
 });
