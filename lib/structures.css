@@ -78,7 +78,6 @@ header .account .picture {
 	justify-content: center;
 	align-items: center;
 
-	width: 100%;
 	height: 100%;
 
 	background: #8881;
@@ -90,7 +89,6 @@ header .account .picture {
 
 header .account .picture img,
 header .account .picture svg {
-	width: 100%;
 	height: 100%;
 }
 

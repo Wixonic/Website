@@ -5,6 +5,7 @@ import font from "/lib/font.js";
 import footer from "/lib/footer.js";
 import header from "/lib/header.js";
 import loader from "/lib/loader.js";
+import pages from "/lib/pages.js";
 import status from "/lib/status.js";
 
 import content from "./content.js";
@@ -30,6 +31,7 @@ window.addEventListener("load", async () => {
 				await content.init();
 				await footer.init();
 				await header.init();
+				await pages.init();
 				await status.init();
 
 				loader.hide();

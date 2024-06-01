@@ -34,7 +34,7 @@ main .pages page .links {
 
 	width: fit-content;
 
-	margin: auto;
+	margin: 0.5rem auto;
 }
 
 main .pages page .news,
@@ -164,8 +164,6 @@ main .pages page#github #repos .repo a.icon img.icon {
 
 	width: 100%;
 	height: 100%;
-
-	border-radius: 0.5rem;
 
 	margin: auto;
 }
