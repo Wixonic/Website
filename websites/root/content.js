@@ -32,7 +32,7 @@ const init = () => new Promise(async (resolve, reject) => {
 
 			const el = document.createElement("a");
 			el.classList.add("article");
-			el.href = `/news/?id=${id}`;
+			el.href = `${window.localEnvironment ? "http://localhost:2012" : "https://discord.wixonic.fr"}/news/?id=${id}`;
 			el.innerHTML = `<div class="date">${article.date.toDate().toLocaleString(navigator?.language ?? "en-US", { dateStyle: "short", timeStyle: "short" })}</div><div class="title">${article.title}</div><div class="summary">${article.summary}</div>`;
 			discordNewsContainer.append(el);
 		}
