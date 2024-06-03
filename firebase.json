@@ -110,7 +110,7 @@
 				},
 				{
 					"regex": "/help.*",
-					"destination": "https://discord.gg/pkD9UjcXcc",
+					"destination": "https://discord.gg/tNfVPDmDdt",
 					"type": 301
 				},
 				{
