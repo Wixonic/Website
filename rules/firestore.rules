@@ -2,55 +2,13 @@ rules_version = "2";
 
 service cloud.firestore {
 	match /databases/{database}/documents {
-		function isValidEmail(value) {
-			return value.matches("^[\\w\\.-]+@([\\w-]+\\.)+[\\w-]{2,}$");
-		}
-
-		function isValidUsername(value) {
-			return value.matches("^([0-9]|[A-z]|_|-){5,25}$");
-		}
-
 		function hasPermission(permission) {
 			return request.auth.token.permissions[permission];
 		}
 
-		function equal(value) {
-			return request.resource.data[value] == resource.data[value];
-		}
 
-		match /discord-news/{article} {
-			match /extended/details {
-				allow read;
-				allow write: if hasPermission("admin") || hasPermission("news");
-			}
-			
-			allow read;
-			allow write: if hasPermission("admin") || hasPermission("discord");
-		}
-
-		match /news/{article} {
-			match /extended/details {
-				allow read;
-				allow write: if hasPermission("admin") || hasPermission("news");
-			}
-
-			allow read;
-			allow write: if hasPermission("admin") || hasPermission("news");
-		}
-
-		match /status/current {
-			allow get;
-			allow write: if hasPermission("admin") || hasPermission("status");
-		}
-
-		match /private-users/{userId} {
-			allow get: if hasPermission("admin") || request.auth.uid == userId;
-			allow update: if hasPermission("admin") || (request.auth.uid == userId && request.resource.data.keys().hasAll(["email"]) && request.resource.data.keys().hasOnly(["email"]) && equal("email"));
-		}
-
-		match /users/{userId} {
-			allow get;
-			allow update: if hasPermission("admin") || (request.auth.uid == userId && request.resource.data.keys().hasAll(["joined", "username"]) && request.resource.data.keys().hasOnly(["joined", "username"]) && equal("joined") && isValidUsername(request.resource.data.username));
+		match /{allPaths=**} {
+			allow read, write: if false;
 		}
 	}
 }

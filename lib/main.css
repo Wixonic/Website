@@ -1,0 +1,197 @@
+:root,
+:root * {
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+
+	user-select: inherit;
+	-moz-user-select: inherit;
+	-webkit-user-select: inherit;
+
+	font-display: block;
+	font-family: inherit;
+
+	cursor: inherit;
+	pointer-events: inherit;
+	outline: inherit;
+}
+
+:root {
+	--font-family: "Open Sans", arial, sans-serif;
+
+	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+
+	background: var(--background);
+
+	color: var(--text-color);
+	font-family: var(--font-family);
+
+	cursor: default;
+	outline: none;
+}
+
+body {
+	margin: 0;
+}
+
+a,
+button,
+input,
+label,
+.button,
+.link {
+	cursor: pointer;
+}
+
+a {
+	display: inline-block;
+
+	color: #07F;
+	text-decoration: unset;
+}
+
+button {
+	background: unset;
+
+	border: unset;
+}
+
+.button {
+	--color: var(--text-color);
+
+	color: var(--color);
+	font-size: 1rem;
+
+	background: var(--background);
+
+	border: 0.2rem solid var(--color);
+	border-radius: 0.8rem;
+
+	padding: 0.4rem 0.5rem;
+
+	transition: background 0.2s cubic-bezier(0, 0.3, 0.7, 1), color 0.2s cubic-bezier(0, 0.3, 0.7, 1), transform 0.2s cubic-bezier(0, 0.3, 0.7, 1);
+}
+
+.button:hover {
+	background: var(--color);
+
+	color: var(--background);
+
+	transform: scale(1.05);
+}
+
+.button.transparent {
+	--color: transparent;
+
+	color: var(--text-color)
+}
+
+.button.transparent:hover {
+	color: var(--text-color);
+
+	transform: scale(0.9);
+}
+
+.button.primary {
+	--color: #07F;
+}
+
+.button.disabled {
+	background: #8885 !important;
+
+	color: #888 !important;
+
+	border-color: transparent !important;
+
+	transform: scale(1) !important;
+}
+
+.link {
+	border-bottom: 0.08rem solid transparent;
+
+	transition: border-color 0.2s linear;
+}
+
+.link:hover {
+	border-bottom-color: currentColor;
+}
+
+input {
+	display: block;
+
+	background: var(--background);
+
+	color: var(--text-color);
+	font-size: 0.8rem;
+
+	border: 0.1rem solid #8881;
+	border-radius: 0.5rem;
+
+	transition: background 0.2s cubic-bezier(0, 0.3, 0.7, 1), border-color 0.2s cubic-bezier(0, 0.3, 0.7, 1);
+
+	margin: 0.2rem;
+	padding: 0.2rem 0.4rem;
+
+	cursor: text !important;
+}
+
+input:hover {
+	border-color: #8882;
+
+	opacity: 1;
+}
+
+input:focus {
+	border-color: var(--text-color);
+
+	opacity: 1;
+}
+
+input.invalid,
+input:invalid {
+	border-color: #F00;
+
+	opacity: 1;
+}
+
+.fade {
+	animation: fade 0.5s ease;
+}
+
+@keyframes fade {
+
+	from,
+	30% {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+.slide {
+	animation: slide 0.5s ease;
+}
+
+@keyframes slide {
+
+	from,
+	30% {
+		transform: translateX(-1rem);
+	}
+
+	to {
+		transform: translateX(0);
+	}
+}
+
+.fade.slide {
+	animation: fade 0.5s ease, slide 0.5s ease;
+}
+
+.firebase-emulator-warning {
+	display: none;
+}
