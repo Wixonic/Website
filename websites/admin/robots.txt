@@ -1,4 +1,2 @@
 User-agent: *
 Disallow: /
-
-Sitemap: https://admin.wixonic.fr/sitemap.xml

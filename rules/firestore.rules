@@ -19,11 +19,21 @@ service cloud.firestore {
 		}
 
 		match /discord-news/{article} {
+			match /extended/details {
+				allow read;
+				allow write: if hasPermission("admin") || hasPermission("news");
+			}
+			
 			allow read;
 			allow write: if hasPermission("admin") || hasPermission("discord");
 		}
 
 		match /news/{article} {
+			match /extended/details {
+				allow read;
+				allow write: if hasPermission("admin") || hasPermission("news");
+			}
+
 			allow read;
 			allow write: if hasPermission("admin") || hasPermission("news");
 		}
