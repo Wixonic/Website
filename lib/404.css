@@ -14,7 +14,7 @@ img {
 	height: auto;
 }
 
-div {
+main {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -24,13 +24,13 @@ div {
 
 	text-align: center;
 
-	padding: 2rem;
+	padding: var(--header-size);
 
 	z-index: 1;
 }
 
-div h1,
-div p {
+main h1,
+main p {
 	width: fit-content;
 	height: fit-content;
 

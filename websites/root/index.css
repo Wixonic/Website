@@ -1,39 +1,55 @@
 @import url("/lib/main.css");
 
-div#background-hello {
+body {
+	margin-top: 0;
+}
+
+#wixiland {
 	display: block;
 
 	width: 100vw;
 
 	background: radial-gradient(circle at bottom right, #F600FF, #8B00FF);
+
+	text-align: center;
+
+	padding-top: var(--header-size);
 }
 
-img#hello {
-	display: block;
-
-	width: auto;
-	height: auto;
-
-	max-width: min(100vw, 25rem);
-	max-height: min(100vh, 25rem);
-
-	margin: auto;
-}
-
-h1#title {
+#wixiland h2 {
 	display: block;
 
 	width: fit-content;
 	height: fit-content;
 
-	background: radial-gradient(circle at bottom right, #F600FF, #8B00FF);
-	background-clip: text;
-	-webkit-background-clip: text;
-
-	color: transparent;
+	color: #FFF;
 	font-size: 2.2rem;
 	font-weight: bold;
 
 	margin: auto;
+	padding: 0;
+}
+
+#wixiland p {
+	display: block;
+
+	width: min(95%, 30rem);
+
+	color: #FFF;
+	font-size: 0.9rem;
+
+	margin: auto;
 	padding: 0.5rem;
+}
+
+#wixiland img {
+	display: block;
+
+	width: auto;
+	height: auto;
+
+	max-width: min(100vw, 30rem);
+	max-height: min(100vh, 30rem);
+
+	margin: auto;
 }

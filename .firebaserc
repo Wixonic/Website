@@ -17,8 +17,8 @@
 				"assets": [
 					"assets-wixonic-website-2"
 				],
-				"discord": [
-					"discord-wixiland-website"
+				"wixiland": [
+					"wixiland-wixonic-website"
 				],
 				"functions": [
 					"functions-wixonic-website-2"

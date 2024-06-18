@@ -53,8 +53,8 @@
 			]
 		},
 		{
-			"target": "discord",
-			"public": "websites/discord",
+			"target": "wixiland",
+			"public": "websites/wixiland",
 			"ignore": [
 				".DS_Store"
 			],

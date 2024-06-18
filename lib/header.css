@@ -1,0 +1,63 @@
+header {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	position: fixed;
+	top: 0;
+	left: 0;
+
+	width: 100vw;
+	height: var(--header-size);
+
+	cursor: default;
+	pointer-events: none;
+
+	z-index: 2;
+}
+
+header div.container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	height: calc(var(--header-size) - 0.3rem);
+
+	background: #EEE8;
+	backdrop-filter: blur(0.9rem);
+	-webkit-backdrop-filter: blur(0.9rem);
+
+	border: 0.16rem solid #EEE8;
+	border-radius: 1.2rem;
+
+	box-shadow: 0 0 3rem #0002;
+
+	padding: 0 1rem;
+
+	pointer-events: fill;
+}
+
+header div.container a {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	height: 100%;
+
+	cursor: pointer;
+
+	transform: scale(0.9);
+
+	transition: transform 0.3s cubic-bezier(0, 0.3, 0.7, 1);
+
+	overflow: hidden;
+}
+
+header div.container a:hover {
+	transform: scale(1);
+}
+
+header div.container a img {
+	max-width: 100%;
+	height: 100%;
+}
