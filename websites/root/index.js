@@ -7,7 +7,7 @@ addEventListener("DOMContentLoaded", async () => {
 	await init();
 
 	await (async () => {
-		const section = await RichLink(localEnvironment ? path.local.wixiland : path.wixiland);
+		const section = document.createElement("section");
 		section.classList.add("fade");
 		section.id = "wixiland";
 		document.body.append(section);
@@ -19,8 +19,13 @@ addEventListener("DOMContentLoaded", async () => {
 
 		const description = document.createElement("p");
 		description.classList.add("fade", "slide");
-		description.innerHTML = "Land with one click in a futuristic universe and be part of a wonderful community on Discord, or anywhere. Find a place in it, or watch from afar what's happening. In either case, you are welcome.";
+		description.innerHTML = "Land with one click in a futuristic universe and be part of a wonderful community on Discord, or anywhere. Find a place in it, or watch from afar what's happening. In either case, you are welcome.<br /><br />";
 		section.append(description);
+
+		const link = await RichLink(localEnvironment ? path.local.wixiland : path.wixiland);
+		link.classList.add("fade", "slide");
+		link.innerHTML = "Join WixiLand";
+		description.append(link);
 
 		const image = await loader.image(new URL("/image/hello.png", localEnvironment ? path.local.assets : path.assets));
 		image.alt = "Robot holding a sign saying hello.";
