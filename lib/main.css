@@ -1,16 +1,9 @@
 @import url("/lib/animation.css");
 @import url("/lib/header.css");
+@import url("/lib/footer.css");
 @import url("/lib/rich.css");
 
 * {
-	appearance: none;
-	-moz-appearance: none;
-	-webkit-appearance: none;
-
-	user-select: inherit;
-	-moz-user-select: inherit;
-	-webkit-user-select: inherit;
-
 	font-display: block;
 	font-family: inherit;
 
@@ -19,24 +12,43 @@
 	outline: inherit;
 
 	box-sizing: border-box;
+
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+
+	user-select: inherit;
+	-moz-user-select: inherit;
+	-webkit-user-select: inherit;
 }
 
 body {
 	--header-size: 3.5rem;
 
-	user-select: none;
-	-moz-user-select: none;
-	-webkit-user-select: none;
+	display: flex;
+	flex-direction: column;
 
 	background: #FFF;
 
 	color: #000;
 	font-family: "Open Sans", arial, sans-serif;
 
-	margin: 3rem 0 0 0;
+	min-height: calc(100vh - var(--header-size));
+
+	margin: var(--header-size) 0 0 0;
 
 	cursor: default;
 	outline: none;
+
+	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+}
+
+main {
+	display: block;
+
+	flex-grow: 1;
 }
 
 a {

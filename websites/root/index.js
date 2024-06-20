@@ -6,11 +6,13 @@ import { RichLink } from "/lib/rich.js";
 addEventListener("DOMContentLoaded", async () => {
 	await init();
 
+	const main = document.querySelector("main");
+
 	await (async () => {
 		const section = document.createElement("section");
 		section.classList.add("fade");
 		section.id = "wixiland";
-		document.body.append(section);
+		main.append(section);
 
 		const title = document.createElement("h2");
 		title.classList.add("fade", "slide");
@@ -37,7 +39,7 @@ addEventListener("DOMContentLoaded", async () => {
 		const section = document.createElement("section");
 		section.classList.add("fade");
 		section.id = "github";
-		document.body.append(section);
+		main.append(section);
 
 		const title = document.createElement("h2");
 		title.classList.add("fade", "slide");
@@ -46,7 +48,7 @@ addEventListener("DOMContentLoaded", async () => {
 
 		const description = document.createElement("p");
 		description.classList.add("fade", "slide");
-		description.innerHTML = "<br /><br />";
+		description.innerHTML = "Searching for small or archived projects?<br />This is the place to go.<br /><br />";
 		section.append(description);
 
 		const link = await RichLink(new URL("/github", localEnvironment ? path.local.redirects : path.redirects));
