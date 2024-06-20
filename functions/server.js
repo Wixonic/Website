@@ -31,21 +31,29 @@ server.get("/rich/link", async (req, res) => {
 	let thumbnail = null;
 
 	try {
-		const url = new URL(req.query.url);
+		const queryUrl = new URL(req.query.url);
 
-		const get = (url.protocol == "https:" ? https : http).get;
+		const getHtml = (url) => new Promise((resolve, reject) => {
+			const get = (url.protocol == "https:" ? https : http).get;
 
-		const html = await new Promise((resolve, reject) => {
 			const request = get(url, (response) => {
-				response.on("error", reject);
+				if (String(response.statusCode).startsWith("3")) {
+					getHtml(new URL(response.headers.location))
+						.then(resolve)
+						.catch(reject);
+				} else {
+					response.on("error", reject);
 
-				const chunks = [];
-				response.on("data", (chunk) => chunks.push(chunk));
-				response.on("end", () => resolve(chunks.join("")));
+					const chunks = [];
+					response.on("data", (chunk) => chunks.push(chunk));
+					response.on("end", () => resolve(chunks.join("")));
+				}
 			});
 
 			request.on("error", reject);
 		});
+
+		const html = await getHtml(queryUrl);
 
 		const $ = cheerio.load(html);
 

@@ -32,4 +32,31 @@ addEventListener("DOMContentLoaded", async () => {
 		image.classList.add("fade", "slide");
 		section.append(image);
 	})();
+
+	await (async () => {
+		const section = document.createElement("section");
+		section.classList.add("fade");
+		section.id = "github";
+		document.body.append(section);
+
+		const title = document.createElement("h2");
+		title.classList.add("fade", "slide");
+		title.innerHTML = "Projects";
+		section.append(title);
+
+		const description = document.createElement("p");
+		description.classList.add("fade", "slide");
+		description.innerHTML = "<br /><br />";
+		section.append(description);
+
+		const link = await RichLink(new URL("/github", localEnvironment ? path.local.redirects : path.redirects));
+		link.classList.add("fade", "slide");
+		link.innerHTML = "See open-source projects";
+		description.append(link);
+
+		const image = await loader.image(new URL("/image/github.png", localEnvironment ? path.local.assets : path.assets));
+		image.alt = "Logo of GitHub in 3D";
+		image.classList.add("fade", "slide");
+		section.append(image);
+	})();
 });

@@ -4,25 +4,20 @@ body {
 	margin-top: 0;
 }
 
-#wixiland {
+section {
 	display: block;
 
-	width: 100vw;
-
-	background: radial-gradient(circle at bottom right, #F600FF, #8B00FF);
+	width: 100%;
 
 	text-align: center;
-
-	padding-top: var(--header-size);
 }
 
-#wixiland h2 {
+section h2 {
 	display: block;
 
 	width: fit-content;
 	height: fit-content;
 
-	color: #FFF;
 	font-size: 2.2rem;
 	font-weight: bold;
 
@@ -30,26 +25,30 @@ body {
 	padding: 0;
 }
 
-#wixiland p {
+section p {
 	display: block;
 
 	width: min(95%, 30rem);
 
-	color: #FFF;
 	font-size: 0.9rem;
 
 	margin: auto;
 	padding: 0.5rem;
 }
 
-#wixiland img {
+section img {
 	display: block;
 
-	width: auto;
-	height: auto;
-
-	max-width: min(100vw, 30rem);
-	max-height: min(100vh, 30rem);
+	max-width: min(100%, 30rem);
+	max-height: min(100%, 30rem);
 
 	margin: auto;
+}
+
+#wixiland {
+	background: radial-gradient(circle at bottom right, #F600FF, #8B00FF);
+
+	color: #FFF;
+
+	padding-top: var(--header-size);
 }

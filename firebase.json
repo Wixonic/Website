@@ -79,17 +79,32 @@
 					"type": 301
 				},
 				{
-					"regex": "/github(.*)",
+					"regex": "/github",
+					"destination": "https://github.com/Wixonic",
+					"type": 301
+				},
+				{
+					"regex": "/github/(.*)",
 					"destination": "https://github.com/Wixonic/:1",
 					"type": 301
 				},
 				{
-					"regex": "/instagram(.*)",
+					"regex": "/instagram",
+					"destination": "https://www.instagram.com/wixonic12",
+					"type": 301
+				},
+				{
+					"regex": "/instagram/(.*)",
 					"destination": "https://www.instagram.com/wixonic12/:1",
 					"type": 301
 				},
 				{
-					"regex": "/youtube(.*)",
+					"regex": "/youtube",
+					"destination": "https://www.youtube.com/channel/UCnPN_SkWcIDNL-BjJGeDzQA",
+					"type": 301
+				},
+				{
+					"regex": "/youtube/(.*)",
 					"destination": "https://www.youtube.com/channel/UCnPN_SkWcIDNL-BjJGeDzQA/:1",
 					"type": 301
 				},

@@ -39,6 +39,8 @@
 	max-width: 14rem;
 	max-height: 14rem;
 
+	border-radius: 0.4rem;
+
 	margin: auto;
 }
 
@@ -51,7 +53,7 @@
 
 	background: #FFF;
 
-	border-radius: 0.2rem;
+	border-radius: 50%;
 }
 
 #richLinkHover .title {
