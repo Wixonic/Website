@@ -13,6 +13,8 @@ header {
 	cursor: default;
 	pointer-events: none;
 
+	overflow: visible !important;
+
 	z-index: 2;
 }
 
@@ -20,6 +22,7 @@ header div.container {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	gap: 0.5rem;
 
 	height: calc(var(--header-size) - 0.3rem);
 
@@ -42,19 +45,15 @@ header div.container a {
 	justify-content: center;
 	align-items: center;
 
-	height: 100%;
+	height: calc(var(--header-size) - 1.5rem);
 
 	cursor: pointer;
 
-	transform: scale(0.9);
-
 	transition: transform 0.3s cubic-bezier(0, 0.3, 0.7, 1);
-
-	overflow: hidden;
 }
 
 header div.container a:hover {
-	transform: scale(1);
+	transform: scale(0.9);
 }
 
 header div.container a img {

@@ -45,6 +45,10 @@ body {
 	-webkit-user-select: none;
 }
 
+body * {
+	overflow: hidden;
+}
+
 main {
 	display: block;
 
@@ -77,6 +81,8 @@ img {
 
 	margin: 0.2rem;
 	padding: 0.4rem 0.5rem;
+
+	overflow: visible;
 }
 
 .button::before {
