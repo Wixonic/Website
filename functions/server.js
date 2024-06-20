@@ -146,7 +146,8 @@ server.get("/rich/link", async (req, res) => {
 	}
 
 	res.writeHead(200, {
-		"content-type": "application/json"
+		"content-type": "application/json",
+		"cache-control": "max-age=604800"
 	});
 
 	res.write(JSON.stringify({
