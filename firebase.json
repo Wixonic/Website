@@ -69,37 +69,37 @@
 			"target": "redirects",
 			"redirects": [
 				{
-					"regex": "/discord.*",
+					"regex": "/discord(?:.*)",
 					"destination": "https://discord.gg/BcXFAVKJZQ",
 					"type": 301
 				},
 				{
-					"regex": "/help.*",
+					"regex": "/help(?:.*)",
 					"destination": "https://discord.gg/tNfVPDmDdt",
 					"type": 301
 				},
 				{
-					"regex": "/github.*",
+					"regex": "/github(?:.*)",
 					"destination": "https://github.com/Wixonic",
 					"type": 301
 				},
 				{
-					"regex": "/instagram.*",
+					"regex": "/instagram(?:.*)",
 					"destination": "https://www.instagram.com/wixonic12",
 					"type": 301
 				},
 				{
-					"regex": "/youtube.*",
+					"regex": "/youtube(?:.*)",
 					"destination": "https://www.youtube.com/channel/UCnPN_SkWcIDNL-BjJGeDzQA",
 					"type": 301
 				},
 				{
-					"regex": "/twitch.*",
+					"regex": "/twitch(?:.*)",
 					"destination": "https://www.twitch.tv/wixonic",
 					"type": 301
 				},
 				{
-					"regex": ".*",
+					"source": "**",
 					"destination": "https://wixonic.fr",
 					"type": 301
 				}
