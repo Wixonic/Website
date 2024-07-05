@@ -1,3 +1,4 @@
 [submodule "websites/cubicEngineering"]
 	path = websites/cubicEngineering
 	url = https://github.com/Wixonic/CubicEngineering
+	branch = Default
