@@ -1,7 +1,3 @@
 [submodule "websites/cubicEngineering"]
 	path = websites/cubicEngineering
-	url = https://github.com/Wixonic/CubicEngineering/tree/Default/src/website
-
-[submodule "websites/playCubicEngineering"]
-	path = websites/cubicEngineering
-	url = https://github.com/Wixonic/CubicEngineering/tree/Default/src/play
+	url = ../CubicEngineering/src/website
