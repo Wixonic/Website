@@ -24,7 +24,7 @@ addEventListener("DOMContentLoaded", async () => {
 		description.innerHTML = "Land with one click in a futuristic universe and be part of a wonderful community on Discord, or anywhere. Find a place in it, or watch from afar what's happening. In either case, you are welcome.<br /><br />";
 		section.append(description);
 
-		const link = await RichLink(localEnvironment ? path.local.wixiland : path.wixiland);
+		const link = await RichLink(localEnvironment ? path.local.wixiLand : path.wixiLand);
 		link.classList.add("fade", "slide");
 		link.innerHTML = "Join WixiLand";
 		description.append(link);

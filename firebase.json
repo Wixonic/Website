@@ -53,8 +53,8 @@
 			]
 		},
 		{
-			"target": "wixiland",
-			"public": "websites/wixiland",
+			"target": "wixiLand",
+			"public": "websites/wixiLand",
 			"ignore": [
 				".DS_Store"
 			],
@@ -62,6 +62,32 @@
 				{
 					"source": "**",
 					"destination": "/lib/404.html"
+				}
+			]
+		},
+		{
+			"target": "cubicEngineering",
+			"public": "websites/cubicEngineering",
+			"ignore": [
+				".DS_Store"
+			],
+			"rewrites": [
+				{
+					"source": "**",
+					"destination": "/lib/404.html"
+				}
+			]
+		},
+		{
+			"target": "playCubicEngineering",
+			"public": "websites/playCubicEngineering",
+			"ignore": [
+				".DS_Store"
+			],
+			"rewrites": [
+				{
+					"source": "**",
+					"destination": "/index.html"
 				}
 			]
 		},
