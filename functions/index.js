@@ -12,7 +12,7 @@ const server = require("./server.js");
 const localEnvironment = process.env.FUNCTIONS_EMULATOR === "true";
 
 const adminApp = adminAppLibrary.initializeApp({
-	credential: adminAppLibrary.cert(require("./config")),
+	credential: adminAppLibrary.cert(require("./config.json")),
 
 	apiKey: "AIzaSyAoAl-09tw3K0i8N2PnYKAjjZb19e4zEBk",
 	projectId: "wixonic-website-2",
