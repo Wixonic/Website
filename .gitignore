@@ -5,6 +5,3 @@ node_modules/
 .DS_Store
 config.js*
 package-lock.json
-
-websites/cubicEngineering
-websites/playCubicEngineering
