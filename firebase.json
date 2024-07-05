@@ -67,7 +67,7 @@
 		},
 		{
 			"target": "cubicEngineering",
-			"public": "websites/cubicEngineering",
+			"public": "websites/cubicEngineering/website",
 			"ignore": [
 				".DS_Store"
 			],
@@ -80,7 +80,7 @@
 		},
 		{
 			"target": "playCubicEngineering",
-			"public": "websites/playCubicEngineering",
+			"public": "websites/cubicEngineering/play",
 			"ignore": [
 				".DS_Store"
 			],
