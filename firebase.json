@@ -2,7 +2,7 @@
 	"hosting": [
 		{
 			"target": "root",
-			"public": "websites/root",
+			"public": "./websites/root",
 			"ignore": [
 				".DS_Store"
 			],
@@ -15,7 +15,7 @@
 		},
 		{
 			"target": "accounts",
-			"public": "websites/accounts",
+			"public": "./websites/accounts",
 			"ignore": [
 				".DS_Store"
 			],
@@ -28,7 +28,7 @@
 		},
 		{
 			"target": "admin",
-			"public": "websites/admin",
+			"public": "./websites/admin",
 			"ignore": [
 				".DS_Store"
 			],
@@ -41,7 +41,7 @@
 		},
 		{
 			"target": "assets",
-			"public": "websites/assets",
+			"public": "./websites/assets",
 			"ignore": [
 				".DS_Store"
 			],
@@ -54,7 +54,7 @@
 		},
 		{
 			"target": "wixiLand",
-			"public": "websites/wixiLand",
+			"public": "./websites/wixiLand",
 			"ignore": [
 				".DS_Store"
 			],
