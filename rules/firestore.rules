@@ -2,11 +2,6 @@ rules_version = "2";
 
 service cloud.firestore {
 	match /databases/{database}/documents {
-		function hasPermission(permission) {
-			return request.auth.token.permissions[permission];
-		}
-
-
 		match /{allPaths=**} {
 			allow read, write: if false;
 		}

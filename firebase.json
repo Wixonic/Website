@@ -66,32 +66,6 @@
 			]
 		},
 		{
-			"target": "cubicEngineering",
-			"public": "websites/cubicEngineering/website",
-			"ignore": [
-				".DS_Store"
-			],
-			"rewrites": [
-				{
-					"source": "**",
-					"destination": "/lib/404.html"
-				}
-			]
-		},
-		{
-			"target": "playCubicEngineering",
-			"public": "websites/cubicEngineering/play",
-			"ignore": [
-				".DS_Store"
-			],
-			"rewrites": [
-				{
-					"source": "**",
-					"destination": "/index.html"
-				}
-			]
-		},
-		{
 			"target": "redirects",
 			"redirects": [
 				{
