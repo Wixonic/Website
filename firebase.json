@@ -11,6 +11,24 @@
 					"source": "**",
 					"destination": "/lib/404.html"
 				}
+			],
+			"headers": [
+				{
+					"headers": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET, OPTIONS"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "max-age=7200, must-revalidate"
+						}
+					]
+				}
 			]
 		},
 		{
@@ -23,6 +41,24 @@
 				{
 					"source": "**",
 					"destination": "/lib/404.html"
+				}
+			],
+			"headers": [
+				{
+					"headers": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET, OPTIONS"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "max-age=7200, must-revalidate"
+						}
+					]
 				}
 			]
 		},
@@ -37,6 +73,24 @@
 					"source": "**",
 					"destination": "/lib/404.html"
 				}
+			],
+			"headers": [
+				{
+					"headers": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET, OPTIONS"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "max-age=7200, must-revalidate"
+						}
+					]
+				}
 			]
 		},
 		{
@@ -50,6 +104,24 @@
 					"source": "**",
 					"destination": "/lib/404.html"
 				}
+			],
+			"headers": [
+				{
+					"headers": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET, OPTIONS"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "max-age=43200"
+						}
+					]
+				}
 			]
 		},
 		{
@@ -62,6 +134,24 @@
 				{
 					"source": "**",
 					"destination": "/lib/404.html"
+				}
+			],
+			"headers": [
+				{
+					"headers": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET, OPTIONS"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "max-age=7200, must-revalidate"
+						}
+					]
 				}
 			]
 		},
