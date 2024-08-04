@@ -199,18 +199,6 @@
 					"type": 301
 				}
 			]
-		},
-		{
-			"target": "functions",
-			"rewrites": [
-				{
-					"source": "**",
-					"function": {
-						"functionId": "httpServer",
-						"region": "europe-west1"
-					}
-				}
-			]
 		}
 	],
 	"emulators": {

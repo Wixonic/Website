@@ -20,9 +20,6 @@
 				"wixiLand": [
 					"wixiland-website"
 				],
-				"functions": [
-					"functions-wixonic-website-2"
-				],
 				"redirects": [
 					"redirect-wixonic-website-2"
 				]
