@@ -13,6 +13,9 @@
 
 	box-sizing: border-box;
 
+	--background: #FFF;
+	--color: #000;
+
 	appearance: none;
 	-moz-appearance: none;
 	-webkit-appearance: none;
@@ -22,15 +25,22 @@
 	-webkit-user-select: inherit;
 }
 
+@media (prefers-color-scheme: dark) {
+	* {
+		--background: #000;
+		--color: #FFF;
+	}
+}
+
 body {
 	--header-size: 3.5rem;
 
 	display: flex;
 	flex-direction: column;
 
-	background: #FFF;
+	background: var(--background);
 
-	color: #000;
+	color: var(--color);
 	font-family: "Open Sans", arial, sans-serif;
 
 	min-height: calc(100vh - var(--header-size));
@@ -51,8 +61,22 @@ body * {
 
 main {
 	display: block;
-
 	flex-grow: 1;
+
+	width: 50rem;
+
+	margin: 0 auto;
+}
+
+nav {
+	width: fit-content;
+	margin: 0 auto;
+}
+
+h1 {
+	text-align: center;
+
+	margin: 0 0 1.6rem 0;
 }
 
 a {
@@ -62,6 +86,17 @@ a {
 
 img {
 	pointer-events: none;
+}
+
+ul,
+ol {
+	list-style-position: inside;
+
+	padding-left: 1.5rem;
+}
+
+li {
+	margin-bottom: 0.5rem;
 }
 
 .button {
@@ -110,6 +145,21 @@ img {
 
 .button:hover::before {
 	background-position: 0;
+}
+
+.link {
+	color: #06F;
+
+	cursor: pointer;
+}
+
+.section-link {
+	cursor: pointer;
+}
+
+.link:hover,
+.section-link:hover {
+	text-decoration: underline;
 }
 
 .firebase-emulator-warning {

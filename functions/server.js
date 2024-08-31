@@ -9,6 +9,8 @@ const server = express();
 
 const localEnvironment = process.env.FUNCTIONS_EMULATOR === "true";
 
+const allowedOrigins = localEnvironment ? ["http://localhost:2005", "http://localhost:2010"] : ["https://wixonic.fr", "https://assets.wixonic.fr", "https://wixiland.wixonic.fr"];
+
 server.use(cookieParser());
 
 server.use(cors({
@@ -16,8 +18,7 @@ server.use(cors({
 	origin: (origin, callback) => {
 		console.log(`Request incomming from ${origin}`);
 
-		if (localEnvironment && origin.match(/localhost:\d{4,6}$/m)) return callback(null, true);
-		else if (origin.endsWith("wixonic.fr")) return callback(null, true);
+		if (allowedOrigins.includes(origin)) return callback(null, true);
 
 		return callback(new Error("Origin not allowed"));
 	},
@@ -71,7 +72,8 @@ server.get("/rich/link", async (req, res) => {
 	})
 
 	const getImageData = (url, host) => new Promise((resolve, reject) => {
-		getWithRedirects(url, host)
+		// Avoiding unnecessary calls to production by replacing it with emulator
+		getWithRedirects(url.replace("https://assets.wixonic.fr", "http://localhost:2012"), host.replace("https://assets.wixonic.fr", "http://localhost:2012"))
 			.then((response) => resolve(`data:${response.headers["content-type"]};base64,${response.data.toString("base64")}`))
 			.catch(reject);
 	});
@@ -146,6 +148,7 @@ server.get("/rich/link", async (req, res) => {
 	}
 
 	res.writeHead(200, {
+		"access-control-allow-origin": req.header("origin"),
 		"content-type": "application/json",
 		"cache-control": "max-age=604800"
 	});

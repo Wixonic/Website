@@ -35,6 +35,8 @@ footer .quickLinks {
 
 footer .links .link,
 footer .quickLinks .link {
+	color: #FFF;
+
 	transition: transform 0.3s cubic-bezier(0, 0.3, 0.7, 1);
 }
 

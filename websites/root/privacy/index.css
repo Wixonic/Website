@@ -1,0 +1,5 @@
+@import url("/lib/main.css");
+
+nav>* {
+	display: block;
+}
