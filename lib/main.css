@@ -63,9 +63,10 @@ main {
 	display: block;
 	flex-grow: 1;
 
-	width: 50rem;
+	width: min(100%, 50rem);
 
 	margin: 0 auto;
+	padding: 0.5rem;
 }
 
 nav {
