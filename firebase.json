@@ -75,25 +75,6 @@
 					"source": "**",
 					"destination": "/lib/404.html"
 				}
-			],
-			"headers": [
-				{
-					"source": "**",
-					"headers": [
-						{
-							"key": "Access-Control-Allow-Origin",
-							"value": "*"
-						},
-						{
-							"key": "Access-Control-Allow-Methods",
-							"value": "GET, OPTIONS"
-						},
-						{
-							"key": "Cache-Control",
-							"value": "max-age=7200, must-revalidate"
-						}
-					]
-				}
 			]
 		},
 		{
@@ -146,25 +127,6 @@
 					"source": "**",
 					"destination": "/lib/404.html"
 				}
-			],
-			"headers": [
-				{
-					"source": "**",
-					"headers": [
-						{
-							"key": "Access-Control-Allow-Origin",
-							"value": "*"
-						},
-						{
-							"key": "Access-Control-Allow-Methods",
-							"value": "GET, OPTIONS"
-						},
-						{
-							"key": "Cache-Control",
-							"value": "max-age=7200, must-revalidate"
-						}
-					]
-				}
 			]
 		},
 		{
@@ -203,6 +165,16 @@
 				{
 					"source": "**",
 					"destination": "https://wixonic.fr",
+					"type": 301
+				}
+			]
+		},
+		{
+			"target": "functions",
+			"redirects": [
+				{
+					"source": "**",
+					"destination": "https://httpserver-qrgkps4rnq-ew.a.run.app",
 					"type": 301
 				}
 			]
