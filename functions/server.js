@@ -9,7 +9,7 @@ const server = express();
 
 const localEnvironment = process.env.FUNCTIONS_EMULATOR === "true";
 
-const allowedOrigins = localEnvironment ? ["http://localhost:2005", "http://localhost:2010"] : ["https://wixonic.fr", "https://assets.wixonic.fr", "https://wixiland.wixonic.fr"];
+const allowedOrigins = localEnvironment ? ["http://localhost:2005", "http://localhost:2010"] : ["https://wixonic.fr", "https://assets.wixonic.fr"];
 
 server.use(cookieParser());
 

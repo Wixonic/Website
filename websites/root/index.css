@@ -13,7 +13,8 @@ main {
 
 	border-radius: 0;
 
-	margin: none;
+	margin: 0;
+	padding: 0;
 }
 
 section {

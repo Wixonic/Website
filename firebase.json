@@ -134,6 +134,13 @@
 			"ignore": [
 				".DS_Store"
 			],
+			"redirects": [
+				{
+					"regex": "/",
+					"destination": "https://go.wixonic.fr/discord",
+					"type": 301
+				}
+			],
 			"rewrites": [
 				{
 					"source": "**",
