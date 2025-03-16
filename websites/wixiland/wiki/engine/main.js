@@ -12,65 +12,74 @@ const index = {
 };
 
 /**
- * @param {String} text 
- * @param {String} separator 
- * @returns String
+ * @param {string} text
+ * @param {string} separator
+ * @returns {string}
  */
 const extractPart = (text, separator) => text.includes(separator) ? text.slice(text.indexOf(separator) + separator.length, text.lastIndexOf(separator)).trim() : "";
 
-const compileSources = (url) => {
-	if (url.startsWith("assets://")) {
+/**
+ * @param {string} path
+ * @returns {string}
+ */
+const compilePath = (path) => {
+	if (path.startsWith("WixiLand-Wiki/assets/")) return path.replace("WixiLand-Wiki/assets/", "/wiki/assets/");
+	if (path.startsWith("WixiLand-Wiki/wiki/")) return path.replace("WixiLand-Wiki/wiki/", "/wiki/pages/");
 
-	}
-
-	return `<img src="${url}" />`;
+	return path;
 };
 
-const compileURL = (url) => {
-	if (url.startsWith("assets://")) return url.replace("assets://", "/wiki/assets/");
-	if (url.startsWith("wiki://")) return url.replace("wiki://", "/wiki/pages/");
+const pathStatus = (path, type) => {
+	path = compilePath(path);
 
-	return url;
-};
+	switch (type) {
+		case "asset":
+			for (const asset of index.assets) {
+				if (asset.path == path.replace("/wiki/assets/", "")) return true;
+			}
+			break;
 
-const URLStatus = (url) => {
-	if (url.startsWith("assets://")) {
-		const assetName = url.slice(7);
-		for (const asset of index.assets) {
-			if (asset.path == assetName) return true;
-		}
-	}
-
-	if (url.startsWith("wiki://")) {
-		const pageName = url.slice(7);
-		for (const page of index.pages) {
-			if (page.path == pageName) return true;
-		}
+		case "page":
+			for (const page of index.pages) {
+				if (page.path == path.replace("/wiki/pages/", "")) return true;
+			}
+			break;
 	}
 
 	return false;
 };
 
+/**
+ * @param {string} markdown 
+ */
 const compileMarkdown = (markdown) => {
 	let html = markdown;
+
 	const replacements = [
 		[/^(#{1,3})\s(.+)$/gm, (_, hashes, content) => `<h${hashes.length}>${content}</h${hashes.length}>`], // Titles
 		[/(\*\*\*|___)(.+?)\1/g, "<b><i>$2</i></b>"], // Bold and italic
 		[/(\*\*|__)(.+?)\1/g, "<b>$2</b>"], // Bold
 		[/(\*|_)(.+?)\1/g, "<i>$2</i>"], // Italic
-		[/\!\[([^\]]+)\]\(([^)]+)\)/g, (_, alt, url) => `<figure>${compileSources(url)}<figcaption>${alt}</figcaption></figure>`], // Images
-		[/\[([^\]]+)\]\(([^)]+)\)/g, (_, content, url) => `<a valid="${URLStatus(url)}" href="${compileURL(url)}">${content}</a>`], // Links
-		[/^(?:---|\*\*\*|___)\s*$/gm, "<hr />"], // Separator
+		[/!\[\[([^|]+)\|([^\]]+)\]\]/g, (_, path, alt) => { // Assets
+			console.log("Uncompiled asset:", path);
+			return "";
+		}],
+		[/\[\[([^|]+)\|([^\]]+)\]\]/g, (_, path, label) => `<a valid="${pathStatus(path, "page")}" href="${compilePath(path)}">${label}</a>`], // Pages
+		[/!\[([^\]]+)\]\(([^)]+)\)/g, (_, alt, url) => {
+			console.log("Uncompiled external asset:", url);
+			return "";
+		}], // External assets
+		[/\[([^\]]+)\]\(([^)]+)\)/g, (_, content, url) => `<a href="${url}">${content}</a>`], // External links
+		[/^(?:---|\*\*\*|___)\s*$/gm, "<hr />"], // Separators
 		[/((?:^[\*\-\+]\s+.+\n?)+)/gm, (match) => `<ul>${match.trim().split("\n").map((line) => line.replace(/^[\*\-\+]\s+/, "<li>") + "</li>").join("")}</ul>`], // Lists
 	];
+
 	for (const replacement of replacements) html = html.replace(replacement[0], replacement[1]);
 	return html;
 };
 
 const compileInfobox = (infobox) => {
-	if (Object.keys(infobox).length > 0) {
 
-	}
 
 	return "";
 };
@@ -105,7 +114,8 @@ const buildIndex = async () => {
 		if (!forbiddenFiles.includes(folder)) {
 			const folderPath = path.join(config.wikiPath, "assets", folder);
 			const info = fs.readFileSync(path.join(folderPath, "info.json"), "utf-8");
-			console.log(info);
+
+			// console.log(info);
 
 			index.assets.push({
 				path: folder
