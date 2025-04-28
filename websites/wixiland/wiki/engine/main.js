@@ -96,6 +96,7 @@ const buildIndex = async () => {
 		if (!forbiddenFiles.includes(file)) {
 			const filePath = path.join(config.wikiPath, "wiki", file);
 			const fileName = file.slice(0, -3);
+			console.log(fileName);
 			const markdown = fs.readFileSync(filePath, "utf-8");
 
 			const metadata = JSON.parse(extractPart(markdown, config.separators.metadata));
