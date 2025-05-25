@@ -13,7 +13,7 @@
 	},
 	"main": "main.js",
 	"devDependencies": {
-		"@types/node": "^20.17.10"
+		"@types/node": "^20.17.50"
 	},
 	"private": true
 }
