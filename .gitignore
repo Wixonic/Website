@@ -1,6 +1,7 @@
 .firebase/
 node_modules/
 private/
+websites/wixiland/wiki/pages
 
 *.log
 .DS_Store
