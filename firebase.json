@@ -114,7 +114,7 @@
 			"public": "./websites/wixiland",
 			"ignore": [
 				".DS_Store",
-				"wiki/deploy.js"
+				"wiki/engine/"
 			],
 			"rewrites": [
 				{
