@@ -118,6 +118,10 @@
 			],
 			"rewrites": [
 				{
+					"source": "/wiki/**",
+					"destination": "/wiki/404.html"
+				},
+				{
 					"source": "**",
 					"destination": "/lib/404.html"
 				}
