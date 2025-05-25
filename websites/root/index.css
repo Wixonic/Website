@@ -73,3 +73,9 @@ section:first-child {
 	--color: transparent;
 	--text-color: #FFF;
 }
+
+#liveActivities {}
+
+#liveActivities activity {
+	display: block;
+}

@@ -61,6 +61,7 @@ page {
 }
 
 a {
+	font-weight: 600;
 	text-decoration: none;
 	cursor: pointer;
 }
@@ -70,7 +71,7 @@ a[valid="true"] {
 }
 
 a[valid="false"] {
-	color: #B00;
+	color: #C66;
 }
 
 a:hover {

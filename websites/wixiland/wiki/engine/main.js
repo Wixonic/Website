@@ -96,7 +96,6 @@ const buildIndex = async () => {
 		if (!forbiddenFiles.includes(file)) {
 			const filePath = path.join(config.wikiPath, "wiki", file);
 			const fileName = file.slice(0, -3);
-			console.log(fileName);
 			const markdown = fs.readFileSync(filePath, "utf-8");
 
 			const metadata = JSON.parse(extractPart(markdown, config.separators.metadata));
@@ -115,8 +114,6 @@ const buildIndex = async () => {
 		if (!forbiddenFiles.includes(folder)) {
 			const folderPath = path.join(config.wikiPath, "assets", folder);
 			const info = fs.readFileSync(path.join(folderPath, "info.json"), "utf-8");
-
-			// console.log(info);
 
 			index.assets.push({
 				path: folder
