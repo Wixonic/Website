@@ -58,7 +58,7 @@ addEventListener("DOMContentLoaded", async () => {
 		section.id = "activities";
 
 		const title = document.createElement("h3");
-		title.classList.add("fade", "glow");
+		title.classList.add("fade", "slide", "glow");
 		title.innerHTML = "Live Activities";
 		section.append(title);
 

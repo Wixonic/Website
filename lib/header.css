@@ -1,6 +1,6 @@
 header {
 	display: flex;
-	justify-content: center;
+	justify-content: space-between;
 	align-items: center;
 
 	position: fixed;
@@ -10,43 +10,35 @@ header {
 	width: 100vw;
 	height: var(--header-size);
 
-	cursor: default;
-	pointer-events: none;
+	backdrop-filter: blur(2rem);
+	-webkit-backdrop-filter: blur(2rem);
 
-	overflow: visible !important;
+	pointer-events: none;
 
 	z-index: 2;
 }
 
-header .container {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+header::before {
+	content: "";
 
-	height: calc(var(--header-size) - 0.3rem);
+	position: absolute;
+	inset: 0;
 
-	background: #000A;
-	backdrop-filter: blur(0.9rem);
-	-webkit-backdrop-filter: blur(0.9rem);
+	background: var(--background);
 
-	color: #FFF;
+	opacity: 0.8;
 
-	border: 0.1rem solid #FFF;
-	border-radius: 1.2rem;
+	pointer-events: none;
 
-	box-shadow: 0 0 3rem #0002;
-
-	padding: 0 1rem;
-
-	pointer-events: fill;
+	z-index: -1;
 }
 
-header .container a {
+header a {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 
-	height: calc(var(--header-size) - 1.5rem);
+	height: 100%;
 
 	text-decoration: none !important;
 
@@ -55,10 +47,31 @@ header .container a {
 	padding: 0 0.5rem;
 }
 
-header .container a .text {
+header a .text {
 	transition: transform 0.2s cubic-bezier(0, 0.3, 0.7, 1);
 }
 
-header .container a:hover .text {
+header a:hover .text {
 	transform: scale(0.85);
+}
+
+header .icon {
+	padding: 0 0.75rem;
+
+	pointer-events: fill;
+}
+
+header .icon img {
+	width: calc(var(--header-size) - 0.5rem);
+	height: calc(var(--header-size) - 0.5rem);
+}
+
+header .container {
+	display: flex;
+	justify-content: right;
+	align-items: center;
+
+	height: calc(var(--header-size) - 0.3rem);
+
+	pointer-events: fill;
 }

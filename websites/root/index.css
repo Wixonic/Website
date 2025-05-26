@@ -96,27 +96,3 @@ section:first-child {
 	margin: auto;
 	padding: 0.2rem;
 }
-
-.glow {
-	display: block;
-
-	animation: glow 0.75s;
-}
-
-@keyframes glow {
-	30% {
-		color: #4283C3;
-	}
-
-	40% {
-		color: #C55AA2;
-	}
-
-	50% {
-		color: #EE4261;
-	}
-
-	60% {
-		color: #F05524;
-	}
-}
