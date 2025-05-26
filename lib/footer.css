@@ -7,9 +7,8 @@ footer {
 
 	width: 100%;
 
-	background: #000;
+	background: #EEE;
 
-	color: #FFF;
 	font-size: 0.8rem;
 
 	padding: 1rem;
@@ -17,6 +16,11 @@ footer {
 	cursor: default;
 
 	overflow: hidden;
+}
+
+footer,
+footer * {
+	color: var(--color);
 }
 
 footer .links {
@@ -60,7 +64,6 @@ footer .quickLinks .link img {
 
 footer .links .link .text,
 footer .quickLinks .link img {
-	color: #FFF;
 	text-align: center;
 
 	transition: transform 0.2s cubic-bezier(0, 0.3, 0.7, 1);

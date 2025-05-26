@@ -73,5 +73,7 @@ header .container {
 
 	height: calc(var(--header-size) - 0.3rem);
 
+	margin-right: 0.75rem;
+
 	pointer-events: fill;
 }
