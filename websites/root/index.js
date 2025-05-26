@@ -5,6 +5,7 @@ import { RichLink } from "/lib/rich.js";
 import request from "/lib/request.js";
 
 let currentActivities = {};
+let currentActivityIntervals = [];
 const activityChanged = (type, activity) => {
 	const previousActivity = currentActivities[type];
 	let changed = false;
@@ -24,6 +25,28 @@ const activityChanged = (type, activity) => {
 	return changed;
 };
 
+const compileAsset = (url) => {
+	switch (true) {
+		case url == "spotify:null":
+			url = null;
+			break;
+
+		case url.startsWith("spotify:"):
+			url = url.replace("spotify:", "https://i.scdn.co/image/");
+			break;
+	}
+
+	return url;
+};
+
+const compileDuration = (duration) => {
+	const hours = Math.floor(duration / 60 / 60 / 1000);
+	const minutes = Math.floor(duration / 60 / 1000) % 60;
+	const seconds = Math.floor(duration / 1000) % 60;
+
+	return `${hours > 0 ? hours + ":" : ""}${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+};
+
 addEventListener("DOMContentLoaded", async () => {
 	await init();
 
@@ -32,7 +55,16 @@ addEventListener("DOMContentLoaded", async () => {
 	await (async () => {
 		const section = document.createElement("section");
 		section.classList.add("fade");
-		section.id = "activity";
+		section.id = "activities";
+
+		const title = document.createElement("h3");
+		title.classList.add("fade", "glow");
+		title.innerHTML = "Live Activities";
+		section.append(title);
+
+		const activityContainer = document.createElement("container");
+		activityContainer.id = "activityContainer";
+		section.append(activityContainer);
 
 		const cycle = async () => {
 			try {
@@ -45,33 +77,85 @@ addEventListener("DOMContentLoaded", async () => {
 				for (const type in currentActivities) changed ||= !activities[type];
 
 				if (changed) {
+					title.classList.remove("glow");
+					void title.offsetWidth;
+					title.classList.add("glow");
+
+					for (const interval of currentActivityIntervals ?? []) clearInterval(interval);
+					currentActivityIntervals = [];
 					currentActivities = activities;
 
 					const els = [];
 					for (const type in activities) {
 						const activity = activities[type];
+						console.log(activity);
 
 						const el = document.createElement("activity");
 						el.classList.add("fade", "slide", type);
 
 						switch (type) {
 							case "music":
-								el.innerHTML = activity.name;
-								els.push(el);
+								{
+									let current = Date.now() - (activity.timestamps?.start ?? 0);
+									const duration = (activity.timestamps?.end ?? 0) - (activity.timestamps?.start ?? 0);
+									if (current > duration) current = duration;
+
+									const thumbnail = document.createElement("img");
+									thumbnail.classList.add("thumbnail");
+									thumbnail.src = compileAsset(activity.assets?.large_image) ?? compileAsset(activity.assets?.small_image);
+									el.append(thumbnail);
+
+									const title = document.createElement("div");
+									title.classList.add("title");
+									title.innerText = activity.name;
+									el.append(title);
+
+									const artists = document.createElement("div");
+									artists.classList.add("artists");
+									artists.innerText = activity.state;
+									el.append(artists);
+
+									const album = document.createElement("div");
+									album.classList.add("album");
+									album.innerText = activity.assets?.large_text ?? "";
+									el.append(album);
+
+									const start = document.createElement("div");
+									start.classList.add("start");
+									start.innerText = compileDuration(current);
+									el.append(start);
+
+									const end = document.createElement("div");
+									end.classList.add("end");
+									end.innerText = compileDuration(duration);
+									el.append(end);
+
+									const bar = document.createElement("div");
+									bar.classList.add("bar");
+
+									const innerBar = document.createElement("div");
+									innerBar.classList.add("innerBar");
+									innerBar.style.width = `${duration == 0 ? 50 : current / duration * 100}%`;
+									bar.append(innerBar);
+
+									el.append(bar);
+
+									els.push(el);
+									currentActivityIntervals.push(setInterval(() => {
+										current = Date.now() - (activity.timestamps?.start ?? 0);
+										if (current > duration) current = duration;
+										start.innerText = compileDuration(current);
+										innerBar.style.width = `${duration == 0 ? 50 : current / duration * 100}%`;
+									}, 1000));
+								}
 								break;
 						}
 					}
 
 					if (els.length < 1) throw "Empty";
 
-					section.innerHTML = "";
-
-					const title = document.createElement("h3");
-					title.classList.add("fade", "slide");
-					title.innerHTML = "Live Activities";
-					section.append(title);
-
-					section.append(...els);
+					activityContainer.innerHTML = "";
+					activityContainer.append(...els);
 
 					if (!main.contains(section)) main.prepend(section);
 				}

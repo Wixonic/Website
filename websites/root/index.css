@@ -1,4 +1,5 @@
 @import url("/lib/main.css");
+@import url("activities.css");
 
 body {
 	margin-top: 0;
@@ -74,8 +75,48 @@ section:first-child {
 	--text-color: #FFF;
 }
 
-#liveActivities {}
+#activities #activityContainer {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, 15.4rem);
+	place-items: center;
+	justify-content: center;
+	gap: 1rem;
 
-#liveActivities activity {
+	margin: auto;
+}
+
+#activities #activityContainer activity {
+	display: grid;
+
+	width: 15.4rem;
+	height: 4.7rem;
+
+	border-radius: 0.5rem;
+
+	margin: auto;
+	padding: 0.2rem;
+}
+
+.glow {
 	display: block;
+
+	animation: glow 0.75s;
+}
+
+@keyframes glow {
+	30% {
+		color: #4283C3;
+	}
+
+	40% {
+		color: #C55AA2;
+	}
+
+	50% {
+		color: #EE4261;
+	}
+
+	60% {
+		color: #F05524;
+	}
 }
