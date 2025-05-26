@@ -75,6 +75,14 @@ section:first-child {
 	--text-color: #FFF;
 }
 
+#activities {
+	padding-bottom: 0.5rem;
+}
+
+#activities h3 {
+	margin: 0 auto 0.4rem auto !important;
+}
+
 #activities #activityContainer {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, 15.4rem);
