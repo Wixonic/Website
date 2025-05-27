@@ -62,8 +62,8 @@ header .icon {
 }
 
 header .icon img {
-	width: calc(var(--header-size) - 0.5rem);
-	height: calc(var(--header-size) - 0.5rem);
+	width: calc(var(--header-size) - 1rem);
+	height: calc(var(--header-size) - 1rem);
 }
 
 header .container {
