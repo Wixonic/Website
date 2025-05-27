@@ -7,30 +7,14 @@ header {
 	top: 0;
 	left: 0;
 
+	background: var(--secondary-background);
+
 	width: 100vw;
 	height: var(--header-size);
-
-	backdrop-filter: blur(2rem);
-	-webkit-backdrop-filter: blur(2rem);
 
 	pointer-events: none;
 
 	z-index: 2;
-}
-
-header::before {
-	content: "";
-
-	position: absolute;
-	inset: 0;
-
-	background: var(--background);
-
-	opacity: 0.8;
-
-	pointer-events: none;
-
-	z-index: -1;
 }
 
 header a {
