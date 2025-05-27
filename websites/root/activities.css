@@ -64,8 +64,6 @@
 
 	width: 4.5rem;
 	height: 4.5rem;
-
-	border-right: 0.05rem solid var(--color);
 }
 
 #activities #activityContainer activity.music .start,
