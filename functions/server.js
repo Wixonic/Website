@@ -1,3 +1,4 @@
+const bodyParser = require("body-parser");
 const cheerio = require("cheerio");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
@@ -6,25 +7,95 @@ const http = require("http");
 const https = require("https");
 const sharp = require("sharp");
 
-const localEnvironment = process.env.FUNCTIONS_EMULATOR === "true";
+const localEnvironment = process.env.FUNCTIONS_EMULATOR == "true";
 
 const server = express();
-
+server.use(bodyParser.json());
 server.use(cookieParser());
 server.use(cors({
 	credentials: true,
-	origin: "*",
-	optionsSuccessStatus: 200
+	origin: (origin, callback) => callback(null, origin)
 }));
 
 let requestId = 0;
 
+server.get("/auth/token/", async (req, res) => {
+	req.id = requestId++;
+	req.logger = {
+		debug: (...data) => console.log(`req${req.id}:`, ...data),
+		info: (...data) => console.info(`req${req.id}:`, ...data),
+		warn: (...data) => console.warn(`req${req.id}:`, ...data),
+		error: (...data) => console.error(`req${req.id}:`, ...data)
+	};
+
+	const sessionCookie = req.cookies.__session;
+
+	if (!sessionCookie) {
+		req.logger.warn("Session cookie is missing");
+		return res.status(401).json({
+			error: "Session cookie is missing"
+		});
+	}
+
+	try {
+		const user = await admin.auth().verifyIdToken(sessionCookie);
+		req.logger.debug("Authenticated user:", user.uid);
+
+		const token = await admin.auth().createCustomToken(user.uid);
+		res.status(200).json({
+			token
+		});
+	} catch (e) {
+		req.logger.error("Failed to verify token:", e);
+		return res.status(403).json({
+			error: "Invalid or expired token"
+		});
+	}
+});
+
+server.post("/auth/token/", async (req, res) => {
+	req.id = requestId++;
+	req.logger = {
+		debug: (...data) => console.log(`req${req.id}:`, ...data),
+		info: (...data) => console.info(`req${req.id}:`, ...data),
+		warn: (...data) => console.warn(`req${req.id}:`, ...data),
+		error: (...data) => console.error(`req${req.id}:`, ...data)
+	};
+
+	const { email, password } = req.body;
+
+	if (!email || !password) {
+		req.logger.warn("Missing email or password");
+		return res.status(400).json({
+			error: "Missing email or password"
+		});
+	}
+
+	// Login with email and password
+
+	const expiresIn = 4 * 7 * 24 * 60 * 60 * 1000;
+
+	const sessionCookie = null; // Create session cookie
+
+	res.cookie("__session", sessionCookie, {
+		domain: localEnvironment ? undefined : ".wixonic.fr",
+		maxAge: expiresIn,
+		httpOnly: true,
+		secure: !localEnvironment,
+		sameSite: localEnvironment ? "lax" : "none"
+	});
+
+	res.status(200).json({ status: "success" });
+});
+
 server.get("/rich/link", async (req, res) => {
 	req.id = requestId++;
-	req.log = (...data) => console.log(`req${req.id}`, ...data);
-	req.info = (...data) => console.info(`req${req.id}`, ...data);
-	req.warn = (...data) => console.warn(`req${req.id}`, ...data);
-	req.error = (...data) => console.error(`req${req.id}`, ...data);
+	req.logger = {
+		debug: (...data) => console.log(`req${req.id}:`, ...data),
+		info: (...data) => console.info(`req${req.id}:`, ...data),
+		warn: (...data) => console.warn(`req${req.id}:`, ...data),
+		error: (...data) => console.error(`req${req.id}:`, ...data)
+	};
 
 	let title = null;
 	let description = null;
@@ -39,7 +110,7 @@ server.get("/rich/link", async (req, res) => {
 
 			const request = get(url, {
 				headers: {
-					"accept-language": "en-US,en-GB,en"
+					"Accept-Language": "en-US,en-GB,en"
 				}
 			}, (response) => {
 				if (String(response.statusCode).startsWith("3")) {
@@ -64,7 +135,7 @@ server.get("/rich/link", async (req, res) => {
 	});
 
 	const getImageData = (url, width = 500, height = 500, host) => new Promise((resolve, reject) => {
-		getWithRedirects(localEnvironment ? url?.replace("https://assets.wixonic.fr", "http://localhost:2012") : url, localEnvironment ? host?.replace("https://assets.wixonic.fr", "http://localhost:2012") : host)
+		getWithRedirects(url, host)
 			.then(async (response) => {
 				const buffer = Buffer.from(response.data);
 				const resizeBuffer = await sharp(buffer)
@@ -94,19 +165,19 @@ server.get("/rich/link", async (req, res) => {
 			try {
 				title = $(`meta[property="og:title"]`).attr("content") || $("title").text();
 			} catch (e) {
-				req.warn(`Title finder: ${e} `);
+				req.logger.warn(`Title finder: ${e} `);
 			}
 
 			try {
 				description = $(`meta[property="og:description"]`).attr("content") || $(`meta[name="description"]`).attr("content");
 			} catch (e) {
-				req.warn(`Description finder: ${e} `);
+				req.logger.warn(`Description finder: ${e} `);
 			}
 
 			try {
 				thumbnail = await getImageData($(`meta[property="og:image"]`).attr("content"));
 			} catch (e) {
-				req.warn(`Thumbnail finder: ${e} `);
+				req.logger.warn(`Thumbnail finder: ${e} `);
 			}
 
 			try {
@@ -129,34 +200,28 @@ server.get("/rich/link", async (req, res) => {
 							else if (!bestFavicon.sizes && favicon.sizes) bestFavicon = favicon;
 							else if (favicon.sizes && Number(bestFavicon.sizes.split(" ")[0].split("x")[0]) > Number(favicon.sizes.split(" ")[0].split("x")[0]) && Number(favicon.sizes.split(" ")[0].split("x")[0]) >= 32) bestFavicon = favicon;
 						} catch (e) {
-							req.warn(`Favicon finder - PNG: ${e}`);
+							req.logger.warn(`Favicon finder - PNG: ${e}`);
 						}
 					}
 				}
 
 				icon = await getImageData(bestFavicon?.url, 64, 64, htmlUrl.origin);
 			} catch (e) {
-				req.warn(`Favicon finder: ${e} `);
+				req.logger.warn(`Favicon finder: ${e} `);
 			}
 		} catch (e) {
-			req.warn(`Failed to get HTML: ${e} `);
+			req.logger.warn(`Failed to get HTML: ${e} `);
 		}
 	} catch {
-		req.warn("Invalid url");
+		req.logger.warn("Invalid url");
 	}
 
-	res.writeHead(200, {
-		"access-control-allow-origin": "*",
-		"content-type": "application/json",
-		"cache-control": "max-age=604800"
-	});
-
-	res.write(JSON.stringify({
+	res.status(200).json({
 		title,
 		description,
 		favicon: icon,
 		thumbnail
-	}));
+	});
 
 	res.end();
 });

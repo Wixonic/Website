@@ -9,7 +9,7 @@ const clientAuthLibrary = require("firebase/auth");
 
 const server = require("./server.js");
 
-const localEnvironment = process.env.FUNCTIONS_EMULATOR === "true";
+const localEnvironment = process.env.FUNCTIONS_EMULATOR == "true";
 
 const adminApp = adminAppLibrary.initializeApp({
 	credential: adminAppLibrary.cert(require("./config.json")),

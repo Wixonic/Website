@@ -1,3 +1,3 @@
 # TODO
 
-- [`/lib/header.js`](./lib/header.js): Replace `Sign In` with the user's name when authentified.
+- Add sign in/sign up form and functions
