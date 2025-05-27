@@ -15,8 +15,8 @@ const activityChanged = (type, activity) => {
 	changed ||= activity.assets?.small_text != previousActivity?.assets?.small_text;
 	changed ||= activity.assets?.large_image != previousActivity?.assets?.large_image;
 	changed ||= activity.assets?.large_text != previousActivity?.assets?.large_text;
-	changed ||= Math.floor((activity.timestamps?.start ?? 0) / 10) != Math.floor((previousActivity?.timestamps?.start ?? 0) / 10);
-	changed ||= Math.floor((activity.timestamps?.end ?? 0) / 10) != Math.floor((previousActivity?.timestamps?.end ?? 0) / 10);
+	changed ||= Math.floor((activity.timestamps?.start ?? 0) / 10000) != Math.floor((previousActivity?.timestamps?.start ?? 0) / 10000);
+	changed ||= Math.floor((activity.timestamps?.end ?? 0) / 10000) != Math.floor((previousActivity?.timestamps?.end ?? 0) / 10000);
 	changed ||= activity.name != previousActivity?.name;
 	changed ||= activity.details != previousActivity?.details;
 	changed ||= activity.state != previousActivity?.state;
