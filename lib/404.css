@@ -28,6 +28,8 @@ main .image-container {
 	align-items: end;
 
 	flex-grow: 1;
+
+	margin-top: auto;
 }
 
 main .image-container img {

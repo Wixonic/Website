@@ -1,8 +1,8 @@
 @import url("/lib/main.css");
 @import url("activities.css");
 
-body {
-	margin-top: 0;
+body:not(.hasLiveActivities) {
+	--header-color: #FFF;
 }
 
 main {
@@ -60,19 +60,14 @@ section img {
 	margin: auto;
 }
 
-section:first-child {
-	padding-top: var(--header-size);
-}
-
 #wixiland {
-	background: radial-gradient(circle at bottom right, #F600FF, #8B00FF);
+	--color: #FFF;
 
-	color: #FFF;
+	background: radial-gradient(circle at bottom right, #F600FF, #8B00FF);
 }
 
 #wixiland .button {
-	--color: transparent;
-	--text-color: #FFF;
+	--secondary-background: transparent;
 }
 
 #activities {
@@ -96,16 +91,18 @@ section:first-child {
 	gap: 1rem;
 
 	margin: auto;
+
+	overflow: visible;
 }
 
 #activities #activityContainer activity {
 	display: grid;
 
 	width: 15.4rem;
-	height: 4.7rem;
+	height: 4.5rem;
 
+	border: 0.05rem solid var(--color);
 	border-radius: 0.5rem;
 
 	margin: auto;
-	padding: 0.2rem;
 }

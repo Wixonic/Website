@@ -15,8 +15,8 @@ const activityChanged = (type, activity) => {
 	changed ||= activity.assets?.small_text != previousActivity?.assets?.small_text;
 	changed ||= activity.assets?.large_image != previousActivity?.assets?.large_image;
 	changed ||= activity.assets?.large_text != previousActivity?.assets?.large_text;
-	changed ||= activity.timestamps?.start != previousActivity?.timestamps?.start;
-	changed ||= activity.timestamps?.end != previousActivity?.timestamps?.end;
+	changed ||= Math.floor((activity.timestamps?.start ?? 0) / 10) != Math.floor((previousActivity?.timestamps?.start ?? 0) / 10);
+	changed ||= Math.floor((activity.timestamps?.end ?? 0) / 10) != Math.floor((previousActivity?.timestamps?.end ?? 0) / 10);
 	changed ||= activity.name != previousActivity?.name;
 	changed ||= activity.details != previousActivity?.details;
 	changed ||= activity.state != previousActivity?.state;
@@ -158,10 +158,13 @@ addEventListener("DOMContentLoaded", async () => {
 					activityContainer.append(...els);
 
 					if (!main.contains(section)) main.prepend(section);
+					document.body.classList.add("hasLiveActivities");
 				}
 			} catch (e) {
-				if (main.contains(section)) main.removeChild(section);
 				console.log("Activity not available:", e);
+
+				if (main.contains(section)) main.removeChild(section);
+				document.body.classList.remove("hasLiveActivities");
 			}
 
 			setTimeout(cycle, 5000);

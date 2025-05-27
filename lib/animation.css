@@ -31,24 +31,24 @@
 }
 
 .glow {
-	animation: glow 0.75s;
+	animation: glow 1s;
 }
 
 @keyframes glow {
 	30% {
-		color: var(--glow-color-a) !important;
+		--color: var(--glow-color-a);
 	}
 
 	40% {
-		color: var(--glow-color-b) !important;
+		--color: var(--glow-color-b) !important;
 	}
 
 	50% {
-		color: var(--glow-color-c) !important;
+		--color: var(--glow-color-c) !important;
 	}
 
 	60% {
-		color: var(--glow-color-d) !important;
+		--color: var(--glow-color-d) !important;
 	}
 }
 
@@ -57,13 +57,13 @@
 }
 
 .fade.glow {
-	animation: fade 0.5s ease, glow 0.75s;
+	animation: fade 0.5s ease, glow 1s;
 }
 
 .slide.glow {
-	animation: slide 0.5s ease, glow 0.75s;
+	animation: slide 0.5s ease, glow 1s;
 }
 
 .fade.slide.glow {
-	animation: fade 0.5s ease, slide 0.5s ease, glow 0.75s;
+	animation: fade 0.5s ease, slide 0.5s ease, glow 1s;
 }

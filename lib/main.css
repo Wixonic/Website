@@ -3,7 +3,16 @@
 @import url("/lib/footer.css");
 @import url("/lib/rich.css");
 
+:root {
+	--background: #FFF;
+	--secondary-background: #EEE;
+	--color: #000;
+	--header-color: #000;
+	--header-size: 2.5rem;
+}
+
 * {
+	color: var(--color);
 	font-display: block;
 	font-family: inherit;
 
@@ -12,10 +21,6 @@
 	outline: inherit;
 
 	box-sizing: border-box;
-
-	--background: #FFF;
-	--secondary-background: #EEE;
-	--color: #000;
 
 	appearance: none;
 	-moz-appearance: none;
@@ -27,19 +32,16 @@
 }
 
 body {
-	--header-size: 2.5rem;
-
 	display: flex;
 	flex-direction: column;
 
 	background: var(--background);
 
-	color: var(--color);
 	font-family: "Open Sans", arial, sans-serif;
 
-	min-height: calc(100vh - var(--header-size));
+	min-height: 100vh;
 
-	margin: var(--header-size) 0 0 0;
+	margin: 0;
 
 	cursor: default;
 	outline: none;
@@ -90,58 +92,19 @@ li {
 }
 
 .button {
-	--color: #EEE;
-	--text-color: #000;
-
 	display: inline-block;
 
 	position: relative;
 
-	color: var(--text-color);
+	color: var(--color);
 	font-size: 1rem;
 
-	background: var(--color);
+	background: var(--secondary-background);
 
 	margin: 0.2rem;
 	padding: 0.3rem 0.4rem;
 
 	overflow: visible;
-}
-
-.button:hover {
-	text-decoration: none !important;
-}
-
-.button::before {
-	content: "";
-
-	position: absolute;
-	top: -0.2rem;
-	left: -0.2rem;
-
-	width: calc(100% + 0.4rem);
-	height: calc(100% + 0.4rem);
-
-	background-image: linear-gradient(155deg, var(--text-color) 40%, var(--color) 60%);
-	background-position: 100%;
-	background-size: 500%;
-
-	border-radius: 0.4rem;
-
-	transition: background 0.3s cubic-bezier(0, 0.3, 0.7, 1);
-
-	-webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-	-webkit-mask-composite: xor;
-	mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-	mask-composite: exclude;
-
-	padding: 0.2rem;
-
-	box-sizing: border-box;
-}
-
-.button:hover::before {
-	background-position: 0;
 }
 
 .link {

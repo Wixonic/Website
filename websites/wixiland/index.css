@@ -1,11 +1,5 @@
 @import url("/lib/main.css");
 
-body {
-	background: #FFF;
-
-	margin-top: 0;
-}
-
 main {
 	background: none;
 
@@ -61,19 +55,14 @@ section img {
 	margin: auto;
 }
 
-section:first-child {
-	padding-top: var(--header-size);
-}
-
 #join {
-	background: radial-gradient(circle at bottom right, #F600FF, #8B00FF);
+	--color: #FFF;
 
-	color: #FFF;
+	background: radial-gradient(circle at bottom right, #F600FF, #8B00FF);
 }
 
 #join .button {
-	--color: transparent;
-	--text-color: #FFF;
+	--secondary-background: transparent;
 }
 
 #wiki img {

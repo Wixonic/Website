@@ -1,10 +1,13 @@
 #activities #activityContainer activity.music {
-	grid-template-columns: 4.3rem repeat(2, 5.35rem);
-	grid-template-rows: 1.2rem repeat(2, 1.05rem) 0.8rem 0.2rem;
+	--color: #FFF;
 
-	background: linear-gradient(0deg, #FC3C44, #F94C57);
+	grid-template-columns: 4.5rem repeat(2, 5.35rem);
+	grid-template-rows: 1.3rem repeat(2, 1rem) 0.8rem 0.4rem;
 
-	color: #FFF;
+	background: linear-gradient(0deg, #FC3C44, #F94C57) content-box;
+	box-shadow: 0 0.1rem 0.3rem #666;
+
+	border-radius: 0.4rem;
 }
 
 #activities #activityContainer activity.music .title,
@@ -29,6 +32,8 @@
 
 	font-size: 0.9rem;
 	font-weight: 700;
+
+	margin-top: 0.3rem;
 }
 
 #activities #activityContainer activity.music .artists,
@@ -41,22 +46,26 @@
 	grid-row: 2;
 
 	opacity: 0.8;
+
+	margin-top: 0.15rem;
 }
 
 #activities #activityContainer activity.music .album {
 	grid-row: 3;
 
 	opacity: 0.6;
+
+	margin-top: 0.1rem;
 }
 
 #activities #activityContainer activity.music .thumbnail {
 	grid-column: 1;
 	grid-row: 1 / 6;
 
-	width: 4.3rem;
-	height: 4.3rem;
+	width: 4.5rem;
+	height: 4.5rem;
 
-	border-radius: 0.4rem;
+	border-right: 0.05rem solid var(--color);
 }
 
 #activities #activityContainer activity.music .start,
@@ -91,20 +100,20 @@
 	grid-column: 2 / 4;
 	grid-row: 5;
 
-	width: 10rem;
-	height: 0.2rem;
+	width: calc(100% - 0.7rem);
+	height: calc(100% - 0.2rem);
 
-	border: 0.01rem solid #FFF;
+	border: 0.01rem solid var(--color);
 	border-radius: 0.2rem;
 
-	margin-left: 0.5rem;
+	margin: 0 0.2rem 0.2rem 0.5rem;
 }
 
 #activities #activityContainer activity.music .bar .innerBar {
 	width: 0;
 	height: 100%;
 
-	background: #FFF;
+	background: var(--color);
 
 	transition: width 1s ease-out;
 }

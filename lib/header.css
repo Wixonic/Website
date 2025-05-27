@@ -1,13 +1,13 @@
 header {
+	--color: var(--header-color);
+
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 
-	position: fixed;
+	position: absolute;
 	top: 0;
 	left: 0;
-
-	background: var(--secondary-background);
 
 	width: 100vw;
 	height: var(--header-size);
@@ -31,23 +31,23 @@ header a {
 	padding: 0 0.5rem;
 }
 
-header a .text {
-	transition: transform 0.2s cubic-bezier(0, 0.3, 0.7, 1);
-}
-
-header a:hover .text {
-	transform: scale(0.85);
-}
-
 header .icon {
 	padding: 0 0.75rem;
+
+	transition: transform 0.2s cubic-bezier(0, 0.3, 0.7, 1);
 
 	pointer-events: fill;
 }
 
-header .icon img {
+header .icon:hover {
+	transform: scale(0.9);
+}
+
+header .icon svg {
 	width: calc(var(--header-size) - 1rem);
 	height: calc(var(--header-size) - 1rem);
+
+	fill: var(--color);
 }
 
 header .container {
