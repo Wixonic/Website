@@ -80,6 +80,11 @@ section:first-child {
 }
 
 #activities h3 {
+	--glow-color-a: #4283C3;
+	--glow-color-b: #C55AA2;
+	--glow-color-c: #EE4261;
+	--glow-color-d: #F05524;
+
 	margin: 0 auto 0.4rem auto !important;
 }
 

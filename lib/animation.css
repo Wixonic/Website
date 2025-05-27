@@ -31,26 +31,24 @@
 }
 
 .glow {
-	display: block;
-
 	animation: glow 0.75s;
 }
 
 @keyframes glow {
 	30% {
-		color: #4283C3;
+		color: var(--glow-color-a) !important;
 	}
 
 	40% {
-		color: #C55AA2;
+		color: var(--glow-color-b) !important;
 	}
 
 	50% {
-		color: #EE4261;
+		color: var(--glow-color-c) !important;
 	}
 
 	60% {
-		color: #F05524;
+		color: var(--glow-color-d) !important;
 	}
 }
 
