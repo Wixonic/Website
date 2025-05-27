@@ -42,53 +42,6 @@ const clientApp = clientAppLibrary.initializeApp({
 const clientAuth = clientAuthLibrary.getAuth(clientApp);
 if (localEnvironment) clientAuthLibrary.connectAuthEmulator(clientAuth, "http://localhost:2001");
 
-
-exports.createAccount = adminFunctionsDefaultLibrary.auth.user().onCreate(async (user, ctx) => {
-	const username = `user-${new Date(ctx.timestamp).getTime().toString(36)}`;
-
-	try {
-		await adminAuth.setCustomUserClaims(user.uid, {
-			admin: user.email === "contact@wixonic.fr",
-			comment: true,
-			moderate: user.email === "contact@wixonic.fr",
-			status: user.email === "contact@wixonic.fr"
-		});
-	} catch (e) {
-		console.error("Failed to set custom claims: " + e);
-	}
-
-	try {
-		await adminFirestore.collection("users").doc(user.uid).set({
-			joined: adminFirestoreLibrary.Timestamp.fromDate(new Date(ctx.timestamp)),
-			username
-		});
-	} catch (e) {
-		console.error("Failed to create public user document: " + e);
-	}
-
-	try {
-		await adminFirestore.collection("private-users").doc(user.uid).set({
-			email: user.email
-		});
-	} catch (e) {
-		console.error("Failed to create private user document: " + e);
-	}
-});
-
-exports.deleteAccount = adminFunctionsDefaultLibrary.auth.user().onDelete(async (user) => {
-	try {
-		await adminFirestore.collection("users").doc(user.uid).delete();
-	} catch (e) {
-		console.error("Failed to delete public user docuement: " + e);
-	}
-
-	try {
-		await adminFirestore.collection("private-users").doc(user.uid).delete();
-	} catch (e) {
-		console.error("Failed to delete private user document: " + e);
-	}
-});
-
 exports.httpServer = require("firebase-functions/v2/https").onRequest({
 	memory: "256MiB",
 	region: "europe-west1",

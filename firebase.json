@@ -17,14 +17,6 @@
 					"source": "**",
 					"headers": [
 						{
-							"key": "Access-Control-Allow-Origin",
-							"value": "*"
-						},
-						{
-							"key": "Access-Control-Allow-Methods",
-							"value": "GET, OPTIONS"
-						},
-						{
 							"key": "Cache-Control",
 							"value": "max-age=7200, must-revalidate"
 						}
@@ -49,14 +41,6 @@
 					"source": "**",
 					"headers": [
 						{
-							"key": "Access-Control-Allow-Origin",
-							"value": "*"
-						},
-						{
-							"key": "Access-Control-Allow-Methods",
-							"value": "GET, OPTIONS"
-						},
-						{
 							"key": "Cache-Control",
 							"value": "max-age=7200, must-revalidate"
 						}
@@ -74,6 +58,17 @@
 				{
 					"source": "**",
 					"destination": "/lib/404.html"
+				}
+			],
+			"headers": [
+				{
+					"source": "**",
+					"headers": [
+						{
+							"key": "Cache-Control",
+							"value": "max-age=43200"
+						}
+					]
 				}
 			]
 		},
@@ -124,6 +119,17 @@
 				{
 					"source": "**",
 					"destination": "/lib/404.html"
+				}
+			],
+			"headers": [
+				{
+					"source": "**",
+					"headers": [
+						{
+							"key": "Cache-Control",
+							"value": "max-age=43200"
+						}
+					]
 				}
 			]
 		},
@@ -176,8 +182,8 @@
 					"source": "**",
 					"headers": [
 						{
-							"key": "Access-Control-Allow-Origin",
-							"value": "*"
+							"key": "Cache-Control",
+							"value": "max-age=43200"
 						}
 					]
 				}
@@ -190,17 +196,6 @@
 					"regex": "/(?P<params>.*)",
 					"destination": "https://httpserver-qrgkps4rnq-ew.a.run.app/:params",
 					"type": 301
-				}
-			],
-			"headers": [
-				{
-					"source": "**",
-					"headers": [
-						{
-							"key": "Access-Control-Allow-Origin",
-							"value": "*"
-						}
-					]
 				}
 			]
 		}

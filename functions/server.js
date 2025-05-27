@@ -61,7 +61,7 @@ server.get("/rich/link", async (req, res) => {
 		} catch {
 			reject(`Invalid url: ${url} - Host: ${host}`);
 		}
-	})
+	});
 
 	const getImageData = (url, width = 500, height = 500, host) => new Promise((resolve, reject) => {
 		getWithRedirects(localEnvironment ? url?.replace("https://assets.wixonic.fr", "http://localhost:2012") : url, localEnvironment ? host?.replace("https://assets.wixonic.fr", "http://localhost:2012") : host)
