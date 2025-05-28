@@ -31,14 +31,9 @@ footer .links {
 }
 
 footer .links .button {
-	display: block;
-
 	width: 7rem;
 
-	text-align: center;
-	text-decoration: none !important;
-
-	margin: 0 auto;
+	border-radius: 0;
 }
 
 footer .quickLinks {

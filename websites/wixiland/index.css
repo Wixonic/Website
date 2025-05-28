@@ -63,6 +63,8 @@ section img {
 
 #join .button {
 	--secondary-background: transparent;
+
+	border-radius: 0;
 }
 
 #wiki img {

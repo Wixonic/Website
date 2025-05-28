@@ -190,7 +190,7 @@ addEventListener("DOMContentLoaded", async () => {
 		section.append(description);
 
 		const link = await RichLink(localEnvironment ? path.local.wixiLand : path.wixiLand);
-		link.classList.add("fade", "slide", "button");
+		link.classList.add("fade", "button");
 		link.innerHTML = "Discover WixiLand";
 		description.append(link);
 

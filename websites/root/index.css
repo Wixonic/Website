@@ -68,6 +68,8 @@ section img {
 
 #wixiland .button {
 	--secondary-background: transparent;
+
+	border-radius: 0;
 }
 
 #activities {

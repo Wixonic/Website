@@ -26,7 +26,7 @@ addEventListener("DOMContentLoaded", async () => {
 
 		const wikiLink = await RichLink(new URL("/wiki", localEnvironment ? path.local.wixiLand : path.wixiLand));
 		wikiLink.target = "_blank";
-		wikiLink.classList.add("fade", "slide", "button");
+		wikiLink.classList.add("fade", "button");
 		wikiLink.innerHTML = "Take a look Inside";
 		wikiDescription.append(wikiLink);
 
@@ -53,7 +53,7 @@ addEventListener("DOMContentLoaded", async () => {
 		joinSection.append(joinDescription);
 
 		const joinLink = await RichLink(new URL("/discord", localEnvironment ? path.local.redirects : path.redirects));
-		joinLink.classList.add("fade", "slide", "button");
+		joinLink.classList.add("fade", "button");
 		joinLink.innerHTML = "Join WixiLand";
 		joinDescription.append(joinLink);
 
