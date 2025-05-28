@@ -46,9 +46,13 @@ addEventListener("DOMContentLoaded", async (e) => {
 				const req = await request("POST", new URL(`${localEnvironment ? "/wixonic-website-2/europe-west1/httpServer" : ""}/auth/token/`, window.localEnvironment ? path.local.functions : path.functions), "json", "application/json", JSON.stringify({
 					email: email.value,
 					password: password.value
-				}));
+				}), -1, true);
 
-				if (req.status != 200) throw req.response.error;
+				if (req.status != 200) throw req.response;
+
+				const user = await firebase.getUser(true);
+				if (user.valid) location.href = redirect;
+				else throw "Invalid user";
 			} catch (e) {
 				console.error("Failed to auth:", e);
 			}
