@@ -9,9 +9,6 @@ addEventListener("DOMContentLoaded", async (e) => {
 	const redirectData = new URLSearchParams(window.location.search).get("redirect");
 	const redirect = redirectData ? decodeURIComponent(redirectData) : (window.localEnvironment ? path.local.accounts : path.accounts);
 
-	const user = await firebase.getUser();
-	if (user.valid) location.href = redirect;
-
 	const toggleForm = (event) => {
 		event.preventDefault();
 		document.querySelector("#signin").classList.toggle("visible");

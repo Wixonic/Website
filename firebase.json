@@ -215,10 +215,6 @@
 			"host": "localhost",
 			"port": 2002
 		},
-		"storage": {
-			"host": "localhost",
-			"port": 2003
-		},
 		"functions": {
 			"host": "localhost",
 			"port": 2004
@@ -227,9 +223,6 @@
 			"host": "localhost",
 			"port": 2005
 		}
-	},
-	"storage": {
-		"rules": "rules/storage.rules"
 	},
 	"firestore": {
 		"rules": "rules/firestore.rules",
