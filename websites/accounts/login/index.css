@@ -1,0 +1,33 @@
+@import url("/lib/main.css");
+
+main {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+form {
+	display: none;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	position: relative;
+
+	width: min(30rem, calc(100% - 2rem));
+	height: fit-content;
+}
+
+form .changeMode {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+
+	background: transparent;
+
+	border: none;
+}
+
+form.visible {
+	display: flex;
+}

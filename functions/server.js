@@ -71,6 +71,8 @@ server.post("/auth/token/", async (req, res) => {
 		});
 	}
 
+	console.log(email, password);
+
 	// Login with email and password
 
 	const expiresIn = 4 * 7 * 24 * 60 * 60 * 1000;
