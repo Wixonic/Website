@@ -1,5 +1,9 @@
 @import url("/lib/main.css");
 
+body {
+	background: var(--secondary-background);
+}
+
 main {
 	display: flex;
 	justify-content: center;
@@ -16,12 +20,18 @@ form {
 
 	width: min(30rem, calc(100% - 2rem));
 	height: fit-content;
+
+	background: var(--background);
+
+	border-radius: 1rem;
+
+	padding: 1rem 2rem 2rem 2rem;
 }
 
 form .changeMode {
 	position: absolute;
-	bottom: 0;
-	left: 0;
+	bottom: 1rem;
+	left: 1rem;
 
 	background: transparent;
 
@@ -30,4 +40,15 @@ form .changeMode {
 
 form.visible {
 	display: flex;
+}
+
+form .button {
+	border-radius: 0;
+
+	margin-top: 0.5rem;
+}
+
+footer,
+.button {
+	background: transparent;
 }

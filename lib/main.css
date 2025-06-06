@@ -5,7 +5,7 @@
 
 :root {
 	--background: #FFF;
-	--secondary-background: #EEE;
+	--secondary-background: #EEEEF4;
 	--color: #000;
 	--header-color: #000;
 	--header-size: 2.5rem;
@@ -103,6 +103,7 @@ li {
 	font-size: 1rem;
 	text-align: center;
 
+	border: none;
 	border-radius: 0.4rem;
 
 	margin: 0.2rem;
@@ -111,7 +112,7 @@ li {
 	transform: translateY(0);
 	transition: box-shadow 0.2s ease-out, transform 0.2s ease-out;
 
-	overflow: visible;
+	cursor: pointer;
 }
 
 .button:hover {
