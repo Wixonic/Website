@@ -170,7 +170,7 @@ addEventListener("DOMContentLoaded", async () => {
 			setTimeout(cycle, 5000);
 		};
 
-		await cycle();
+		cycle();
 	})();
 
 	await (async () => {
