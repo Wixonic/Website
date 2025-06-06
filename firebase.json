@@ -191,11 +191,11 @@
 		},
 		{
 			"target": "functions",
-			"redirects": [
+			"rewrites": [
 				{
-					"regex": "/(?P<params>.*)",
-					"destination": "https://httpserver-qrgkps4rnq-ew.a.run.app/:params",
-					"type": 301
+					"source": "/**",
+					"function": "httpServer",
+					"region": "europe-west1"
 				}
 			]
 		}
