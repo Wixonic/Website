@@ -193,7 +193,7 @@
 			"target": "functions",
 			"rewrites": [
 				{
-					"source": "/**",
+					"source": "**",
 					"function": "httpServer",
 					"region": "europe-west1"
 				}

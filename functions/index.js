@@ -129,12 +129,12 @@ server.post("/auth/token/", async (req, res) => {
 			req.logger.info(`Authentified as "${credentials.user.displayName ?? "user" + credentials.user.uid}"`);
 		} catch (e) {
 			req.logger.error(e);
-			res.status(401).json({
+			res.status(400).json({
 				error: "Failed to authenticate"
 			});
 		}
 	} catch (e) {
-		res.status(401).json({
+		res.status(400).json({
 			error: `Failed to parse JSON: ${e}`
 		});
 	}
