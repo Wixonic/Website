@@ -23,26 +23,54 @@ addEventListener("DOMContentLoaded", async (e) => {
 		form.id = "signin";
 
 		const title = document.createElement("h1");
-		title.innerHTML = "Sign In";
+		title.innerHTML = "Sign in";
 
-		const email = document.createElement("input");
-		email.type = "email";
-		email.required = true;
+		const resetStatus = () => {
+			for (const child of form.children) child.classList.remove("invalid");
 
-		const password = document.createElement("input");
-		password.type = "password";
-		password.required = true;
+			submit.classList.toggle("invalid", !(emailInput.validity.valid && passwordInput.validity.valid) || (emailInput.value.length == 0 || emailInput.value.length == 0));
+		};
+
+		const email = document.createElement("div");
+		email.classList.add("input");
+
+		const emailLabel = document.createElement("label");
+		emailLabel.innerText = "Email";
+
+		const emailInput = document.createElement("input");
+		emailInput.type = "email";
+		emailInput.minLength = 6;
+		emailInput.placeholder = " ";
+		emailInput.addEventListener("input", () => resetStatus(email));
+
+		email.append(emailInput, emailLabel);
+
+		const password = document.createElement("div");
+		password.classList.add("input");
+
+		const passwordLabel = document.createElement("label");
+		passwordLabel.innerText = "Password";
+
+		const passwordInput = document.createElement("input");
+		passwordInput.type = "password";
+		passwordInput.minLength = 8;
+		passwordInput.maxLength = 32;
+		passwordInput.pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{,32}$";
+		passwordInput.placeholder = " ";
+		passwordInput.addEventListener("input", () => resetStatus(password));
+
+		password.append(passwordInput, passwordLabel);
 
 		const submit = document.createElement("button");
-		submit.classList.add("button");
+		submit.classList.add("button", "invalid");
 		submit.innerHTML = "Submit";
 		submit.addEventListener("click", async (event) => {
 			event.preventDefault();
 
 			try {
 				const req = await request("POST", new URL(`${localEnvironment ? "/wixonic-website-2/europe-west1/httpServer" : ""}/auth/token/`, window.localEnvironment ? path.local.functions : path.functions), "json", "application/json", JSON.stringify({
-					email: email.value,
-					password: password.value
+					email: emailInput.value,
+					password: passwordInput.value
 				}), -1, true);
 
 				if (req.status != 200) throw req.response;
@@ -51,7 +79,21 @@ addEventListener("DOMContentLoaded", async (e) => {
 				if (user.valid) location.href = redirect;
 				else throw "Invalid user";
 			} catch (e) {
-				console.error("Failed to auth:", e);
+				const message = e.error ?? e;
+
+				switch (message) {
+					case "Missing email or password":
+						break;
+
+					case "Failed to authenticate":
+						email.classList.add("invalid");
+						password.classList.add("invalid");
+						break;
+
+					default:
+						console.error(`Failed to auth: ${message}`);
+						break;
+				}
 			}
 		});
 
@@ -63,6 +105,8 @@ addEventListener("DOMContentLoaded", async (e) => {
 		form.append(title, email, password, submit, changeMode);
 
 		main.append(form);
+
+		resetStatus();
 	})();
 
 	await (async () => {
@@ -71,14 +115,17 @@ addEventListener("DOMContentLoaded", async (e) => {
 		form.id = "signup";
 
 		const title = document.createElement("h1");
-		title.innerHTML = "Sign Up";
+		title.innerHTML = "Sign up";
+
+		const info = document.createElement("div");
+		info.innerHTML = "Creating an account is currently not available.";
 
 		const changeMode = document.createElement("button");
 		changeMode.classList.add("link", "changeMode");
 		changeMode.innerHTML = "Already have an account?";
 		changeMode.addEventListener("click", toggleForm);
 
-		form.append(title, changeMode);
+		form.append(title, info, changeMode);
 
 		main.append(form);
 	})();

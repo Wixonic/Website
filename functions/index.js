@@ -130,8 +130,7 @@ server.post("/auth/token/", async (req, res) => {
 		} catch (e) {
 			req.logger.error(e);
 			res.status(401).json({
-				error: "Failed to authenticate",
-				reason: e
+				error: "Failed to authenticate"
 			});
 		}
 	} catch (e) {

@@ -110,7 +110,7 @@ li {
 	padding: 0.3rem 0.4rem;
 
 	transform: translateY(0);
-	transition: box-shadow 0.2s ease-out, transform 0.2s ease-out;
+	transition: box-shadow 0.2s ease-out, color 0.2s ease-out, opacity 0.2s ease-out, transform 0.2s ease-out;
 
 	cursor: pointer;
 }
@@ -119,6 +119,77 @@ li {
 	box-shadow: 0 0.1rem 0 var(--color);
 
 	transform: translateY(-0.1rem);
+}
+
+.button.invalid {
+	opacity: 0.5;
+
+	cursor: default;
+}
+
+.button.invalid:hover {
+	--color: #F00;
+}
+
+.input {
+	display: inline-block;
+
+	position: relative;
+
+	width: 15rem;
+
+	margin: 0.2rem;
+	padding: 0.4rem;
+}
+
+.input input {
+	width: 100%;
+
+	background: var(--background);
+
+	color: var(--color);
+	font-size: 0.9rem;
+
+	border: 0.1rem solid var(--color);
+	border-radius: 0.2rem;
+
+	padding: 0.4rem;
+
+	cursor: text;
+
+	transition: border-color 0.2s ease-out;
+}
+
+.input label {
+	position: absolute;
+	top: 0.9rem;
+	left: 0.8rem;
+
+	color: var(--color);
+	font-size: 0.9rem;
+
+	background: var(--background);
+
+	padding: 0 0.2rem;
+
+	transition: color 0.2s ease-out, transform 0.1s ease-out;
+
+	pointer-events: none;
+}
+
+.input input:focus+label,
+.input input:not(:placeholder-shown)+label {
+	transform: translate(-0.2rem, -1.1rem) scale(0.85);
+}
+
+.input input:invalid,
+.input.invalid input {
+	border-color: #F00;
+}
+
+.input input:invalid+label,
+.input.invalid label {
+	color: #F00;
 }
 
 .link {
