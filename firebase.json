@@ -105,35 +105,6 @@
 			]
 		},
 		{
-			"target": "wixiland",
-			"public": "./websites/wixiland",
-			"ignore": [
-				".DS_Store",
-				"wiki/engine/"
-			],
-			"rewrites": [
-				{
-					"source": "/wiki/**",
-					"destination": "/wiki/404.html"
-				},
-				{
-					"source": "**",
-					"destination": "/lib/404.html"
-				}
-			],
-			"headers": [
-				{
-					"source": "**",
-					"headers": [
-						{
-							"key": "Cache-Control",
-							"value": "max-age=43200"
-						}
-					]
-				}
-			]
-		},
-		{
 			"target": "redirects",
 			"redirects": [
 				{
