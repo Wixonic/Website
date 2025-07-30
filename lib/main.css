@@ -12,6 +12,8 @@
 }
 
 * {
+	flex-shrink: 0;
+
 	color: var(--color);
 	font-display: block;
 	font-family: inherit;
