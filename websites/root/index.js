@@ -191,6 +191,7 @@ addEventListener("DOMContentLoaded", async () => {
 
 		const link = await RichLink(new URL("/discord", localEnvironment ? path.local.redirects : path.redirects));
 		link.classList.add("fade", "button");
+		link.target = "_blank";
 		link.innerHTML = "Discover WixiLand";
 		description.append(link);
 
@@ -219,6 +220,7 @@ addEventListener("DOMContentLoaded", async () => {
 		const link = await RichLink(new URL("/github", localEnvironment ? path.local.redirects : path.redirects));
 		link.classList.add("fade", "slide", "button");
 		link.innerHTML = "See open-source projects";
+		link.target = "_blank";
 		description.append(link);
 
 		const image = await loader.image(new URL("/image/github.png", localEnvironment ? path.local.assets : path.assets));
