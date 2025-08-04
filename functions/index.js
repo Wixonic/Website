@@ -111,10 +111,9 @@ server.post("/auth/token/", async (req, res) => {
 
 		try {
 			const credentials = await clientAuthLibrary.signInWithEmailAndPassword(clientAuth, email, password);
+
 			const idToken = await credentials.user.getIdToken();
-
 			const expiresIn = 2 * 7 * 24 * 60 * 60 * 1000;
-
 			const sessionCookie = await adminAuth.createSessionCookie(idToken, { expiresIn });
 
 			res.cookie("__session", sessionCookie, {
@@ -138,6 +137,95 @@ server.post("/auth/token/", async (req, res) => {
 			error: `Failed to parse JSON: ${e}`
 		});
 	}
+});
+
+server.post("/auth/join/", async (req, res) => {
+	req.id = requestId++;
+	req.logger = {
+		debug: (...data) => console.log(`req${req.id}:`, ...data),
+		info: (...data) => console.info(`req${req.id}:`, ...data),
+		warn: (...data) => console.warn(`req${req.id}:`, ...data),
+		error: (...data) => console.error(`req${req.id}:`, ...data)
+	};
+
+	try {
+		const { email, password, confirm } = JSON.parse(req.body);
+
+		if (!email || !password || !confirm) {
+			req.logger.warn("Missing email, password or password confirmation");
+			return res.status(400).json({
+				error: "Missing email, password or password confirmation"
+			});
+		}
+
+		if (password != confirm) {
+			req.logger.warn("Password and confirmation do not match");
+			return res.status(400).json({
+				error: "Password and confirmation do not match",
+			});
+		}
+
+		try {
+			const credentials = await clientAuthLibrary.createUserWithEmailAndPassword(clientAuth, email, password);
+			const displayName = "user" + credentials.user.uid;
+
+			await adminAuth.updateUser(credentials.user.uid, { displayName });
+			await adminFirestore.collection("users").doc(credentials.user.uid).set({
+				displayName,
+				createdAt: new Date().toISOString()
+			});
+
+			await adminFirestore.collection("privateUsers").doc(credentials.user.uid).set({
+				email
+			});
+
+			const idToken = await credentials.user.getIdToken();
+			const expiresIn = 2 * 7 * 24 * 60 * 60 * 1000;
+			const sessionCookie = await adminAuth.createSessionCookie(idToken, { expiresIn });
+
+			res.cookie("__session", sessionCookie, {
+				domain: localEnvironment ? undefined : ".wixonic.fr",
+				maxAge: expiresIn,
+				httpOnly: true,
+				secure: !localEnvironment,
+				sameSite: localEnvironment ? "lax" : "none"
+			});
+
+			res.status(200).json({});
+			req.logger.info(`Authentified as "${credentials.user.displayName ?? "user" + credentials.user.uid}"`);
+		} catch (e) {
+			req.logger.error(e);
+			res.status(400).json({
+				error: "Failed to create account"
+			});
+		}
+	} catch (e) {
+		res.status(400).json({
+			error: `Failed to parse JSON: ${e}`
+		});
+	}
+});
+
+server.delete("/auth/token/", async (req, res) => {
+	const sessionCookie = req.cookies.__session;
+
+	res.clearCookie("__session", {
+		domain: localEnvironment ? undefined : ".wixonic.fr",
+		httpOnly: true,
+		secure: !localEnvironment,
+		sameSite: localEnvironment ? "lax" : "none"
+	});
+
+	if (req.query.all == "true" && sessionCookie) {
+		try {
+			const decoded = await adminAuth.verifySessionCookie(sessionCookie);
+			await adminAuth.revokeRefreshTokens(decoded.uid);
+		} catch (e) {
+			console.warn("Failed to revoke session globally:", e);
+		}
+	}
+
+	res.status(200).end();
 });
 
 server.get("/rich/link", async (req, res) => {

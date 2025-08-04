@@ -28,7 +28,7 @@ form {
 	padding: 1rem 2rem 2rem 2rem;
 }
 
-form .changeMode {
+form .switchMode {
 	position: absolute;
 	bottom: 1rem;
 	left: 1rem;
