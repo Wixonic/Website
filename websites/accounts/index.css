@@ -1,1 +1,15 @@
 @import url("/lib/main.css");
+
+.button.signout {
+	position: absolute;
+	top: 0.25rem;
+	right: 0.5rem;
+
+	--secondary-background: transparent;
+
+	border-radius: 0;
+}
+
+.button.signout:hover {
+	--color: #F00;
+}

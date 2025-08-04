@@ -3,3 +3,7 @@
 nav>* {
 	display: block;
 }
+
+.section-link {
+	cursor: pointer;
+}

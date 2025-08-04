@@ -31,6 +31,8 @@ footer .links {
 }
 
 footer .links .button {
+	--underline-color: transparent;
+
 	width: 7rem;
 
 	border-radius: 0;

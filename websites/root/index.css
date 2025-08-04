@@ -1,8 +1,9 @@
 @import url("/lib/main.css");
 @import url("activities.css");
 
-body:not(.hasLiveActivities) {
-	--header-color: #FFF;
+body:not(.hasLiveActivities) header {
+	--color: #FFF;
+	--underline-color: #FFF2;
 }
 
 main {
@@ -68,6 +69,7 @@ section img {
 
 #wixiland .button {
 	--secondary-background: transparent;
+	--underline-color: #FFF2;
 
 	border-radius: 0;
 }

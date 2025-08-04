@@ -6,6 +6,7 @@
 :root {
 	--background: #FFF;
 	--secondary-background: #EEEEF4;
+	--underline-color: #0002;
 	--color: #000;
 	--header-color: #000;
 	--header-size: 2.5rem;
@@ -99,7 +100,7 @@ li {
 	position: relative;
 
 	background: var(--secondary-background);
-	box-shadow: 0 0 0 var(--color);
+	box-shadow: 0 0.1rem 0 var(--underline-color);
 
 	color: var(--color);
 	font-size: 1rem;

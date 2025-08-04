@@ -48,15 +48,102 @@ const clientAuth = clientAuthLibrary.getAuth(clientApp);
 if (localEnvironment) clientAuthLibrary.connectAuthEmulator(clientAuth, "http://localhost:2001");
 
 const server = express();
-server.use(cookieParser());
+
 server.use(cors({
 	credentials: true,
-	origin: (origin, callback) => callback(null, origin)
+	origin: (origin, callback) => callback(null, origin ?? true)
 }));
+
+server.use(cookieParser());
 
 let requestId = 0;
 
-server.get("/auth/token/", async (req, res) => {
+server.route(["/auth/token", "/auth/token/"])
+	.get(async (req, res) => {
+		req.id = requestId++;
+		req.logger = {
+			debug: (...data) => console.log(`req${req.id}:`, ...data),
+			info: (...data) => console.info(`req${req.id}:`, ...data),
+			warn: (...data) => console.warn(`req${req.id}:`, ...data),
+			error: (...data) => console.error(`req${req.id}:`, ...data)
+		};
+
+		const sessionCookie = req.cookies.__session;
+
+		if (!sessionCookie) {
+			req.logger.warn("Session cookie is missing");
+			return res.status(401).json({
+				error: "Session cookie is missing"
+			});
+		}
+
+		try {
+			const user = await adminAuth.verifySessionCookie(sessionCookie, true);
+			req.logger.debug("Authenticated user:", user.uid);
+
+			const token = await adminAuth.createCustomToken(user.uid);
+			res.status(200).json({
+				token
+			});
+		} catch (e) {
+			req.logger.error("Failed to verify token:", e);
+			return res.status(403).json({
+				error: "Invalid or expired token"
+			});
+		}
+	})
+	.post(async (req, res) => {
+		req.id = requestId++;
+		req.logger = {
+			debug: (...data) => console.log(`req${req.id}:`, ...data),
+			info: (...data) => console.info(`req${req.id}:`, ...data),
+			warn: (...data) => console.warn(`req${req.id}:`, ...data),
+			error: (...data) => console.error(`req${req.id}:`, ...data)
+		};
+
+		try {
+			const { email, password } = JSON.parse(req.body);
+
+			if (!email || !password) {
+				req.logger.warn("Missing email or password");
+				return res.status(400).json({
+					error: "Missing email or password"
+				});
+			}
+
+			try {
+				const credentials = await clientAuthLibrary.signInWithEmailAndPassword(clientAuth, email, password);
+
+				const idToken = await credentials.user.getIdToken();
+				const expiresIn = 2 * 7 * 24 * 60 * 60 * 1000;
+				const sessionCookie = await adminAuth.createSessionCookie(idToken, { expiresIn });
+
+				res.cookie("__session", sessionCookie, {
+					domain: localEnvironment ? undefined : ".wixonic.fr",
+					maxAge: expiresIn,
+					httpOnly: true,
+					secure: !localEnvironment,
+					sameSite: localEnvironment ? "lax" : "none"
+				});
+
+				res.status(200).json({});
+				req.logger.info(`Authentified as "${credentials.user.displayName ?? "user" + credentials.user.uid}"`);
+			} catch (e) {
+				req.logger.error(e);
+				res.status(400).json({
+					error: "Failed to authenticate"
+				});
+			}
+		} catch (e) {
+			res.status(400).json({
+				error: `Failed to parse JSON: ${e}`
+			});
+		}
+	});
+
+server.post(["/auth/revoke", "/auth/revoke/"], async (req, res) => {
+	console.log("Deleted");
+
 	req.id = requestId++;
 	req.logger = {
 		debug: (...data) => console.log(`req${req.id}:`, ...data),
@@ -74,72 +161,24 @@ server.get("/auth/token/", async (req, res) => {
 		});
 	}
 
-	try {
-		const user = await adminAuth.verifySessionCookie(sessionCookie, true);
-		req.logger.debug("Authenticated user:", user.uid);
-
-		const token = await adminAuth.createCustomToken(user.uid);
-		res.status(200).json({
-			token
-		});
-	} catch (e) {
-		req.logger.error("Failed to verify token:", e);
-		return res.status(403).json({
-			error: "Invalid or expired token"
-		});
-	}
-});
-
-server.post("/auth/token/", async (req, res) => {
-	req.id = requestId++;
-	req.logger = {
-		debug: (...data) => console.log(`req${req.id}:`, ...data),
-		info: (...data) => console.info(`req${req.id}:`, ...data),
-		warn: (...data) => console.warn(`req${req.id}:`, ...data),
-		error: (...data) => console.error(`req${req.id}:`, ...data)
-	};
+	res.clearCookie("__session", {
+		domain: localEnvironment ? undefined : ".wixonic.fr",
+		httpOnly: true,
+		secure: !localEnvironment,
+		sameSite: localEnvironment ? "lax" : "none"
+	});
 
 	try {
-		const { email, password } = JSON.parse(req.body);
-
-		if (!email || !password) {
-			req.logger.warn("Missing email or password");
-			return res.status(400).json({
-				error: "Missing email or password"
-			});
-		}
-
-		try {
-			const credentials = await clientAuthLibrary.signInWithEmailAndPassword(clientAuth, email, password);
-
-			const idToken = await credentials.user.getIdToken();
-			const expiresIn = 2 * 7 * 24 * 60 * 60 * 1000;
-			const sessionCookie = await adminAuth.createSessionCookie(idToken, { expiresIn });
-
-			res.cookie("__session", sessionCookie, {
-				domain: localEnvironment ? undefined : ".wixonic.fr",
-				maxAge: expiresIn,
-				httpOnly: true,
-				secure: !localEnvironment,
-				sameSite: localEnvironment ? "lax" : "none"
-			});
-
-			res.status(200).json({});
-			req.logger.info(`Authentified as "${credentials.user.displayName ?? "user" + credentials.user.uid}"`);
-		} catch (e) {
-			req.logger.error(e);
-			res.status(400).json({
-				error: "Failed to authenticate"
-			});
-		}
+		const decoded = await adminAuth.verifySessionCookie(sessionCookie);
+		await adminAuth.revokeRefreshTokens(decoded.uid);
 	} catch (e) {
-		res.status(400).json({
-			error: `Failed to parse JSON: ${e}`
-		});
+		console.warn("Failed to revoke refresh tokens:", e);
 	}
+
+	res.status(200).json({});
 });
 
-server.post("/auth/join/", async (req, res) => {
+server.post(["/auth/join", "/auth/join/"], async (req, res) => {
 	req.id = requestId++;
 	req.logger = {
 		debug: (...data) => console.log(`req${req.id}:`, ...data),
@@ -167,7 +206,7 @@ server.post("/auth/join/", async (req, res) => {
 
 		try {
 			const credentials = await clientAuthLibrary.createUserWithEmailAndPassword(clientAuth, email, password);
-			const displayName = "user" + credentials.user.uid;
+			const displayName = "user_" + credentials.user.uid;
 
 			await adminAuth.updateUser(credentials.user.uid, { displayName });
 			await adminFirestore.collection("users").doc(credentials.user.uid).set({
@@ -192,7 +231,7 @@ server.post("/auth/join/", async (req, res) => {
 			});
 
 			res.status(200).json({});
-			req.logger.info(`Authentified as "${credentials.user.displayName ?? "user" + credentials.user.uid}"`);
+			req.logger.info(`Authentified as "${credentials.user.displayName ?? "user_" + credentials.user.uid}"`);
 		} catch (e) {
 			req.logger.error(e);
 			res.status(400).json({
@@ -206,29 +245,7 @@ server.post("/auth/join/", async (req, res) => {
 	}
 });
 
-server.delete("/auth/token/", async (req, res) => {
-	const sessionCookie = req.cookies.__session;
-
-	res.clearCookie("__session", {
-		domain: localEnvironment ? undefined : ".wixonic.fr",
-		httpOnly: true,
-		secure: !localEnvironment,
-		sameSite: localEnvironment ? "lax" : "none"
-	});
-
-	if (req.query.all == "true" && sessionCookie) {
-		try {
-			const decoded = await adminAuth.verifySessionCookie(sessionCookie);
-			await adminAuth.revokeRefreshTokens(decoded.uid);
-		} catch (e) {
-			console.warn("Failed to revoke session globally:", e);
-		}
-	}
-
-	res.status(200).end();
-});
-
-server.get("/rich/link", async (req, res) => {
+server.get(["/rich/link", "/rich/link/"], async (req, res) => {
 	req.id = requestId++;
 	req.logger = {
 		debug: (...data) => console.log(`req${req.id}:`, ...data),

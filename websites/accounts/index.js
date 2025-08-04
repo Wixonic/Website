@@ -7,9 +7,12 @@ addEventListener("DOMContentLoaded", async () => {
 	const user = await firebase.getUser();
 	if (!user.valid) location.href = `/login/?redirect=${encodeURIComponent(window.location.href)}`;
 
-	console.log(user);
+	const main = document.querySelector("main");
 
-	// Log out
+	const signout = document.createElement("button");
+	signout.classList.add("button", "signout");
+	signout.innerHTML = "Sign out";
+	signout.addEventListener("click", async () => await firebase.signOut());
 
 	// Private account switch
 
@@ -22,4 +25,6 @@ addEventListener("DOMContentLoaded", async () => {
 	// Log out from ALL devices (security)
 
 	// Delete account
+
+	main.append(signout);
 });

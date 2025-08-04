@@ -1,6 +1,4 @@
 header {
-	--color: var(--header-color);
-
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -24,7 +22,7 @@ header .button {
 	justify-content: center;
 	align-items: center;
 
-	height: 100%;
+	height: calc(100% - 0.25rem);
 
 	border-radius: 0;
 
