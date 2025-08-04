@@ -15,7 +15,9 @@ addEventListener("DOMContentLoaded", async (e) => {
 		document.querySelector("#signup").classList.toggle("visible");
 	};
 
-	const main = document.querySelector("main");
+	const main = document.querySelector("main"); $;
+
+	let processing = false;
 
 	await (async () => {
 		const form = document.createElement("form");
@@ -72,7 +74,10 @@ addEventListener("DOMContentLoaded", async (e) => {
 		submit.addEventListener("click", async (event) => {
 			event.preventDefault();
 
-			if (isValid()) {
+			if (isValid() && !processing) {
+				processing = true;
+				submit.classList.add("invalid");
+
 				try {
 					const req = await request("POST", new URL(`${localEnvironment ? "/wixonic-website-2/europe-west1/httpServer" : ""}/auth/token/`, window.localEnvironment ? path.local.functions : path.functions), "json", "application/json", JSON.stringify({
 						email: emailInput.value,
@@ -104,6 +109,7 @@ addEventListener("DOMContentLoaded", async (e) => {
 							break;
 					}
 
+					processing = false;
 					submit.classList.toggle("invalid", !isValid());
 				}
 			}
@@ -192,7 +198,10 @@ addEventListener("DOMContentLoaded", async (e) => {
 		submit.addEventListener("click", async (event) => {
 			event.preventDefault();
 
-			if (isValid()) {
+			if (isValid() && !processing) {
+				processing = true;
+				submit.classList.add("invalid");
+
 				try {
 					const req = await request("POST", new URL(`${localEnvironment ? "/wixonic-website-2/europe-west1/httpServer" : ""}/auth/join/`, window.localEnvironment ? path.local.functions : path.functions), "json", "application/json", JSON.stringify({
 						email: emailInput.value,
@@ -234,6 +243,7 @@ addEventListener("DOMContentLoaded", async (e) => {
 							break;
 					}
 
+					processing = false;
 					submit.classList.toggle("invalid", !isValid());
 				}
 			}
