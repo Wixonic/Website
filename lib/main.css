@@ -64,8 +64,8 @@ main {
 
 	width: min(100%, 50rem);
 
-	margin: 0 auto;
-	padding: 0.5rem;
+	margin: auto;
+	padding: max(var(--header-size), 0.5rem) 0.5rem 0.5rem 0.5rem;
 }
 
 h1 {
@@ -95,12 +95,14 @@ li {
 }
 
 .button {
+	--current-underline-color: var(--underline-color);
+
 	display: inline-block;
 
 	position: relative;
 
 	background: var(--secondary-background);
-	box-shadow: 0 0.1rem 0 var(--underline-color);
+	box-shadow: 0 0.1rem 0 var(--current-underline-color);
 
 	color: var(--color);
 	font-size: 1rem;
@@ -119,7 +121,7 @@ li {
 }
 
 .button:hover {
-	box-shadow: 0 0.1rem 0 var(--color);
+	--current-underline-color: var(--color);
 
 	transform: translateY(-0.1rem);
 }
@@ -132,6 +134,18 @@ li {
 
 .button.invalid:hover {
 	--color: #F00;
+}
+
+.button:disabled {
+	opacity: 0.5;
+
+	cursor: default;
+}
+
+.button:disabled:hover {
+	--current-underline-color: var(--underline-color) !important;
+
+	transform: translateY(0);
 }
 
 .input {
@@ -240,6 +254,25 @@ input:-webkit-autofill:active {
 
 .link:hover {
 	text-decoration: underline;
+}
+
+.banner {
+	display: block;
+
+	width: 100%;
+
+	background: var(--secondary-background);
+
+	font-size: 0.8rem;
+
+	border-radius: 0.5rem;
+
+	margin: auto;
+	padding: 0.5rem;
+}
+
+.banner .button {
+	background: var(--background);
 }
 
 .firebase-emulator-warning {

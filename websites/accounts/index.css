@@ -2,7 +2,7 @@
 
 .button.signout {
 	position: absolute;
-	top: 0.25rem;
+	top: 0;
 	right: 0.5rem;
 
 	--secondary-background: transparent;
@@ -12,4 +12,20 @@
 
 .button.signout:hover {
 	--color: #F00;
+}
+
+.button.discord {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.button.discord:hover {
+	--current-underline-color: #5865F2;
+}
+
+.button.discord svg {
+	height: 1rem;
+
+	margin-left: 0.5rem;
 }

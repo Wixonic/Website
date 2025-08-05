@@ -5,8 +5,10 @@ const express = require("express");
 const adminAppLibrary = require("firebase-admin/app");
 const adminAuthLibrary = require("firebase-admin/auth");
 const adminFirestoreLibrary = require("firebase-admin/firestore");
+const fs = require("fs");
 const http = require("http");
 const https = require("https");
+const nodemailer = require("nodemailer");
 const sharp = require("sharp");
 
 const adminFunctionsLibrary = require("firebase-functions/v1");
@@ -14,10 +16,12 @@ const adminFunctionsLibrary = require("firebase-functions/v1");
 const clientAppLibrary = require("firebase/app");
 const clientAuthLibrary = require("firebase/auth");
 
+const config = require("./config.json");
+
 const localEnvironment = process.env.FUNCTIONS_EMULATOR == "true";
 
 const adminApp = adminAppLibrary.initializeApp({
-	credential: adminAppLibrary.cert(require("./config.json")),
+	credential: adminAppLibrary.cert(config.firebase),
 
 	apiKey: "AIzaSyAoAl-09tw3K0i8N2PnYKAjjZb19e4zEBk",
 	projectId: "wixonic-website-2",
@@ -47,6 +51,16 @@ const clientApp = clientAppLibrary.initializeApp({
 const clientAuth = clientAuthLibrary.getAuth(clientApp);
 if (localEnvironment) clientAuthLibrary.connectAuthEmulator(clientAuth, "http://localhost:2001");
 
+const transporter = nodemailer.createTransport({
+	host: "smtp.mail.me.com",
+	port: 587,
+	secure: false,
+	auth: {
+		user: config.icloud.id,
+		pass: config.icloud.password
+	}
+});
+
 const server = express();
 
 server.use(cors({
@@ -57,6 +71,21 @@ server.use(cors({
 server.use(cookieParser());
 
 let requestId = 0;
+
+const sendVerificationEmail = async (email) => {
+	const verificationLink = await adminAuth.generateEmailVerificationLink(email, {
+		url: localEnvironment ? "http://localhost:2010" : "https://accounts.wixonic.fr"
+	});
+
+	await transporter.sendMail({
+		from: "Wixonic Network <contact@wixonic.fr>",
+		to: email,
+		subject: "Verify your email",
+		html: fs.readFileSync("./emails/verify.html", "utf-8")
+			.replaceAll("%EMAIL%", email)
+			.replaceAll("%VERIFICATION_LINK%", verificationLink)
+	});
+};
 
 server.route(["/auth/token", "/auth/token/"])
 	.get(async (req, res) => {
@@ -126,7 +155,7 @@ server.route(["/auth/token", "/auth/token/"])
 					sameSite: localEnvironment ? "lax" : "none"
 				});
 
-				res.status(200).json({});
+				res.status(204).end();
 				req.logger.info(`Authentified as "${credentials.user.displayName ?? "user" + credentials.user.uid}"`);
 			} catch (e) {
 				req.logger.error(e);
@@ -175,7 +204,7 @@ server.post(["/auth/revoke", "/auth/revoke/"], async (req, res) => {
 		console.warn("Failed to revoke refresh tokens:", e);
 	}
 
-	res.status(200).json({});
+	res.status(204).end();
 });
 
 server.post(["/auth/join", "/auth/join/"], async (req, res) => {
@@ -206,7 +235,13 @@ server.post(["/auth/join", "/auth/join/"], async (req, res) => {
 
 		try {
 			const credentials = await clientAuthLibrary.createUserWithEmailAndPassword(clientAuth, email, password);
-			const displayName = "user_" + credentials.user.uid;
+			const displayName = credentials.user.email == "contact@wixonic.fr" ? "Admin" : "user_" + credentials.user.uid;
+
+			if (credentials.user.email == "contact@wixonic.fr") {
+				await adminAuth.setCustomUserClaims(credentials.user.uid, {
+					admin: true
+				});
+			}
 
 			await adminAuth.updateUser(credentials.user.uid, { displayName });
 			await adminFirestore.collection("users").doc(credentials.user.uid).set({
@@ -217,6 +252,8 @@ server.post(["/auth/join", "/auth/join/"], async (req, res) => {
 			await adminFirestore.collection("privateUsers").doc(credentials.user.uid).set({
 				email
 			});
+
+			await sendVerificationEmail(email);
 
 			const idToken = await credentials.user.getIdToken();
 			const expiresIn = 2 * 7 * 24 * 60 * 60 * 1000;
@@ -230,7 +267,7 @@ server.post(["/auth/join", "/auth/join/"], async (req, res) => {
 				sameSite: localEnvironment ? "lax" : "none"
 			});
 
-			res.status(200).json({});
+			res.status(204).end();
 			req.logger.info(`Authentified as "${credentials.user.displayName ?? "user_" + credentials.user.uid}"`);
 		} catch (e) {
 			req.logger.error(e);
@@ -241,6 +278,40 @@ server.post(["/auth/join", "/auth/join/"], async (req, res) => {
 	} catch (e) {
 		res.status(400).json({
 			error: `Failed to parse JSON: ${e}`
+		});
+	}
+});
+
+server.post(["/auth/verify", "/auth/verify/"], async (req, res) => {
+	req.id = requestId++;
+	req.logger = {
+		debug: (...data) => console.log(`req${req.id}:`, ...data),
+		info: (...data) => console.info(`req${req.id}:`, ...data),
+		warn: (...data) => console.warn(`req${req.id}:`, ...data),
+		error: (...data) => console.error(`req${req.id}:`, ...data)
+	};
+
+	const sessionCookie = req.cookies.__session;
+
+	if (!sessionCookie) {
+		req.logger.warn("Session cookie is missing");
+		return res.status(401).json({
+			error: "Session cookie is missing"
+		});
+	}
+
+	try {
+		const user = await adminAuth.verifySessionCookie(sessionCookie, true);
+		req.logger.debug("Authenticated user:", user.uid);
+
+		if (user.email_verified) throw "Email already verified";
+
+		await sendVerificationEmail(user.email);
+		res.status(204).end();
+	} catch (e) {
+		req.logger.error("Failed to verify token:", e);
+		return res.status(403).json({
+			error: "Invalid or expired token"
 		});
 	}
 });

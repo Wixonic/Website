@@ -15,9 +15,7 @@ addEventListener("DOMContentLoaded", async (e) => {
 		document.querySelector("#signup").classList.toggle("visible");
 	};
 
-	const main = document.querySelector("main"); $;
-
-	let processing = false;
+	const main = document.querySelector("main");
 
 	await (async () => {
 		const form = document.createElement("form");
@@ -74,9 +72,8 @@ addEventListener("DOMContentLoaded", async (e) => {
 		submit.addEventListener("click", async (event) => {
 			event.preventDefault();
 
-			if (isValid() && !processing) {
-				processing = true;
-				submit.classList.add("invalid");
+			if (isValid() && !submit.disabled) {
+				submit.disabled = true;
 
 				try {
 					const req = await request("POST", new URL(`${localEnvironment ? "/wixonic-website-2/europe-west1/httpServer" : ""}/auth/token/`, window.localEnvironment ? path.local.functions : path.functions), "json", "application/json", JSON.stringify({
@@ -84,7 +81,7 @@ addEventListener("DOMContentLoaded", async (e) => {
 						password: passwordInput.value
 					}), -1, true);
 
-					if (req.status != 200) throw req.response;
+					if (req.status != 204) throw req.response;
 
 					const user = await firebase.getUser(true);
 					if (user.valid) location.href = redirect;
@@ -109,8 +106,7 @@ addEventListener("DOMContentLoaded", async (e) => {
 							break;
 					}
 
-					processing = false;
-					submit.classList.toggle("invalid", !isValid());
+					submit.disabled = false;
 				}
 			}
 		});
@@ -198,9 +194,8 @@ addEventListener("DOMContentLoaded", async (e) => {
 		submit.addEventListener("click", async (event) => {
 			event.preventDefault();
 
-			if (isValid() && !processing) {
-				processing = true;
-				submit.classList.add("invalid");
+			if (isValid() && !submit.disabled) {
+				submit.disabled = true;
 
 				try {
 					const req = await request("POST", new URL(`${localEnvironment ? "/wixonic-website-2/europe-west1/httpServer" : ""}/auth/join/`, window.localEnvironment ? path.local.functions : path.functions), "json", "application/json", JSON.stringify({
@@ -209,7 +204,7 @@ addEventListener("DOMContentLoaded", async (e) => {
 						confirm: confirmPasswordInput.value
 					}), -1, true);
 
-					if (req.status != 200) throw req.response;
+					if (req.status != 204) throw req.response;
 
 					const user = await firebase.getUser(true);
 					if (user.valid) location.href = redirect;
@@ -243,8 +238,7 @@ addEventListener("DOMContentLoaded", async (e) => {
 							break;
 					}
 
-					processing = false;
-					submit.classList.toggle("invalid", !isValid());
+					submit.disabled = false;
 				}
 			}
 		});
