@@ -262,16 +262,19 @@ input:-webkit-autofill:active {
 	width: 100%;
 
 	background: var(--secondary-background);
+	box-shadow: 0 0.1rem 0 #8884;
 
 	font-size: 0.8rem;
 
 	border-radius: 0.5rem;
 
-	margin: auto;
+	margin: 0.5rem auto;
 	padding: 0.5rem;
 }
 
 .banner .button {
+	--underline-color: #8882;
+
 	background: var(--background);
 }
 

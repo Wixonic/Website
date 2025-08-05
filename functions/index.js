@@ -316,6 +316,18 @@ server.post(["/auth/verify", "/auth/verify/"], async (req, res) => {
 	}
 });
 
+server.post(["/link/discord", "/link/discord/"], async (req, res) => {
+	req.id = requestId++;
+	req.logger = {
+		debug: (...data) => console.log(`req${req.id}:`, ...data),
+		info: (...data) => console.info(`req${req.id}:`, ...data),
+		warn: (...data) => console.warn(`req${req.id}:`, ...data),
+		error: (...data) => console.error(`req${req.id}:`, ...data)
+	};
+
+	res.status(401).end();
+});
+
 server.get(["/rich/link", "/rich/link/"], async (req, res) => {
 	req.id = requestId++;
 	req.logger = {

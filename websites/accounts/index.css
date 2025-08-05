@@ -27,5 +27,14 @@
 .button.discord svg {
 	height: 1rem;
 
+	position: relative;
+	top: 0.08em;
+
 	margin-left: 0.5rem;
+}
+
+.subtext {
+	--color: #888;
+
+	font-size: 0.8rem;
 }
