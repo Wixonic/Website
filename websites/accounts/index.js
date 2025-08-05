@@ -7,7 +7,7 @@ addEventListener("DOMContentLoaded", async () => {
 	await init();
 
 	const credentials = await firebase.getUser();
-	if (!credentials.valid) location.href = `/login/?redirect=${encodeURIComponent(window.location.href)}`;
+	if (!credentials.valid) return location.href = `/login/?redirect=${encodeURIComponent(window.location.href)}`;
 	const user = credentials.user;
 	console.log(user);
 
@@ -23,7 +23,7 @@ addEventListener("DOMContentLoaded", async () => {
 		banner.classList.add("banner");
 
 		const text = document.createElement("div");
-		text.innerHTML = "Your email address has not yet been verified.<br />To help protect both your account and the platform, and to ensure full access to all available features, please verify your email address by clicking the button below.<br />A verification message will be sent to your registered email address.";
+		text.innerHTML = "Your email address has not yet been verified.<br />To help protect both your account and the platform, and to ensure full access to all available features, please verify your email address by clicking the button below.<br />A verification email will be sent to your registered address.";
 
 		const button = document.createElement("button");
 		button.classList.add("button");
@@ -42,7 +42,13 @@ addEventListener("DOMContentLoaded", async () => {
 
 	const discordArea = document.createElement("div");
 
-	if (true) {
+	if (await firebase.isLinked("discord")) {
+		const discordSubtext = document.createElement("div");
+		discordSubtext.classList.add("subtext");
+		discordSubtext.innerHTML = `To unlink your Discord account, you may delete your account, or <a href="${new URL("/contact/", window.localEnvironment ? path.local.root : path.root)}">contact us</a> to keep it active.`;
+
+		discordArea.append(discordSubtext);
+	} else {
 		const discord = document.createElement("button");
 		discord.classList.add("button", "discord");
 		discord.innerHTML = `Link your account to ${(await request("GET", new URL("/icon/discord.text.svg", window.localEnvironment ? path.local.assets : path.assets), "text", "image/svg+xml")).response}`;
@@ -61,12 +67,6 @@ addEventListener("DOMContentLoaded", async () => {
 		discordSubtext.innerHTML = `Linking your Discord account unlocks exclusive features and rewards. <b>1,000 points</b> will be credited to your account after linking.`;
 
 		discordArea.append(discord, discordSubtext);
-	} else {
-		const discordSubtext = document.createElement("div");
-		discordSubtext.classList.add("subtext");
-		discordSubtext.innerHTML = `To unlink your Discord account, you may delete your account, or <a href="${new URL("/contact/", window.localEnvironment ? path.local.root : path.root)}">contact us</a> to keep it active.`;
-
-		discordArea.append(discordSubtext);
 	}
 
 	const email = document.createElement("input");
