@@ -278,6 +278,12 @@ input:-webkit-autofill:active {
 	background: var(--background);
 }
 
+.subtext {
+	--color: #888;
+
+	font-size: 0.8rem;
+}
+
 .firebase-emulator-warning {
 	display: none;
 }
