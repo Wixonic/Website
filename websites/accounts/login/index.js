@@ -6,8 +6,8 @@ import request from "/lib/request.js";
 addEventListener("DOMContentLoaded", async (e) => {
 	await init();
 
-	const redirectData = new URLSearchParams(window.location.search).get("redirect");
-	const redirect = redirectData ? decodeURIComponent(redirectData) : (window.localEnvironment ? path.local.accounts : path.accounts);
+	const redirectData = new URLSearchParams(location.search).get("redirect");
+	const redirect = redirectData ? decodeURIComponent(redirectData) : (localEnvironment ? path.local.accounts : path.accounts);
 
 	const toggleForm = (event) => {
 		event.preventDefault();
@@ -76,7 +76,7 @@ addEventListener("DOMContentLoaded", async (e) => {
 				submit.disabled = true;
 
 				try {
-					const req = await request("POST", new URL(`${localEnvironment ? "/wixonic-website-2/europe-west1/httpServer" : ""}/auth/token/`, window.localEnvironment ? path.local.functions : path.functions), "json", "application/json", JSON.stringify({
+					const req = await request("POST", new URL(`${localEnvironment ? "/wixonic-website-2/europe-west1/httpServer" : ""}/auth/token/`, localEnvironment ? path.local.functions : path.functions), "json", "application/json", JSON.stringify({
 						email: emailInput.value,
 						password: passwordInput.value
 					}), -1, true);
@@ -198,7 +198,7 @@ addEventListener("DOMContentLoaded", async (e) => {
 				submit.disabled = true;
 
 				try {
-					const req = await request("POST", new URL(`${localEnvironment ? "/wixonic-website-2/europe-west1/httpServer" : ""}/auth/join/`, window.localEnvironment ? path.local.functions : path.functions), "json", "application/json", JSON.stringify({
+					const req = await request("POST", new URL(`${localEnvironment ? "/wixonic-website-2/europe-west1/httpServer" : ""}/auth/join/`, localEnvironment ? path.local.functions : path.functions), "json", "application/json", JSON.stringify({
 						email: emailInput.value,
 						password: passwordInput.value,
 						confirm: confirmPasswordInput.value
