@@ -259,7 +259,7 @@ input:-webkit-autofill:active {
 .banner {
 	display: block;
 
-	width: 100%;
+	width: fit-content;
 
 	background: var(--secondary-background);
 	box-shadow: 0 0.1rem 0 #8884;
