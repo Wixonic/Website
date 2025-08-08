@@ -23,6 +23,7 @@ addEventListener("DOMContentLoaded", async (e) => {
 		form.id = "signin";
 
 		const title = document.createElement("h1");
+		title.classList.add("slide");
 		title.innerHTML = "Sign in";
 
 		const email = document.createElement("div");
@@ -67,7 +68,7 @@ addEventListener("DOMContentLoaded", async (e) => {
 		};
 
 		const submit = document.createElement("button");
-		submit.classList.add("button", "invalid");
+		submit.classList.add("button", "invalid", "slide");
 		submit.innerHTML = "Submit";
 		submit.addEventListener("click", async (event) => {
 			event.preventDefault();
@@ -112,7 +113,7 @@ addEventListener("DOMContentLoaded", async (e) => {
 		});
 
 		const switchMode = document.createElement("button");
-		switchMode.classList.add("link", "switchMode");
+		switchMode.classList.add("link", "switchMode", "slide");
 		switchMode.innerHTML = "Don't have an account?";
 		switchMode.addEventListener("click", toggleForm);
 
@@ -129,6 +130,7 @@ addEventListener("DOMContentLoaded", async (e) => {
 		form.id = "signup";
 
 		const title = document.createElement("h1");
+		title.classList.add("slide");
 		title.innerHTML = "Sign up";
 
 		const email = document.createElement("div");
@@ -189,7 +191,7 @@ addEventListener("DOMContentLoaded", async (e) => {
 		};
 
 		const submit = document.createElement("button");
-		submit.classList.add("button", "invalid");
+		submit.classList.add("button", "invalid", "slide");
 		submit.innerHTML = "Submit";
 		submit.addEventListener("click", async (event) => {
 			event.preventDefault();
@@ -244,7 +246,7 @@ addEventListener("DOMContentLoaded", async (e) => {
 		});
 
 		const switchMode = document.createElement("button");
-		switchMode.classList.add("link", "switchMode");
+		switchMode.classList.add("link", "switchMode", "slide");
 		switchMode.innerHTML = "Already have an account?";
 		switchMode.addEventListener("click", toggleForm);
 
