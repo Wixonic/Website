@@ -13,20 +13,18 @@ addEventListener("DOMContentLoaded", async () => {
 
 	const main = document.querySelector("main");
 
-	const signout = document.createElement("button");
-	signout.classList.add("button", "signout");
-	signout.innerHTML = "Sign out";
+	const signout = document.querySelector(".signout");
 	signout.addEventListener("click", async () => await firebase.signOut());
 
 	if (!user.emailVerified) {
 		const banner = document.createElement("div");
-		banner.classList.add("banner");
+		banner.classList.add("banner", "fade", "slide");
 
 		const text = document.createElement("div");
 		text.innerHTML = "Your email address has not yet been verified.<br />To help protect both your account and the platform, and to ensure full access to all available features, please verify your email address by clicking the button below.<br />A verification email will be sent to your registered address.";
 
 		const button = document.createElement("button");
-		button.classList.add("button");
+		button.classList.add("button", "fade", "slide");
 		button.innerHTML = "Send verification email";
 		button.addEventListener("click", async () => {
 			if (!button.disabled) {
@@ -41,19 +39,20 @@ addEventListener("DOMContentLoaded", async () => {
 	}
 
 	const discordArea = document.createElement("div");
+	discordArea.classList.add("fade", "slide");
 
 	const discordLink = await firebase.isLinked("discord");
 	if (discordLink) {
 		// Make Discord link private
 
 		const discordSubtext = document.createElement("div");
-		discordSubtext.classList.add("subtext");
+		discordSubtext.classList.add("subtext", "fade");
 		discordSubtext.innerHTML = `To unlink your Discord account, you may delete your account, or <a href="${new URL("/contact/", localEnvironment ? path.local.root : path.root)}">contact us</a> to keep it active.`;
 
 		discordArea.append(discordSubtext);
 	} else {
 		const discord = document.createElement("button");
-		discord.classList.add("button", "discord");
+		discord.classList.add("button", "discord", "fade", "slide");
 		discord.innerHTML = `Link your account to ${(await request("GET", new URL("/icon/discord.text.svg", localEnvironment ? path.local.assets : path.assets), "text", "image/svg+xml", null, 3600)).response}`;
 		discord.addEventListener("click", async () => {
 			if (!discord.disabled) {
@@ -88,5 +87,5 @@ addEventListener("DOMContentLoaded", async () => {
 	deleteAccountSubtext.classList.add("subtext");
 	deleteAccountSubtext.innerHTML = "";
 
-	main.append(signout, discordArea, email, emailSubtext, displayName, displayNameSubtext, deleteAccountSubtext);
+	main.append(discordArea, email, emailSubtext, displayName, displayNameSubtext, deleteAccountSubtext);
 });
