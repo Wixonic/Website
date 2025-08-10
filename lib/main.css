@@ -129,7 +129,7 @@ li {
 .button.invalid {
 	opacity: 0.5;
 
-	cursor: default;
+	cursor: not-allowed;
 }
 
 .button.invalid:hover {
@@ -139,7 +139,8 @@ li {
 .button:disabled {
 	opacity: 0.5;
 
-	cursor: default;
+	cursor: not-allowed;
+	pointer-events: none;
 }
 
 .button:disabled:hover {
