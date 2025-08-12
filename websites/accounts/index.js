@@ -9,7 +9,6 @@ addEventListener("DOMContentLoaded", async () => {
 	const credentials = await firebase.getUser();
 	if (!credentials.valid) return location.href = `/login/?redirect=${encodeURIComponent(location.href)}`;
 	const user = credentials.user;
-	console.log(user);
 
 	const main = document.querySelector("main");
 
@@ -68,24 +67,24 @@ addEventListener("DOMContentLoaded", async () => {
 		discordArea.append(discord, discordSubtext);
 	}
 
-	const email = document.createElement("input");
+	/* const email = document.createElement("input");
 	// Change email
 
 	const emailSubtext = document.createElement("div");
 	emailSubtext.classList.add("subtext");
-	emailSubtext.innerHTML = "";
+	emailSubtext.innerHTML = ""; */
 
-	const displayName = document.createElement("input");
+	/* const displayName = document.createElement("input");
 	// Change display name
 
 	const displayNameSubtext = document.createElement("div");
 	displayNameSubtext.classList.add("subtext");
-	displayNameSubtext.innerHTML = "";
+	displayNameSubtext.innerHTML = ""; */
 
 	// Delete account
-	const deleteAccountSubtext = document.createElement("div");
+	/* const deleteAccountSubtext = document.createElement("div");
 	deleteAccountSubtext.classList.add("subtext");
-	deleteAccountSubtext.innerHTML = "";
+	deleteAccountSubtext.innerHTML = ""; */
 
-	main.append(discordArea, email, emailSubtext, displayName, displayNameSubtext, deleteAccountSubtext);
+	main.append(discordArea, email, emailSubtext, /* displayName, *//* displayNameSubtext, *//* deleteAccountSubtext */);
 });
