@@ -4,7 +4,7 @@
 - Verify email address
 - Change display name
 - Change email address
-- Hide Discord link
+- Hide Discord Account link
 - Delete account
 
 ## Admin

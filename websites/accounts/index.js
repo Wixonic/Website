@@ -38,20 +38,19 @@ addEventListener("DOMContentLoaded", async () => {
 	}
 
 	const discordArea = document.createElement("div");
-	discordArea.classList.add("fade", "slide");
 
 	const discordLink = await firebase.isLinked("discord");
 	if (discordLink) {
 		// Make Discord link private
 
 		const discordSubtext = document.createElement("div");
-		discordSubtext.classList.add("subtext", "fade");
+		discordSubtext.classList.add("subtext");
 		discordSubtext.innerHTML = `To unlink your Discord account, you may delete your account, or <a href="${new URL("/contact/", localEnvironment ? path.local.root : path.root)}">contact us</a> to keep it active.`;
 
 		discordArea.append(discordSubtext);
 	} else {
 		const discord = document.createElement("button");
-		discord.classList.add("button", "discord", "fade", "slide");
+		discord.classList.add("button", "discord");
 		discord.innerHTML = `Link your account to ${(await request("GET", new URL("/icon/discord.text.svg", localEnvironment ? path.local.assets : path.assets), "text", "image/svg+xml", null, 3600)).response}`;
 		discord.addEventListener("click", async () => {
 			if (!discord.disabled) {
@@ -67,24 +66,119 @@ addEventListener("DOMContentLoaded", async () => {
 		discordArea.append(discord, discordSubtext);
 	}
 
-	/* const email = document.createElement("input");
-	// Change email
+	const section = document.createElement("section");
+	section.classList.add("fade", "slide");
+
+	const maskEmail = (email) => {
+		const [user, domain] = email.split("@");
+		if (user.length <= 2) return email;
+		return `${user[0]}${"•".repeat(user.length - 2)}${user.at(-1)}@${domain}`;
+	};
+
+	let oldEmail = user.email;
+	const email = document.createElement("div");
+	email.classList.add("input");
+
+	const emailLabel = document.createElement("label");
+	emailLabel.innerText = "Email";
+
+	const emailWrapper = document.createElement("div");
+	emailWrapper.classList.add("wrapper");
+
+	const emailInput = document.createElement("input");
+	emailInput.type = "email";
+	emailInput.minLength = 6;
+	emailInput.placeholder = maskEmail(oldEmail);
+
+	const updateEmail = () => {
+		if (!emailInput.disabled && emailInput.validity.valid && emailInput.value.length > 0 && emailInput.value != oldEmail) {
+			emailInput.disabled = true;
+			email.classList.add("loading");
+			// Change email (https://firebase.google.com/docs/reference/js/auth.md#verifybeforeupdateemail_09d6f11)
+			// emailInput.disabled = false;
+			// email.classList.remove("loading");
+		}
+	};
+
+	emailInput.addEventListener("blur", () => updateEmail());
+	emailInput.addEventListener("keydown", (event) => {
+		if (event.key == "Enter") {
+			updateEmail();
+			emailInput.blur();
+		}
+	});
+
+	emailWrapper.append(emailInput);
+
+	email.append(emailWrapper, emailLabel);
 
 	const emailSubtext = document.createElement("div");
 	emailSubtext.classList.add("subtext");
-	emailSubtext.innerHTML = ""; */
+	emailSubtext.innerHTML = "Change your email address by simply typing the new one. Verification is required before changes take effect.";
 
-	/* const displayName = document.createElement("input");
-	// Change display name
+	let oldDisplayName = user.displayName;
+	const displayName = document.createElement("div");
+	displayName.classList.add("input");
+
+	const displayNameLabel = document.createElement("label");
+	displayNameLabel.innerText = "Name";
+
+	const displayNameWrapper = document.createElement("div");
+	displayNameWrapper.classList.add("wrapper");
+
+	const displayNameInput = document.createElement("input");
+	displayNameInput.minLength = 4;
+	displayNameInput.maxLength = 20;
+	displayNameInput.placeholder = oldDisplayName;
+
+	const updateDisplayName = () => {
+		if (!displayNameInput.disabled && displayNameInput.validity.valid && displayNameInput.value.length > 0 && displayNameInput.value != oldDisplayName) {
+			displayNameInput.disabled = true;
+			displayName.classList.add("loading");
+			// Change display name
+			// displayNameInput.disabled = false;
+			// displayName.classList.remove("loading");
+		}
+	};
+
+	displayNameInput.addEventListener("blur", () => updateDisplayName());
+	displayNameInput.addEventListener("input", (event) => {
+		if (event.key == "Enter") {
+			updateDisplayName();
+			displayNameInput.blur();
+		}
+	});
+
+	displayNameWrapper.append(displayNameInput);
+
+	displayName.append(displayNameWrapper, displayNameLabel);
 
 	const displayNameSubtext = document.createElement("div");
 	displayNameSubtext.classList.add("subtext");
-	displayNameSubtext.innerHTML = ""; */
+	displayNameSubtext.innerHTML = "Change your display name by simply typing a new one.";
 
-	// Delete account
-	/* const deleteAccountSubtext = document.createElement("div");
+	const deleteAccountButton = document.createElement("button");
+	deleteAccountButton.classList.add("button", "delete");
+	deleteAccountButton.innerHTML = "Delete account";
+	deleteAccountButton.addEventListener("click", async () => {
+		if (!deleteAccountButton.disabled) {
+			deleteAccountButton.disabled = true;
+			deleteAccountButton.classList.add("loading");
+			// Delete account
+			// await firebase.signOut();
+			// location.reload();
+		}
+	});
+
+	const deleteAccountSubtext = document.createElement("div");
 	deleteAccountSubtext.classList.add("subtext");
-	deleteAccountSubtext.innerHTML = ""; */
+	deleteAccountSubtext.innerHTML = `Deleting your account is permanent and cannot be undone. All data will be deleted from our servers. To remove data stored on Discord or other providers, follow the instructions <a href="${new URL("/privacy/#rights", localEnvironment ? path.local.root : path.root)}" target="_blank" class="link">here</a>, and to see what data we have about you, click <a href="${new URL("/privacy/", localEnvironment ? path.local.root : path.root)}" target="_blank" class="link">here</a>.`;
 
-	main.append(discordArea, email, emailSubtext, /* displayName, *//* displayNameSubtext, *//* deleteAccountSubtext */);
+	section.append(
+		discordArea, document.createElement("space"),
+		email, emailSubtext, document.createElement("space"),
+		displayName, displayNameSubtext, document.createElement("space"),
+		deleteAccountButton, deleteAccountSubtext
+	);
+	main.append(section);
 });

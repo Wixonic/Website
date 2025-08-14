@@ -137,7 +137,7 @@ li {
 }
 
 .button:disabled {
-	opacity: 0.5;
+	--color: #888;
 
 	cursor: not-allowed;
 	pointer-events: none;
@@ -180,22 +180,35 @@ li {
 	}
 }
 
-.input input {
-	width: 100%;
-
+.input .wrapper {
 	background: var(--background);
-
-	color: var(--color);
-	font-size: 0.9rem;
 
 	border: 0.1rem solid var(--color);
 	border-radius: 0.2rem;
 
+	transition: border-color 0.2s;
+}
+
+.input .wrapper input {
+	width: 100%;
+
+	background: none;
+
+	color: var(--color);
+	font-size: 0.9rem;
+
+	border: none;
+
 	padding: 0.4rem;
 
 	cursor: text;
+}
 
-	transition: border-color 0.2s;
+.input .wrapper input:disabled {
+	--color: #888;
+
+	cursor: not-allowed;
+	pointer-events: none;
 }
 
 .input label {
@@ -210,31 +223,25 @@ li {
 
 	padding: 0 0.2rem;
 
-	transition: color 0.2s, transform 0.2s ease-out;
+	transition: color 0.2s;
+	transform: translate(-0.2rem, -1.1rem) scale(0.85);
 
 	pointer-events: none;
 }
 
-.input input:focus+label,
-.input input:not(:placeholder-shown)+label {
-	transform: translate(-0.2rem, -1.1rem) scale(0.85);
-}
-
-.input input:invalid,
-.input.invalid input {
+.input.invalid .wrapper {
 	border-color: #F00;
 }
 
-.input input:invalid+label,
 .input.invalid label {
 	color: #F00;
 }
 
-.input input:autofill {
+.input.autofilled .wrapper {
 	border-color: #F80;
 }
 
-.input input:autofill+label {
+.input.autofilled label {
 	color: #F80;
 }
 
@@ -245,6 +252,26 @@ input:-webkit-autofill:active {
 	-webkit-box-shadow: 0 0 0 10rem var(--background) inset !important;
 	background: var(--background) !important;
 	background-clip: content-box !important;
+}
+
+input:-webkit-autofill {
+	animation-name: onAutoFillStart;
+}
+
+input:not(:-webkit-autofill) {
+	animation-name: onAutoFillCancel;
+}
+
+@keyframes onAutoFillStart {
+	from {}
+
+	to {}
+}
+
+@keyframes onAutoFillCancel {
+	from {}
+
+	to {}
 }
 
 .link {

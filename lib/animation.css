@@ -67,3 +67,9 @@
 .fade.slide.glow {
 	animation: fade 0.5s ease, slide 0.5s ease, glow 1s;
 }
+
+@keyframes spin {
+	to {
+		transform: rotate(360deg);
+	}
+}

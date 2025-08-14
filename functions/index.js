@@ -235,7 +235,7 @@ server.post(["/auth/join", "/auth/join/"], async (req, res) => {
 
 		try {
 			const credentials = await clientAuthLibrary.createUserWithEmailAndPassword(clientAuth, email, password);
-			const displayName = credentials.user.email == "contact@wixonic.fr" ? "Admin" : "user_" + credentials.user.uid;
+			const displayName = credentials.user.email == "contact@wixonic.fr" ? "Admin" : "user_" + credentials.user.uid.slice(-16, -1);
 
 			if (credentials.user.email == "contact@wixonic.fr") {
 				await adminAuth.setCustomUserClaims(credentials.user.uid, {

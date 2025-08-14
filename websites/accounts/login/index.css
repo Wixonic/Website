@@ -26,6 +26,33 @@ form {
 	border-radius: 1rem;
 
 	padding: 1rem 2rem 2rem 2rem;
+
+	z-index: 0;
+}
+
+form.loading::after {
+	content: "";
+
+	position: absolute;
+	inset: 0.2rem;
+
+	background: var(--background);
+
+	border-radius: 0.5rem;
+
+	z-index: -1;
+}
+
+form.loading::before {
+	content: "";
+
+	position: absolute;
+	inset: -50%;
+
+	background: conic-gradient(var(--color) 0% 1%, transparent 4% 46%, var(--color) 49% 51%, transparent 54% 96%, var(--color) 99% 100%);
+	animation: spin 2s linear infinite;
+
+	z-index: -2;
 }
 
 form .switchMode {
@@ -36,6 +63,14 @@ form .switchMode {
 	background: transparent;
 
 	border: none;
+}
+
+form .switchMode:disabled {
+	color: #888 !important;
+
+	cursor: default;
+
+	pointer-events: none;
 }
 
 form.visible {

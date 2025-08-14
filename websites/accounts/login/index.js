@@ -32,13 +32,16 @@ addEventListener("DOMContentLoaded", async (e) => {
 		const emailLabel = document.createElement("label");
 		emailLabel.innerText = "Email";
 
+		const emailWrapper = document.createElement("div");
+		emailWrapper.classList.add("wrapper");
+
 		const emailInput = document.createElement("input");
 		emailInput.type = "email";
 		emailInput.minLength = 6;
-		emailInput.placeholder = " ";
-		emailInput.addEventListener("input", () => resetStatus(email));
+		emailInput.addEventListener("input", () => resetStatus());
 
-		email.append(emailInput, emailLabel);
+		emailWrapper.append(emailInput);
+		email.append(emailWrapper, emailLabel);
 
 		const password = document.createElement("div");
 		password.classList.add("input");
@@ -46,15 +49,18 @@ addEventListener("DOMContentLoaded", async (e) => {
 		const passwordLabel = document.createElement("label");
 		passwordLabel.innerText = "Password";
 
+		const passwordWrapper = document.createElement("div");
+		passwordWrapper.classList.add("wrapper");
+
 		const passwordInput = document.createElement("input");
 		passwordInput.type = "password";
 		passwordInput.minLength = 8;
 		passwordInput.maxLength = 32;
-		passwordInput.pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{,32}$";
-		passwordInput.placeholder = " ";
-		passwordInput.addEventListener("input", () => resetStatus(password));
+		passwordInput.pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^a-zA-Z\\d]).{8,32}$";
+		passwordInput.addEventListener("input", () => resetStatus());
 
-		password.append(passwordInput, passwordLabel);
+		passwordWrapper.append(passwordInput);
+		password.append(passwordWrapper, passwordLabel);
 
 		const isValid = () => !(!(emailInput.validity.valid && passwordInput.validity.valid) || (emailInput.value.length == 0 || passwordInput.value.length == 0));
 
@@ -75,6 +81,8 @@ addEventListener("DOMContentLoaded", async (e) => {
 
 			if (isValid() && !submit.disabled) {
 				submit.disabled = true;
+				switchMode.disabled = true;
+				form.classList.add("loading");
 
 				try {
 					const req = await request("POST", new URL(`${localEnvironment ? "/wixonic-website-2/europe-west1/httpServer" : ""}/auth/token/`, localEnvironment ? path.local.functions : path.functions), "json", "application/json", JSON.stringify({
@@ -108,6 +116,8 @@ addEventListener("DOMContentLoaded", async (e) => {
 					}
 
 					submit.disabled = false;
+					switchMode.disabled = false;
+					form.classList.remove("loading");
 				}
 			}
 		});
@@ -115,7 +125,9 @@ addEventListener("DOMContentLoaded", async (e) => {
 		const switchMode = document.createElement("button");
 		switchMode.classList.add("link", "switchMode", "slide");
 		switchMode.innerHTML = "Don't have an account?";
-		switchMode.addEventListener("click", toggleForm);
+		switchMode.addEventListener("click", (event) => {
+			if (!switchMode.disabled) toggleForm(event);
+		});
 
 		form.append(title, email, password, submit, switchMode);
 
@@ -139,13 +151,16 @@ addEventListener("DOMContentLoaded", async (e) => {
 		const emailLabel = document.createElement("label");
 		emailLabel.innerText = "Email";
 
+		const emailWrapper = document.createElement("div");
+		emailWrapper.classList.add("wrapper");
+
 		const emailInput = document.createElement("input");
 		emailInput.type = "email";
 		emailInput.minLength = 6;
-		emailInput.placeholder = " ";
 		emailInput.addEventListener("input", () => resetStatus(email));
 
-		email.append(emailInput, emailLabel);
+		emailWrapper.append(emailInput);
+		email.append(emailWrapper, emailLabel);
 
 		const password = document.createElement("div");
 		password.classList.add("input");
@@ -153,15 +168,18 @@ addEventListener("DOMContentLoaded", async (e) => {
 		const passwordLabel = document.createElement("label");
 		passwordLabel.innerText = "Password";
 
+		const passwordWrapper = document.createElement("div");
+		passwordWrapper.classList.add("wrapper");
+
 		const passwordInput = document.createElement("input");
 		passwordInput.type = "password";
 		passwordInput.minLength = 8;
 		passwordInput.maxLength = 32;
-		passwordInput.pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{,32}$";
-		passwordInput.placeholder = " ";
+		passwordInput.pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^a-zA-Z\\d]).{8,32}$";
 		passwordInput.addEventListener("input", () => resetStatus(password));
 
-		password.append(passwordInput, passwordLabel);
+		passwordWrapper.append(passwordInput);
+		password.append(passwordWrapper, passwordLabel);
 
 		const confirmPassword = document.createElement("div");
 		confirmPassword.classList.add("input");
@@ -169,15 +187,18 @@ addEventListener("DOMContentLoaded", async (e) => {
 		const confirmPasswordLabel = document.createElement("label");
 		confirmPasswordLabel.innerText = "Confirm Password";
 
+		const confirmPasswordWrapper = document.createElement("div");
+		confirmPasswordWrapper.classList.add("wrapper");
+
 		const confirmPasswordInput = document.createElement("input");
 		confirmPasswordInput.type = "password";
 		confirmPasswordInput.minLength = 8;
 		confirmPasswordInput.maxLength = 32;
-		confirmPasswordInput.pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{,32}$";
-		confirmPasswordInput.placeholder = " ";
+		confirmPasswordInput.pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^a-zA-Z\\d]).{8,32}$";
 		confirmPasswordInput.addEventListener("input", () => resetStatus(password));
 
-		confirmPassword.append(confirmPasswordInput, confirmPasswordLabel);
+		confirmPasswordWrapper.append(confirmPasswordInput);
+		confirmPassword.append(confirmPasswordWrapper, confirmPasswordLabel);
 
 		const isValid = () => !(!(emailInput.validity.valid && passwordInput.validity.valid) || (emailInput.value.length == 0 || passwordInput.value.length == 0) || (passwordInput.value != confirmPasswordInput.value));
 
@@ -198,6 +219,8 @@ addEventListener("DOMContentLoaded", async (e) => {
 
 			if (isValid() && !submit.disabled) {
 				submit.disabled = true;
+				switchMode.disabled = true;
+				form.classList.add("loading");
 
 				try {
 					const req = await request("POST", new URL(`${localEnvironment ? "/wixonic-website-2/europe-west1/httpServer" : ""}/auth/join/`, localEnvironment ? path.local.functions : path.functions), "json", "application/json", JSON.stringify({
@@ -241,6 +264,8 @@ addEventListener("DOMContentLoaded", async (e) => {
 					}
 
 					submit.disabled = false;
+					switchMode.disabled = false;
+					form.classList.remove("loading");
 				}
 			}
 		});
@@ -248,7 +273,9 @@ addEventListener("DOMContentLoaded", async (e) => {
 		const switchMode = document.createElement("button");
 		switchMode.classList.add("link", "switchMode", "slide");
 		switchMode.innerHTML = "Already have an account?";
-		switchMode.addEventListener("click", toggleForm);
+		switchMode.addEventListener("click", (event) => {
+			if (!switchMode.disabled) toggleForm(event);
+		});
 
 		form.append(title, email, password, confirmPassword, submit, switchMode);
 
