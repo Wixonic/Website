@@ -1,4 +1,4 @@
-const { randomUUID } = require("crypto");
+const { randomBytes } = require("crypto");
 const express = require("express");
 const fs = require("fs");
 
@@ -94,7 +94,7 @@ router.post(["/discord", "/discord/"], async (req, res) => {
 					email: `discord_${discord.id}@wixonic.fr`,
 					emailVerified: true,
 					displayName,
-					password: randomUUID()
+					password: `Discord_${randomBytes(24).toString("hex").slice(0, 24)}`
 				});
 
 				await adminAuth.setCustomUserClaims(user.uid, {
@@ -297,4 +297,4 @@ router.post(["/verify", "/verify/"], async (req, res) => {
 	}
 });
 
-module.exports = router;
+module.exports = router;;;

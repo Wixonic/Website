@@ -6,6 +6,7 @@ const clientAppLibrary = require("firebase/app");
 const clientAuthLibrary = require("firebase/auth");
 
 const config = require("./config.json");
+
 const localEnvironment = process.env.FUNCTIONS_EMULATOR == "true";
 
 const adminApp = adminAppLibrary.initializeApp({
