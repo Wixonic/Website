@@ -91,3 +91,70 @@ footer,
 footer {
 	border-color: transparent !important;
 }
+
+.button.discord {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	background: #5865F2;
+
+	color: #FFF;
+
+	border-radius: 0.5rem;
+}
+
+.button.discord:hover {
+	--current-underline-color: #000;
+}
+
+.button.discord svg {
+	height: 1rem;
+
+	position: relative;
+	top: 0.08em;
+
+	fill: #FFF;
+
+	margin-left: 0.5rem;
+}
+
+separator {
+	display: block;
+
+	position: relative;
+
+	width: 90%;
+	height: 0.1rem;
+
+	background: #8888;
+
+	border-radius: 0.1rem;
+
+	margin: 2rem auto;
+
+	overflow: visible;
+
+	z-index: 0;
+}
+
+separator::after {
+	content: "OR";
+
+	display: flex;
+	justify-content: center;
+	align-content: center;
+
+	position: absolute;
+	top: calc(50% - 0.75rem);
+	left: calc(50% - 1rem);
+
+	width: 2rem;
+	height: 1.5rem;
+
+	background: var(--background);
+
+	color: #8888;
+
+	z-index: 1;
+}

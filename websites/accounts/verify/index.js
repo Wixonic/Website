@@ -8,6 +8,8 @@ addEventListener("DOMContentLoaded", async () => {
 	const params = new URLSearchParams(location.search);
 	const mode = params.get("mode");
 	const oobCode = params.get("oobCode");
+	const token = params.get("token");
+	const redirect = params.get("redirect") ?? (localEnvironment ? path.local.accounts : path.accounts);
 
 	const main = document.querySelector("main");
 
@@ -41,6 +43,15 @@ addEventListener("DOMContentLoaded", async () => {
 			await firebase.signOut(false);
 			title.innerText = "Changed email";
 			subtext.innerText = "Your new email has been verified.";
+		} catch (e) {
+			console.error(e);
+			title.innerText = "Failed to change email";
+		}
+	} else if (mode == "finalizeDiscord" && token) {
+		try {
+			const success = await firebase.signInWithCustomToken(token);
+			if (!success) throw "Failed to finalize Discord";
+			location.href = redirect;
 		} catch (e) {
 			console.error(e);
 			title.innerText = "Failed to change email";

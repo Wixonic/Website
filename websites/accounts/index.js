@@ -13,7 +13,10 @@ addEventListener("DOMContentLoaded", async () => {
 	const main = document.querySelector("main");
 
 	const signout = document.querySelector(".signout");
-	signout.addEventListener("click", async () => await firebase.signOut());
+	signout.addEventListener("click", async (e) => {
+		e.preventDefault();
+		await firebase.signOut();
+	});
 
 	if (!user.emailVerified) {
 		const banner = document.createElement("div");
@@ -200,9 +203,8 @@ addEventListener("DOMContentLoaded", async () => {
 	deleteAccountSubtext.classList.add("subtext");
 	deleteAccountSubtext.innerHTML = `Deleting your account is permanent and cannot be undone. All data will be deleted from our servers. To remove data stored on Discord or other providers, follow the instructions <a href="${new URL("/privacy/#rights", localEnvironment ? path.local.root : path.root)}" target="_blank" class="link">here</a>, and to see what data we have about you, click <a href="${new URL("/privacy/", localEnvironment ? path.local.root : path.root)}" target="_blank" class="link">here</a>.`;
 
+	if (!credentials.claims.discord) section.append(discordArea, document.createElement("space"), email, emailSubtext, document.createElement("space"));
 	section.append(
-		discordArea, document.createElement("space"),
-		email, emailSubtext, document.createElement("space"),
 		displayName, displayNameSubtext, document.createElement("space"),
 		deleteAccountButton, deleteAccountSubtext
 	);
