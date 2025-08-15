@@ -67,7 +67,7 @@ router.post(["/session", "/session/"], async (req, res) => {
 
 		res.status(204).end();
 	} catch (e) {
-		req.logger.error("Failed to create session cookie:", e);
+		req.logger.warn("Failed to create session cookie:", e);
 		res.status(401).json({ error: "Unauthorized request" });
 	}
 });
@@ -118,7 +118,7 @@ router.post(["/discord", "/discord/"], async (req, res) => {
 			customToken
 		});
 	} catch (e) {
-		req.logger.error(e);
+		req.logger.warn(e);
 		res.status(400).json({
 			error: "Failed to authenticate with Discord"
 		});
@@ -202,13 +202,13 @@ router.post(["/join", "/join/"], async (req, res) => {
 
 			res.status(204).end();
 		} catch (e) {
-			req.logger.error(e);
+			req.logger.warn(e);
 			res.status(400).json({
 				error: "Failed to create account"
 			});
 		}
 	} catch (e) {
-		req.logger.error(e);
+		req.logger.warn(e);
 		res.status(400).json({
 			error: `Failed to parse JSON: ${e}`
 		});
@@ -266,7 +266,7 @@ router.post(["/delete", "/delete/"], async (req, res) => {
 
 		res.status(204).end();
 	} catch (e) {
-		req.logger.error("Failed to delete account:", e);
+		req.logger.warn("Failed to delete account:", e);
 		res.status(500).end();
 	}
 });
@@ -290,7 +290,7 @@ router.post(["/verify", "/verify/"], async (req, res) => {
 		else await sendVerificationEmail(user.email);
 		res.status(204).end();
 	} catch (e) {
-		req.logger.error("Failed to verify token:", e);
+		req.logger.warn("Failed to verify token:", e);
 		return res.status(403).json({
 			error: "Invalid or expired token"
 		});
