@@ -160,7 +160,7 @@ li {
 	padding: 0.4rem;
 }
 
-.input.invalid {
+.input.invalid:not(:has(input:focus)) {
 	animation: bounce 0.3s ease-out;
 }
 

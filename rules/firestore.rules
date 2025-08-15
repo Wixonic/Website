@@ -4,16 +4,19 @@ service cloud.firestore {
 	match /databases/{database}/documents {
 		match /users/{uid} {
 			allow read: if true;
-			allow write: if request.auth != null && request.auth.uid == uid;
+			allow write: if request.auth != null
+				&& request.auth.uid == uid
+				&& isValidUserUpdate(request.resource.data);
 
 			match /links/{link} {
-				allow read: if request.auth != null;
-				allow write: if request.auth != null && request.auth.uid == uid;
+				allow read, write: if request.auth != null && request.auth.uid == uid;
 			}
 		}
 
 		match /privateUsers/{uid} {
-			allow read, write: if request.auth != null && request.auth.uid == uid;
+			allow read, write: if request.auth != null
+				&& request.auth.uid == uid
+				&& isValidPrivateUserUpdate(request.resource.data);
 
 			match /links/{link} {
 				allow read, write: if request.auth != null && request.auth.uid == uid;
@@ -23,5 +26,28 @@ service cloud.firestore {
 		match /{allPaths=**} {
 			allow read, write: if false;
 		}
+	}
+
+	function isValidEmail(email) {
+		return email is string && email.matches("^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$");
+	}
+
+	function isValidDisplayName(name) {
+		return name is string && name.matches("^[\\p{L}\\p{N}_\\- ]{4,20}$");
+	}
+
+	function isValidUserUpdate(data) {
+		let keys = request.writeFields;
+
+		return ((keys.hasAny(["email"]) && isValidEmail(data.email)) ||
+			(keys.hasAny(["displayName"]) && isValidDisplayName(data.displayName)))
+			&& keys.hasOnly(["email", "displayName"]);
+	}
+
+	function isValidPrivateUserUpdate(data) {
+		let keys = request.writeFields;
+
+		return (keys.hasAny(["email"]) && isValidEmail(data.email))
+			&& keys.hasOnly(["email"]);
 	}
 }

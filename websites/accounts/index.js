@@ -61,7 +61,7 @@ addEventListener("DOMContentLoaded", async () => {
 
 		const discordSubtext = document.createElement("div");
 		discordSubtext.classList.add("subtext");
-		discordSubtext.innerHTML = `Linking your Discord account unlocks exclusive features and rewards. <b>1,000 points</b> will be credited to your account after linking.`;
+		discordSubtext.innerHTML = `Linking your Discord account unlocks exclusive features and rewards.<br /><b>5,000 points</b> will be credited to your account after linking.`;
 
 		discordArea.append(discord, discordSubtext);
 	}
@@ -88,24 +88,32 @@ addEventListener("DOMContentLoaded", async () => {
 	const emailInput = document.createElement("input");
 	emailInput.type = "email";
 	emailInput.minLength = 6;
+	emailInput.pattern = "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$";
 	emailInput.placeholder = maskEmail(oldEmail);
 
-	const updateEmail = () => {
+	const updateEmail = async () => {
 		if (!emailInput.disabled && emailInput.validity.valid && emailInput.value.length > 0 && emailInput.value != oldEmail) {
 			emailInput.disabled = true;
 			email.classList.add("loading");
-			// Change email (https://firebase.google.com/docs/reference/js/auth.md#verifybeforeupdateemail_09d6f11)
-			// emailInput.disabled = false;
-			// email.classList.remove("loading");
+			try {
+				const newEmail = emailInput.value;
+				const response = await request("POST", new URL(`${localEnvironment ? "/wixonic-website-2/europe-west1/httpServer" : ""}/auth/verify/?email=${encodeURIComponent(newEmail)}`, localEnvironment ? path.local.functions : path.functions), "json", "application/json", null, -1, true);
+				if (response.status != 204) throw "Failed: " + response.status;
+				oldEmail = newEmail;
+				emailInput.placeholder = maskEmail(newEmail);
+			} catch (e) {
+				console.error(e);
+			}
+
+			emailInput.value = "";
+			emailInput.disabled = false;
+			email.classList.remove("loading");
 		}
 	};
 
 	emailInput.addEventListener("blur", () => updateEmail());
 	emailInput.addEventListener("keydown", (event) => {
-		if (event.key == "Enter") {
-			updateEmail();
-			emailInput.blur();
-		}
+		if (event.key == "Enter") emailInput.blur();
 	});
 
 	emailWrapper.append(emailInput);
@@ -129,24 +137,36 @@ addEventListener("DOMContentLoaded", async () => {
 	const displayNameInput = document.createElement("input");
 	displayNameInput.minLength = 4;
 	displayNameInput.maxLength = 20;
+	displayNameInput.title = "4 to 20 characters. Letters, numbers, spaces, underscores, and hyphens only.";
+	displayNameInput.pattern = "^[\\p{L}\\p{N}_\\- ]{4,20}$";
 	displayNameInput.placeholder = oldDisplayName;
 
-	const updateDisplayName = () => {
+	const updateDisplayName = async () => {
 		if (!displayNameInput.disabled && displayNameInput.validity.valid && displayNameInput.value.length > 0 && displayNameInput.value != oldDisplayName) {
 			displayNameInput.disabled = true;
 			displayName.classList.add("loading");
-			// Change display name
-			// displayNameInput.disabled = false;
-			// displayName.classList.remove("loading");
+
+			try {
+				const newDisplayName = displayNameInput.value;
+				await firebase.updateProfile({
+					displayName: newDisplayName
+				});
+
+				oldDisplayName = newDisplayName;
+				displayNameInput.placeholder = newDisplayName;
+			} catch (e) {
+				console.error(e);
+			}
+
+			displayNameInput.value = "";
+			displayNameInput.disabled = false;
+			displayName.classList.remove("loading");
 		}
 	};
 
 	displayNameInput.addEventListener("blur", () => updateDisplayName());
-	displayNameInput.addEventListener("input", (event) => {
-		if (event.key == "Enter") {
-			updateDisplayName();
-			displayNameInput.blur();
-		}
+	displayNameInput.addEventListener("keydown", (event) => {
+		if (event.key == "Enter") displayNameInput.blur();
 	});
 
 	displayNameWrapper.append(displayNameInput);
@@ -164,9 +184,15 @@ addEventListener("DOMContentLoaded", async () => {
 		if (!deleteAccountButton.disabled) {
 			deleteAccountButton.disabled = true;
 			deleteAccountButton.classList.add("loading");
-			// Delete account
-			// await firebase.signOut();
-			// location.reload();
+			try {
+				const response = await request("POST", new URL(`${localEnvironment ? "/wixonic-website-2/europe-west1/httpServer" : ""}/auth/delete/`, localEnvironment ? path.local.functions : path.functions), "json", "application/json", null, -1, true);
+				if (response.status != 204) throw "Failed: " + response.status;
+				await firebase.signOut();
+			} catch (e) {
+				console.error(e);
+				deleteAccountButton.disabled = false;
+				deleteAccountButton.classList.remove("loading");
+			}
 		}
 	});
 

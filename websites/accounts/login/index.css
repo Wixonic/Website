@@ -38,7 +38,7 @@ form.loading::after {
 
 	background: var(--background);
 
-	border-radius: 0.5rem;
+	border-radius: 0.75rem;
 
 	z-index: -1;
 }
@@ -86,4 +86,8 @@ form .button {
 footer,
 .button {
 	background: transparent;
+}
+
+footer {
+	border-color: transparent !important;
 }

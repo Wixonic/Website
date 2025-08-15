@@ -16,6 +16,8 @@ const adminFunctionsLibrary = require("firebase-functions/v1");
 const clientAppLibrary = require("firebase/app");
 const clientAuthLibrary = require("firebase/auth");
 
+const request = require("./request.js");
+
 const config = require("./config.json");
 
 const localEnvironment = process.env.FUNCTIONS_EMULATOR == "true";
@@ -72,10 +74,11 @@ server.use(cookieParser());
 
 let requestId = 0;
 
-const sendVerificationEmail = async (email) => {
-	const verificationLink = await adminAuth.generateEmailVerificationLink(email, {
-		url: localEnvironment ? "http://localhost:2010" : "https://accounts.wixonic.fr"
-	});
+const sendVerificationEmail = async (email, newEmail) => {
+	const url = new URL("/verify/", localEnvironment ? "http://localhost:2010" : "https://accounts.wixonic.fr");
+	const verificationLink = new URL(newEmail ? await adminAuth.generateVerifyAndChangeEmailLink(email, newEmail) : await adminAuth.generateEmailVerificationLink(email));
+	url.searchParams.set("mode", verificationLink.searchParams.get("mode"));
+	url.searchParams.set("oobCode", verificationLink.searchParams.get("oobCode"));
 
 	await transporter.sendMail({
 		from: "Wixonic Network <contact@wixonic.fr>",
@@ -83,7 +86,7 @@ const sendVerificationEmail = async (email) => {
 		subject: "Verify your email",
 		html: fs.readFileSync("./emails/verify.html", "utf-8")
 			.replaceAll("%EMAIL%", email)
-			.replaceAll("%VERIFICATION_LINK%", verificationLink)
+			.replaceAll("%VERIFICATION_LINK%", url.toString())
 	});
 };
 
@@ -148,6 +151,7 @@ server.route(["/auth/token", "/auth/token/"])
 				const sessionCookie = await adminAuth.createSessionCookie(idToken, { expiresIn });
 
 				res.cookie("__session", sessionCookie, {
+					path: "/",
 					domain: localEnvironment ? undefined : ".wixonic.fr",
 					maxAge: expiresIn,
 					httpOnly: true,
@@ -156,7 +160,6 @@ server.route(["/auth/token", "/auth/token/"])
 				});
 
 				res.status(204).end();
-				req.logger.info(`Authentified as "${credentials.user.displayName ?? "user" + credentials.user.uid}"`);
 			} catch (e) {
 				req.logger.error(e);
 				res.status(400).json({
@@ -171,8 +174,6 @@ server.route(["/auth/token", "/auth/token/"])
 	});
 
 server.post(["/auth/revoke", "/auth/revoke/"], async (req, res) => {
-	console.log("Deleted");
-
 	req.id = requestId++;
 	req.logger = {
 		debug: (...data) => console.log(`req${req.id}:`, ...data),
@@ -191,6 +192,7 @@ server.post(["/auth/revoke", "/auth/revoke/"], async (req, res) => {
 	}
 
 	res.clearCookie("__session", {
+		path: "/",
 		domain: localEnvironment ? undefined : ".wixonic.fr",
 		httpOnly: true,
 		secure: !localEnvironment,
@@ -201,7 +203,7 @@ server.post(["/auth/revoke", "/auth/revoke/"], async (req, res) => {
 		const decoded = await adminAuth.verifySessionCookie(sessionCookie);
 		await adminAuth.revokeRefreshTokens(decoded.uid);
 	} catch (e) {
-		console.warn("Failed to revoke refresh tokens:", e);
+		req.logger.warn("Failed to revoke refresh tokens:", e);
 	}
 
 	res.status(204).end();
@@ -268,7 +270,6 @@ server.post(["/auth/join", "/auth/join/"], async (req, res) => {
 			});
 
 			res.status(204).end();
-			req.logger.info(`Authentified as "${credentials.user.displayName ?? "user_" + credentials.user.uid}"`);
 		} catch (e) {
 			req.logger.error(e);
 			res.status(400).json({
@@ -276,9 +277,75 @@ server.post(["/auth/join", "/auth/join/"], async (req, res) => {
 			});
 		}
 	} catch (e) {
+		req.logger.error(e);
 		res.status(400).json({
 			error: `Failed to parse JSON: ${e}`
 		});
+	}
+});
+
+server.post(["/auth/delete", "/auth/delete/"], async (req, res) => {
+	req.id = requestId++;
+	req.logger = {
+		debug: (...data) => console.log(`req${req.id}:`, ...data),
+		info: (...data) => console.info(`req${req.id}:`, ...data),
+		warn: (...data) => console.warn(`req${req.id}:`, ...data),
+		error: (...data) => console.error(`req${req.id}:`, ...data)
+	};
+
+	const sessionCookie = req.cookies.__session;
+
+	if (!sessionCookie) {
+		req.logger.warn("Session cookie is missing");
+		return res.status(401).json({
+			error: "Session cookie is missing"
+		});
+	}
+
+	try {
+		const decoded = await adminAuth.verifySessionCookie(sessionCookie);
+
+		const discordLink = await adminFirestore.collection("users").doc(decoded.uid).collection("links").doc("discord").get();
+
+		if (discordLink.exists) {
+			try {
+				const discordData = discordLink.data();
+				const response = await request(req.logger, {
+					url: new URL("/discord/link/delete/", localEnvironment ? "http://localhost:999" : "https://server.wixonic.fr"),
+					method: "POST",
+					type: "text",
+					auth: config.server.wixkey,
+					headers: {
+						"Content-Type": "text/plain"
+					},
+					secure: !localEnvironment,
+					body: discordData.id
+				});
+				if (response.error) throw "Failed: " + response.error;
+			} catch (e) {
+				req.logger.error("Failed to delete Discord link:", e);
+				return res.status(500).end();
+			}
+		}
+
+		await adminFirestore.recursiveDelete(adminFirestore.collection("users").doc(decoded.uid));
+		await adminFirestore.recursiveDelete(adminFirestore.collection("privateUsers").doc(decoded.uid));
+
+		await adminAuth.revokeRefreshTokens(decoded.uid);
+		await adminAuth.deleteUser(decoded.uid);
+
+		res.clearCookie("__session", {
+			path: "/",
+			domain: localEnvironment ? undefined : ".wixonic.fr",
+			httpOnly: true,
+			secure: !localEnvironment,
+			sameSite: localEnvironment ? "lax" : "none"
+		});
+
+		res.status(204).end();
+	} catch (e) {
+		req.logger.error("Failed to delete account:", e);
+		res.status(500).end();
 	}
 });
 
@@ -304,9 +371,11 @@ server.post(["/auth/verify", "/auth/verify/"], async (req, res) => {
 		const user = await adminAuth.verifySessionCookie(sessionCookie, true);
 		req.logger.debug("Authenticated user:", user.uid);
 
-		if (user.email_verified) throw "Email already verified";
+		const newEmail = req.query.email ? decodeURIComponent(req.query.email) : null;
 
-		await sendVerificationEmail(user.email);
+		if (newEmail) await sendVerificationEmail(user.email, newEmail);
+		else if (user.email_verified) throw "Email already verified";
+		else await sendVerificationEmail(user.email);
 		res.status(204).end();
 	} catch (e) {
 		req.logger.error("Failed to verify token:", e);

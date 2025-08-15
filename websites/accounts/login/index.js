@@ -38,6 +38,7 @@ addEventListener("DOMContentLoaded", async (e) => {
 		const emailInput = document.createElement("input");
 		emailInput.type = "email";
 		emailInput.minLength = 6;
+		emailInput.pattern = "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$";
 		emailInput.addEventListener("input", () => resetStatus());
 
 		emailWrapper.append(emailInput);
@@ -78,6 +79,10 @@ addEventListener("DOMContentLoaded", async (e) => {
 		submit.innerHTML = "Submit";
 		submit.addEventListener("click", async (event) => {
 			event.preventDefault();
+
+			for (const child of form.children) {
+				if (typeof child.blur == "function") child.blur();
+			}
 
 			if (isValid() && !submit.disabled) {
 				submit.disabled = true;
@@ -157,6 +162,7 @@ addEventListener("DOMContentLoaded", async (e) => {
 		const emailInput = document.createElement("input");
 		emailInput.type = "email";
 		emailInput.minLength = 6;
+		emailInput.pattern = "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$";
 		emailInput.addEventListener("input", () => resetStatus(email));
 
 		emailWrapper.append(emailInput);
@@ -175,6 +181,7 @@ addEventListener("DOMContentLoaded", async (e) => {
 		passwordInput.type = "password";
 		passwordInput.minLength = 8;
 		passwordInput.maxLength = 32;
+		passwordInput.title = "8 to 32 characters, including at least one lowercase letter, one uppercase letter, one number, and one special character.";
 		passwordInput.pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^a-zA-Z\\d]).{8,32}$";
 		passwordInput.addEventListener("input", () => resetStatus(password));
 
@@ -194,6 +201,7 @@ addEventListener("DOMContentLoaded", async (e) => {
 		confirmPasswordInput.type = "password";
 		confirmPasswordInput.minLength = 8;
 		confirmPasswordInput.maxLength = 32;
+		confirmPasswordInput.title = "Must match the password exactly.";
 		confirmPasswordInput.pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^a-zA-Z\\d]).{8,32}$";
 		confirmPasswordInput.addEventListener("input", () => resetStatus(password));
 
@@ -216,6 +224,10 @@ addEventListener("DOMContentLoaded", async (e) => {
 		submit.innerHTML = "Submit";
 		submit.addEventListener("click", async (event) => {
 			event.preventDefault();
+
+			for (const child of form.children) {
+				if (typeof child.blur == "function") child.blur();
+			}
 
 			if (isValid() && !submit.disabled) {
 				submit.disabled = true;
