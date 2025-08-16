@@ -28,7 +28,7 @@ addEventListener("DOMContentLoaded", async () => {
 
 		const discordButton = document.createElement("button");
 		discordButton.classList.add("button", "discord");
-		discordButton.innerHTML = `Continue with ${(await request("GET", new URL("/icon/discord.text.svg", localEnvironment ? path.local.assets : path.assets), "text", "image/svg+xml", null, 3600)).response}`;
+		discordButton.innerHTML = `Continue with ${(await request("GET", new URL("/icon/discord.text.svg", localEnvironment ? path.local.assets : path.assets), "text", null, null, 3600)).response}`;
 		discordButton.type = "button";
 
 		discordButton.addEventListener("click", (event) => {
@@ -42,7 +42,7 @@ addEventListener("DOMContentLoaded", async () => {
 			switchMode.disabled = true;
 			form.classList.add("loading");
 
-			const discordLinkURL = new URL("/discord/link/join/", localEnvironment ? path.local.server : path.server);
+			const discordLinkURL = new URL("/discord/link/auth/", localEnvironment ? path.local.server : path.server);
 			discordLinkURL.searchParams.set("redirect", redirect);
 			location.href = discordLinkURL.toString();
 		});
@@ -168,7 +168,7 @@ addEventListener("DOMContentLoaded", async () => {
 
 		const discordButton = document.createElement("button");
 		discordButton.classList.add("button", "discord");
-		discordButton.innerHTML = `Continue with ${(await request("GET", new URL("/icon/discord.text.svg", localEnvironment ? path.local.assets : path.assets), "text", "image/svg+xml", null, 3600)).response}`;
+		discordButton.innerHTML = `Continue with ${(await request("GET", new URL("/icon/discord.text.svg", localEnvironment ? path.local.assets : path.assets), "text", null, null, 3600)).response}`;
 		discordButton.type = "button";
 
 		discordButton.addEventListener("click", (event) => {
@@ -182,7 +182,7 @@ addEventListener("DOMContentLoaded", async () => {
 			switchMode.disabled = true;
 			form.classList.add("loading");
 
-			const discordLinkURL = new URL("/discord/link/join/", localEnvironment ? path.local.server : path.server);
+			const discordLinkURL = new URL("/discord/link/auth/", localEnvironment ? path.local.server : path.server);
 			discordLinkURL.searchParams.set("redirect", redirect);
 			location.href = discordLinkURL.toString();
 		});
@@ -276,7 +276,7 @@ addEventListener("DOMContentLoaded", async () => {
 				form.classList.add("loading");
 
 				try {
-					const req = await request("POST", new URL(`${localEnvironment ? "/wixonic-website-2/europe-west1/httpServer" : ""}/auth/join/`, localEnvironment ? path.local.functions : path.functions), "json", "application/json", JSON.stringify({
+					const req = await request("POST", new URL("/auth/join/", localEnvironment ? path.local.functions : path.functions), "json", "application/json", JSON.stringify({
 						email: emailInput.value,
 						password: passwordInput.value,
 						confirm: confirmPasswordInput.value

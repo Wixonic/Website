@@ -26,51 +26,85 @@ const sendVerificationEmail = async (email, newEmail) => {
 	});
 };
 
-router.get(["/token", "/token/"], async (req, res) => {
-	const sessionCookie = req.cookies.__session;
+router.route(["/token", "/token/"])
+	.get(async (req, res) => {
+		const sessionCookie = req.cookies.__session;
 
-	if (!sessionCookie) {
-		req.logger.warn("Session cookie is missing");
-		return res.status(401).json({
-			error: "Session cookie is missing"
-		});
-	}
+		if (!sessionCookie) {
+			req.logger.warn("Session cookie is missing");
+			return res.status(401).json({
+				error: "Session cookie is missing"
+			});
+		}
 
-	try {
-		const user = await adminAuth.verifySessionCookie(sessionCookie, true);
+		try {
+			const user = await adminAuth.verifySessionCookie(sessionCookie, true);
 
-		const customToken = await adminAuth.createCustomToken(user.uid);
-		res.status(200).json({
-			customToken
-		});
-	} catch (e) {
-		req.logger.error("Failed to verify token:", e);
-		return res.status(403).json({
-			error: "Invalid or expired token"
-		});
-	}
-});
+			const customToken = await adminAuth.createCustomToken(user.uid);
+			res.status(200).json({
+				customToken
+			});
+		} catch (e) {
+			req.logger.error("Failed to verify token:", e);
+			return res.status(403).json({
+				error: "Invalid or expired token"
+			});
+		}
+	})
+	.post(async (req, res) => {
+		const { idToken } = req.body;
 
-router.post(["/session", "/session/"], async (req, res) => {
-	try {
-		const { idToken } = JSON.parse(req.body);
-		const expiresIn = 2 * 7 * 24 * 60 * 60 * 1000;
-		const sessionCookie = await adminAuth.createSessionCookie(idToken, { expiresIn });
+		if (!idToken) {
+			req.logger.warn("Missing idToken");
+			return res.status(400).json({
+				error: "Missing idToken"
+			});
+		}
 
-		res.cookie("__session", sessionCookie, {
+		try {
+			const expiresIn = 2 * 7 * 24 * 60 * 60 * 1000;
+			const sessionCookie = await adminAuth.createSessionCookie(idToken, { expiresIn });
+
+			res.cookie("__session", sessionCookie, {
+				domain: localEnvironment ? undefined : ".wixonic.fr",
+				maxAge: expiresIn,
+				httpOnly: true,
+				secure: !localEnvironment,
+				sameSite: localEnvironment ? "lax" : "none"
+			});
+
+			res.status(204).end();
+		} catch (e) {
+			req.logger.warn("Failed to create session cookie:", e);
+			res.status(401).json({ error: "Unauthorized request" });
+		}
+	})
+	.delete(async (req, res) => {
+		const sessionCookie = req.cookies.__session;
+
+		if (!sessionCookie) {
+			req.logger.warn("Session cookie is missing");
+			return res.status(401).json({
+				error: "Session cookie is missing"
+			});
+		}
+
+		res.clearCookie("__session", {
 			domain: localEnvironment ? undefined : ".wixonic.fr",
-			maxAge: expiresIn,
 			httpOnly: true,
 			secure: !localEnvironment,
 			sameSite: localEnvironment ? "lax" : "none"
 		});
 
-		res.status(204).end();
-	} catch (e) {
-		req.logger.warn("Failed to create session cookie:", e);
-		res.status(401).json({ error: "Unauthorized request" });
-	}
-});
+		try {
+			const decoded = await adminAuth.verifySessionCookie(sessionCookie);
+			await adminAuth.revokeRefreshTokens(decoded.uid);
+			res.status(204).end();
+		} catch (e) {
+			req.logger.warn("Failed to revoke refresh tokens:", e);
+			res.status(500).end();
+		}
+	});
 
 router.post(["/discord", "/discord/"], async (req, res) => {
 	try {
@@ -128,97 +162,63 @@ router.post(["/discord", "/discord/"], async (req, res) => {
 	}
 });
 
-router.post(["/revoke", "/revoke/"], async (req, res) => {
-	const sessionCookie = req.cookies.__session;
+router.post(["/join", "/join/"], async (req, res) => {
+	const { email, password, confirm } = req.body;
 
-	if (!sessionCookie) {
-		req.logger.warn("Session cookie is missing");
-		return res.status(401).json({
-			error: "Session cookie is missing"
+	if (!email || !password || !confirm) {
+		req.logger.warn("Missing email, password or password confirmation");
+		return res.status(400).json({
+			error: "Missing email, password or password confirmation"
 		});
 	}
 
-	res.clearCookie("__session", {
-		domain: localEnvironment ? undefined : ".wixonic.fr",
-		httpOnly: true,
-		secure: !localEnvironment,
-		sameSite: localEnvironment ? "lax" : "none"
-	});
-
-	try {
-		const decoded = await adminAuth.verifySessionCookie(sessionCookie);
-		await adminAuth.revokeRefreshTokens(decoded.uid);
-		res.status(204).end();
-	} catch (e) {
-		req.logger.warn("Failed to revoke refresh tokens:", e);
-		res.status(500).end();
+	if (password != confirm) {
+		req.logger.warn("Password and confirmation do not match");
+		return res.status(400).json({
+			error: "Password and confirmation do not match",
+		});
 	}
-});
 
-router.post(["/join", "/join/"], async (req, res) => {
 	try {
-		const { email, password, confirm } = JSON.parse(req.body);
+		const credentials = await clientAuthLibrary.createUserWithEmailAndPassword(clientAuth, email, password);
+		const displayName = credentials.user.email == "contact@wixonic.fr" ? "Admin" : "user_" + credentials.user.uid.slice(-16, -1);
 
-		if (!email || !password || !confirm) {
-			req.logger.warn("Missing email, password or password confirmation");
-			return res.status(400).json({
-				error: "Missing email, password or password confirmation"
+		if (credentials.user.email == "contact@wixonic.fr") {
+			await adminAuth.setCustomUserClaims(credentials.user.uid, {
+				admin: true
 			});
 		}
 
-		if (password != confirm) {
-			req.logger.warn("Password and confirmation do not match");
-			return res.status(400).json({
-				error: "Password and confirmation do not match",
-			});
-		}
+		await adminAuth.updateUser(credentials.user.uid, { displayName });
+		await adminFirestore.collection("users").doc(credentials.user.uid).set({
+			displayName,
+			createdAt: new Date().toISOString()
+		});
 
-		try {
-			const credentials = await clientAuthLibrary.createUserWithEmailAndPassword(clientAuth, email, password);
-			const displayName = credentials.user.email == "contact@wixonic.fr" ? "Admin" : "user_" + credentials.user.uid.slice(-16, -1);
+		await sendVerificationEmail(email);
 
-			if (credentials.user.email == "contact@wixonic.fr") {
-				await adminAuth.setCustomUserClaims(credentials.user.uid, {
-					admin: true
-				});
-			}
+		const idToken = await credentials.user.getIdToken();
+		const expiresIn = 2 * 7 * 24 * 60 * 60 * 1000;
+		const sessionCookie = await adminAuth.createSessionCookie(idToken, { expiresIn });
 
-			await adminAuth.updateUser(credentials.user.uid, { displayName });
-			await adminFirestore.collection("users").doc(credentials.user.uid).set({
-				displayName,
-				createdAt: new Date().toISOString()
-			});
+		res.cookie("__session", sessionCookie, {
+			domain: localEnvironment ? undefined : ".wixonic.fr",
+			maxAge: expiresIn,
+			httpOnly: true,
+			secure: !localEnvironment,
+			sameSite: localEnvironment ? "lax" : "none"
+		});
 
-			await sendVerificationEmail(email);
-
-			const idToken = await credentials.user.getIdToken();
-			const expiresIn = 2 * 7 * 24 * 60 * 60 * 1000;
-			const sessionCookie = await adminAuth.createSessionCookie(idToken, { expiresIn });
-
-			res.cookie("__session", sessionCookie, {
-				domain: localEnvironment ? undefined : ".wixonic.fr",
-				maxAge: expiresIn,
-				httpOnly: true,
-				secure: !localEnvironment,
-				sameSite: localEnvironment ? "lax" : "none"
-			});
-
-			res.status(204).end();
-		} catch (e) {
-			req.logger.warn(e);
-			res.status(400).json({
-				error: "Failed to create account"
-			});
-		}
+		res.status(204).end();
 	} catch (e) {
 		req.logger.warn(e);
 		res.status(400).json({
-			error: `Failed to parse JSON: ${e}`
+			error: "Failed to create account"
 		});
 	}
 });
 
-router.post(["/delete", "/delete/"], async (req, res) => {
+router.delete(["/delete", "/delete/"], async (req, res) => {
 	const sessionCookie = req.cookies.__session;
 
 	if (!sessionCookie) {
@@ -238,18 +238,14 @@ router.post(["/delete", "/delete/"], async (req, res) => {
 
 			try {
 				const response = await request(req.logger, {
-					url: new URL("/discord/link/delete/", localEnvironment ? "http://localhost:999" : "https://server.wixonic.fr"),
-					method: "POST",
-					type: "text",
+					url: new URL(`/discord/link/?id=${discordData.id}`, localEnvironment ? "http://localhost:999" : "https://server.wixonic.fr"),
+					method: "DELETE",
+					type: "json",
 					auth: config.server.wixkey,
-					headers: {
-						"Content-Type": "text/plain"
-					},
-					secure: !localEnvironment,
-					body: discordData.id
+					secure: !localEnvironment
 				});
 
-				if (response.error) throw "Failed: " + response.error;
+				if (response?.error) throw "Failed: " + response.error;
 			} catch (e) {
 				req.logger.error("Failed to delete Discord link:", e);
 				return res.status(500).end();
@@ -311,44 +307,37 @@ router.post(["/verify", "/verify/"], async (req, res) => {
 });
 
 router.post(["/verify/discord", "/verify/discord/"], async (req, res) => {
+	const { id, username, uid, wixkey } = req.body;
+
+	if (!id || !username || !uid || !wixkey) {
+		return res.status(400).json({
+			error: "Missing Discord payload"
+		});
+	}
+
 	try {
-		const { id, username, uid, wixkey } = JSON.parse(req.body);;
+		if (wixkey != config.server.wixkey) return res.status(403).end();
 
-		if (!id || !username || !uid || !wixkey) {
-			return res.status(400).json({
-				error: "Missing Discord payload"
-			});
-		}
+		await adminAuth.getUser(uid);
 
-		try {
-			if (wixkey != config.server.wixkey) return res.status(403).end();
+		const discordIndexRef = adminFirestore.collection("discord").doc(id);
+		const discordIndex = await discordIndexRef.get();
+		if (discordIndex.exists) throw "Invalid User";
 
-			await adminAuth.getUser(uid);
+		await adminFirestore.collection("discord").doc(id).set({
+			uid
+		});
 
-			const discordIndexRef = adminFirestore.collection("discord").doc(id);
-			const discordIndex = await discordIndexRef.get();
-			if (discordIndex.exists) throw "Invalid User";
+		await adminFirestore.collection("users").doc(uid).collection("links").doc("discord").set({
+			username,
+			id
+		});
 
-			await adminFirestore.collection("discord").doc(id).set({
-				uid
-			});
-
-			await adminFirestore.collection("users").doc(uid).collection("links").doc("discord").set({
-				username,
-				id
-			});
-
-			res.status(204).end();
-		} catch (e) {
-			req.logger.warn(e);
-			res.status(400).json({
-				error: "Failed to authenticate with Discord"
-			});
-		}
+		res.status(204).end();
 	} catch (e) {
 		req.logger.warn(e);
 		res.status(400).json({
-			error: `Failed to parse JSON: ${e}`
+			error: "Failed to authenticate with Discord"
 		});
 	}
 });

@@ -31,7 +31,7 @@ addEventListener("DOMContentLoaded", async () => {
 		button.addEventListener("click", async () => {
 			if (!button.disabled) {
 				button.disabled = true;
-				await request("POST", new URL(`${localEnvironment ? "/wixonic-website-2/europe-west1/httpServer" : ""}/auth/verify/`, localEnvironment ? path.local.functions : path.functions), "json", "application/json", null, -1, true);
+				await request("POST", new URL("/auth/verify/", localEnvironment ? path.local.functions : path.functions), "json", "application/json", null, -1, true);
 				button.disabled = false;
 			}
 		});
@@ -54,7 +54,7 @@ addEventListener("DOMContentLoaded", async () => {
 	} else {
 		const discord = document.createElement("button");
 		discord.classList.add("button", "discord");
-		discord.innerHTML = `Link your account to ${(await request("GET", new URL("/icon/discord.text.svg", localEnvironment ? path.local.assets : path.assets), "text", "image/svg+xml", null, 3600)).response}`;
+		discord.innerHTML = `Link your account to ${(await request("GET", new URL("/icon/discord.text.svg", localEnvironment ? path.local.assets : path.assets), "text", null, null, 3600)).response}`;
 		discord.addEventListener("click", async () => {
 			if (!discord.disabled) {
 				discord.disabled = true;
@@ -100,7 +100,7 @@ addEventListener("DOMContentLoaded", async () => {
 			email.classList.add("loading");
 			try {
 				const newEmail = emailInput.value;
-				const response = await request("POST", new URL(`${localEnvironment ? "/wixonic-website-2/europe-west1/httpServer" : ""}/auth/verify/?email=${encodeURIComponent(newEmail)}`, localEnvironment ? path.local.functions : path.functions), "json", "application/json", null, -1, true);
+				const response = await request("POST", new URL(`/auth/verify/?email=${encodeURIComponent(newEmail)}`, localEnvironment ? path.local.functions : path.functions), "json", "application/json", null, -1, true);
 				if (response.status != 204) throw "Failed: " + response.status;
 				oldEmail = newEmail;
 				emailInput.placeholder = maskEmail(newEmail);
@@ -188,7 +188,7 @@ addEventListener("DOMContentLoaded", async () => {
 			deleteAccountButton.disabled = true;
 			deleteAccountButton.classList.add("loading");
 			try {
-				const response = await request("POST", new URL(`${localEnvironment ? "/wixonic-website-2/europe-west1/httpServer" : ""}/auth/delete/`, localEnvironment ? path.local.functions : path.functions), "json", "application/json", null, -1, true);
+				const response = await request("DELETE", new URL("/auth/delete/", localEnvironment ? path.local.functions : path.functions), "json", "application/json", null, -1, true);
 				if (response.status != 204) throw "Failed: " + response.status;
 				await firebase.signOut();
 			} catch (e) {
