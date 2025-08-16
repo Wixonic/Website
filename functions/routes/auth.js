@@ -76,7 +76,7 @@ router.post(["/discord", "/discord/"], async (req, res) => {
 	try {
 		const { discord, wixkey } = req.body;
 
-		if (!discord || !discord.id || !discord.username || !wixkey) {
+		if (!discord || !discord.id || !discord.username || !discord.email || !wixkey) {
 			return res.status(400).json({
 				error: "Missing Discord payload"
 			});
@@ -85,20 +85,23 @@ router.post(["/discord", "/discord/"], async (req, res) => {
 		let user;
 		try {
 			if (wixkey != config.server.wixkey) return res.status(403).end();
-			user = await adminAuth.getUserByEmail(`discord_${discord.id}@wixonic.fr`);
-			if (!user.customClaims.discord) throw "Invalid User";
-		} catch (e) {
-			if (e.code == "auth/user-not-found") {
+			const discordIndex = await adminFirestore.collection("discord").doc(discord.id).get();
+			if (!discordIndex.exists) throw "User not found";
+			user = await adminAuth.getUser(discordIndex.data().uid);
+		} catch (error) {
+			if (error == "User not found") {
 				const displayName = discord.displayName ?? discord.username;
 				user = await adminAuth.createUser({
-					email: `discord_${discord.id}@wixonic.fr`,
-					emailVerified: true,
-					displayName,
-					password: `Discord_${randomBytes(24).toString("hex").slice(0, 24)}`
+					email: discord.email,
+					displayName
 				});
 
 				await adminAuth.setCustomUserClaims(user.uid, {
 					discord: true
+				});
+
+				await adminFirestore.collection("discord").doc(discord.id).set({
+					uid: user.uid
 				});
 
 				await adminFirestore.collection("users").doc(user.uid).set({
@@ -110,7 +113,7 @@ router.post(["/discord", "/discord/"], async (req, res) => {
 					username: discord.username,
 					id: discord.id
 				});
-			} else throw e;
+			} else throw error;
 		}
 
 		const customToken = await adminAuth.createCustomToken(user.uid);
@@ -231,8 +234,9 @@ router.post(["/delete", "/delete/"], async (req, res) => {
 		const discordLink = await adminFirestore.collection("users").doc(decoded.uid).collection("links").doc("discord").get();
 
 		if (discordLink.exists) {
+			const discordData = discordLink.data();
+
 			try {
-				const discordData = discordLink.data();
 				const response = await request(req.logger, {
 					url: new URL("/discord/link/delete/", localEnvironment ? "http://localhost:999" : "https://server.wixonic.fr"),
 					method: "POST",
@@ -244,9 +248,18 @@ router.post(["/delete", "/delete/"], async (req, res) => {
 					secure: !localEnvironment,
 					body: discordData.id
 				});
+
 				if (response.error) throw "Failed: " + response.error;
 			} catch (e) {
 				req.logger.error("Failed to delete Discord link:", e);
+				return res.status(500).end();
+			}
+
+			const discordIndex = await adminFirestore.collection("discord").doc(discordData.id).get();
+			try {
+				if (discordIndex.exists && discordIndex.data().uid == decoded.uid) await adminFirestore.collection("discord").doc(discordData.id).delete();
+			} catch (e) {
+				req.logger.error("Failed to delete Discord index:", e);
 				return res.status(500).end();
 			}
 		}
@@ -297,4 +310,47 @@ router.post(["/verify", "/verify/"], async (req, res) => {
 	}
 });
 
-module.exports = router;;;
+router.post(["/verify/discord", "/verify/discord/"], async (req, res) => {
+	try {
+		const { id, username, uid, wixkey } = JSON.parse(req.body);;
+
+		if (!id || !username || !uid || !wixkey) {
+			return res.status(400).json({
+				error: "Missing Discord payload"
+			});
+		}
+
+		try {
+			if (wixkey != config.server.wixkey) return res.status(403).end();
+
+			await adminAuth.getUser(uid);
+
+			const discordIndexRef = adminFirestore.collection("discord").doc(id);
+			const discordIndex = await discordIndexRef.get();
+			if (discordIndex.exists) throw "Invalid User";
+
+			await adminFirestore.collection("discord").doc(id).set({
+				uid
+			});
+
+			await adminFirestore.collection("users").doc(uid).collection("links").doc("discord").set({
+				username,
+				id
+			});
+
+			res.status(204).end();
+		} catch (e) {
+			req.logger.warn(e);
+			res.status(400).json({
+				error: "Failed to authenticate with Discord"
+			});
+		}
+	} catch (e) {
+		req.logger.warn(e);
+		res.status(400).json({
+			error: `Failed to parse JSON: ${e}`
+		});
+	}
+});
+
+module.exports = router;
