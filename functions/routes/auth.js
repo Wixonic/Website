@@ -234,7 +234,7 @@ router.post(["/delete", "/delete/"], async (req, res) => {
 			try {
 				const discordData = discordLink.data();
 				const response = await request(req.logger, {
-					url: new URL("/discord/link/delete/", localEnvironment ? "http://localhost:999" : "https://router.wixonic.fr"),
+					url: new URL("/discord/link/delete/", localEnvironment ? "http://localhost:999" : "https://server.wixonic.fr"),
 					method: "POST",
 					type: "text",
 					auth: config.server.wixkey,
