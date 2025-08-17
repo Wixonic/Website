@@ -68,7 +68,7 @@ addEventListener("DOMContentLoaded", async () => {
 
 		const cycle = async () => {
 			try {
-				const req = await request("GET", new URL("/activity/", localEnvironment ? path.local.server : path.server), null, null, null, -1, false);
+				const req = await request("GET", new URL("/rpc/", localEnvironment ? path.local.server : path.server), null, null, null, -1, false);
 
 				const activities = JSON.parse(req.response);
 
