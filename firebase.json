@@ -123,18 +123,8 @@
 					"type": 301
 				},
 				{
-					"regex": "/instagram(?:.*)",
-					"destination": "https://www.instagram.com/wixonic12",
-					"type": 301
-				},
-				{
 					"regex": "/patreon(?:.*)",
 					"destination": "https://patreon.com/Wixonic",
-					"type": 301
-				},
-				{
-					"regex": "/twitch(?:.*)",
-					"destination": "https://www.twitch.tv/wixonic",
 					"type": 301
 				},
 				{
@@ -159,16 +149,6 @@
 					]
 				}
 			]
-		},
-		{
-			"target": "functions",
-			"rewrites": [
-				{
-					"source": "**",
-					"function": "httpServer",
-					"region": "europe-west1"
-				}
-			]
 		}
 	],
 	"emulators": {
@@ -186,10 +166,6 @@
 			"host": "localhost",
 			"port": 2002
 		},
-		"functions": {
-			"host": "localhost",
-			"port": 2004
-		},
 		"hosting": {
 			"host": "localhost",
 			"port": 2005
@@ -198,17 +174,5 @@
 	"firestore": {
 		"rules": "rules/firestore.rules",
 		"indexes": "rules/firestore.indexes.json"
-	},
-	"functions": [
-		{
-			"source": "functions",
-			"codebase": "default",
-			"ignore": [
-				"node_modules",
-				".git",
-				"firebase-debug.log",
-				"firebase-debug.*.log"
-			]
-		}
-	]
+	}
 }
