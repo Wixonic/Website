@@ -1,1 +1,66 @@
 @import url("/lib/main.css");
+
+:root {
+	--separator-size: 3rem;
+}
+
+body,
+section:first-child {
+	transition: background 0.3s ease-out;
+}
+
+main {
+	height: 100vh;
+
+	overflow-y: scroll;
+
+	scroll-snap-type: y mandatory;
+}
+
+section {
+	height: 100vh;
+
+	scroll-snap-align: center;
+}
+
+separator {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	width: 100%;
+	height: var(--separator-size);
+
+	color: var(--text-muted);
+	font-size: larger;
+
+	margin-bottom: var(--margin-s);
+
+	cursor: pointer;
+}
+
+separator .icon {
+	animation: upAndDown 1s ease-out infinite;
+}
+
+@keyframes upAndDown {
+
+	from,
+	to {
+		transform: translateY(0em);
+	}
+
+	50% {
+		transform: translateY(0.2em);
+	}
+}
+
+section:first-child {
+	height: calc(100vh - var(--separator-size) - var(--margin-s) * 4);
+
+	background: var(--background);
+
+	border-radius: var(--border-radius-l);
+
+	margin: var(--margin-s);
+}

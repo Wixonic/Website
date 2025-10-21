@@ -1,25 +1,34 @@
 @import url("/lib/style/button.css");
 @import url("/lib/style/font.css");
+@import url("/lib/style/icon.css");
 @import url("/lib/style/input.css");
+@import url("/lib/style/text.css");
 
-:root {
+body {
 	/* COLORS */
 	--background-dark: hsl(0, 0%, 90%);
 	--background: hsl(0 0 95%);
 	--background-light: hsl(0 0 100%);
 	--background-accent: hsl(300 100% 75%);
-	--background-accent-hover: hsl(300 50% 85%);
 
 	--text: hsl(0 0 5%);
 	--text-muted: hsl(0 0 30%);
 	--text-accent: hsl(300 50% 25%);
 	--text-accent-vivid: hsl(300 75% 35%);
 
-	--shadow-subtle: hsl(0, 0%, 75%);
+	--shadow: hsl(0, 0%, 75%);
+	--shadow-subtle: hsl(0 0 85%);
 	--shadow-accent: hsl(300 20% 75%);
+
+	--danger: hsl(0 100% 60%);
+	--danger-text: hsl(0 0 100%);
 	/* COLORS */
 
 	/* SIZES */
+	--border-s: 0.05rem;
+	--border-m: 0.1rem;
+	--border-l: 0.2rem;
+
 	--border-radius-s: 0.1rem;
 	--border-radius-m: 0.25rem;
 	--border-radius-l: 0.5rem;
@@ -41,18 +50,16 @@
 	--shadow-s: 0.2rem;
 	--shadow-m: 0.5rem;
 	--shadow-l: 1rem;
-
-	--shadow-size-button: 0.15rem;
+	--shadow-xl: 2rem;
 	/* SIZES */
 
 	/* FONT */
 	--font-family: "Open Sans", "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", "Helvetica Neue", Arial, sans-serif;
-	;
 	/* FONT */
 }
 
 @media (prefers-color-scheme: dark) {
-	:root {
+	body {
 		/* COLORS */
 		--background-dark: hsl(0 0 5%);
 		--background: hsl(0 0 10%);
@@ -63,15 +70,36 @@
 		--text: hsl(0 0 95%);
 		--text-muted: hsl(0 0 70%);
 		--text-accent: hsl(300 50% 75%);
-		--text-accent-vivid: hsl(300 75% 75%);
+		--text-accent-vivid: hsl(300 75% 50%);
 
-		--shadow-subtle: hsl(0 0 0);
+		--shadow: hsl(0 0 0);
+		--shadow-subtle: hsl(0 0 3%);
 		/* COLORS */
 	}
 }
 
+body.dark {
+	/* COLORS */
+	--background-dark: hsl(0 0 5%);
+	--background: hsl(0 0 10%);
+	--background-light: hsl(0 0 15%);
+	--background-accent: hsl(300 100% 20%);
+	--background-accent-hover: hsl(300 40% 10%);
+
+	--text: hsl(0 0 95%);
+	--text-muted: hsl(0 0 70%);
+	--text-accent: hsl(300 50% 75%);
+	--text-accent-vivid: hsl(300 75% 50%);
+
+	--shadow: hsl(0 0 0);
+	--shadow-subtle: hsl(0 0 3%);
+	/* COLORS */
+}
+
 * {
 	flex-shrink: 0;
+
+	background: inherit;
 
 	color: inherit;
 	font-display: block;
@@ -82,14 +110,17 @@
 	appearance: none;
 
 	cursor: inherit;
+	caret-color: var(--text-accent-vivid);
 	pointer-events: inherit;
-	outline: inherit;
+	outline: none;
 
 	user-select: inherit;
 	-webkit-user-select: inherit;
 }
 
 body {
+	min-height: 100vh;
+
 	background: var(--background-dark);
 
 	color: var(--text);
@@ -100,6 +131,9 @@ body {
 
 	user-select: none;
 	-webkit-user-select: none;
+
+	margin: 0;
+	padding: 0;
 }
 
 ::selection {

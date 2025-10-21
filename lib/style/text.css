@@ -1,0 +1,24 @@
+p {
+	margin: var(--margin-s);
+
+	cursor: text;
+
+	user-select: text;
+	-webkit-user-select: text;
+}
+
+i {
+	font-style: italic;
+}
+
+b {
+	font-weight: 700;
+}
+
+strong {
+	font-weight: 800;
+}
+
+mark {
+	background: var(--background-accent);
+}
