@@ -78,24 +78,6 @@ body {
 	}
 }
 
-body.dark {
-	/* COLORS */
-	--background-dark: hsl(0 0 5%);
-	--background: hsl(0 0 10%);
-	--background-light: hsl(0 0 15%);
-	--background-accent: hsl(300 100% 20%);
-	--background-accent-hover: hsl(300 40% 10%);
-
-	--text: hsl(0 0 95%);
-	--text-muted: hsl(0 0 70%);
-	--text-accent: hsl(300 50% 75%);
-	--text-accent-vivid: hsl(300 75% 50%);
-
-	--shadow: hsl(0 0 0);
-	--shadow-subtle: hsl(0 0 3%);
-	/* COLORS */
-}
-
 * {
 	flex-shrink: 0;
 

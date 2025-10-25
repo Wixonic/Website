@@ -4,12 +4,53 @@
 	--separator-size: 3rem;
 }
 
+@media (prefers-color-scheme: dark) {
+	body {
+		/* COLORS */
+		--background-dark: hsl(0, 0%, 90%);
+		--background: hsl(0 0 95%);
+		--background-light: hsl(0 0 100%);
+		--background-accent: hsl(300 100% 75%);
+
+		--text: hsl(0 0 5%);
+		--text-muted: hsl(0 0 30%);
+		--text-accent: hsl(300 50% 25%);
+		--text-accent-vivid: hsl(300 75% 35%);
+
+		--shadow: hsl(0, 0%, 75%);
+		--shadow-subtle: hsl(0 0 85%);
+		--shadow-accent: hsl(300 20% 75%);
+
+		--danger: hsl(0 100% 60%);
+		--danger-text: hsl(0 0 100%);
+		/* COLORS */
+	}
+}
+
+body.dark {
+	/* COLORS */
+	--background-dark: hsl(0 0 5%);
+	--background: hsl(0 0 10%);
+	--background-light: hsl(0 0 15%);
+	--background-accent: hsl(300 100% 20%);
+	--background-accent-hover: hsl(300 40% 10%);
+
+	--text: hsl(0 0 95%);
+	--text-muted: hsl(0 0 70%);
+	--text-accent: hsl(300 50% 75%);
+	--text-accent-vivid: hsl(300 75% 50%);
+
+	--shadow: hsl(0 0 0);
+	--shadow-subtle: hsl(0 0 3%);
+	/* COLORS */
+}
+
 body,
 section:first-child {
 	transition: background 0.3s ease-out;
 }
 
-main {
+body main {
 	height: 100vh;
 
 	overflow-y: scroll;
@@ -20,7 +61,7 @@ main {
 section {
 	height: 100vh;
 
-	scroll-snap-align: center;
+	scroll-snap-align: start;
 }
 
 separator {
