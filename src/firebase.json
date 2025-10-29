@@ -2,14 +2,14 @@
 	"hosting": [
 		{
 			"target": "root",
-			"public": "./websites/root",
+			"public": "../build/websites/root",
 			"ignore": [
 				".DS_Store"
 			],
 			"rewrites": [
 				{
 					"source": "**",
-					"destination": "/lib/404.html"
+					"destination": "/lib/404/"
 				}
 			],
 			"headers": [
@@ -26,14 +26,14 @@
 		},
 		{
 			"target": "accounts",
-			"public": "./websites/accounts",
+			"public": "../build/websites/accounts",
 			"ignore": [
 				".DS_Store"
 			],
 			"rewrites": [
 				{
 					"source": "**",
-					"destination": "/lib/404.html"
+					"destination": "/lib/404/"
 				}
 			],
 			"headers": [
@@ -50,14 +50,14 @@
 		},
 		{
 			"target": "admin",
-			"public": "./websites/admin",
+			"public": "../build/websites/admin",
 			"ignore": [
 				".DS_Store"
 			],
 			"rewrites": [
 				{
 					"source": "**",
-					"destination": "/lib/404.html"
+					"destination": "/lib/404/"
 				}
 			],
 			"headers": [
@@ -74,14 +74,14 @@
 		},
 		{
 			"target": "assets",
-			"public": "./websites/assets",
+			"public": "../build/websites/assets",
 			"ignore": [
 				".DS_Store"
 			],
 			"rewrites": [
 				{
 					"source": "**",
-					"destination": "/lib/404.html"
+					"destination": "/lib/404/"
 				}
 			],
 			"headers": [
@@ -172,7 +172,7 @@
 		}
 	},
 	"firestore": {
-		"rules": "rules/firestore.rules",
-		"indexes": "rules/firestore.indexes.json"
+		"rules": "./rules/firestore.rules",
+		"indexes": "./rules/firestore.indexes.json"
 	}
 }

@@ -19,9 +19,6 @@
 				],
 				"redirects": [
 					"redirect-wixonic-website-2"
-				],
-				"functions": [
-					"http-functions-wixonic-website-2"
 				]
 			}
 		}

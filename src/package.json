@@ -1,0 +1,12 @@
+{
+	"scripts": {
+		"serve": "firebase emulators:start",
+		"prepublish": "npm run build",
+		"publish": "firebase publish",
+		"build": "rm -r ../build/; npx @11ty/eleventy"
+	},
+	"dependencies": {
+		"@11ty/eleventy": "^3.1.2"
+	},
+	"type": "module"
+}
