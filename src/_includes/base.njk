@@ -22,7 +22,7 @@
 
 		<meta property="og:locale" content="en_US" />
 		<meta property="og:type" content="website" />
-		{% set absoluteUrl = "https://wixonic.fr" + page.url | cleanPathPrefix %}
+		{% set absoluteUrl = page.url | cleanPath %}
 		<meta rel="canonical" href="{{ absoluteUrl }}" />
 		<meta property="og:url" content="{{ absoluteUrl }}" />
 

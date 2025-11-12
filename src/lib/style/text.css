@@ -22,3 +22,27 @@ strong {
 mark {
 	background: var(--background-accent);
 }
+
+h1,
+h2,
+h3 {
+	display: inline-block;
+
+	border-bottom: var(--border-s) solid var(--text-muted);
+
+	margin: var(--margin-xs) 0;
+
+	padding: var(--margin-xxs);
+}
+
+h1 {
+	font-size: xx-large;
+}
+
+h2 {
+	font-size: x-large;
+}
+
+h3 {
+	font-size: larger;
+}

@@ -65,6 +65,8 @@ section {
 	height: 100vh;
 
 	scroll-snap-align: start;
+
+	padding: var(--margin-s);
 }
 
 separator {
