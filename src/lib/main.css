@@ -125,7 +125,7 @@ body {
 }
 
 ::selection {
-	background: var(--background-accent);
+	background: var(--background-accent-transparent);
 
-	color: var(--text-accent);
+	color: var(--text-accent-vivid);
 }
