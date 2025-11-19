@@ -1,1 +1,80 @@
 @import url("/lib/main.css");
+
+.classement {
+	display: flex;
+	flex-direction: column;
+
+	width: min(95%, 30rem);
+
+	border-radius: var(--border-radius-l);
+
+	box-shadow: inset 0 0 var(--margin-s) var(--shadow);
+
+	margin: auto;
+	padding: var(--margin-xs);
+}
+
+.classement .membre {
+	display: grid;
+	grid-template-columns: 1.5rem 2em auto 4rem;
+	grid-template-rows: 2rem auto;
+	column-gap: 0.5rem;
+
+	cursor: pointer;
+
+	padding: 0 var(--margin-s);
+}
+
+.classement .membre .rang,
+.classement .membre .delta,
+.classement .membre .nom,
+.classement .membre .valeur {
+	display: block;
+
+	width: 100%;
+
+	margin: auto;
+}
+
+.classement .membre .rang,
+.classement .membre .delta {
+	text-align: right;
+}
+
+.classement .membre .delta.positif {
+	color: hsl(150, 100%, 30%);
+}
+
+.classement .membre .delta.negatif {
+	color: hsl(0, 100%, 30%);
+}
+
+.classement .membre .nom {
+	text-overflow: ellipsis;
+
+	overflow: hidden;
+}
+
+@media (prefers-color-scheme: dark) {
+	.classement .membre .delta.positif {
+		color: hsl(150, 50%, 75%);
+	}
+
+	.classement .membre .delta.negatif {
+		color: hsl(0, 50%, 75%);
+	}
+}
+
+.classement .membre .valeur {
+	text-align: right;
+}
+
+.classement .membre .details {
+	height: 0;
+
+	overflow: hidden;
+}
+
+.classement .membre.open {
+	height: 10rem;
+}

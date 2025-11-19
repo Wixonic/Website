@@ -1,8 +1,13 @@
 import { path } from "/lib/script/path.js";
 import storage from "/lib/script/storage.js";
 
-addEventListener("DOMContentLoaded", () => {
+/**
+ * @typedef {{added: (node: HTMLElement) => void; removed: (node: HTMLElement) => void; changed: (node: HTMLElement, attribute: string, oldValue: string | null) => void}} Mutation
+ */
+
+const init = async () => {
 	const mutationSelectors = {};
+	/** @param {Record<string, Mutation>} mutations */
 	const addMutations = (mutations) => {
 		for (const selector in mutations) {
 			if (!mutationSelectors[selector]) {
@@ -13,25 +18,45 @@ addEventListener("DOMContentLoaded", () => {
 		}
 	};
 
+	// ----- CUSTOM INPUT -----
+	{
+		addMutations({
+			".input.date": {
+				added: (node) => {
+					if (node.classList.contains("input") && node.classList.contains("date")) {
+						const calendar = document.createElement("div");
+						calendar.classList.add("calendar");
 
+						const value = document.createElement("div");
+						value.classList.add("value");
+
+						node.append(calendar, value);
+					}
+				},
+				changed: (node, attribute, oldValue) => {
+					console.log(node, attribute, node.getAttribute(attribute), oldValue);
+				},
+				removed: (node) => {
+
+				}
+			}
+		});
+	}
+	// ----- CUSTOM INPUT -----
 
 	/** @param {HTMLElement} node */
 	const added = (node) => {
 		for (const selector in mutationSelectors) {
 			if (node.matches(selector)) {
 				for (const action of mutationSelectors[selector]) {
-					if (action.added) {
-						action.added(node);
-					}
+					if (action.added) action.added(node);
 				}
 			}
 
 			const childs = node.querySelectorAll(selector);
 			for (const child of childs) {
 				for (const action of mutationSelectors[selector]) {
-					if (action.added) {
-						action.added(child);
-					}
+					if (action.added) action.added(child);
 				}
 			}
 		}
@@ -42,18 +67,29 @@ addEventListener("DOMContentLoaded", () => {
 		for (const selector in mutationSelectors) {
 			if (node.matches(selector)) {
 				for (const action of mutationSelectors[selector]) {
-					if (action.removed) {
-						action.removed(node);
-					}
+					if (action.removed) action.removed(node);
 				}
 			}
 
 			const childs = node.querySelectorAll(selector);
 			for (const child of childs) {
 				for (const action of mutationSelectors[selector]) {
-					if (action.removed) {
-						action.removed(child);
-					}
+					if (action.removed) action.removed(child);
+				}
+			}
+		}
+	};
+
+	/**
+	 * @param {HTMLElement} node
+	 * @param {string} attribute
+	 * @param {string} oldValue
+	 */
+	const changed = (node, attribute, oldValue) => {
+		for (const selector in mutationSelectors) {
+			if (node.matches(selector)) {
+				for (const action of mutationSelectors[selector]) {
+					if (action.changed) action.changed(node, attribute, oldValue);
 				}
 			}
 		}
@@ -65,18 +101,14 @@ addEventListener("DOMContentLoaded", () => {
 		for (const mutation of mutations) {
 			if (mutation.type === "childList") {
 				mutation.addedNodes.forEach((node) => {
-					if (node.nodeType === 1) {
-						added(node);
-					}
+					if (node.nodeType == 1) added(node);
 				});
 
 				mutation.removedNodes.forEach((node) => {
-					if (node.nodeType === 1) {
-						removed(node);
-					}
+					if (node.nodeType == 1) removed(node);
 				});
 			} else if (mutation.type === "attributes") {
-
+				if (mutation.target.nodeType == 1) changed(mutation.target, mutation.attributeName, mutation.oldValue);
 			}
 		}
 	});
@@ -134,4 +166,8 @@ addEventListener("DOMContentLoaded", () => {
 		cookiePopup.append(description, buttons);
 		document.body.append(cookiePopup);
 	}
-});
+};
+
+export {
+	init
+};

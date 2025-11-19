@@ -1,6 +1,8 @@
-import "/lib/main.js";
+import { init } from "/lib/main.js";
 
-addEventListener("DOMContentLoaded", () => {
+addEventListener("DOMContentLoaded", async () => {
+	await init();
+
 	const sections = document.querySelectorAll("section");
 	const separator = document.querySelector("separator");
 
