@@ -1,3 +1,4 @@
+import { path } from "/lib/script/path.js";
 import storage from "/lib/script/storage.js";
 
 addEventListener("DOMContentLoaded", () => {
@@ -101,7 +102,7 @@ addEventListener("DOMContentLoaded", () => {
 
 		const description = document.createElement("div");
 		description.classList.add("description");
-		description.innerHTML = `Do you want some cookies?<br />We need a few to make the site work (the serious stuff), and some others to track how cool this page is (Analytics). See the recipe and ingredients in our <a href="https://wixonic.fr/privacy/" target="_blank">Privacy Policy</a><br />What's your flavor?`;
+		description.innerHTML = `Do you want some cookies?<br />We need a few to make the site work (the serious stuff), and some others to track how cool this page is (Analytics). See the recipe and ingredients in our <a href="${new URL("/privacy/", path.root)}" target="_blank">Privacy Policy</a><br />What's your flavor?`;
 
 		const buttons = document.createElement("div");
 		buttons.classList.add("buttons");

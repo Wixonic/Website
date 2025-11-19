@@ -20,6 +20,9 @@
 				"kcmaths": [
 					"kcmaths-wixonic-website-2"
 				],
+				"git": [
+					"git-wixonic-website-2"
+				],
 				"redirects": [
 					"redirect-wixonic-website-2"
 				]

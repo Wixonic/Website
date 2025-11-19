@@ -129,6 +129,30 @@
 			]
 		},
 		{
+			"target": "git",
+			"public": "../build/websites/git",
+			"ignore": [
+				".DS_Store"
+			],
+			"rewrites": [
+				{
+					"source": "**",
+					"destination": "/lib/404/"
+				}
+			],
+			"headers": [
+				{
+					"source": "**",
+					"headers": [
+						{
+							"key": "Cache-Control",
+							"value": "max-age=7200, must-revalidate"
+						}
+					]
+				}
+			]
+		},
+		{
 			"target": "redirects",
 			"redirects": [
 				{
