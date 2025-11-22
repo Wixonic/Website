@@ -37,14 +37,14 @@ addEventListener("DOMContentLoaded", async () => {
 		} else {
 			container.innerHTML = "";
 			const date = entries[id];
-			const previous = id > 0 ? entries[id - 1] : [];
+			const previous = id > 0 ? entries[id - 1] : null;
 
 			let leaderboard = await request("GET", new URL(`/kcmaths/leaderboard/?date=${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(2, "0")}-${String(date.getUTCDate()).padStart(2, "0")}`, path.server), "json", "application/json", null, 600);
 
 			if ([200].includes(leaderboard.status)) leaderboard = formatLeaderboard(leaderboard.response);
 			else leaderboard = {};
 
-			let previousLeaderboard = await request("GET", new URL(`/kcmaths/leaderboard/?date=${previous.getUTCFullYear()}-${String(previous.getUTCMonth() + 1).padStart(2, "0")}-${String(previous.getUTCDate()).padStart(2, "0")}`, path.server), "json", "application/json", null, 600);
+			let previousLeaderboard = previous ? await request("GET", new URL(`/kcmaths/leaderboard/?date=${previous.getUTCFullYear()}-${String(previous.getUTCMonth() + 1).padStart(2, "0")}-${String(previous.getUTCDate()).padStart(2, "0")}`, path.server), "json", "application/json", null, 600) : {};
 
 			if ([200].includes(previousLeaderboard.status)) previousLeaderboard = formatLeaderboard(previousLeaderboard.response);
 			else previousLeaderboard = {};
@@ -55,7 +55,7 @@ addEventListener("DOMContentLoaded", async () => {
 				const previousRank = findRankFor(previousLeaderboard, id, category);
 
 				const entry = leaderboard[id];
-				const previousEntry = previousLeaderboard[id];
+				const previousEntry = previousLeaderboard[id] ?? {};
 
 				const element = document.createElement("div");
 				element.classList.add("membre");
@@ -73,7 +73,7 @@ addEventListener("DOMContentLoaded", async () => {
 						deltaEl.innerHTML = `${delta > 0 ? "+" : ""}${delta}`;
 						deltaEl.classList.add(delta > 0 ? "positif" : "negatif");
 					}
-					element.append(rankEl);
+					element.append(deltaEl);
 
 					const nameEl = document.createElement("div");
 					nameEl.classList.add("nom");
@@ -94,17 +94,17 @@ addEventListener("DOMContentLoaded", async () => {
 
 					switch (category) {
 						case "ratio":
-							valueEl.innerHTML = entry.ratio > 0 ? `${Number((entry.ratio * 100).toFixed(2))}%` : "--";
-							const deltaRatio = entry.ratio > 0 ? entry.ratio - previousEntry.ratio : 0;
+							valueEl.innerHTML = entry.ratio > 0 ? `${Number((entry.ratio * 100).toFixed(1))}%` : "--";
+							const deltaRatio = entry.ratio > 0 ? entry.ratio - (previousEntry.ratio ?? entry.ratio) : 0;
 							if (deltaRatio != 0) {
-								deltaValueEl.innerHTML = `${deltaRatio > 0 ? "+" : ""}${Number((deltaRatio * 100).toFixed(2))}%`;
+								deltaValueEl.innerHTML = `${deltaRatio > 0 ? "+" : ""}${Number((deltaRatio * 100).toFixed(1))}%`;
 								deltaValueEl.classList.add(deltaRatio > 0 ? "positif" : "negatif");
 							}
 							break;
 
 						case "bank":
 							valueEl.innerHTML = entry.kcCoins;
-							const deltaKCC = entry.kcCoins - previousEntry.kcCoins;
+							const deltaKCC = entry.kcCoins - (previousEntry.kcCoins ?? entry.kcCoins);
 							if (deltaKCC != 0) {
 								deltaValueEl.innerHTML = `${deltaKCC > 0 ? "+" : ""}${deltaKCC}`;
 								deltaValueEl.classList.add(deltaKCC > 0 ? "positif" : "negatif");
@@ -113,10 +113,19 @@ addEventListener("DOMContentLoaded", async () => {
 
 						case "entries":
 							valueEl.innerHTML = entry.entries;
-							const deltaEntries = entry.entries - previousEntry.entries;
+							const deltaEntries = entry.entries - (previousEntry.entries ?? entry.entries);
 							if (deltaEntries != 0) {
 								deltaValueEl.innerHTML = `${deltaEntries > 0 ? "+" : ""}${deltaEntries}`;
 								deltaValueEl.classList.add(deltaEntries > 0 ? "positif" : "negatif");
+							}
+							break;
+
+						case "victories":
+							valueEl.innerHTML = entry.victories;
+							const deltaVictories = entry.victories - (previousEntry.victories ?? entry.victories);
+							if (deltaVictories != 0) {
+								deltaValueEl.innerHTML = `${deltaVictories > 0 ? "+" : ""}${deltaVictories}`;
+								deltaValueEl.classList.add(deltaVictories > 0 ? "positif" : "negatif");
 							}
 							break;
 					}
@@ -128,7 +137,7 @@ addEventListener("DOMContentLoaded", async () => {
 	};
 
 	const params = new URLSearchParams(location.search);
-	const category = ["ratio", "bank", "entries"].includes(params.get("category")) ? params.get("category") : "ratio";
+	const category = ["ratio", "bank", "entries", "victories"].includes(params.get("category")) ? params.get("category") : "ratio";
 	if (params.get("date")) {
 		const selectedDate = new Date(params.get("date"));
 		selectedDate.setUTCHours(0, 0, 0, 0);

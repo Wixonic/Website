@@ -54,6 +54,8 @@
 .classement .membre .delta {
 	grid-row: 1;
 	grid-column: 2;
+
+	font-size: small;
 }
 
 .classement .membre .positif {
@@ -67,6 +69,8 @@
 .classement .membre .nom {
 	grid-row: 1;
 	grid-column: 3;
+
+	color: var(--text-muted);
 
 	text-overflow: ellipsis;
 }
@@ -84,6 +88,8 @@
 .classement .membre .delta-valeur {
 	grid-row: 1;
 	grid-column: 4;
+
+	font-size: small;
 
 	text-align: right;
 }
