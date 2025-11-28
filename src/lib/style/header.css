@@ -1,0 +1,40 @@
+header {
+	position: fixed;
+	top: var(--margin-s);
+	left: var(--margin-s);
+
+	width: calc(100% - var(--margin-s) * 2);
+	height: var(--header-size);
+
+	background: var(--background-accent-transparent);
+	backdrop-filter: blur(var(--margin-s));
+
+	border: var(--border-m) solid var(--border-subtle);
+	border-radius: var(--border-radius-l);
+
+	padding: var(--margin-xs) var(--margin-xxs);
+}
+
+header button {
+	min-width: calc(var(--header-size) - var(--margin-xs) * 2);
+	height: calc(var(--header-size) - var(--margin-xs) * 2);
+
+	background: transparent;
+	box-shadow: none;
+
+	border: none;
+	border-radius: none;
+
+	margin: 0;
+	padding: 0;
+}
+
+header button:active {
+	box-shadow: none;
+}
+
+header button.home svg {
+	fill: currentColor;
+
+	height: 100%;
+}

@@ -1,6 +1,8 @@
 @import url("/lib/style/button.css");
 @import url("/lib/style/cookie.css");
+@import url("/lib/style/footer.css");
 @import url("/lib/style/font.css");
+@import url("/lib/style/header.css");
 @import url("/lib/style/icon.css");
 @import url("/lib/style/input.css");
 @import url("/lib/style/link.css");
@@ -21,6 +23,8 @@ body {
 	--text-accent: hsl(300, 50%, 25%);
 	--text-accent-vivid: hsl(300, 75%, 35%);
 
+	--border-subtle: hsla(0, 0%, 50%, 0.05);
+
 	--shadow: hsl(0, 0%, 75%);
 	--shadow-subtle: hsl(0, 0%, 85%);
 	--shadow-accent: hsl(300, 20%, 75%);
@@ -30,6 +34,8 @@ body {
 	/* COLORS */
 
 	/* SIZES */
+	--header-size: 2.5rem;
+
 	--border-s: 0.05rem;
 	--border-m: 0.1rem;
 	--border-l: 0.2rem;
@@ -80,8 +86,8 @@ body {
 		--text-accent: hsl(300, 50%, 75%);
 		--text-accent-vivid: hsl(300, 75%, 50%);
 
-		--shadow: hsl(0, 0%, 0%);
-		--shadow-subtle: hsl(0, 0%, 3%);
+		--shadow: hsla(0, 0%, 0%, 0);
+		--shadow-subtle: hsla(0, 0%, 3%, 0);
 		/* COLORS */
 	}
 }
@@ -122,6 +128,8 @@ body {
 
 	margin: 0;
 	padding: 0;
+
+	padding-top: calc(var(--header-size) + var(--margin-s) * 2);
 }
 
 ::selection {

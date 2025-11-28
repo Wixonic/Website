@@ -5,7 +5,7 @@ button {
 	font-size: small;
 	font-weight: bold;
 
-	border: none;
+	border: var(--border-m) solid var(--border-subtle);
 	border-radius: var(--border-radius-l);
 
 	margin: var(--margin-xs);

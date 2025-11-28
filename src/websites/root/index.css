@@ -43,9 +43,13 @@ body.dark {
 	--text-accent: hsl(300, 50%, 75%);
 	--text-accent-vivid: hsl(300, 75%, 50%);
 
-	--shadow: hsl(0, 0%, 0%);
-	--shadow-subtle: hsl(0, 0%, 3%);
+	--shadow: hsl(0, 0%, 0%, 0);
+	--shadow-subtle: hsl(0, 0%, 3%, 0);
 	/* COLORS */
+}
+
+body {
+	padding-top: 0;
 }
 
 body,
@@ -55,6 +59,8 @@ section:first-child {
 
 body main {
 	height: 100vh;
+
+	padding-top: calc(var(--header-size) + var(--margin-s) * 2);
 
 	overflow-y: scroll;
 
@@ -102,13 +108,16 @@ separator .icon {
 }
 
 section:first-child {
-	height: calc(100vh - var(--separator-size) - var(--margin-s) * 4);
+	height: calc(100vh - (var(--separator-size) + var(--margin-s) * 4) - (var(--header-size) + var(--margin-s) * 2));
 
 	background: var(--background);
 
 	border-radius: var(--border-radius-l);
 
 	margin: var(--margin-s);
+	margin-top: calc(var(--header-size) + var(--margin-s) * 3);
+
+	scroll-snap-align: center;
 }
 
 section.news {

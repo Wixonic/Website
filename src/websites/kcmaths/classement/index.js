@@ -27,7 +27,7 @@ addEventListener("DOMContentLoaded", async () => {
 
 	/**
 	 * @param {Number} id
-	 * @param {"ratio" | "bank" | "entries"} category
+	 * @param {"ratio" | "bank" | "entries" | "victories"} category
 	 */
 	const loadLeaderboard = async (id, category) => {
 		const container = document.querySelector(".classement");

@@ -18,20 +18,30 @@ const init = async () => {
 		}
 	};
 
+
+	// -------- HEADER --------
+	{
+		addMutations({
+			"header > .icon.home": {
+				added: (node) => node.addEventListener("click", () => location.href = path.root)
+			}
+		});
+	}
+	// -------- HEADER --------
+
+
 	// ----- CUSTOM INPUT -----
 	{
 		addMutations({
 			".input.date": {
 				added: (node) => {
-					if (node.classList.contains("input") && node.classList.contains("date")) {
-						const calendar = document.createElement("div");
-						calendar.classList.add("calendar");
+					const calendar = document.createElement("div");
+					calendar.classList.add("calendar");
 
-						const value = document.createElement("div");
-						value.classList.add("value");
+					const value = document.createElement("div");
+					value.classList.add("value");
 
-						node.append(calendar, value);
-					}
+					node.append(calendar, value);
 				},
 				changed: (node, attribute, oldValue) => {
 					console.log(node, attribute, node.getAttribute(attribute), oldValue);
@@ -43,6 +53,18 @@ const init = async () => {
 		});
 	}
 	// ----- CUSTOM INPUT -----
+
+
+	// ----- EXTRA HEADER -----
+	{
+		addMutations({
+			".extra-header": {
+
+			}
+		});
+	}
+	// ----- EXTRA HEADER -----
+
 
 	/** @param {HTMLElement} node */
 	const added = (node) => {

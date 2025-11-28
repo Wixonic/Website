@@ -5,7 +5,7 @@ input {
 	font-size: small;
 	font-weight: 500;
 
-	border: none;
+	border: var(--border-m) solid var(--border-subtle);
 	border-radius: var(--border-radius-l);
 
 	box-shadow: 0 var(--shadow-s) var(--shadow-s) var(--shadow-subtle);
