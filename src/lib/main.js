@@ -22,12 +22,28 @@ const init = async () => {
 	// -------- HEADER --------
 	{
 		addMutations({
-			"header > .icon.home": {
+			"header > .home": {
 				added: (node) => node.addEventListener("click", () => location.href = path.root)
 			}
 		});
 	}
 	// -------- HEADER --------
+
+
+	// ----- EXTRA HEADER -----
+	{
+		addMutations({
+			".extra-header": {
+				added: (node) => {
+					const clone = node.cloneNode(true);
+					node.remove();
+
+					document.querySelector("header").append(clone);
+				}
+			}
+		});
+	}
+	// ----- EXTRA HEADER -----
 
 
 	// ----- CUSTOM INPUT -----
