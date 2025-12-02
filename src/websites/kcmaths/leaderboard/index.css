@@ -4,7 +4,7 @@ body {
 	--extra-header-size: 2.5rem;
 }
 
-.leaderboard {
+#leaderboard {
 	display: flex;
 	flex-direction: column;
 
@@ -19,7 +19,7 @@ body {
 	padding: var(--margin-xs);
 }
 
-.leaderboard .member {
+#leaderboard .member {
 	display: grid;
 	grid-template-columns: 2rem 2em auto 3rem 3rem;
 	grid-template-rows: 2rem auto;
@@ -30,11 +30,11 @@ body {
 	padding: 0 var(--margin-s);
 }
 
-.leaderboard .member .rank,
-.leaderboard .member .delta,
-.leaderboard .member .name,
-.leaderboard .member .delta-value,
-.leaderboard .member .value {
+#leaderboard .member .rank,
+#leaderboard .member .delta,
+#leaderboard .member .name,
+#leaderboard .member .delta-value,
+#leaderboard .member .value {
 	display: block;
 
 	width: 100%;
@@ -46,32 +46,32 @@ body {
 	overflow: hidden;
 }
 
-.leaderboard .member .rank,
-.leaderboard .member .delta {
+#leaderboard .member .rank,
+#leaderboard .member .delta {
 	text-align: right;
 }
 
-.leaderboard .member .rank {
+#leaderboard .member .rank {
 	grid-row: 1;
 	grid-column: 1;
 }
 
-.leaderboard .member .delta {
+#leaderboard .member .delta {
 	grid-row: 1;
 	grid-column: 2;
 
 	font-size: small;
 }
 
-.leaderboard .member .pos {
+#leaderboard .member .pos {
 	color: hsl(150, 100%, 30%);
 }
 
-.leaderboard .member .neg {
+#leaderboard .member .neg {
 	color: hsl(0, 100%, 30%);
 }
 
-.leaderboard .member .name {
+#leaderboard .member .name {
 	grid-row: 1;
 	grid-column: 3;
 
@@ -81,16 +81,16 @@ body {
 }
 
 @media (prefers-color-scheme: dark) {
-	.leaderboard .member .pos {
+	#leaderboard .member .pos {
 		color: hsl(150, 50%, 75%);
 	}
 
-	.leaderboard .member .neg {
+	#leaderboard .member .neg {
 		color: hsl(0, 50%, 75%);
 	}
 }
 
-.leaderboard .member .delta-value {
+#leaderboard .member .delta-value {
 	grid-row: 1;
 	grid-column: 4;
 
@@ -99,14 +99,14 @@ body {
 	text-align: right;
 }
 
-.leaderboard .member .value {
+#leaderboard .member .value {
 	grid-row: 1;
 	grid-column: 5;
 
 	text-align: right;
 }
 
-.leaderboard .member .details {
+#leaderboard .member .details {
 	grid-row: 2;
 	grid-column: 1 / 6;
 
@@ -115,6 +115,6 @@ body {
 	overflow: hidden;
 }
 
-.leaderboard .member.open .details {
+#leaderboard .member.open .details {
 	height: 10rem;
 }

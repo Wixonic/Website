@@ -8,6 +8,8 @@ import { findRankFor, formatLeaderboard, formatRank, sortLeaderboard } from "/ut
 addEventListener("DOMContentLoaded", async () => {
 	await init();
 
+	document.querySelector(".extra-header .overview").addEventListener("click", () => location.href = path.kcmaths);
+
 	const date = document.querySelector(".input.date");
 
 	/** @type {Date[]} */
@@ -30,7 +32,7 @@ addEventListener("DOMContentLoaded", async () => {
 	 * @param {"ratio" | "bank" | "entries" | "victories"} category
 	 */
 	const loadLeaderboard = async (id, category) => {
-		const container = document.querySelector(".leaderboard");
+		const container = document.querySelector("#leaderboard");
 
 		if (id == -1) {
 			container.innerHTML = "Aucune donnée pour cette date.";
