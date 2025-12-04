@@ -10,24 +10,17 @@
 
 body {
 	/* COLORS */
-	--background-dark: hsl(0, 0%, 90%);
+	--background-deep: hsl(0, 0%, 100%);
 	--background: hsl(0, 0%, 95%);
-	--background-light: hsl(0, 0%, 100%);
-	--background-transparent: hsla(0, 0%, 95%, 0.25);
+	--background-front: hsl(0, 0%, 90%);
 
-	--background-accent: hsl(300, 100%, 75%);
-	--background-accent-transparent: hsla(300, 100%, 75%, 0.25);
+	--background-accent: hsl(0, 0%, 0%);
 
 	--text: hsl(0, 0%, 5%);
 	--text-muted: hsl(0, 0%, 30%);
-	--text-accent: hsl(300, 50%, 25%);
-	--text-accent-vivid: hsl(300, 75%, 35%);
+	--text-accent: hsl(0, 0%, 100%);
 
 	--border-subtle: hsla(0, 0%, 50%, 0.05);
-
-	--shadow: hsl(0, 0%, 75%);
-	--shadow-subtle: hsl(0, 0%, 85%);
-	--shadow-accent: hsl(300, 20%, 75%);
 
 	--danger: hsl(0, 100%, 60%);
 	--danger-text: hsl(0, 0%, 100%);
@@ -57,12 +50,6 @@ body {
 	--spacing-m: 6.25rem;
 	--spacing-l: 10rem;
 	--spacing-xl: 15rem;
-
-	--shadow-xs: 0.1rem;
-	--shadow-s: 0.2rem;
-	--shadow-m: 0.5rem;
-	--shadow-l: 1rem;
-	--shadow-xl: 2rem;
 	/* SIZES */
 
 	/* FONT */
@@ -73,22 +60,12 @@ body {
 @media (prefers-color-scheme: dark) {
 	body {
 		/* COLORS */
-		--background-dark: hsl(0, 0%, 5%);
+		--background-deep: hsl(0, 0%, 5%);
 		--background: hsl(0, 0%, 10%);
-		--background-light: hsl(0, 0%, 15%);
-		--background-transparent: hsla(0, 0%, 10%, 0.25);
-
-		--background-accent: hsl(300, 100%, 20%);
-		--background-accent-hover: hsl(300, 40%, 10%);
-		--background-accent-transparent: hsla(300, 100%, 20%, 0.25);
+		--background-front: hsl(0, 0%, 15%);
 
 		--text: hsl(0, 0%, 95%);
 		--text-muted: hsl(0, 0%, 70%);
-		--text-accent: hsl(300, 50%, 75%);
-		--text-accent-vivid: hsl(300, 75%, 50%);
-
-		--shadow: hsla(0, 0%, 0%, 0);
-		--shadow-subtle: hsla(0, 0%, 3%, 0);
 		/* COLORS */
 	}
 }
@@ -116,7 +93,7 @@ body {
 body {
 	min-height: 100vh;
 
-	background: var(--background-dark);
+	background: var(--background-deep);
 
 	color: var(--text);
 	font-family: var(--font-family);

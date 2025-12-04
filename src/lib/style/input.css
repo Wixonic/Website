@@ -1,5 +1,5 @@
 input {
-	background: var(--background-light);
+	background: var(--background-front);
 
 	color: var(--text-muted);
 	font-size: small;
@@ -8,14 +8,10 @@ input {
 	border: var(--border-m) solid var(--border-subtle);
 	border-radius: var(--border-radius-l);
 
-	box-shadow: 0 var(--shadow-s) var(--shadow-s) var(--shadow-subtle);
-
 	cursor: text;
 
 	margin: var(--margin-s);
 	padding: var(--margin-xs) var(--margin-s);
 }
 
-input:focus {
-	box-shadow: inset 0 var(--shadow-s) var(--shadow-xs) var(--shadow-subtle);
-}
+input:focus {}

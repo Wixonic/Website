@@ -9,7 +9,7 @@
 			"rewrites": [
 				{
 					"source": "**",
-					"destination": "/lib/404/"
+					"destination": "/lib/404/index.html"
 				}
 			],
 			"headers": [
@@ -33,7 +33,7 @@
 			"rewrites": [
 				{
 					"source": "**",
-					"destination": "/lib/404/"
+					"destination": "/lib/404/index.html"
 				}
 			],
 			"headers": [
@@ -57,7 +57,7 @@
 			"rewrites": [
 				{
 					"source": "**",
-					"destination": "/lib/404/"
+					"destination": "/lib/404/index.html"
 				}
 			],
 			"headers": [
@@ -81,7 +81,7 @@
 			"rewrites": [
 				{
 					"source": "**",
-					"destination": "/lib/404/"
+					"destination": "/lib/404/index.html"
 				}
 			],
 			"headers": [
@@ -113,7 +113,7 @@
 			"rewrites": [
 				{
 					"source": "**",
-					"destination": "/lib/404/"
+					"destination": "/lib/404/index.html"
 				}
 			],
 			"headers": [
@@ -137,7 +137,7 @@
 			"rewrites": [
 				{
 					"source": "**",
-					"destination": "/lib/404/"
+					"destination": "/lib/404/index.html"
 				}
 			],
 			"headers": [
