@@ -32,27 +32,47 @@ button.danger {
 }
 
 button:hover {
-	background: var(--background);
-
 	color: var(--text);
 }
 
-button:active {}
+@keyframes bounce {
+
+	from,
+	to {
+		transform: scale(1);
+	}
+
+	20% {
+		transform: scale(1.2);
+	}
+
+	50% {
+		transform: scale(0.9);
+	}
+
+	80% {
+		transform: scale(1.05);
+	}
+}
+
+button:active {
+	animation: bounce 0.3s linear;
+}
 
 button.primary:hover {
-	background: var(--background-front);
+	color: var(--text-accent-vivid);
 }
 
 button.danger:hover {
-	background: var(--background-front);
-
 	color: var(--danger);
 }
 
-button[disabled] {
-	background: var(--background-deep) !important;
+button[disabled],
+button[disabled]:hover,
+button[disabled]:active {
+	background: var(--background-deep);
 
-	color: var(--text-muted) !important;
+	color: var(--text-muted);
 
 	cursor: default;
 

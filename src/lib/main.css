@@ -18,7 +18,9 @@ body {
 
 	--text: hsl(0, 0%, 5%);
 	--text-muted: hsl(0, 0%, 30%);
-	--text-accent: hsl(0, 0%, 100%);
+
+	--text-accent: hsl(0, 0%, 85%);
+	--text-accent-vivid: hsl(0, 0%, 100%);
 
 	--border-subtle: hsla(0, 0%, 50%, 0.05);
 
