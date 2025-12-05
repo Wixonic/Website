@@ -11,6 +11,10 @@ addEventListener("DOMContentLoaded", async () => {
 	document.querySelector(".extra-header .overview").addEventListener("click", () => location.href = path.kcmaths);
 
 	const date = document.querySelector(".input.date");
+	const ratioButton = document.querySelector(".category#ratio");
+	const bankButton = document.querySelector(".category#bank");
+	const entriesButton = document.querySelector(".category#entries");
+	const victoriesButton = document.querySelector(".category#victories");
 
 	/** @type {Date[]} */
 	let entries = await request("GET", new URL("/kcmaths/entries/", path.server), "json", "application/json", null, 600);
@@ -32,6 +36,17 @@ addEventListener("DOMContentLoaded", async () => {
 	 * @param {"ratio" | "bank" | "entries" | "victories"} category
 	 */
 	const loadLeaderboard = async (id, category) => {
+		for (const el of [ratioButton, bankButton, entriesButton, victoriesButton]) el.removeAttribute("disabled");
+
+		document.querySelector("#title").innerHTML = {
+			"ratio": "Pourcentage de victoires",
+			"bank": "Banque",
+			"entries": "Participations",
+			"victories": "Victoires"
+		}[category];
+
+		// document.querySelector(`.category.${category}`).setAttribute("disabled", "");
+
 		const container = document.querySelector("#leaderboard");
 
 		if (id == -1) {
@@ -140,13 +155,28 @@ addEventListener("DOMContentLoaded", async () => {
 	};
 
 	const params = new URLSearchParams(location.search);
+	let entry = entries.length - 1;
+
+	const changeCategory = async (category) => {
+		await loadLeaderboard(entry, category);
+		const url = new URL(location.href);
+		params.set("category", category);
+		url.searchParam = params;
+		updateURL(url);
+	};
+
+	ratioButton.addEventListener("click", async () => await changeCategory("ratio"));
+	bankButton.addEventListener("click", async () => await changeCategory("bank"));
+	entriesButton.addEventListener("click", async () => await changeCategory("entries"));
+	victoriesButton.addEventListener("click", async () => await changeCategory("victories"));
+
 	const category = ["ratio", "bank", "entries", "victories"].includes(params.get("category")) ? params.get("category") : "ratio";
 	if (params.get("date")) {
 		const selectedDate = new Date(params.get("date"));
 		selectedDate.setUTCHours(0, 0, 0, 0);
 		date.setAttribute("date", `${selectedDate.getUTCFullYear()}-${String(selectedDate.getUTCMonth() + 1).padStart(2, "0")}-${String(selectedDate.getUTCDate()).padStart(2, "0")}`);
 
-		const entry = entries.findIndex((value) => `${selectedDate.getUTCFullYear()}-${String(selectedDate.getUTCMonth() + 1).padStart(2, "0")}-${String(selectedDate.getUTCDate()).padStart(2, "0")}` == `${value.getUTCFullYear()}-${String(value.getUTCMonth() + 1).padStart(2, "0")}-${String(value.getUTCDate()).padStart(2, "0")}`) ?? -1;
+		entry = entries.findIndex((value) => `${selectedDate.getUTCFullYear()}-${String(selectedDate.getUTCMonth() + 1).padStart(2, "0")}-${String(selectedDate.getUTCDate()).padStart(2, "0")}` == `${value.getUTCFullYear()}-${String(value.getUTCMonth() + 1).padStart(2, "0")}-${String(value.getUTCDate()).padStart(2, "0")}`) ?? -1;
 		await loadLeaderboard(entry, category);
-	} else await loadLeaderboard(entries.length - 1, category);
+	} else await loadLeaderboard(entry, category);
 });
