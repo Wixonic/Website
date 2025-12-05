@@ -1,1 +1,5 @@
 @import url("/lib/main.css");
+
+body {
+	--extra-header-size: 2.5rem;
+}

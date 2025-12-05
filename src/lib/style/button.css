@@ -23,47 +23,33 @@ button.primary {
 	background: var(--background-accent);
 
 	color: var(--text-accent);
+
+	border-color: var(--background-accent);
 }
 
 button.danger {
 	background: var(--danger);
 
 	color: var(--danger-text);
+
+	border-color: var(--danger);
 }
 
 button:hover {
+	background: var(--background-deep);
+
 	color: var(--text);
 }
 
-@keyframes bounce {
-
-	from,
-	to {
-		transform: scale(1);
-	}
-
-	20% {
-		transform: scale(1.2);
-	}
-
-	50% {
-		transform: scale(0.9);
-	}
-
-	80% {
-		transform: scale(1.05);
-	}
-}
-
-button:active {
-	animation: bounce 0.3s linear;
-}
-
 button.primary:hover {
-	color: var(--text-accent-vivid);
+	background: var(--text-accent-vivid);
+
+	color: var(--background-accent);
 }
 
 button.danger:hover {
+	background: var(--danger-text);
+
 	color: var(--danger);
 }
 
@@ -73,6 +59,8 @@ button[disabled]:active {
 	background: var(--background-deep);
 
 	color: var(--text-muted);
+
+	border-color: var(--border-subtle) !important;
 
 	cursor: default;
 

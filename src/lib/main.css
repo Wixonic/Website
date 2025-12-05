@@ -14,7 +14,12 @@ body {
 	--background: hsl(0, 0%, 95%);
 	--background-front: hsl(0, 0%, 90%);
 
+	--background-transparent: hsla(0, 0%, 95%, 75%);
+
 	--background-accent: hsl(0, 0%, 0%);
+
+	--background-selection: hsl(0, 0%, 0%);
+
 
 	--text: hsl(0, 0%, 5%);
 	--text-muted: hsl(0, 0%, 30%);
@@ -22,7 +27,11 @@ body {
 	--text-accent: hsl(0, 0%, 85%);
 	--text-accent-vivid: hsl(0, 0%, 100%);
 
+	--text-selection: hsl(0, 0%, 100%);
+
+	--border-color: hsla(0, 0%, 50%, 0.2);
 	--border-subtle: hsla(0, 0%, 50%, 0.05);
+
 
 	--danger: hsl(0, 100%, 60%);
 	--danger-text: hsl(0, 0%, 100%);
@@ -30,7 +39,11 @@ body {
 
 	/* SIZES */
 	--header-size: 2.5rem;
+	--header-margin: 0.5rem;
 	--extra-header-size: 0;
+
+	--footer-size: 2.5rem;
+	--footer-margin: 0.5rem;
 
 	--border-s: 0.05rem;
 	--border-m: 0.1rem;
@@ -52,6 +65,8 @@ body {
 	--spacing-m: 6.25rem;
 	--spacing-l: 10rem;
 	--spacing-xl: 15rem;
+
+	--blur: 2rem;
 	/* SIZES */
 
 	/* FONT */
@@ -66,8 +81,14 @@ body {
 		--background: hsl(0, 0%, 10%);
 		--background-front: hsl(0, 0%, 15%);
 
+		--background-transparent: hsla(0, 0%, 10%, 75%);
+
+		--background-selection: hsl(0, 0%, 100%);
+
 		--text: hsl(0, 0%, 95%);
 		--text-muted: hsl(0, 0%, 70%);
+
+		--text-selection: hsl(0, 0%, 0%);
 		/* COLORS */
 	}
 }
@@ -88,14 +109,14 @@ body {
 	pointer-events: inherit;
 	outline: none;
 
+	scrollbar-color: inherit;
+
 	user-select: inherit;
 	-webkit-user-select: inherit;
 }
 
 body {
-	min-height: 100vh;
-
-	background: var(--background-deep);
+	background: var(--background-accent);
 
 	color: var(--text);
 	font-family: var(--font-family);
@@ -103,17 +124,27 @@ body {
 	cursor: default;
 	outline: none;
 
+	scrollbar-color: var(--text) var(--background);
+
 	user-select: none;
 	-webkit-user-select: none;
 
 	margin: 0;
 	padding: 0;
+}
 
-	padding-top: calc(var(--header-size) + var(--extra-header-size) + var(--margin-s) * 2);
+main {
+	background: var(--background-deep);
+
+	min-height: calc(100vh - var(--header-size) - var(--extra-header-size) - 2 * var(--header-margin) - var(--footer-size) - 2 * var(--margin-s));
+
+	margin-top: var(--header-size);
+	padding-top: calc(var(--extra-header-size) + 2 * var(--header-margin));
+	padding-bottom: var(--footer-margin);
 }
 
 ::selection {
-	background: var(--background-accent-transparent);
+	background: var(--background-selection);
 
-	color: var(--text-accent-vivid);
+	color: var(--text-selection);
 }

@@ -10,7 +10,8 @@
 
 	width: min(calc(100vw - var(--margin-m) * 2), 30rem);
 
-	backdrop-filter: blur(var(--border-radius-l));
+	background: var(--background-transparent);
+	backdrop-filter: blur(var(--blur));
 
 	border: var(--border-m) solid var(--background-front);
 	border-radius: var(--border-radius-l);

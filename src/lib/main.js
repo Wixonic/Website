@@ -30,22 +30,6 @@ const init = async () => {
 	// -------- HEADER --------
 
 
-	// ----- EXTRA HEADER -----
-	{
-		addMutations({
-			".extra-header": {
-				added: (node) => {
-					const clone = node.cloneNode(true);
-					node.remove();
-
-					document.querySelector("header").append(clone);
-				}
-			}
-		});
-	}
-	// ----- EXTRA HEADER -----
-
-
 	// ----- CUSTOM INPUT -----
 	{
 		addMutations({
