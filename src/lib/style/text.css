@@ -37,6 +37,17 @@ h3 {
 	padding: var(--margin-xxs);
 }
 
+@media (max-width: 30rem) {
+
+	h1,
+	h2,
+	h3 {
+		display: block;
+
+		text-align: center;
+	}
+}
+
 h1 {
 	font-size: xx-large;
 }

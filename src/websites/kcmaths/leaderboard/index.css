@@ -1,7 +1,44 @@
 @import url("/lib/main.css");
 
+@import url("/facts.css");
+
 body {
 	--extra-header-size: 2.5rem;
+}
+
+h2 {
+	display: block;
+
+	width: 30rem;
+
+	text-align: center;
+
+	margin: auto;
+}
+
+.category-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	width: 100%;
+}
+
+@media (max-width: 30rem) {
+	.category-container {
+		justify-content: space-around;
+
+		gap: var(--margin-xxs);
+
+		width: 100%;
+	}
+
+	.category-container button {
+		margin-left: 0;
+		margin-right: 0;
+		padding-left: var(--margin-xs);
+		padding-right: var(--margin-xs);
+	}
 }
 
 #leaderboard {
@@ -11,10 +48,20 @@ body {
 	width: min(95%, 30rem);
 
 	border: var(--border-m) solid var(--border-subtle);
-	border-radius: var(--border-radius-l);
+	border-radius: var(--border-radius-l) 0;
 
 	margin: auto;
 	padding: var(--margin-xs);
+}
+
+@media (max-width: 30rem) {
+	#leaderboard {
+		width: 100%;
+
+		border-left: none;
+		border-right: none;
+		border-radius: 0;
+	}
 }
 
 #leaderboard .member {

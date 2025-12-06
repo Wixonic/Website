@@ -5,7 +5,7 @@ button {
 	font-size: small;
 	font-weight: bold;
 
-	border: var(--border-m) solid var(--border-subtle);
+	border: var(--border-m) solid var(--border-color);
 	border-radius: var(--border-radius-l);
 
 	margin: var(--margin-xs);
@@ -23,8 +23,6 @@ button.primary {
 	background: var(--background-accent);
 
 	color: var(--text-accent);
-
-	border-color: var(--background-accent);
 }
 
 button.danger {

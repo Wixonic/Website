@@ -116,6 +116,10 @@ body {
 }
 
 body {
+	position: relative;
+
+	min-height: 100vh;
+
 	background: var(--background-accent);
 
 	color: var(--text);
@@ -136,13 +140,21 @@ body {
 main {
 	display: block;
 
-	background: var(--background-deep);
-
 	min-height: calc(100vh - var(--header-size) - var(--extra-header-size) - 2 * var(--header-margin) - var(--footer-size) - 2 * var(--margin-s));
+
+	background: var(--background-deep);
 
 	margin-top: var(--header-size);
 	padding-top: calc(var(--extra-header-size) + 2 * var(--header-margin));
 	padding-bottom: var(--footer-margin);
+}
+
+@media (max-width: 30rem) {
+	main {
+		min-height: calc(100vh - var(--header-size) - var(--header-margin) - var(--footer-size) - 2 * var(--margin-s));
+
+		padding-top: var(--header-margin);
+	}
 }
 
 ::selection {

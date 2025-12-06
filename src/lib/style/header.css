@@ -24,6 +24,19 @@ header {
 
 	width: 100%;
 	height: var(--extra-header-size);
+
+	pointer-events: none;
+}
+
+@media (max-width: 30rem) {
+	.extra-header {
+		top: auto;
+		bottom: var(--header-margin);
+	}
+
+	footer {
+		padding-bottom: calc(var(--extra-header-size) + 2 * var(--header-margin));
+	}
 }
 
 .extra-header .container {
@@ -43,6 +56,8 @@ header {
 
 	margin: auto;
 	padding: var(--margin-xxs) var(--margin-s);
+
+	pointer-events: all;
 }
 
 header button,
@@ -54,6 +69,7 @@ header button,
 
 	color: inherit !important;
 
+	border-color: transparent !important;
 	border-radius: 0;
 
 	transition: border-color 0.2s linear;

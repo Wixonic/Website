@@ -1,0 +1,16 @@
+.facts {
+	max-width: min(30rem, 95%);
+
+	border: var(--border-m) solid var(--border-color);
+	border-radius: var(--border-radius-m);
+
+	margin: auto;
+}
+
+.facts .title {
+	width: 100%;
+
+	background: var(--background-front);
+}
+
+.facts .fact {}
