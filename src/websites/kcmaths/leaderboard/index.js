@@ -18,6 +18,18 @@ addEventListener("DOMContentLoaded", async () => {
 
 	const factsContainer = document.querySelector(".facts");
 
+	const lastUpdated = document.querySelector(".last-updated");
+
+	const lastUpdate = await request("GET", new URL("/kcmaths/lastUpdate/", path.server), "text", "plain/text", null, -1);
+	if (lastUpdate.status == 200) lastUpdated.innerHTML = `Mis à jour le ${new Date(lastUpdate.response).toLocaleString("fr-FR", {
+		weekday: "long",
+		day: "numeric",
+		month: "long",
+		hour: "numeric",
+		minute: "numeric"
+	})}`;
+	else lastUpdated.innerHTML = "Server is not available at the moment.";
+
 	/** @type {Date[]} */
 	let entries = await request("GET", new URL("/kcmaths/entries/", path.server), "json", "application/json", null, 600);
 
