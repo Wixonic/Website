@@ -16,6 +16,10 @@ h2 {
 	margin: auto;
 }
 
+.facts.hidden {
+	display: none;
+}
+
 .category-container {
 	display: flex;
 	justify-content: center;

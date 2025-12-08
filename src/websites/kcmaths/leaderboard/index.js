@@ -117,11 +117,6 @@ addEventListener("DOMContentLoaded", async () => {
 					generateFactForCategory("entries");
 					generateFactForCategory("victories");
 
-					const ratioDelta = entry.ratio - previousEntry.ratio;
-
-					if (ratioDelta > 0.15) generateFact(`${id} a gagné ${Math.round(ratioDelta * 100)}% de ratio`, "pos");
-					else if (ratioDelta < -0.15) generateFact(`${id} a perdu ${Math.round(Math.abs(ratioDelta) * 100)}% de ratio`, "neg");
-
 					const kccDelta = entry.kcCoins - previousEntry.kcCoins;
 
 					if (kccDelta > 20) generateFact(`${id} a gagné ${kccDelta} KCC`, "pos");
