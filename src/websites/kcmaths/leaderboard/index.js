@@ -3,7 +3,7 @@ import { init } from "/lib/main.js";
 import { path, updateURL } from "/lib/script/path.js";
 import request from "/lib/script/request.js";
 
-import { findRankFor, formatLeaderboard, formatRank, parseID, sortLeaderboard } from "/utils.js";
+import { findRankFor, formatLeaderboard, formatRank, sortLeaderboard } from "/utils.js";
 
 addEventListener("DOMContentLoaded", async () => {
 	await init();
@@ -61,10 +61,13 @@ addEventListener("DOMContentLoaded", async () => {
 
 		const container = document.querySelector("#leaderboard");
 
-		/** @param {string} id */
-		const loadDetails = async (id) => {
-			const details = await request("GET", new URL(`/kcmaths/details/?id=${id}`, path.server), "json", "application/json", null, -1);
-			container.querySelector(`#${id} .details`).innerHTML = JSON.stringify(details);
+		/**
+		 * @param {HTMLElement} element
+		 * @param {string} id
+		 */
+		const loadDetails = async (element, id) => {
+			const details = await request("GET", new URL(`/kcmaths/details/?id=${encodeURIComponent(id)}`, path.server), "json", "application/json", null, -1);
+			element.querySelector(".details").innerHTML = JSON.stringify(details);
 		};
 
 		if (id == -1) container.innerHTML = "Aucune donnée pour cette date.";
@@ -141,7 +144,6 @@ addEventListener("DOMContentLoaded", async () => {
 				const previousEntry = previousLeaderboard[id] ?? {};
 
 				const element = document.createElement("div");
-				element.id = parseID(id);
 				element.classList.add("member");
 				element.setAttribute("rank", rank);
 
@@ -223,7 +225,7 @@ addEventListener("DOMContentLoaded", async () => {
 
 					const open = element.classList.toggle("open");
 
-					if (open) await loadDetails(element.id);
+					if (open) await loadDetails(element, id);
 				});
 
 				container.append(element);

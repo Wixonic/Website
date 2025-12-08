@@ -20,7 +20,7 @@ import storage from "./storage.js";
  */
 const request = (method, url, type = "text", mimeType = null, body, cache = 180, credentials = false) => new Promise((resolve, reject) => {
 	try {
-		if (!["blob", "arraybuffer", "document"].includes(type)) throw "Cache doesn't support this response type";
+		if (["blob", "arraybuffer", "document"].includes(type)) throw "Cache doesn't support this response type";
 
 		const cachedResponse = storage.getItem(`request-cache|${url}`);
 		if (cachedResponse || cache > 0) {
