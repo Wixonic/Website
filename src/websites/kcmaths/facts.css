@@ -7,10 +7,25 @@
 	margin: auto;
 }
 
-.facts .title {
-	width: 100%;
-
-	background: var(--background-front);
+.facts.hidden {
+	display: none;
 }
 
-.facts .fact {}
+.facts .title,
+.facts .fact {
+	width: 100%;
+
+	padding: var(--margin-xxs);
+}
+
+.facts .title {
+	background: var(--background-front);
+
+	font-size: small;
+	font-weight: bold;
+}
+
+.facts .fact {
+	color: var(--text-muted);
+	font-size: small;
+}

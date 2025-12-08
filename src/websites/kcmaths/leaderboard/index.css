@@ -16,8 +16,8 @@ h2 {
 	margin: auto;
 }
 
-.facts.hidden {
-	display: none;
+.facts {
+	margin-top: var(--margin-xxs);
 }
 
 .category-container {
@@ -52,7 +52,7 @@ h2 {
 	width: min(95%, 30rem);
 
 	border: var(--border-m) solid var(--border-subtle);
-	border-radius: var(--border-radius-l) 0;
+	border-radius: 0 0 var(--border-radius-l) var(--border-radius-l);
 
 	margin: auto;
 	padding: var(--margin-xs);
@@ -161,9 +161,17 @@ h2 {
 
 	height: 0;
 
+	transition: height 0.2s ease;
+
 	overflow: hidden;
 }
 
 #leaderboard .member.open .details {
 	height: 10rem;
+}
+
+.last-updated {
+	color: var(--text-muted);
+	font-size: small;
+	text-align: center;
 }

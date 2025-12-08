@@ -31,6 +31,8 @@ const formatLeaderboard = (leaderboard) => {
 	return leaderboard;
 };
 
+const parseID = (id) => id.replace(/\s/g, "_").replace(/[^a-zA-Z_]/g, "");
+
 const sortLeaderboard = (leaderboard, category) => {
 	const values = Object.values(leaderboard);
 	values.sort((a, b) => {
@@ -64,5 +66,6 @@ export {
 	findRankFor,
 	formatLeaderboard,
 	formatRank,
+	parseID,
 	sortLeaderboard
 };

@@ -3,7 +3,7 @@ import { init } from "/lib/main.js";
 import { path, updateURL } from "/lib/script/path.js";
 import request from "/lib/script/request.js";
 
-import { findRankFor, formatLeaderboard, formatRank, sortLeaderboard } from "/utils.js";
+import { findRankFor, formatLeaderboard, formatRank, parseID, sortLeaderboard } from "/utils.js";
 
 addEventListener("DOMContentLoaded", async () => {
 	await init();
@@ -46,7 +46,7 @@ addEventListener("DOMContentLoaded", async () => {
 	entries = entries.sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
 
 	/**
-	 * @param {Number} id
+	 * @param {number} id
 	 * @param {"ratio" | "bank" | "entries" | "victories"} category
 	 */
 	const loadLeaderboard = async (id, category) => {
@@ -61,9 +61,14 @@ addEventListener("DOMContentLoaded", async () => {
 
 		const container = document.querySelector("#leaderboard");
 
-		if (id == -1) {
-			container.innerHTML = "Aucune donnée pour cette date.";
-		} else {
+		/** @param {string} id */
+		const loadDetails = async (id) => {
+			const details = await request("GET", new URL(`/kcmaths/details/?id=${id}`, path.server), "json", "application/json", null, -1);
+			container.querySelector(`#${id} .details`).innerHTML = JSON.stringify(details);
+		};
+
+		if (id == -1) container.innerHTML = "Aucune donnée pour cette date.";
+		else {
 			container.innerHTML = "";
 			const date = entries[id];
 			const previous = id > 0 ? entries[id - 1] : null;
@@ -136,6 +141,7 @@ addEventListener("DOMContentLoaded", async () => {
 				const previousEntry = previousLeaderboard[id] ?? {};
 
 				const element = document.createElement("div");
+				element.id = parseID(id);
 				element.classList.add("member");
 				element.setAttribute("rank", rank);
 
@@ -209,6 +215,16 @@ addEventListener("DOMContentLoaded", async () => {
 							break;
 					}
 				}
+
+				element.addEventListener("click", async () => {
+					for (const el of container.querySelectorAll(".member")) {
+						if (el != element) el.classList.remove("open");
+					}
+
+					const open = element.classList.toggle("open");
+
+					if (open) await loadDetails(element.id);
+				});
 
 				container.append(element);
 			}
