@@ -1,4 +1,3 @@
-import { path } from "/lib/script/path.js";
 import storage from "/lib/script/storage.js";
 
 /**

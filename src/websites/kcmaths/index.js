@@ -1,5 +1,4 @@
 import { init } from "/lib/main.js";
-import { path } from "/lib/script/path.js";
 
 addEventListener("DOMContentLoaded", async () => {
 	await init();
