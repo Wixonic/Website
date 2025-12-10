@@ -1,6 +1,6 @@
 {
 	"scripts": {
-		"serve": "clear; npm run build; firebase emulators:start",
+		"serve": "clear; dev=true npm run build; firebase emulators:start",
 		"prepublish": "clear; npm run build",
 		"publish": "clear; firebase publish",
 		"build": "clear; rm -r ../build/; npx @11ty/eleventy"
