@@ -2,30 +2,8 @@ rules_version = "2";
 
 service cloud.firestore {
 	match /databases/{database}/documents {
-		match /users/{uid} {
-			allow read: if true;
-			allow write: if request.auth != null
-				&& request.auth.uid == uid
-				&& isValidUserUpdate(request.resource.data);
-
-			match /links/{link} {
-				allow read, write: if request.auth != null && request.auth.uid == uid;
-			}
-		}
-
 		match /{allPaths=**} {
 			allow read, write: if false;
 		}
-	}
-
-	function isValidDisplayName(name) {
-		return name is string && name.matches("^[\\p{L}\\p{N}_\\- ]{4,20}$");
-	}
-
-	function isValidUserUpdate(data) {
-		let keys = request.writeFields;
-
-		return ((keys.hasAny(["displayName"]) && isValidDisplayName(data.displayName)))
-			&& keys.hasOnly(["displayName"]);
 	}
 }
