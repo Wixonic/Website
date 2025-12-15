@@ -2,7 +2,7 @@
 	"hosting": [
 		{
 			"target": "root",
-			"public": "../build/websites/root",
+			"public": "./build/websites/root",
 			"ignore": [
 				".DS_Store"
 			],
@@ -26,7 +26,7 @@
 		},
 		{
 			"target": "accounts",
-			"public": "../build/websites/accounts",
+			"public": "./build/websites/accounts",
 			"ignore": [
 				".DS_Store"
 			],
@@ -50,7 +50,7 @@
 		},
 		{
 			"target": "admin",
-			"public": "../build/websites/admin",
+			"public": "./build/websites/admin",
 			"ignore": [
 				".DS_Store"
 			],
@@ -74,7 +74,7 @@
 		},
 		{
 			"target": "assets",
-			"public": "../build/websites/assets",
+			"public": "./build/websites/assets",
 			"ignore": [
 				".DS_Store"
 			],
@@ -106,7 +106,7 @@
 		},
 		{
 			"target": "kcmaths",
-			"public": "../build/websites/kcmaths",
+			"public": "./build/websites/kcmaths",
 			"ignore": [
 				".DS_Store"
 			],
@@ -130,7 +130,7 @@
 		},
 		{
 			"target": "git",
-			"public": "../build/websites/git",
+			"public": "./build/websites/git",
 			"ignore": [
 				".DS_Store"
 			],
@@ -220,7 +220,7 @@
 		}
 	},
 	"firestore": {
-		"rules": "./rules/firestore.rules",
-		"indexes": "./rules/firestore.indexes.json"
+		"rules": "./src/rules/firestore.rules",
+		"indexes": "./src/rules/firestore.indexes.json"
 	}
 }
