@@ -9,7 +9,7 @@ addEventListener("DOMContentLoaded", async () => {
 	await init();
 
 	document.querySelector(".extra-header .overview").addEventListener("click", () => location.href = path.kcmaths);
-	document.querySelector(".extra-header .fiels").addEventListener("click", () => location.href = new URL("/files/", path.kcmaths));
+	document.querySelector(".extra-header .files").addEventListener("click", () => location.href = new URL("/files/", path.kcmaths));
 
 	const date = document.querySelector(".input.date");
 	const ratioButton = document.querySelector(".category#ratio");

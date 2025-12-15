@@ -4,5 +4,5 @@ addEventListener("DOMContentLoaded", async () => {
 	await init();
 
 	document.querySelector(".extra-header .leaderboard").addEventListener("click", () => location.href = new URL("/leaderboard/", path.kcmaths));
-	document.querySelector(".extra-header .fiels").addEventListener("click", () => location.href = new URL("/files/", path.kcmaths));
+	document.querySelector(".extra-header .files").addEventListener("click", () => location.href = new URL("/files/", path.kcmaths));
 });
