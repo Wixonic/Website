@@ -1,1 +1,75 @@
 @import url("/lib/main.css");
+
+main {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-m);
+
+	width: 100%;
+	max-width: 80rem;
+	margin: 0 auto;
+	padding: var(--margin-xl);
+
+	background: var(--background);
+}
+
+.hero {
+	text-align: center;
+	padding: var(--spacing-s) 0;
+}
+
+.hero h1 {
+	font-size: 3rem;
+	margin-bottom: var(--margin-m);
+}
+
+.hero p {
+	font-size: 1.2rem;
+	color: var(--text-muted);
+}
+
+.projects h2, .socials h2 {
+	font-size: 2rem;
+	margin-bottom: var(--margin-l);
+	border-bottom: var(--border-m) solid var(--border-color);
+	padding-bottom: var(--margin-xs);
+}
+
+.list {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+	gap: var(--margin-l);
+}
+
+article {
+	background: var(--background-front);
+	padding: var(--margin-l);
+	border-radius: var(--border-radius-m);
+	box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+article h3 {
+	margin-top: 0;
+	margin-bottom: var(--margin-s);
+}
+
+.socials ul {
+	list-style: none;
+	padding: 0;
+	display: flex;
+	gap: var(--margin-m);
+}
+
+.socials a {
+	display: inline-block;
+	padding: var(--margin-m) var(--margin-l);
+	background: var(--background-front);
+	border-radius: var(--border-radius-m);
+	text-decoration: none;
+	font-weight: bold;
+	transition: background 0.2s;
+}
+
+.socials a:hover {
+	background: var(--background-deep);
+}
