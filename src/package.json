@@ -2,7 +2,7 @@
 	"scripts": {
 		"serve": "clear; dev=true npm run build; cd .. && firebase emulators:start; cd src",
 		"prepublish": "clear; npm run build",
-		"publish": "clear; cd .. && firebase publish; cd src",
+		"publish": "clear; cd .. && firebase deploy; cd src",
 		"build": "clear; rm -r ../build/; npx @11ty/eleventy"
 	},
 	"dependencies": {
