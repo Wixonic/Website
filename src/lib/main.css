@@ -1,3 +1,4 @@
+@import url("/lib/style/animation.css");
 @import url("/lib/style/button.css");
 @import url("/lib/style/cookie.css");
 @import url("/lib/style/footer.css");
@@ -35,6 +36,9 @@ body {
 
 	--danger: hsl(0, 100%, 60%);
 	--danger-text: hsl(0, 0%, 100%);
+
+	--color-loading-background: transparent;
+	--color-loading-background-contrast: hsla(0, 0%, 50%, 0.15);
 	/* COLORS */
 
 	/* SIZES */
