@@ -143,6 +143,15 @@ addEventListener("DOMContentLoaded", async () => {
 				}
 
 				const sortedLeaderboard = sortLeaderboard(leaderboard, category);
+
+				const entriesSorted = Object.values(leaderboard).sort((a, b) => b.entries - a.entries);
+
+				let hellThreshold = -1;
+				if (entriesSorted.length > 0) {
+					const thresholdIndex = Math.max(0, entriesSorted.length - 12);
+					hellThreshold = entriesSorted[thresholdIndex].entries;
+				}
+
 				for (const id in sortedLeaderboard) {
 					const rank = findRankFor(leaderboard, id, category);
 					const previousRank = findRankFor(previousLeaderboard, id, category);
@@ -153,6 +162,7 @@ addEventListener("DOMContentLoaded", async () => {
 					const element = document.createElement("div");
 					element.classList.add("member");
 					element.setAttribute("rank", rank);
+					if (entry.entries <= hellThreshold) element.classList.add("hell");
 
 					{
 						const rankEl = document.createElement("div");

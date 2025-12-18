@@ -79,6 +79,20 @@ h2 {
 	padding: 0 var(--margin-s);
 }
 
+#leaderboard .member.hell {
+	background: linear-gradient(90deg, hsla(10deg, 100%, 50%, 0.15), transparent 50%);
+	background-size: 200% 100%;
+	background-position: 100% 0;
+
+	animation: fade 1s ease-in-out infinite alternate;
+}
+
+@keyframes fade {
+	to {
+		background-position: 0 0;
+	}
+}
+
 #leaderboard .member .rank,
 #leaderboard .member .delta,
 #leaderboard .member .name,
