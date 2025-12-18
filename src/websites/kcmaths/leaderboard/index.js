@@ -37,7 +37,7 @@ addEventListener("DOMContentLoaded", async () => {
 	})();
 
 	/** @type {Date[]} */
-	let entries = await request("GET", new URL("/kcmaths/entries/", path.server), "json", "application/json", null, 600);
+	let entries = await request("GET", new URL("/kcmaths/entries/", path.server), "json", "application/json", null, -1);
 
 	if ([200, 204].includes(entries.status)) {
 		entries = entries.response;
@@ -84,7 +84,7 @@ addEventListener("DOMContentLoaded", async () => {
 				const previous = id > 0 ? entries[id - 1] : null;
 
 				let [leaderboard, previousLeaderboard] = await Promise.all([
-					request("GET", new URL(`/kcmaths/leaderboard/?date=${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(2, "0")}-${String(date.getUTCDate()).padStart(2, "0")}`, path.server), "json", "application/json", null, 600)
+					request("GET", new URL(`/kcmaths/leaderboard/?date=${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(2, "0")}-${String(date.getUTCDate()).padStart(2, "0")}`, path.server), "json", "application/json", null, -1)
 						.then((res) => [200].includes(res.status) ? formatLeaderboard(res.response) : {}),
 
 					previous ? request("GET", new URL(`/kcmaths/leaderboard/?date=${previous.getUTCFullYear()}-${String(previous.getUTCMonth() + 1).padStart(2, "0")}-${String(previous.getUTCDate()).padStart(2, "0")}`, path.server), "json", "application/json", null, 600)
