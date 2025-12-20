@@ -133,15 +133,26 @@ const init = async () => {
 					headers.forEach((th) => {
 						th.addEventListener("click", () => {
 							const currentDir = th.dataset.sortDir;
+							const isDate = th.dataset.type === "date";
+							const isAlwaysSorted = table.classList.contains("always-sorted");
+
 							table.querySelectorAll("th").forEach((h) => delete h.dataset.sortDir);
 
-							let newDir = "asc";
-							if (currentDir === "asc") newDir = "desc";
-							else if (currentDir === "desc") newDir = "asc";
-							else if (th.dataset.type === "date") newDir = "desc";
+							let newDir;
+							if (currentDir === "asc") {
+								if (isDate && !isAlwaysSorted) newDir = null;
+								else newDir = "desc";
+							} else if (currentDir === "desc") {
+								if (isDate) newDir = "asc";
+								else newDir = isAlwaysSorted ? "asc" : null;
+							} else {
+								newDir = isDate ? "desc" : "asc";
+							}
 
-							th.dataset.sortDir = newDir;
-							sortTable(table);
+							if (newDir) {
+								th.dataset.sortDir = newDir;
+								sortTable(table);
+							}
 						});
 					});
 
@@ -165,8 +176,8 @@ const init = async () => {
 						const date = new Date(td.innerText);
 						if (!isNaN(date)) {
 							td.dataset.value = date.getTime();
-							td.innerText = formatDate(date);
-							if (table.classList.contains("always-sorted")) requestSort(table);
+							td.innerText = formatDate(date, table.getAttribute("lang") || "en");
+							if (table.querySelector("th[data-sort-dir]")) requestSort(table);
 						}
 					}
 				}

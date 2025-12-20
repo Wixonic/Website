@@ -9,9 +9,9 @@ addEventListener("DOMContentLoaded", async () => {
 	document.querySelector(".extra-header .overview").addEventListener("click", () => location.href = path.kcmaths);
 	document.querySelector(".extra-header .leaderboard").addEventListener("click", () => location.href = new URL("/leaderboard/", path.kcmaths));
 
-	const fileList = document.querySelector("#file-list");
-
 	const searchInput = document.querySelector(".input.search");
+
+	const fileList = document.querySelector("#files");
 
 	const loadFiles = async () => {
 		fileList.innerHTML = "";
@@ -19,6 +19,7 @@ addEventListener("DOMContentLoaded", async () => {
 		const response = await request("GET", new URL("/kcmaths/files/history/", path.server), "json", "application/json", null, -1);
 
 		if (response.status === 200) {
+			fileList.classList.remove("loading");
 			const files = response.response;
 
 			const fileArray = Object.entries(files).map(([name, data]) => ({ name, ...data }));
@@ -73,6 +74,7 @@ addEventListener("DOMContentLoaded", async () => {
 			});
 
 		} else {
+			fileList.classList.remove("loading");
 			fileList.innerHTML = "<tr><td colspan='3'>Impossible de charger la liste des fichiers.</td></tr>";
 		}
 	};

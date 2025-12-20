@@ -80,7 +80,7 @@ h2 {
 }
 
 #leaderboard .member.hell {
-	background: linear-gradient(90deg, hsla(10deg, 100%, 50%, 0.15), transparent 50%);
+	background: linear-gradient(90deg, hsla(10deg, 100%, 50%, 0.15), transparent 15%);
 	background-size: 200% 100%;
 	background-position: 100% 0;
 
