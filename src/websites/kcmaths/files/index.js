@@ -25,6 +25,15 @@ addEventListener("DOMContentLoaded", async () => {
 			const fileArray = Object.entries(files).map(([name, data]) => ({ name, ...data }));
 			fileArray.sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' }));
 
+			const formatSize = (sizeStr) => {
+				const size = parseFloat(sizeStr);
+				if (isNaN(size)) return sizeStr;
+
+				if (size >= 1024 * 1024) return `${(size / (1024 * 1024)).toFixed(2)} Go`;
+				if (size >= 1024) return `${(size / 1024).toFixed(2)} Mo`;
+				return `${Math.round(size)} Ko`;
+			};
+
 			const renderFiles = (filter = "") => {
 				fileList.innerHTML = "";
 				const lowerFilter = filter.toLowerCase();
@@ -52,7 +61,7 @@ addEventListener("DOMContentLoaded", async () => {
 					row.appendChild(dateCell);
 
 					const sizeCell = document.createElement("td");
-					sizeCell.textContent = file.size;
+					sizeCell.textContent = formatSize(file.size);
 					row.appendChild(sizeCell);
 
 					fileList.appendChild(row);
