@@ -1,6 +1,6 @@
 const formatRank = (rank) => {
 	if (rank <= 0) return "--";
-	else if (rank == 1) return "1er";
+	else if (rank === 1) return "1er";
 	else return rank + "e";
 };
 
@@ -8,7 +8,7 @@ const findRankFor = (leaderboard, id, category) => {
 	const sortedLeaderboard = sortLeaderboard(leaderboard, category);
 	let previousEntry = { id: 0, value: 0 };
 
-	if (Object.keys(sortedLeaderboard).indexOf(id) == -1) return -1;
+	if (Object.keys(sortedLeaderboard).indexOf(id) === -1) return -1;
 
 	let currentId = 0;
 	for (const name in sortedLeaderboard) {
@@ -19,8 +19,8 @@ const findRankFor = (leaderboard, id, category) => {
 			"entries": "entries",
 			"victories": "victories"
 		}[category]];
-		if (previousEntry.value != value) previousEntry = { id: currentId, value };
-		if (name == id) break;
+		if (previousEntry.value !=== value) previousEntry = { id: currentId, value };
+		if (name === id) break;
 	}
 
 	return previousEntry.id;
@@ -36,19 +36,19 @@ const sortLeaderboard = (leaderboard, category) => {
 	values.sort((a, b) => {
 		switch (category) {
 			case "ratio":
-				if (a.ratio == b.ratio) return b.entries - a.entries;
+				if (a.ratio === b.ratio) return b.entries - a.entries;
 				else return b.ratio - a.ratio;
 
 			case "bank":
-				if (a.kcCoins == b.kcCoins) return b.percent - a.percent;
+				if (a.kcCoins === b.kcCoins) return b.percent - a.percent;
 				else return b.kcCoins - a.kcCoins;
 
 			case "entries":
-				if (a.entries == b.entries) return b.percent - a.percent;
+				if (a.entries === b.entries) return b.percent - a.percent;
 				else return b.entries - a.entries;
 
 			case "victories":
-				if (a.victories == b.victories) return a.entries - b.entries;
+				if (a.victories === b.victories) return a.entries - b.entries;
 				else return b.victories - a.victories;
 
 			default:

@@ -243,14 +243,14 @@ const init = async () => {
 		for (const mutation of mutations) {
 			if (mutation.type === "childList") {
 				mutation.addedNodes.forEach((node) => {
-					if (node.nodeType == 1) added(node);
+					if (node.nodeType === 1) added(node);
 				});
 
 				mutation.removedNodes.forEach((node) => {
-					if (node.nodeType == 1) removed(node);
+					if (node.nodeType === 1) removed(node);
 				});
 			} else if (mutation.type === "attributes") {
-				if (mutation.target.nodeType == 1) changed(mutation.target, mutation.attributeName, mutation.oldValue);
+				if (mutation.target.nodeType === 1) changed(mutation.target, mutation.attributeName, mutation.oldValue);
 			}
 		}
 	});
@@ -264,7 +264,7 @@ const init = async () => {
 	const analyticScript = document.createElement("script");
 	analyticScript.src = "https://www.googletagmanager.com/gtag/js?id=G-Q6C79RDDZX";
 
-	if (storage.getItem("consent") == "true") {
+	if (storage.getItem("consent") === "true") {
 		document.head.append(analyticScript);
 	} else if (!storage.getItem("consent")) {
 		const cookiePopup = document.createElement("aside");

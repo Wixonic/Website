@@ -3,7 +3,7 @@ export const config = {
 };
 
 export default (config) => {
-	const isEmulator = process.env.dev == "true";
+	const isEmulator = process.env.dev === "true";
 
 	const pathConfig = isEmulator ? {
 		root: "http://localhost:2005",
