@@ -1,44 +1,5 @@
 @import url("/lib/main.css");
 
-.file-list-container {
-	margin: 20px auto;
-	max-width: 1000px;
-	background: var(--bg-secondary);
-	border-radius: 12px;
-	padding: 20px;
-	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-table {
-	width: 100%;
-	border-collapse: collapse;
-}
-
-th,
-td {
-	text-align: left;
-	padding: 12px;
-	border-bottom: 1px solid var(--border);
-}
-
-th {
-	font-weight: 600;
-	color: var(--text-secondary);
-}
-
-td a {
-	color: var(--accent);
-	text-decoration: none;
-	font-weight: 500;
-}
-
-td a:hover {
-	text-decoration: underline;
-}
-
-.loading {
-	text-align: center;
-	color: var(--text-secondary);
-	font-style: italic;
-	padding: 20px;
+tbody.loading {
+	min-height: 100vh;
 }

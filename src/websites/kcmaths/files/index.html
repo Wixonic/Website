@@ -14,24 +14,24 @@ description: Accédez à une sauvegarde des fichiers, mise à jour régulièreme
 
 	</div>
 
-</div>
-
-<div class="input date"></div>
-
-<div class="file-list-container">
-
-	<table>
-
-		<thead>
-			<tr>
-				<th>Nom</th>
-				<th>Date de modification</th>
-				<th>Taille</th>
-			</tr>
-		</thead>
-
-		<tbody id="file-list"></tbody>
-
-	</table>
+	<input type="search" class="input search" placeholder="Rechercher un fichier...">
 
 </div>
+
+<table class="table always-sorted">
+
+	<thead>
+
+		<tr>
+
+			<th class="sortable">Nom</th>
+			<th class="sortable" data-type="date">Date de modification</th>
+			<th>Taille</th>
+
+		</tr>
+
+	</thead>
+
+	<tbody class="loading"></tbody>
+
+</table>
