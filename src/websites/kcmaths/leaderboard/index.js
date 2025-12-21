@@ -173,7 +173,7 @@ addEventListener("DOMContentLoaded", async () => {
 						const deltaEl = document.createElement("div");
 						deltaEl.classList.add("delta");
 						const delta = previousRank - rank;
-						if (delta !=== 0) {
+						if (delta !== 0) {
 							deltaEl.innerHTML = `${delta > 0 ? "+" : ""}${delta}`;
 							deltaEl.classList.add(delta > 0 ? "pos" : "neg");
 						}
@@ -200,7 +200,7 @@ addEventListener("DOMContentLoaded", async () => {
 							case "ratio":
 								valueEl.innerHTML = entry.ratio > 0 ? `${Number((entry.ratio * 100).toFixed(1))}%` : "--";
 								const deltaRatio = entry.ratio > 0 ? entry.ratio - (previousEntry.ratio ?? entry.ratio) : 0;
-								if (deltaRatio !=== 0) {
+								if (deltaRatio !== 0) {
 									deltaValueEl.innerHTML = `${deltaRatio > 0 ? "+" : ""}${Number((deltaRatio * 100).toFixed(1))}%`;
 									deltaValueEl.classList.add(deltaRatio > 0 ? "pos" : "neg");
 								}
@@ -209,7 +209,7 @@ addEventListener("DOMContentLoaded", async () => {
 							case "bank":
 								valueEl.innerHTML = entry.kcCoins;
 								const deltaKCC = entry.kcCoins - (previousEntry.kcCoins ?? entry.kcCoins);
-								if (deltaKCC !=== 0) {
+								if (deltaKCC !== 0) {
 									deltaValueEl.innerHTML = `${deltaKCC > 0 ? "+" : ""}${deltaKCC}`;
 									deltaValueEl.classList.add(deltaKCC > 0 ? "pos" : "neg");
 								}
@@ -218,7 +218,7 @@ addEventListener("DOMContentLoaded", async () => {
 							case "entries":
 								valueEl.innerHTML = entry.entries;
 								const deltaEntries = entry.entries - (previousEntry.entries ?? entry.entries);
-								if (deltaEntries !=== 0) {
+								if (deltaEntries !== 0) {
 									deltaValueEl.innerHTML = `${deltaEntries > 0 ? "+" : ""}${deltaEntries}`;
 									deltaValueEl.classList.add(deltaEntries > 0 ? "pos" : "neg");
 								}
@@ -227,7 +227,7 @@ addEventListener("DOMContentLoaded", async () => {
 							case "victories":
 								valueEl.innerHTML = entry.victories;
 								const deltaVictories = entry.victories - (previousEntry.victories ?? entry.victories);
-								if (deltaVictories !=== 0) {
+								if (deltaVictories !== 0) {
 									deltaValueEl.innerHTML = `${deltaVictories > 0 ? "+" : ""}${deltaVictories}`;
 									deltaValueEl.classList.add(deltaVictories > 0 ? "pos" : "neg");
 								}
@@ -237,7 +237,7 @@ addEventListener("DOMContentLoaded", async () => {
 
 					element.addEventListener("click", async () => {
 						for (const el of container.querySelectorAll(".member")) {
-							if (el !=== element) el.classList.remove("open");
+							if (el !== element) el.classList.remove("open");
 						}
 
 						const open = element.classList.toggle("open");

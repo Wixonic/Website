@@ -19,7 +19,7 @@ const findRankFor = (leaderboard, id, category) => {
 			"entries": "entries",
 			"victories": "victories"
 		}[category]];
-		if (previousEntry.value !=== value) previousEntry = { id: currentId, value };
+		if (previousEntry.value !== value) previousEntry = { id: currentId, value };
 		if (name === id) break;
 	}
 

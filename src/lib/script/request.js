@@ -25,7 +25,7 @@ const request = (method, url, type = "text", mimeType = null, body = null, cache
 			const cacheKey = `request-cache|${url}`;
 			const isCacheableType = !["blob", "arraybuffer", "document"].includes(type);
 
-			if (isCacheableType && cache !=== -1) {
+			if (isCacheableType && cache !== -1) {
 				const cachedItem = storage.getItem(cacheKey);
 				if (cachedItem) {
 					try {
