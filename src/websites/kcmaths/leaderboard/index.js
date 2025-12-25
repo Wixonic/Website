@@ -72,7 +72,8 @@ addEventListener("DOMContentLoaded", async () => {
 			const loadDetails = async (element, id) => {
 				const el = element.querySelector(".details");
 				el.classList.add("loading");
-				// const details = await request("GET", new URL(`/kcmaths/details/?id=${encodeURIComponent(id)}`, path.server), "json", "application/json", null, -1);
+				const details = await request("GET", new URL(`/kcmaths/details/?id=${encodeURIComponent(id)}`, path.server), "json", "application/json", null, -1);
+
 				// el.classList.remove("loading");
 				// el.innerHTML = JSON.stringify(details);
 			};
