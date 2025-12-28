@@ -1,4 +1,4 @@
-@import url("/lib/main.css");
+@import url("../lib/main.css");
 
 tbody.loading {
 	min-height: 100vh;

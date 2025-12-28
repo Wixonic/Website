@@ -3,10 +3,13 @@
 		"serve": "clear; dev=true npm run build; cd .. && firebase emulators:start; cd src",
 		"prepublish": "clear; npm run build",
 		"publish": "clear; cd .. && firebase deploy; cd src",
-		"build": "clear; rm -r ../build/; npx @11ty/eleventy"
+		"build": "clear; rm -rf ../build/; npx @11ty/eleventy",
+		"testbuild": "dev=true clear=true npm run build"
 	},
 	"dependencies": {
-		"@11ty/eleventy": "^3.1.2"
+		"@11ty/eleventy": "3.1.2",
+		"esbuild": "0.27.2",
+		"glob": "13.0.0"
 	},
 	"type": "module"
 }

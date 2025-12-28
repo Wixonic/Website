@@ -1,13 +1,13 @@
-@import url("/lib/style/animation.css");
-@import url("/lib/style/button.css");
-@import url("/lib/style/cookie.css");
-@import url("/lib/style/footer.css");
-@import url("/lib/style/font.css");
-@import url("/lib/style/header.css");
-@import url("/lib/style/icon.css");
-@import url("/lib/style/input.css");
-@import url("/lib/style/link.css");
-@import url("/lib/style/text.css");
+@import url("./style/animation.css");
+@import url("./style/button.css");
+@import url("./style/cookie.css");
+@import url("./style/footer.css");
+@import url("./style/font.css");
+@import url("./style/header.css");
+@import url("./style/icon.css");
+@import url("./style/input.css");
+@import url("./style/link.css");
+@import url("./style/text.css");
 
 body {
 	/* COLORS */

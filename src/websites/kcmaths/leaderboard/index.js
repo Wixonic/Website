@@ -1,9 +1,9 @@
-import { init } from "/lib/main.js";
+import { init } from "../lib/main.js";
 
-import { updateURL } from "/lib/script/path.js";
-import request from "/lib/script/request.js";
+import { updateURL } from "../lib/script/path.js";
+import request from "../lib/script/request.js";
 
-import { findRankFor, formatLeaderboard, formatRank, sortLeaderboard } from "/utils.js";
+import { findRankFor, formatLeaderboard, formatRank, sortLeaderboard } from "../utils.js";
 
 addEventListener("DOMContentLoaded", async () => {
 	await init();

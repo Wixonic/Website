@@ -1,1 +1,1 @@
-import "/lib/main.js";
+import "../main.js";

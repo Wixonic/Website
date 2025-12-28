@@ -1,9 +1,9 @@
-import storage from "/lib/script/storage.js";
+import storage from "./script/storage.js";
 
-import headerMutation from "/lib/mutations/header.js";
-import inputDateMutation from "/lib/mutations/input-date.js";
-import extraHeaderMutation from "/lib/mutations/extra-header.js";
-import tableSortingMutation from "/lib/mutations/table-sorting.js";
+import headerMutation from "./mutations/header.js";
+import inputDateMutation from "./mutations/input-date.js";
+import extraHeaderMutation from "./mutations/extra-header.js";
+import tableSortingMutation from "./mutations/table-sorting.js";
 
 
 /**

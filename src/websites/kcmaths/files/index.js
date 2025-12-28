@@ -1,7 +1,7 @@
-import { init } from "/lib/main.js";
+import { init } from "../lib/main.js";
 
-import { updateURL } from "/lib/script/path.js";
-import request from "/lib/script/request.js";
+import { updateURL } from "../lib/script/path.js";
+import request from "../lib/script/request.js";
 
 addEventListener("DOMContentLoaded", async () => {
 	await init();

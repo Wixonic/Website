@@ -2,7 +2,7 @@
 	"hosting": [
 		{
 			"target": "root",
-			"public": "./build/websites/root",
+			"public": "./build/root",
 			"ignore": [
 				".DS_Store"
 			],
@@ -26,7 +26,7 @@
 		},
 		{
 			"target": "accounts",
-			"public": "./build/websites/accounts",
+			"public": "./build/accounts",
 			"ignore": [
 				".DS_Store"
 			],
@@ -50,7 +50,7 @@
 		},
 		{
 			"target": "admin",
-			"public": "./build/websites/admin",
+			"public": "./build/admin",
 			"ignore": [
 				".DS_Store"
 			],
@@ -74,7 +74,7 @@
 		},
 		{
 			"target": "assets",
-			"public": "./build/websites/assets",
+			"public": "./build/assets",
 			"ignore": [
 				".DS_Store"
 			],
@@ -106,7 +106,7 @@
 		},
 		{
 			"target": "kcmaths",
-			"public": "./build/websites/kcmaths",
+			"public": "./build/kcmaths",
 			"ignore": [
 				".DS_Store"
 			],
@@ -130,7 +130,7 @@
 		},
 		{
 			"target": "git",
-			"public": "./build/websites/git",
+			"public": "./build/git",
 			"ignore": [
 				".DS_Store"
 			],
