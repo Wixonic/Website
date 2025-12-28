@@ -31,11 +31,7 @@ header {
 @media (max-width: 30rem) {
 	.extra-header {
 		top: auto;
-		bottom: var(--header-margin);
-	}
-
-	footer {
-		padding-bottom: calc(var(--extra-header-size) + 2 * var(--header-margin));
+		bottom: calc(var(--header-margin) + env(safe-area-inset-bottom, 0));
 	}
 }
 

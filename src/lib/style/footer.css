@@ -8,3 +8,9 @@ footer {
 
 	border-top: var(--border-m) solid var(--border-color);
 }
+
+@media (max-width: 30rem) {
+	footer {
+		padding-bottom: calc(var(--extra-header-size) + 2 * var(--header-margin) + env(safe-area-inset-bottom, 0));
+	}
+}
