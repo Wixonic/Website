@@ -1,5 +1,9 @@
 @import url("../lib/main.css");
 
+body {
+	--extra-header-size: 2.5rem;
+}
+
 tbody.loading {
 	min-height: 100vh;
 }
