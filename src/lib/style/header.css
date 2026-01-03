@@ -36,11 +36,6 @@ header {
 }
 
 .extra-header .container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	gap: var(--margin-s);
-
 	width: fit-content;
 
 	background: var(--background-accent);
@@ -54,6 +49,13 @@ header {
 	padding: var(--margin-xxs) var(--margin-s);
 
 	pointer-events: all;
+}
+
+.extra-header .container .nav {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: var(--margin-s);
 }
 
 header button,

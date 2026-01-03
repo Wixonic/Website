@@ -49,6 +49,7 @@ body {
 	--footer-size: 2.5rem;
 	--footer-margin: 0.5rem;
 
+	--border-xs: 0.025rem;
 	--border-s: 0.05rem;
 	--border-m: 0.1rem;
 	--border-l: 0.2rem;

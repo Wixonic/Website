@@ -1,9 +1,33 @@
 @import url("../lib/main.css");
 
 body {
-	--extra-header-size: 2.5rem;
+	--extra-header-size: 5.5rem;
 }
 
 tbody.loading {
 	min-height: 100vh;
+}
+
+.extra-header .container {
+	display: grid;
+}
+
+.extra-header .input {
+	grid-row: 2;
+
+	background: transparent !important;
+
+	color: inherit !important;
+
+	border-top: var(--border-xs) solid currentColor !important;
+	border-radius: 0 !important;
+
+	margin: 0;
+	padding: var(--margin-xs) var(--margin-xxs) var(--margin-xxs) var(--margin-xxs);
+}
+
+@media (max-width: 30rem) {
+	.extra-header .input {
+		grid-row: 1;
+	}
 }
