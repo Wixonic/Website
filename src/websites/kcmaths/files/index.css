@@ -29,5 +29,8 @@ tbody.loading {
 @media (max-width: 30rem) {
 	.extra-header .input {
 		grid-row: 1;
+
+		border-top: none !important;
+		border-bottom: var(--border-xs) solid currentColor !important;
 	}
 }
