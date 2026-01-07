@@ -27,7 +27,10 @@ mark {
 
 h1,
 h2,
-h3 {
+h3,
+h4,
+h5,
+h6 {
 	display: inline-block;
 
 	margin: var(--margin-xs) 0;
@@ -45,4 +48,16 @@ h2 {
 
 h3 {
 	font-size: larger;
+}
+
+h4 {
+	font-size: large;
+}
+
+h5 {
+	font-size: medium;
+}
+
+h6 {
+	font-size: small;
 }

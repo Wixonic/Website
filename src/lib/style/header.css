@@ -4,8 +4,9 @@ header {
 	left: 0;
 
 	display: grid;
-	grid-template-columns: 2rem auto;
+	grid-template-columns: 2rem auto 2rem;
 	grid-template-rows: 2rem auto;
+	gap: var(--margin-xs);
 
 	width: 100%;
 	height: var(--header-size);
@@ -15,6 +16,8 @@ header {
 	color: var(--text-accent-vivid);
 
 	border-bottom: var(--border-m) solid var(--border-color);
+
+	padding: 0 var(--margin-xs);
 }
 
 .extra-header {
@@ -93,9 +96,17 @@ header button[disabled],
 	opacity: 0.5;
 }
 
-header button.home svg {
+header button svg {
 	fill: currentColor;
 
 	height: calc(100% - var(--margin-xxs));
 	margin: auto;
+}
+
+header button.home {
+	grid-column: 1;
+}
+
+header button.nav-toggle {
+	grid-column: 3;
 }

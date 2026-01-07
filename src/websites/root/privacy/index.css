@@ -23,6 +23,15 @@
 	max-width: 50rem;
 }
 
+.hero h1,
+.hero h2,
+.hero h3,
+.hero h4,
+.hero h5,
+.hero h6 {
+	margin: 0 var(--margin-xs);
+}
+
 .hero .subtitle {
 	color: var(--text-muted);
 	font-size: 0.9rem;
