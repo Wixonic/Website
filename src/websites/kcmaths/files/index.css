@@ -4,6 +4,12 @@ body {
 	--extra-header-size: 5.5rem;
 }
 
+table {
+	width: min(95%, 60rem);
+
+	margin: auto;
+}
+
 tbody.loading {
 	min-height: 100vh;
 }
@@ -19,7 +25,7 @@ tbody.loading {
 
 	color: inherit !important;
 
-	border-top: var(--border-xs) solid currentColor !important;
+	border-top: var(--border-xs) solid var(--border-color) !important;
 	border-radius: 0 !important;
 
 	margin: 0;
@@ -31,6 +37,6 @@ tbody.loading {
 		grid-row: 1;
 
 		border-top: none !important;
-		border-bottom: var(--border-xs) solid currentColor !important;
+		border-bottom: var(--border-xs) solid var(--border-color) !important;
 	}
 }

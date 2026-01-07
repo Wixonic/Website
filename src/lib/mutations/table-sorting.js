@@ -58,7 +58,7 @@ const requestSort = (table) => {
 };
 
 export default {
-	".table": {
+	"table": {
 		added: (table) => {
 			const headers = table.querySelectorAll("th.sortable");
 			headers.forEach((th) => {
@@ -95,7 +95,7 @@ export default {
 			}
 		}
 	},
-	".table td": {
+	"table td": {
 		added: (td) => {
 			const table = td.closest("table");
 			if (!table) return;

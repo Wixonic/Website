@@ -1,5 +1,5 @@
 export default {
-	".input.date": {
+	"input.date": {
 		added: (node) => {
 			const calendar = document.createElement("div");
 			calendar.classList.add("calendar");

@@ -9,7 +9,7 @@ addEventListener("DOMContentLoaded", async () => {
 	document.querySelector(".extra-header .overview").addEventListener("click", () => location.href = path.kcmaths);
 	document.querySelector(".extra-header .leaderboard").addEventListener("click", () => location.href = new URL("/leaderboard/", path.kcmaths));
 
-	const searchInput = document.querySelector(".input.search");
+	const searchInput = document.querySelector(".input");
 
 	const fileList = document.querySelector("#files");
 

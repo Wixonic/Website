@@ -3,6 +3,8 @@ import storage from "./script/storage.js";
 import headerMutation from "./mutations/header.js";
 import inputDateMutation from "./mutations/input-date.js";
 import extraHeaderMutation from "./mutations/extra-header.js";
+import linkSecurityMutation from "./mutations/link-security.js";
+import navMutation from "./mutations/nav.js";
 import tableSortingMutation from "./mutations/table-sorting.js";
 
 
@@ -27,6 +29,8 @@ const init = async () => {
 	addMutations(headerMutation);
 	addMutations(inputDateMutation);
 	addMutations(extraHeaderMutation);
+	addMutations(linkSecurityMutation);
+	addMutations(navMutation);
 	addMutations(tableSortingMutation);
 
 

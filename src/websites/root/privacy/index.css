@@ -1,1 +1,49 @@
 @import url("../lib/main.css");
+
+.container {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: flex-start;
+	gap: var(--margin-xl);
+
+	max-width: 80rem;
+
+	margin: 0 auto;
+	padding: var(--margin-l);
+}
+
+#content {
+	flex: 1;
+
+	display: flex;
+	flex-direction: column;
+	gap: var(--margin-xl);
+
+	max-width: 50rem;
+}
+
+.hero .subtitle {
+	color: var(--text-muted);
+	font-size: 0.9rem;
+
+	margin: 0 var(--margin-s);
+}
+
+.hero .intro {
+	font-size: 1.1rem;
+	line-height: 1.6;
+}
+
+@media (max-width: 50rem) {
+	.container {
+		flex-direction: column;
+
+		padding: var(--margin-s);
+	}
+
+	#content {
+		width: 100%;
+		max-width: 100%;
+	}
+}

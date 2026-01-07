@@ -1,5 +1,6 @@
 @import url("./style/animation.css");
 @import url("./style/button.css");
+@import url("./style/card.css");
 @import url("./style/cookie.css");
 @import url("./style/footer.css");
 @import url("./style/font.css");
@@ -7,6 +8,8 @@
 @import url("./style/icon.css");
 @import url("./style/input.css");
 @import url("./style/link.css");
+@import url("./style/nav.css");
+@import url("./style/table.css");
 @import url("./style/text.css");
 
 body {
