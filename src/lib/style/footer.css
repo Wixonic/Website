@@ -13,7 +13,7 @@ footer {
 	z-index: 2;
 }
 
-@media (max-width: 30rem) {
+@media (max-width: 50rem) {
 	footer {
 		padding-bottom: calc(var(--extra-header-size) + 2 * var(--header-margin) + env(safe-area-inset-bottom, 0));
 	}

@@ -51,7 +51,7 @@ body {
 	/* SIZES */
 	--header-size: 2.5rem;
 	--header-margin: 0.5rem;
-	--extra-header-size: 0;
+	--extra-header-size: 0rem;
 
 	--footer-size: 2.5rem;
 	--footer-margin: 0.5rem;
@@ -138,8 +138,6 @@ body {
 body {
 	position: relative;
 
-	min-height: 100vh;
-
 	background: var(--background-accent);
 
 	color: var(--text);
@@ -160,18 +158,17 @@ body {
 main {
 	display: block;
 
-	min-height: calc(100vh - var(--header-size) - var(--extra-header-size) - 2 * var(--header-margin) - var(--footer-size) - 2 * var(--margin-s));
+	min-height: calc(100vh - var(--header-size) - var(--footer-size));
 
 	background: var(--background-deep);
 
 	margin-top: var(--header-size);
-	padding-top: calc(var(--extra-header-size) + 2 * var(--header-margin));
-	padding-bottom: var(--footer-margin);
+	padding: calc(var(--extra-header-size) + 2 * var(--header-margin) + env(safe-area-inset-top)) env(safe-area-inset-right) calc(var(--footer-margin) + env(safe-area-inset-bottom)) env(safe-area-inset-left);
 }
 
-@media (max-width: 30rem) {
+@media (max-width: 50rem) {
 	main {
-		min-height: calc(100vh - var(--header-size) - var(--header-margin) - var(--footer-size) - 2 * var(--margin-s));
+		min-height: calc(100vh - var(--header-size) - var(--footer-size));
 
 		padding-top: var(--header-margin);
 	}

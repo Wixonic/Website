@@ -9,7 +9,7 @@ body {
 h2 {
 	display: block;
 
-	max-width: 30rem;
+	max-width: 50rem;
 
 	text-align: center;
 
@@ -25,31 +25,14 @@ h2 {
 	justify-content: center;
 	align-items: center;
 
-	width: 100%;
-}
-
-@media (max-width: 30rem) {
-	.category-container {
-		justify-content: space-around;
-
-		gap: var(--margin-xxs);
-
-		width: 100%;
-	}
-
-	.category-container button {
-		margin-left: 0;
-		margin-right: 0;
-		padding-left: var(--margin-xs);
-		padding-right: var(--margin-xs);
-	}
+	gap: var(--margin-xxs);
 }
 
 #leaderboard {
 	display: flex;
 	flex-direction: column;
 
-	width: min(95%, 30rem);
+	width: min(95%, 50rem);
 
 	border: var(--border-m) solid var(--border-subtle);
 	border-radius: 0 0 var(--border-radius-l) var(--border-radius-l);
@@ -58,7 +41,7 @@ h2 {
 	padding: var(--margin-xs);
 }
 
-@media (max-width: 30rem) {
+@media (max-width: 50rem) {
 	#leaderboard {
 		width: 100%;
 

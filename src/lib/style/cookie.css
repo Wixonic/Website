@@ -1,14 +1,14 @@
 .cookie {
 	display: grid;
 	grid-template-rows: auto auto;
-	grid-template-columns: 3rem min(calc(100vw - var(--margin-m) * 2) - var(--var(--margin-xs)) - 4rem, 26.5rem);
+	grid-template-columns: 3rem min(calc(100vw - var(--margin-s) * 2 - env(safe-area-inset-left, 0) - env(safe-area-inset-right, 0)) - var(--margin-xs) - 4rem, 26.5rem);
 	gap: var(--margin-xs);
 
 	position: fixed;
-	bottom: var(--margin-m);
-	left: var(--margin-m);
+	bottom: max(var(--margin-s), env(safe-area-inset-bottom, 0));
+	left: max(var(--margin-s), env(safe-area-inset-left, 0));
 
-	width: min(calc(100vw - var(--margin-m) * 2), 30rem);
+	width: min(calc(100vw - var(--margin-s) * 2 - env(safe-area-inset-left, 0) - env(safe-area-inset-right, 0)), 30rem);
 
 	background: var(--background-transparent);
 	backdrop-filter: blur(var(--blur-m));
@@ -17,6 +17,8 @@
 	border-radius: var(--border-radius-l);
 
 	padding: var(--margin-xs);
+
+	z-index: 4;
 }
 
 .cookie .description {
