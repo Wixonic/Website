@@ -76,7 +76,8 @@ header .nav-toggle {
 
 		height: 100vh;
 
-		background: var(--background-deep);
+		background: var(--background-deep-seethrough);
+		backdrop-filter: blur(var(--blur-m));
 
 		border-right: var(--border-xs) solid var(--border-color);
 		border-radius: 0;

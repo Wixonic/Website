@@ -11,13 +11,14 @@ header {
 	width: 100%;
 	height: var(--header-size);
 
-	background: var(--background-accent);
+	background: linear-gradient(0deg, var(--background-accent-seethrough), var(--background-accent));
+	backdrop-filter: blur(var(--blur-xxs));
 
 	color: var(--text-accent-vivid);
 
-	border-bottom: var(--border-m) solid var(--border-color);
-
 	padding: 0 var(--margin-xs);
+
+	z-index: 2;
 }
 
 .extra-header {
@@ -28,7 +29,12 @@ header {
 	width: 100%;
 	height: var(--extra-header-size);
 
+	background: var(--background-accent-seethrough);
+	backdrop-filter: blur(var(--blur-xxs));
+
 	pointer-events: none;
+
+	z-index: 2;
 }
 
 @media (max-width: 30rem) {

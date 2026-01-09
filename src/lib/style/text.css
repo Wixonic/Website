@@ -1,10 +1,21 @@
-p {
-	margin: var(--margin-s);
-
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+li,
+th,
+td {
 	cursor: text;
 
 	user-select: text;
 	-webkit-user-select: text;
+}
+
+p {
+	margin: var(--margin-s);
 }
 
 i {

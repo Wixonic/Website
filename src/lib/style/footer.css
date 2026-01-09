@@ -1,4 +1,6 @@
 footer {
+	position: relative;
+
 	width: 100%;
 	height: var(--footer-size);
 
@@ -7,6 +9,8 @@ footer {
 	color: var(--text-accent-vivid);
 
 	border-top: var(--border-m) solid var(--border-color);
+
+	z-index: 2;
 }
 
 @media (max-width: 30rem) {

@@ -15,12 +15,16 @@
 body {
 	/* COLORS */
 	--background-deep: hsl(0, 0%, 100%);
+	--background-deep-seethrough: hsla(0, 0%, 100%, 80%);
 	--background: hsl(0, 0%, 95%);
+	--background-seethrough: hsla(0, 0%, 95%, 80%);
 	--background-front: hsl(0, 0%, 90%);
+	--background-front-seethrough: hsla(0, 0%, 90%, 80%);
 
 	--background-transparent: hsla(0, 0%, 95%, 75%);
 
 	--background-accent: hsl(0, 0%, 0%);
+	--background-accent-seethrough: hsla(0, 0%, 0%, 80%);
 
 	--background-selection: hsl(0, 0%, 0%);
 
@@ -74,7 +78,12 @@ body {
 	--spacing-l: 10rem;
 	--spacing-xl: 15rem;
 
-	--blur: 2rem;
+	--blur-xxs: 0.25rem;
+	--blur-xs: 0.5rem;
+	--blur-s: 1rem;
+	--blur-m: 2rem;
+	--blur-l: 4rem;
+	--blur-xl: 8rem;
 	/* SIZES */
 
 	/* FONT */
@@ -86,8 +95,11 @@ body {
 	body {
 		/* COLORS */
 		--background-deep: hsl(0, 0%, 5%);
+		--background-deep-seethrough: hsla(0, 0%, 5%, 80%);
 		--background: hsl(0, 0%, 10%);
+		--background-seethrough: hsla(0, 0%, 10%, 80%);
 		--background-front: hsl(0, 0%, 15%);
+		--background-front-seethrough: hsla(0, 0%, 15%, 80%);
 
 		--background-transparent: hsla(0, 0%, 10%, 75%);
 
