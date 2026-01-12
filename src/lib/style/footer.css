@@ -1,4 +1,8 @@
 footer {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: auto;
+
 	position: relative;
 
 	width: 100%;
@@ -10,11 +14,13 @@ footer {
 
 	border-top: var(--border-m) solid var(--border-color);
 
+	padding: 0 calc(2rem + env(safe-area-inset-right, 0)) env(safe-area-inset-bottom, 0) calc(2rem + env(safe-area-inset-left, 0));
+
 	z-index: 2;
 }
 
 @media (max-width: 50rem) {
 	footer {
-		padding-bottom: calc(var(--extra-header-size) + 2 * var(--header-margin) + env(safe-area-inset-bottom, 0));
+		padding-top: calc(var(--extra-header-size) + 2 * var(--header-margin));
 	}
 }

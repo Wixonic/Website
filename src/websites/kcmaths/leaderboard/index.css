@@ -16,10 +16,6 @@ h2 {
 	margin: auto;
 }
 
-.facts {
-	margin-top: var(--margin-xxs);
-}
-
 .category-container {
 	display: flex;
 	justify-content: center;
@@ -168,7 +164,11 @@ h2 {
 }
 
 .last-updated {
+	display: block;
+
 	color: var(--text-muted);
 	font-size: small;
 	text-align: center;
+
+	margin: var(--margin-xs) auto var(--margin-xxs) auto;
 }

@@ -4,7 +4,7 @@
 	border: var(--border-m) solid var(--border-color);
 	border-radius: var(--border-radius-m);
 
-	margin: auto;
+	margin: var(--margin-xxs) auto;
 }
 
 .facts.hidden {
