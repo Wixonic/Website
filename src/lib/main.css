@@ -166,6 +166,10 @@ main {
 	padding: calc(var(--extra-header-size) + 2 * var(--header-margin) + env(safe-area-inset-top)) env(safe-area-inset-right) calc(var(--footer-margin) + env(safe-area-inset-bottom)) env(safe-area-inset-left);
 }
 
+main>* {
+	animation: slide 0.5s ease-out;
+}
+
 @media (max-width: 50rem) {
 	main {
 		min-height: calc(100vh - var(--header-size) - var(--footer-size));

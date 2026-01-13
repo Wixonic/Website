@@ -14,3 +14,19 @@
 		background-position: 50rem 0;
 	}
 }
+
+.slide>* {
+	animation: slide 0.5s ease-out;
+}
+
+@keyframes slide {
+	from {
+		opacity: 0;
+		transform: translateY(-1rem);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}

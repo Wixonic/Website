@@ -1,13 +1,12 @@
-.cookie {
+aside.cookie {
 	display: grid;
 	grid-template-rows: auto auto;
-	grid-template-columns: 3rem min(calc(100vw - var(--margin-s) * 2 - env(safe-area-inset-left, 0) - env(safe-area-inset-right, 0)) - var(--margin-xs) - 4rem, 26.5rem);
+	grid-template-columns: 3rem min(calc(100vw - var(--margin-s) * 2 - env(safe-area-inset-left, 0) - env(safe-area-inset-right, 0)) - var(--margin-xs) * 2, calc(27rem - var(--margin-xs) * 2 - var(--margin-xs)));
 	gap: var(--margin-xs);
 
 	position: fixed;
 	bottom: max(var(--margin-s), env(safe-area-inset-bottom, 0));
 	left: max(var(--margin-s), env(safe-area-inset-left, 0));
-
 	width: min(calc(100vw - var(--margin-s) * 2 - env(safe-area-inset-left, 0) - env(safe-area-inset-right, 0)), 30rem);
 
 	background: var(--background-transparent);
@@ -21,14 +20,18 @@
 	z-index: 4;
 }
 
-.cookie .description {
+aside.cookie.hidden {
+	display: none;
+}
+
+aside.cookie .description {
 	grid-row: 1;
 	grid-column: 2;
 
 	font-size: small;
 }
 
-.cookie .icon {
+aside.cookie .icon {
 	grid-row: 1;
 	grid-column: 1;
 
@@ -40,7 +43,7 @@
 	margin-top: auto;
 }
 
-.cookie .buttons {
+aside.cookie .buttons {
 	grid-row: 2;
 	grid-column: 1 / 3;
 }
