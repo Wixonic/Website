@@ -1,6 +1,7 @@
 @import url("./style/animation.css");
 @import url("./style/button.css");
 @import url("./style/card.css");
+@import url("./style/carousel.css");
 @import url("./style/cookie.css");
 @import url("./style/footer.css");
 @import url("./style/font.css");
@@ -164,10 +165,6 @@ main {
 
 	margin-top: var(--header-size);
 	padding: calc(var(--extra-header-size) + 2 * var(--header-margin) + env(safe-area-inset-top)) env(safe-area-inset-right) calc(var(--footer-margin) + env(safe-area-inset-bottom)) env(safe-area-inset-left);
-}
-
-main>* {
-	animation: slide 0.5s ease-out;
 }
 
 @media (max-width: 50rem) {

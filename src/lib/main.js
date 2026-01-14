@@ -1,3 +1,4 @@
+import carouselMutation from "./mutations/carousel.js";
 import extraHeaderMutation from "./mutations/extra-header.js";
 import footerMutation from "./mutations/footer.js";
 import headerMutation from "./mutations/header.js";
@@ -27,6 +28,7 @@ const init = async () => {
 	};
 
 
+	addMutations(carouselMutation);
 	addMutations(extraHeaderMutation);
 	addMutations(footerMutation);
 	addMutations(headerMutation);

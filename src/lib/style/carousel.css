@@ -1,0 +1,130 @@
+.caroussel {
+	--gap: 1rem;
+	--arrow-size: 3rem;
+	--dot-size: 0.75rem;
+	--transition-speed: 0.3s;
+
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--margin-s);
+
+	padding: var(--margin-s) 0;
+}
+
+.caroussel .track {
+	display: flex;
+	gap: var(--gap);
+
+	width: 100%;
+
+	transition: transform var(--transition-speed) ease-out;
+	will-change: transform;
+}
+
+.caroussel section {
+	flex: 0 0 100%;
+
+	max-width: 100%;
+
+	margin: 0;
+
+	transition: opacity var(--transition-speed), transform var(--transition-speed);
+}
+
+.caroussel .arrow {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	position: absolute;
+	top: 50%;
+
+	font-size: larger;
+
+	user-select: none;
+	cursor: pointer;
+
+	transform: translateY(-50%);
+
+	transition: opacity 0.2s;
+
+	opacity: 0.6;
+
+	z-index: 1;
+}
+
+.caroussel .arrow .icon {
+	width: var(--arrow-size);
+	height: var(--arrow-size);
+}
+
+.caroussel .arrow:hover {
+	opacity: 1;
+}
+
+.caroussel .arrow.prev {
+	left: var(--margin-l);
+}
+
+.caroussel .arrow.next {
+	right: var(--margin-l);
+}
+
+.caroussel .dots {
+	display: flex;
+	justify-content: center;
+
+	gap: var(--margin-xs);
+
+	margin-top: var(--margin-s);
+}
+
+.caroussel .dot {
+	width: var(--dot-size);
+	height: var(--dot-size);
+
+	background: var(--border-subtle);
+
+	border-radius: 50%;
+
+	cursor: pointer;
+
+	transition: background 0.2s;
+}
+
+.caroussel .dot.active {
+	background: var(--text-muted);
+}
+
+@media (min-width: 50rem) {
+	.caroussel .arrow {
+		opacity: 0;
+	}
+
+	.caroussel:hover .arrow {
+		opacity: 1;
+	}
+
+	.caroussel section {
+		flex: 0 0 85%;
+
+		opacity: 0.5;
+
+		pointer-events: none;
+
+		transform: scale(0.95);
+	}
+
+	.caroussel section.active {
+		opacity: 1;
+
+		pointer-events: auto;
+
+		transform: scale(1);
+	}
+}
