@@ -1,10 +1,11 @@
 import { init } from "./lib/main.js";
+import { Graph } from "./lib/script/graph.js";
 
-import request from "../lib/script/request.js";
+import request from "./lib/script/request.js";
 
 import { initFacts } from "./facts.js";
 
-import { formatLeaderboard } from "../utils.js";
+import { formatLeaderboard } from "./utils.js";
 
 addEventListener("DOMContentLoaded", async () => {
 	await init();
@@ -13,6 +14,27 @@ addEventListener("DOMContentLoaded", async () => {
 	document.querySelector(".extra-header .files").addEventListener("click", () => location.href = new URL("/files/", path.kcmaths));
 
 	const factsContainer = document.querySelector(".facts");
+
+	const statsReq = await request("GET", new URL("/kcmaths/stats/", path.server), "json", "application/json", null, 300);
+
+	if ([200].includes(statsReq.status)) {
+		const stats = statsReq.response;
+
+		const createGraph = (selector, values, color) => {
+			const canvas = document.querySelector(selector);
+			if (canvas && values && values.length > 0) {
+				new Graph(canvas, { labels: stats.dates, values }, {
+					color: "var(--text)",
+					accentColor: color
+				});
+			}
+		};
+
+		createGraph(".graph-kcc", stats.kcc, "#ffca28");
+		createGraph(".graph-victories", stats.victories, "#66bb6a");
+		createGraph(".graph-defeats", stats.defeats, "#ef5350");
+		createGraph(".graph-ratio", stats.ratio, "#42a5f5");
+	}
 
 	/** @type {Date[]} */
 	let entries = await request("GET", new URL("/kcmaths/entries/", path.server), "json", "application/json", null, -1);
