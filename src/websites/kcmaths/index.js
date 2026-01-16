@@ -17,7 +17,7 @@ addEventListener("DOMContentLoaded", async () => {
 
 	const statsReq = await request("GET", new URL("/kcmaths/stats/", path.server), "json", "application/json", null, 300);
 
-	if ([200].includes(statsReq.status)) {
+	if ([200, 204].includes(statsReq.status)) {
 		const stats = statsReq.response;
 
 		const createGraph = (selector, values, color) => {
@@ -30,10 +30,10 @@ addEventListener("DOMContentLoaded", async () => {
 			}
 		};
 
+		createGraph(".graph-ratio", stats.ratio, "#42a5f5");
 		createGraph(".graph-kcc", stats.kcc, "#ffca28");
 		createGraph(".graph-victories", stats.victories, "#66bb6a");
 		createGraph(".graph-defeats", stats.defeats, "#ef5350");
-		createGraph(".graph-ratio", stats.ratio, "#42a5f5");
 	}
 
 	/** @type {Date[]} */
