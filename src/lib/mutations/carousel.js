@@ -20,16 +20,28 @@ export default {
 
 			if (dotsContainer.children.length === 0) {
 				items.forEach((_, index) => {
-					const dot = document.createElement("div");
-					dot.classList.add("dot");
-					dot.addEventListener("click", () => goTo(index));
+					dot.addEventListener("click", (e) => {
+						e.preventDefault();
+						goTo(index);
+					});
+					dot.addEventListener("touchstart", (e) => {
+						e.preventDefault();
+						goTo(index);
+					});
 					dotsContainer.appendChild(dot);
 				});
 			}
 
 			const dots = Array.from(dotsContainer.querySelectorAll(".dot"));
 			dots.forEach((dot, index) => {
-				dot.onclick = () => goTo(index);
+				dot.onclick = (e) => {
+					e.preventDefault();
+					goTo(index);
+				};
+				dot.ontouchstart = (e) => {
+					e.preventDefault();
+					goTo(index);
+				};
 			});
 
 			const update = () => {
@@ -67,8 +79,23 @@ export default {
 				update();
 			};
 
-			prevBtn.addEventListener("click", () => goTo(currentIndex - 1));
-			nextBtn.addEventListener("click", () => goTo(currentIndex + 1));
+			prevBtn.addEventListener("click", (e) => {
+				e.preventDefault();
+				goTo(currentIndex - 1);
+			});
+			prevBtn.addEventListener("touchstart", (e) => {
+				e.preventDefault();
+				goTo(currentIndex - 1);
+			});
+
+			nextBtn.addEventListener("click", (e) => {
+				e.preventDefault();
+				goTo(currentIndex + 1);
+			});
+			nextBtn.addEventListener("touchstart", (e) => {
+				e.preventDefault();
+				goTo(currentIndex + 1);
+			});
 
 			requestAnimationFrame(update);
 

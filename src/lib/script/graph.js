@@ -40,6 +40,7 @@ export class Graph {
 		this.resizeObserver.observe(canvas);
 
 		this.attachListeners();
+		this.canvas.style.touchAction = "none";
 
 		this.resize();
 	}
@@ -203,11 +204,15 @@ export class Graph {
 	}
 
 	onPointerDown(e) {
+		e.preventDefault();
+
 		this.isDragging = true;
 		this.lastX = e.clientX || e.touches[0].clientX;
 	}
 
 	onPointerMove(e) {
+		e.preventDefault();
+
 		const clientX = e.clientX || (e.touches ? e.touches[0].clientX : 0);
 
 		if (this.isDragging) {
@@ -244,7 +249,9 @@ export class Graph {
 		}
 	}
 
-	onPointerUp() {
+	onPointerUp(e) {
+		e.preventDefault();
+
 		this.isDragging = false;
 	}
 
@@ -282,6 +289,8 @@ export class Graph {
 	}
 
 	onTouchStart(e) {
+		e.preventDefault();
+
 		if (e.touches.length === 1) {
 			this.isDragging = true;
 			this.lastX = e.touches[0].clientX;
@@ -294,8 +303,9 @@ export class Graph {
 	}
 
 	onTouchMove(e) {
+		e.preventDefault();
+
 		if (e.touches.length === 1 && this.isDragging) {
-			e.preventDefault();
 			const clientX = e.touches[0].clientX;
 			const deltaPx = clientX - this.lastX;
 			this.lastX = clientX;
@@ -308,7 +318,6 @@ export class Graph {
 			this.clampWindow();
 			this.requestDraw();
 		} else if (e.touches.length === 2) {
-			e.preventDefault();
 			const t1 = e.touches[0];
 			const t2 = e.touches[1];
 			const dist = Math.hypot(t2.clientX - t1.clientX, t2.clientY - t1.clientY);
@@ -331,6 +340,8 @@ export class Graph {
 	}
 
 	onTouchEnd(e) {
+		e.preventDefault();
+
 		if (e.touches.length === 0) {
 			this.isDragging = false;
 		} else if (e.touches.length === 1) {

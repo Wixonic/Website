@@ -1,4 +1,5 @@
 import { init } from "../lib/main.js";
+import { Graph } from "../lib/script/graph.js";
 
 import { updateURL } from "../lib/script/path.js";
 import request from "../lib/script/request.js";
@@ -73,11 +74,76 @@ addEventListener("DOMContentLoaded", async () => {
 			 */
 			const loadDetails = async (element, id) => {
 				const el = element.querySelector(".details");
+
 				el.classList.add("loading");
 				const details = await request("GET", new URL(`/kcmaths/details/?id=${encodeURIComponent(id)}`, path.server), "json", "application/json", null, -1);
 
-				// el.classList.remove("loading");
-				// el.innerHTML = JSON.stringify(details);
+				el.classList.remove("loading");
+
+				if (details.status === 200) {
+					const data = details.response;
+
+					const container = document.createElement("div");
+					container.classList.add("caroussel");
+					container.style.maxHeight = "20rem";
+
+					const track = document.createElement("div");
+					track.classList.add("track");
+					container.appendChild(track);
+
+					const createGraphSection = (title, className, color, values) => {
+						const section = document.createElement("section");
+						section.style.display = "flex";
+						section.style.flexDirection = "column";
+						section.style.alignItems = "center";
+
+						const h3 = document.createElement("h3");
+						h3.textContent = title;
+						h3.style.margin = "0 0 10px 0";
+						section.appendChild(h3);
+
+						const canvas = document.createElement("canvas");
+						canvas.classList.add("graph", className);
+						canvas.style.width = "100%";
+						canvas.style.height = "200px"; // Keeps graph internal height assumption
+						section.appendChild(canvas);
+
+						track.appendChild(section);
+
+						new Graph(canvas, { labels: entries, values: values }, {
+							color: "var(--text)",
+							accentColor: color
+						});
+					};
+
+					const kcc = [];
+					const ratio = [];
+					const victories = [];
+					const defeats = [];
+
+					for (const item of data) {
+						if (item.value) {
+							kcc.push(item.value.kcCoins);
+							ratio.push(item.value.entries > 0 ? item.value.victories / item.value.entries : 0);
+							victories.push(item.value.victories);
+							defeats.push(item.value.entries - item.value.victories);
+						} else {
+							kcc.push(0);
+							ratio.push(0);
+							victories.push(0);
+							defeats.push(0);
+						}
+					}
+
+					createGraphSection("KCC", "graph-kcc", "#ffca28", kcc);
+					createGraphSection("Ratio", "graph-ratio", "#42a5f5", ratio);
+					createGraphSection("Victoires", "graph-victories", "#66bb6a", victories);
+					createGraphSection("Défaites", "graph-defeats", "#ef5350", defeats);
+
+					el.appendChild(container);
+				} else {
+					el.innerHTML = "Impossible de charger les détails.";
+				}
 			};
 
 			if (id === -1) container.innerHTML = "Aucune donnée pour cette date.";
