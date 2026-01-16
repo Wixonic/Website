@@ -92,11 +92,21 @@ addEventListener("DOMContentLoaded", async () => {
 					track.classList.add("track");
 					container.appendChild(track);
 
-					const createGraphSection = (title, className, color, values) => {
+					const graphDefs = [];
+
+					const createGraphSection = (title, className, color, values, id) => {
 						const section = document.createElement("section");
 						section.style.display = "flex";
 						section.style.flexDirection = "column";
 						section.style.alignItems = "center";
+
+						let isActive = false;
+						if (category === "ratio" && id === "ratio") isActive = true;
+						if (category === "bank" && id === "kcc") isActive = true;
+						if (category === "victories" && id === "victories") isActive = true;
+						if (category === "entries" && id === "entries") isActive = true;
+
+						if (isActive) section.classList.add("active");
 
 						const h3 = document.createElement("h3");
 						h3.textContent = title;
@@ -106,42 +116,50 @@ addEventListener("DOMContentLoaded", async () => {
 						const canvas = document.createElement("canvas");
 						canvas.classList.add("graph", className);
 						canvas.style.width = "100%";
-						canvas.style.height = "200px"; // Keeps graph internal height assumption
+						canvas.style.height = "200px";
 						section.appendChild(canvas);
 
 						track.appendChild(section);
 
-						new Graph(canvas, { labels: entries, values: values }, {
-							color: "var(--text)",
-							accentColor: color
+						graphDefs.push({
+							canvas,
+							values,
+							color
 						});
 					};
 
 					const kcc = [];
 					const ratio = [];
 					const victories = [];
-					const defeats = [];
+					const entries = [];
 
 					for (const item of data) {
 						if (item.value) {
 							kcc.push(item.value.kcCoins);
 							ratio.push(item.value.entries > 0 ? item.value.victories / item.value.entries : 0);
 							victories.push(item.value.victories);
-							defeats.push(item.value.entries - item.value.victories);
+							entries.push(item.value.entries);
 						} else {
 							kcc.push(0);
 							ratio.push(0);
 							victories.push(0);
-							defeats.push(0);
+							entries.push(0);
 						}
 					}
 
-					createGraphSection("KCC", "graph-kcc", "#ffca28", kcc);
-					createGraphSection("Ratio", "graph-ratio", "#42a5f5", ratio);
-					createGraphSection("Victoires", "graph-victories", "#66bb6a", victories);
-					createGraphSection("Défaites", "graph-defeats", "#ef5350", defeats);
+					createGraphSection("KCC", "graph-kcc", "#ffca28", kcc, "kcc");
+					createGraphSection("Ratio", "graph-ratio", "#42a5f5", ratio, "ratio");
+					createGraphSection("Victoires", "graph-victories", "#66bb6a", victories, "victories");
+					createGraphSection("Participations", "graph-entries", "#ba68c8", entries, "entries");
 
 					el.appendChild(container);
+
+					for (const def of graphDefs) {
+						new Graph(def.canvas, { labels: entries, values: def.values }, {
+							color: "var(--text)",
+							accentColor: def.color
+						});
+					}
 				} else {
 					el.innerHTML = "Impossible de charger les détails.";
 				}

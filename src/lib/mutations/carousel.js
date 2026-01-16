@@ -15,11 +15,14 @@ export default {
 
 			node.append(prevBtn, nextBtn, dotsContainer);
 
-			let currentIndex = 0;
 			const items = Array.from(track.children);
+			let currentIndex = items.findIndex(item => item.classList.contains("active"));
+			if (currentIndex === -1) currentIndex = 0;
 
 			if (dotsContainer.children.length === 0) {
 				items.forEach((_, index) => {
+					const dot = document.createElement("div");
+					dot.classList.add("dot");
 					dot.addEventListener("click", (e) => {
 						e.preventDefault();
 						goTo(index);
