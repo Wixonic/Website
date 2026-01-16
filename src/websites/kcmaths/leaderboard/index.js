@@ -86,6 +86,7 @@ addEventListener("DOMContentLoaded", async () => {
 					const container = document.createElement("div");
 					container.classList.add("caroussel");
 					container.style.maxHeight = "20rem";
+					container.addEventListener("click", (e) => e.stopPropagation());
 
 					const track = document.createElement("div");
 					track.classList.add("track");
