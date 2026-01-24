@@ -2,14 +2,14 @@
 	"hosting": [
 		{
 			"target": "root",
-			"public": "./build/root",
+			"public": "./websites/root",
 			"ignore": [
 				".DS_Store"
 			],
 			"rewrites": [
 				{
 					"source": "**",
-					"destination": "/lib/404/index.html"
+					"destination": "/src/index.html"
 				}
 			],
 			"headers": [
@@ -19,54 +19,6 @@
 						{
 							"key": "Cache-Control",
 							"value": "max-age=7200, must-revalidate"
-						}
-					]
-				}
-			]
-		},
-		{
-			"target": "accounts",
-			"public": "./build/accounts",
-			"ignore": [
-				".DS_Store"
-			],
-			"rewrites": [
-				{
-					"source": "**",
-					"destination": "/lib/404/index.html"
-				}
-			],
-			"headers": [
-				{
-					"source": "**",
-					"headers": [
-						{
-							"key": "Cache-Control",
-							"value": "max-age=7200, must-revalidate"
-						}
-					]
-				}
-			]
-		},
-		{
-			"target": "admin",
-			"public": "./build/admin",
-			"ignore": [
-				".DS_Store"
-			],
-			"rewrites": [
-				{
-					"source": "**",
-					"destination": "/lib/404/index.html"
-				}
-			],
-			"headers": [
-				{
-					"source": "**",
-					"headers": [
-						{
-							"key": "Cache-Control",
-							"value": "max-age=43200"
 						}
 					]
 				}
@@ -74,14 +26,14 @@
 		},
 		{
 			"target": "assets",
-			"public": "./build/assets",
+			"public": "./websites/assets",
 			"ignore": [
 				".DS_Store"
 			],
 			"rewrites": [
 				{
 					"source": "**",
-					"destination": "/lib/404/index.html"
+					"destination": "/src/index.html"
 				}
 			],
 			"headers": [
@@ -99,54 +51,6 @@
 						{
 							"key": "Cache-Control",
 							"value": "max-age=43200"
-						}
-					]
-				}
-			]
-		},
-		{
-			"target": "kcmaths",
-			"public": "./build/kcmaths",
-			"ignore": [
-				".DS_Store"
-			],
-			"rewrites": [
-				{
-					"source": "**",
-					"destination": "/lib/404/index.html"
-				}
-			],
-			"headers": [
-				{
-					"source": "**",
-					"headers": [
-						{
-							"key": "Cache-Control",
-							"value": "max-age=7200, must-revalidate"
-						}
-					]
-				}
-			]
-		},
-		{
-			"target": "git",
-			"public": "./build/git",
-			"ignore": [
-				".DS_Store"
-			],
-			"rewrites": [
-				{
-					"source": "**",
-					"destination": "/lib/404/index.html"
-				}
-			],
-			"headers": [
-				{
-					"source": "**",
-					"headers": [
-						{
-							"key": "Cache-Control",
-							"value": "max-age=7200, must-revalidate"
 						}
 					]
 				}
@@ -220,7 +124,7 @@
 		}
 	},
 	"firestore": {
-		"rules": "./src/rules/firestore.rules",
-		"indexes": "./src/rules/firestore.indexes.json"
+		"rules": "./rules/firestore.rules",
+		"indexes": "./rules/firestore.indexes.json"
 	}
 }

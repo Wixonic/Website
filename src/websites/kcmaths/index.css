@@ -1,8 +1,0 @@
-@import url("./lib/main.css");
-
-@import url("./facts.css");
-
-
-body {
-	--extra-header-size: 2.5rem;
-}
