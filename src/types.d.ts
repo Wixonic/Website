@@ -24,3 +24,12 @@ export interface Module {
 	components: Component[];
 	init: () => void | Promise<void>;
 }
+
+declare global {
+	const path: {
+		root: string;
+		assets: string;
+		redirects: string;
+		server: string;
+	};
+}

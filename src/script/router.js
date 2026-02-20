@@ -1,5 +1,7 @@
 import { loadComponents } from "/src/script/components.js";
 
+window.debug = 0;
+
 const loadPage = async () => {
 	let modulePath = location.pathname;
 	if (modulePath.endsWith("/")) modulePath += "index.js";
@@ -24,6 +26,7 @@ const loadPage = async () => {
 	else console.warn(`[Router] No components in ${modulePath}`);
 
 	if (module.init) await module.init();
+	else console.warn(`[Router] No init in ${modulePath}`);
 };
 
 const handleNavigation = (e) => {

@@ -8,10 +8,6 @@
 			],
 			"rewrites": [
 				{
-					"source": "**/*.js",
-					"destination": "/src/404.js"
-				},
-				{
 					"source": "**",
 					"destination": "/src/main.html"
 				}
@@ -35,10 +31,6 @@
 				".DS_Store"
 			],
 			"rewrites": [
-				{
-					"source": "**/*.js",
-					"destination": "/src/404.js"
-				},
 				{
 					"source": "**",
 					"destination": "/src/main.html"
