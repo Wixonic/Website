@@ -29,10 +29,10 @@ export default (config) => {
 			if (data.permalink) return data.permalink;
 
 			const fallbackStem = data.page.filePathStem || "";
-			if (fallbackStem.endsWith("/index")) {
+			if (fallbackStem.endsWith("/main")) {
 				return fallbackStem + ".html";
 			}
-			return fallbackStem + "/index.html";
+			return fallbackStem + "/main.html";
 		}
 	});
 	config.setOutputDirectory("../build/");
@@ -70,17 +70,10 @@ export default (config) => {
 			}
 		};
 
-		console.log("[Esbuild] Starting isolated builds...");
-
-		const websitesDir = path.join(process.cwd());
-		const sites = (await fsp.readdir(websitesDir, { withFileTypes: true }))
-			.filter((dirent) => dirent.isDirectory())
-			.map((dirent) => dirent.name);
-
 		console.log("[Esbuild] Starting src build...");
 
 		await esbuild.build({
-			entryPoints: ["./index.js", "./index.css"],
+			entryPoints: ["./main.js", "./main.css", "./404.js"],
 			outdir: "../build",
 			bundle: !isClear,
 			minify: !isClear,

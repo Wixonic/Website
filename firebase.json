@@ -8,8 +8,12 @@
 			],
 			"rewrites": [
 				{
+					"source": "**/*.js",
+					"destination": "/src/404.js"
+				},
+				{
 					"source": "**",
-					"destination": "/src/index.html"
+					"destination": "/src/main.html"
 				}
 			],
 			"headers": [
@@ -32,8 +36,12 @@
 			],
 			"rewrites": [
 				{
+					"source": "**/*.js",
+					"destination": "/src/404.js"
+				},
+				{
 					"source": "**",
-					"destination": "/src/index.html"
+					"destination": "/src/main.html"
 				}
 			],
 			"headers": [
