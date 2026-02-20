@@ -11,10 +11,7 @@ export const loadComponents = async (components) => {
 
 	const missingComponents = components.filter((c) => !componentsCache.has(c.id));
 
-	if (missingComponents.length === 0) {
-		window.dispatchEvent(new CustomEvent("components:progress", { detail: 1 }));
-		return;
-	}
+	if (missingComponents.length === 0) window.dispatchEvent(new CustomEvent("components:progress", { detail: 1 }));
 
 	const progresses = new Array(missingComponents.length).fill(0);
 

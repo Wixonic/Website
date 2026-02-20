@@ -37,6 +37,7 @@ export default (config) => {
 	});
 	config.setOutputDirectory("../build/");
 
+
 	config.on("eleventy.before", async () => {
 		const nunjucksPathPlugin = {
 			name: "nunjucks-path",
@@ -73,7 +74,7 @@ export default (config) => {
 		console.log("[Esbuild] Starting src build...");
 
 		await esbuild.build({
-			entryPoints: ["./main.js", "./main.css", "./404.js"],
+			entryPoints: ["./main.js", "./main.css", "./404.js", "./script/**/*.js", "./style/**/*.css"],
 			outdir: "../build",
 			bundle: !isClear,
 			minify: !isClear,
