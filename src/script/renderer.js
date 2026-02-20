@@ -1,57 +1,26 @@
 import { getComponent } from "/src/script/components.js";
-
-
-let canvas = document.querySelector("canvas");
-let ctx = null;
-
-const initCanvas = () => {
-	if (canvas && ctx) return;
-	if (!canvas) canvas = document.querySelector("canvas");
-	if (canvas && !ctx) {
-		try {
-			ctx = canvas.getContext("2d", { colorSpace: "display-p3" });
-		} catch (e) {
-			ctx = canvas.getContext("2d");
-		}
-	}
-};
-
-initCanvas();
-
-const video = document.createElement("video");
-video.crossOrigin = "anonymous";
-video.playsInline = true;
-video.muted = true;
+import { request } from "/src/script/request.js";
 
 let queue = [];
 let isPlaying = false;
 let currentLoop = false;
-let animationFrameId = null;
 
 const activeAudios = new Set();
 
-video.addEventListener("ended", () => {
-	if (currentLoop) video.play().catch((e) => console.warn("[Renderer] Video replay failed:", e));
-	else playNext();
-});
+const getVideo = () => document.getElementById("main");
 
-const drawLoop = () => {
-	if (isPlaying && video.readyState >= 2) {
-		initCanvas();
+const setupVideoOnce = () => {
+	const video = getVideo();
+	if (video && !video.dataset.eventsAttached) {
+		video.addEventListener("ended", () => {
+			if (currentLoop) video.play().catch((e) => console.warn("[Renderer] Video replay failed:", e));
+			else playNext();
+		});
 
-		if (canvas && ctx) {
-			if (canvas.width !== video.videoWidth || canvas.height !== video.videoHeight) {
-				if (video.videoWidth > 0 && video.videoHeight > 0) {
-					canvas.width = video.videoWidth;
-					canvas.height = video.videoHeight;
-				}
-			}
-
-			ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-		}
+		video.dataset.eventsAttached = "true";
 	}
 
-	animationFrameId = requestAnimationFrame(drawLoop);
+	return video;
 };
 
 export const startVideo = (id, loop = false) => {
@@ -76,64 +45,94 @@ export const playNext = () => {
 
 const playVideoInternal = (id) => {
 	const src = getComponent(id).content;
+	const video = setupVideoOnce();
+
+	if (!video) return console.warn("[Renderer] Video element #main not found in DOM");
 
 	if (video.src !== src && video.src !== window.location.origin + src) video.src = src;
 
 	video.play().catch((e) => console.warn("[Renderer] Video play failed:", e));
 	isPlaying = true;
-
-	if (!animationFrameId) drawLoop();
 };
 
 export const stopVideo = () => {
+	const video = getVideo();
+	if (!video) return console.warn("[Renderer] Video element #main not found in DOM");
+
 	isPlaying = false;
 	video.pause();
 	video.removeAttribute("src");
 	video.load();
 	queue = [];
+};
 
-	if (animationFrameId) {
-		cancelAnimationFrame(animationFrameId);
-		animationFrameId = null;
-	}
+let audioCtx = null;
+const audioBuffers = new Map();
 
-	if (ctx && canvas && canvas.width > 0 && canvas.height > 0) {
-		ctx.clearRect(0, 0, canvas.width, canvas.height);
-	}
+const getAudioContext = () => {
+	if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+	return audioCtx;
 };
 
 export const playSound = (id, loop = false) => {
-	const src = getComponent(id).content;
-	const audio = new Audio(src);
-	audio.loop = loop;
+	const ctx = getAudioContext();
+	if (ctx.state === "suspended") ctx.resume();
 
-	audio.play().catch((e) => console.warn("[Renderer] Audio play failed:", e));
+	const srcUrl = getComponent(id).content;
 
-	activeAudios.add(audio);
-
-	const removeAudio = () => activeAudios.delete(audio);
-	audio.addEventListener("ended", removeAudio);
-
-	return {
-		audio,
-		stop: () => {
-			audio.pause();
-			audio.currentTime = 0;
-			removeAudio();
-		},
-		pause: () => audio.pause(),
-		resume: () => audio.play(),
-		setVolume: (v) => {
-			audio.volume = Math.max(0, Math.min(1, v));
-		}
+	const audioProxy = {
+		stop: () => { },
+		setVolume: () => { }
 	};
+
+	const playBuffer = (buffer) => {
+		const source = ctx.createBufferSource();
+		source.buffer = buffer;
+		source.loop = loop;
+
+		const gainNode = ctx.createGain();
+		source.connect(gainNode);
+		gainNode.connect(ctx.destination);
+
+		source.start(0);
+
+		const audioObj = { source, gainNode, stop: null };
+		activeAudios.add(audioObj);
+
+		const removeAudio = () => activeAudios.delete(audioObj);
+		source.addEventListener("ended", removeAudio);
+
+		audioProxy.stop = () => {
+			try {
+				source.stop();
+			} catch (e) { }
+
+			removeAudio();
+		};
+
+		audioProxy.setVolume = (v) => gainNode.gain.value = Math.max(0, Math.min(1, v));
+
+		audioObj.stop = audioProxy.stop;
+	};
+
+	let buffer = audioBuffers.get(id);
+	if (buffer) {
+		playBuffer(buffer);
+	} else {
+		request("GET", srcUrl, "arraybuffer")
+			.then((resp) => ctx.decodeAudioData(resp.response))
+			.then((decodedBuffer) => {
+				audioBuffers.set(id, decodedBuffer);
+				playBuffer(decodedBuffer);
+			})
+			.catch((e) => console.warn("[Renderer] Audio decode failed:", e));
+	}
+
+	return audioProxy;
 };
 
 export const stopAllSounds = () => {
-	for (const audio of activeAudios) {
-		audio.pause();
-		audio.currentTime = 0;
-	}
+	for (const audioObject of activeAudios) if (audioObject.stop) audioObject.stop();
 
 	activeAudios.clear();
 };
