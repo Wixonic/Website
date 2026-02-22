@@ -39,7 +39,39 @@
 
 	<body>
 
-		<video id="main" playsinline muted crossorigin="anonymous"></video>
+		<noscript>
+
+			<span>This website relies heavily on JavaScript to render complex animations and interactive content.<br />Please enable JavaScript in your browser settings to access the site.</span>
+
+		</noscript>
+
+		<div id="orientation-lock">
+
+			<span>This website offers an immersive visual experience that requires a wider screen.<br /><br />Please rotate your device to landscape mode or increase your window size to continue.</span>
+
+		</div>
+
+		<div id="fatal-error" class="hidden">
+
+			<span>The site has encountered an unexpected error and is temporarily unavailable.<br /><br />Please refresh the page or try again later.</span>
+
+		</div>
+
+		<main>
+
+			<video autoplay loop muted nocontrols></video>
+
+			<div id="layer">
+
+				<div id="screen">
+
+
+
+				</div>
+
+			</div>
+
+		</main>
 
 	</body>
 

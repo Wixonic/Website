@@ -1,3 +1,4 @@
+import logger from "/src/script/logger.js";
 import storage from "/src/script/storage.js";
 
 /**
@@ -12,14 +13,14 @@ import storage from "/src/script/storage.js";
  * Performs an XMLHttpRequest with caching support.
  * @param {"GET" | "POST" | "PUT" | "PATCH" | "DELETE"} method
  * @param {URL | string} url
- * @param {XMLHttpRequestResponseType} type
- * @param {string} mimeType
- * @param {Document | XMLHttpRequestBodyInit | null} [body]
+ * @param {XMLHttpRequestResponseType} [type="text"]
+ * @param {string | null} [mimeType=null]
+ * @param {Document | XMLHttpRequestBodyInit | null} [body=null]
  * @param {number} [cache=-1] - Cache duration in seconds. 0 = permanent, -1 = disabled (always fetch).
  * @param {boolean} [credentials=false]
  * @returns {Promise<Response>}
  */
-export const request = (method, url, type = "text", mimeType = null, body = null, cache = -1, credentials = false) => {
+const request = (method, url, type = "text", mimeType = null, body = null, cache = -1, credentials = false) => {
 	return new Promise((resolve, reject) => {
 		try {
 			const cacheKey = `request-cache|${url}`;
@@ -27,6 +28,7 @@ export const request = (method, url, type = "text", mimeType = null, body = null
 
 			if (isCacheableType && cache !== -1) {
 				const cachedItem = storage.getItem(cacheKey);
+
 				if (cachedItem) {
 					try {
 						const data = JSON.parse(cachedItem);
@@ -34,8 +36,9 @@ export const request = (method, url, type = "text", mimeType = null, body = null
 							resolve(data);
 							return;
 						}
-					} catch (e) {
-						console.warn("Failed to parse cached response", e);
+					} catch (unsafeError) {
+						const e = unsafeError instanceof Error ? unsafeError : new Error(unsafeError);
+						logger.warn("Failed to parse cached response", e.message, e.stack);
 					}
 				}
 			}
@@ -51,7 +54,7 @@ export const request = (method, url, type = "text", mimeType = null, body = null
 
 			xhr.withCredentials = credentials;
 
-			xhr.onload = () => {
+			xhr.addEventListener("load", () => {
 				const headers = {};
 				const headerStr = xhr.getAllResponseHeaders();
 				if (headerStr) {
@@ -74,26 +77,24 @@ export const request = (method, url, type = "text", mimeType = null, body = null
 				if (cache >= 0 && isCacheableType) {
 					try {
 						storage.setItem(cacheKey, JSON.stringify(responseData));
-					} catch (e) {
-						console.warn("Quota exceeded or storage error", e);
+					} catch (unsafeError) {
+						const e = unsafeError instanceof Error ? unsafeError : new Error(unsafeError);
+						logger.warn("[Request] Quota exceeded or storage error", e.message, e.stack);
 					}
 				}
 
-				if (xhr.status >= 200 && xhr.status < 300) {
-					resolve(responseData);
-				} else {
-					reject(new Error(`[Request] Code ${xhr.status}`));
-				}
-			};
+				if (xhr.status >= 200 && xhr.status < 300) resolve(responseData);
+				else reject(new Error(`[Request] Code ${xhr.status}`));
+			});
 
-			xhr.onerror = () => {
-				reject(new Error("Network error"));
-			};
+			xhr.addEventListener("error", () => reject(new Error("Network error")));
 
 			xhr.send(body);
-		} catch (e) {
-			console.error("Request error:", e);
-			reject(new Error(String(e)));
+		} catch (unsafeError) {
+			const e = unsafeError instanceof Error ? unsafeError : new Error(unsafeError);
+			reject(e);
 		}
 	});
 };
+
+export { request };

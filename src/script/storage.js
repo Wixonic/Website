@@ -1,14 +1,18 @@
+import logger from "/src/script/logger.js";
+
 let storage;
 
 try {
 	storage = localStorage;
-} catch (e) {
-	console.warn("Failed to access localStorage, switching to sessionStorage", e);
+} catch (unsafeError) {
+	const e = unsafeError instanceof Error ? unsafeError : new Error(unsafeError);
+	logger.warn("Failed to access localStorage, switching to sessionStorage", e.message, e.stack);
 
 	try {
 		storage = sessionStorage;
-	} catch (e) {
-		console.error("Failed to access sessionStorage, switching to placeboStorage", e);
+	} catch (unsafeError) {
+		const e = unsafeError instanceof Error ? unsafeError : new Error(unsafeError);
+		logger.error("Failed to access sessionStorage, switching to placeboStorage", e.message, e.stack);
 
 		storage = {
 			getItem: () => null,

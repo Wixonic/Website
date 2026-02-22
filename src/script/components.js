@@ -1,83 +1,81 @@
-/** @type {Map<string, import("/src/types.d.ts").CachedComponent>} */
-const componentsCache = new Map();
+import logger from "/src/script/logger.js";
+import { request } from "/src/script/request.js";
 
-export const getComponent = (id) => componentsCache.get(id);
-
-let currentProgress = 1;
-
-export const getComponentsProgress = () => currentProgress;
+let progress = 0;
+const getProgress = () => progress;
+const resetProgress = () => progress = 0;
 
 /**
- * @param {import("/src/types.d.ts").Module["components"]} components
+ * Map to store loaded component data/Object URLs.
+ * @type {Map<string, any>}
  */
-export const loadComponents = async (components) => {
-	console.log("[Components] Loading components...");
+const loadedComponents = new Map();
 
-	const missingComponents = components.filter((c) => !componentsCache.has(c.id));
+/**
+ * Gets the loaded data or Object URL for a component by its ID.
+ * @param {string} id
+ * @returns {any}
+ */
+const getComponent = (id) => loadedComponents.get(id);
 
-	if (missingComponents.length === 0) currentProgress = 1;
+/**
+ * Loads an array of components and updates the internal progress.
+ * @param {import("/src/types.d.ts").Component[]} components
+ * @returns {Promise<void>}
+ */
+const loadComponents = async (components) => {
+	if (!components || components.length === 0) {
+		progress = 1;
+		return;
+	}
 
-	const progresses = new Array(missingComponents.length).fill(0);
+	progress = 0;
+	let loadedCount = 0;
+	const totalCount = components.length;
 
 	const updateProgress = () => {
-		currentProgress = progresses.reduce((a, b) => a + b, 0) / missingComponents.length;
+		loadedCount++;
+		progress = loadedCount / totalCount;
 	};
 
-	const promises = missingComponents.map((component, index) => new Promise((resolve) => {
-		const xhr = new XMLHttpRequest();
-		xhr.open("GET", component.url, true);
+	const loadPromises = components.map(async (component) => {
+		let attempt = 0;
+		const maxAttempts = 3;
 
-		if (["image", "audio", "video"].includes(component.type)) xhr.responseType = "blob";
-		else if (component.type === "json") xhr.responseType = "json";
-		else xhr.responseType = "text";
+		while (attempt < maxAttempts) {
+			try {
+				let responseType = "text";
+				if (["image", "audio", "video"].includes(component.type)) responseType = "blob";
+				else if (component.type === "json") responseType = "json";
 
-		xhr.addEventListener("progress", (e) => {
-			if (e.lengthComputable) {
-				progresses[index] = e.loaded / e.total;
-				updateProgress();
-			}
-		});
+				const res = await request("GET", component.url.toString(), responseType);
 
-		xhr.addEventListener("load", () => {
-			progresses[index] = 1;
-			updateProgress();
-
-			if (xhr.status >= 200 && xhr.status < 300) {
-				let content = xhr.response;
-
-				if (xhr.responseType === "blob" && content instanceof Blob) content = URL.createObjectURL(content);
-				else if (component.type === "json" && typeof content === "string") {
-					try {
-						content = JSON.parse(content);
-					} catch (e) {
-						console.warn(`[Components] Component "${component.id}" - Failed to parse JSON:`, e);
-					}
+				let data = res.response;
+				if (responseType === "blob") {
+					// Clean up previous blob URL if it exists to avoid memory leaks
+					const oldData = loadedComponents.get(component.id);
+					if (typeof oldData === "string" && oldData.startsWith("blob:")) URL.revokeObjectURL(oldData);
+					data = URL.createObjectURL(data);
 				}
 
-				componentsCache.set(component.id, {
-					type: component.type,
-					content
-				});
+				loadedComponents.set(component.id, data);
+				break;
+			} catch (unsafeError) {
+				const e = unsafeError instanceof Error ? unsafeError : new Error(unsafeError);
+				attempt++;
 
-				resolve();
-			} else {
-				console.error(`[Components] Component "${component.id}" - Code ${xhr.status}`);
-				resolve();
+				if (attempt >= maxAttempts) {
+					if (!component.optional) logger.fatalError(`[components.js] Failed to load component ${component.id} after ${maxAttempts} attempts`, e.message, e.stack);
+					else logger.error(`[components.js] Failed to load component ${component.id} after ${maxAttempts} attempts`, e.message, e.stack);
+					break;
+				} else logger.warn(`[components.js] Attempt ${attempt} failed for component ${component.id}`);
 			}
-		});
+		}
 
-		xhr.addEventListener("error", () => {
-			progresses[index] = 1;
-			updateProgress();
+		updateProgress();
+	});
 
-			console.error(`[Components] Component "${component.id}" - Network error`);
-			resolve();
-		});
-
-		xhr.send();
-	}));
-
-	await Promise.all(promises);
-
-	console.info(`[Components] ${components.length} component${components.length > 1 ? "s" : ""} loaded`);
+	await Promise.all(loadPromises);
 };
+
+export { getProgress, resetProgress, getComponent, loadComponents };

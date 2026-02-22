@@ -7,15 +7,9 @@ const components = [
 	}
 ];
 
-/** @type {import("/src/types.d.ts").Module["metadata"]} */
-const metadata = {
-	title: "404 Not Found - Wixonic",
-	description: "Page not found."
-};
-
 /** @type {import("/src/types.d.ts").Module["init"]} */
 const init = async () => {
 
 };
 
-export { components, metadata, init };
+export { components, init };

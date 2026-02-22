@@ -13,16 +13,25 @@ export interface Component<T extends ComponentType = ComponentType> {
 	id: string;
 	type: T;
 	url: URL;
-}
-
-export interface CachedComponent<T extends ComponentType = ComponentType> {
-	type: T;
-	content: ContentMap[T];
+	optional?: boolean;
 }
 
 export interface Module {
 	components: Component[];
 	init: () => void | Promise<void>;
+	metadata?: {
+		title?: string;
+		description?: string;
+		image?: string;
+	};
+}
+
+export type LoggerFunction = (reason?: any, message?: any, trace?: any) => void;
+
+export interface Logger {
+	fatalError: LoggerFunction;
+	error: LoggerFunction;
+	warn: LoggerFunction;
 }
 
 declare global {

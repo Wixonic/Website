@@ -1,15 +1,227 @@
 @import url("/src/style/font.css");
 
-video#main {
+body {
+	/* COLORS */
+	--background-deep: hsl(0, 0%, 100%);
+	--background-deep-seethrough: hsla(0, 0%, 100%, 80%);
+	--background: hsl(0, 0%, 95%);
+	--background-seethrough: hsla(0, 0%, 95%, 80%);
+	--background-front: hsl(0, 0%, 90%);
+	--background-front-seethrough: hsla(0, 0%, 90%, 80%);
+
+	--background-transparent: hsla(0, 0%, 95%, 75%);
+
+	--background-accent: hsl(0, 0%, 0%);
+	--background-accent-seethrough: hsla(0, 0%, 0%, 80%);
+
+	--background-selection: hsl(0, 0%, 0%);
+
+
+	--text: hsl(0, 0%, 5%);
+	--text-muted: hsl(0, 0%, 30%);
+
+	--text-accent: hsl(0, 0%, 85%);
+	--text-accent-vivid: hsl(0, 0%, 100%);
+
+	--text-selection: hsl(0, 0%, 100%);
+
+	--border-color: hsla(0, 0%, 50%, 0.2);
+	--border-subtle: hsla(0, 0%, 50%, 0.05);
+
+
+	--danger: hsl(0, 100%, 60%);
+	--danger-text: hsl(0, 0%, 100%);
+
+	--color-loading-background: transparent;
+	--color-loading-background-contrast: hsla(0, 0%, 50%, 0.15);
+	/* COLORS */
+
+	/* SIZES */
+	--header-size: 2.5rem;
+	--header-margin: 0.5rem;
+	--extra-header-size: 0rem;
+
+	--footer-size: 2.5rem;
+	--footer-margin: 0.5rem;
+
+	--border-xs: 0.025rem;
+	--border-s: 0.05rem;
+	--border-m: 0.1rem;
+	--border-l: 0.2rem;
+
+	--border-radius-s: 0.1rem;
+	--border-radius-m: 0.25rem;
+	--border-radius-l: 0.5rem;
+
+	--margin-xxs: 0.25rem;
+	--margin-xs: 0.5rem;
+	--margin-s: 0.75rem;
+	--margin-m: 1rem;
+	--margin-l: 1.25rem;
+	--margin-xl: 1.75rem;
+	--margin-xxl: 2.5rem;
+
+	--spacing-s: 3.75rem;
+	--spacing-m: 6.25rem;
+	--spacing-l: 10rem;
+	--spacing-xl: 15rem;
+
+	--blur-xxs: 0.25rem;
+	--blur-xs: 0.5rem;
+	--blur-s: 1rem;
+	--blur-m: 2rem;
+	--blur-l: 4rem;
+	--blur-xl: 8rem;
+	/* SIZES */
+
+	/* FONT */
+	--font-family: "Open Sans", "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+	--stylized-font-family: "VT323", ui-monospace, "Cascadia Mono", "Segoe UI Mono", "Liberation Mono", Menlo, Monaco, Consolas, "Courier New", monospace;
+	/* FONT */
+}
+
+@media (prefers-color-scheme: dark) {
+	body {
+		/* COLORS */
+		--background-deep: hsl(0, 0%, 5%);
+		--background-deep-seethrough: hsla(0, 0%, 5%, 80%);
+		--background: hsl(0, 0%, 10%);
+		--background-seethrough: hsla(0, 0%, 10%, 80%);
+		--background-front: hsl(0, 0%, 15%);
+		--background-front-seethrough: hsla(0, 0%, 15%, 80%);
+
+		--background-transparent: hsla(0, 0%, 10%, 75%);
+
+		--background-selection: hsl(0, 0%, 100%);
+
+		--text: hsl(0, 0%, 95%);
+		--text-muted: hsl(0, 0%, 70%);
+
+		--text-selection: hsl(0, 0%, 0%);
+		/* COLORS */
+	}
+}
+
+* {
+	flex-shrink: 0;
+
+	color: inherit;
+	font-family: inherit;
+
+	box-sizing: border-box;
+
+	-webkit-appearance: none;
+	appearance: none;
+
+	cursor: inherit;
+	caret-color: inherit;
+	pointer-events: inherit;
+	outline: none;
+
+	scrollbar-color: inherit;
+
+	-webkit-user-select: inherit;
+	user-select: inherit;
+}
+
+body {
+	position: relative;
+
+	background: var(--background-accent);
+
+	color: var(--text);
+	font-family: var(--font-family);
+
+	cursor: default;
+
+	scrollbar-color: var(--text) var(--background);
+
+	-webkit-user-select: none;
+	user-select: none;
+
+	margin: 0;
+	padding: 0;
+}
+
+main {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+
+	min-width: 100vw;
+	min-height: 100vh;
+	width: auto;
+	height: auto;
+	aspect-ratio: 2 / 1;
+
+	transform: translate(-50%, -50%);
+
+	z-index: 1;
+}
+
+main video {
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	width: 100%;
+	height: 100%;
+
+	object-fit: fill;
+}
+
+main .screen {
+	position: absolute;
+	left: 25%;
+	top: 25%;
+
+	width: 50%;
+	height: 50%;
+
+	z-index: 10;
+}
+
+noscript,
+#orientation-lock,
+#fatal-error {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
 	position: fixed;
 	top: 0;
 	left: 0;
 
-	width: 100vw;
-	height: 100vh;
+	width: 100%;
+	height: 100%;
 
-	object-fit: cover;
+	background: var(--background);
 
-	z-index: -1;
-	pointer-events: none;
+	color: var(--text);
+	text-align: center;
+
+	padding: var(--margin-xxl);
+
+	z-index: 1000;
+}
+
+noscript span,
+#orientation-lock span,
+#fatal-error span {
+	max-width: max(50rem, 95%);
+
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	line-height: 1.6;
+}
+
+@media (orientation: landscape) {
+	#orientation-lock {
+		display: none;
+	}
+}
+
+.hidden {
+	display: none !important;
 }
