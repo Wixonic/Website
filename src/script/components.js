@@ -3,6 +3,10 @@ const componentsCache = new Map();
 
 export const getComponent = (id) => componentsCache.get(id);
 
+let currentProgress = 1;
+
+export const getComponentsProgress = () => currentProgress;
+
 /**
  * @param {import("/src/types.d.ts").Module["components"]} components
  */
@@ -11,13 +15,12 @@ export const loadComponents = async (components) => {
 
 	const missingComponents = components.filter((c) => !componentsCache.has(c.id));
 
-	if (missingComponents.length === 0) window.dispatchEvent(new CustomEvent("components:progress", { detail: 1 }));
+	if (missingComponents.length === 0) currentProgress = 1;
 
 	const progresses = new Array(missingComponents.length).fill(0);
 
-	const dispatchProgress = () => {
-		const totalProgress = progresses.reduce((a, b) => a + b, 0) / missingComponents.length;
-		window.dispatchEvent(new CustomEvent("components:progress", { detail: totalProgress }));
+	const updateProgress = () => {
+		currentProgress = progresses.reduce((a, b) => a + b, 0) / missingComponents.length;
 	};
 
 	const promises = missingComponents.map((component, index) => new Promise((resolve) => {
@@ -31,13 +34,13 @@ export const loadComponents = async (components) => {
 		xhr.addEventListener("progress", (e) => {
 			if (e.lengthComputable) {
 				progresses[index] = e.loaded / e.total;
-				dispatchProgress();
+				updateProgress();
 			}
 		});
 
 		xhr.addEventListener("load", () => {
 			progresses[index] = 1;
-			dispatchProgress();
+			updateProgress();
 
 			if (xhr.status >= 200 && xhr.status < 300) {
 				let content = xhr.response;
@@ -65,7 +68,7 @@ export const loadComponents = async (components) => {
 
 		xhr.addEventListener("error", () => {
 			progresses[index] = 1;
-			dispatchProgress();
+			updateProgress();
 
 			console.error(`[Components] Component "${component.id}" - Network error`);
 			resolve();
