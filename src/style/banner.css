@@ -1,0 +1,36 @@
+.banner {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	position: fixed;
+	top: 0;
+	left: 0;
+
+	width: 100%;
+
+	opacity: 1;
+
+	transition: opacity 250ms linear;
+	animation: fade-in 250ms linear;
+
+	pointer-events: none;
+
+	z-index: 20;
+}
+
+.banner-inner {
+	width: max(30rem, 90%);
+
+	pointer-events: auto;
+}
+
+.banner.banner-hiding {
+	opacity: 0;
+}
+
+@keyframes fade-in {
+	from {
+		opacity: 0;
+	}
+}
