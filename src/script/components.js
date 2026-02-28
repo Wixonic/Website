@@ -42,13 +42,30 @@ const loadComponents = async (components) => {
 		let attempt = 0;
 		const maxAttempts = 3;
 
+		// Resolve the best URL from sources (codec-aware)
+		let url = component.url;
+		if (component.sources) {
+			const mimeTypes = Object.keys(component.sources);
+			const video = document.createElement("video");
+			const supported = mimeTypes.find((mime) => {
+				const canPlay = video.canPlayType(mime);
+				return canPlay === "probably" || canPlay === "maybe";
+			});
+			url = component.sources[supported ?? mimeTypes[mimeTypes.length - 1]];
+		}
+
+		if (!url) {
+			logger.error(`[components.js] No valid source found for component ${component.id}`);
+			return;
+		}
+
 		while (attempt < maxAttempts) {
 			try {
 				let responseType = "text";
 				if (["image", "audio", "video"].includes(component.type)) responseType = "blob";
 				else if (component.type === "json") responseType = "json";
 
-				const res = await request("GET", component.url.toString(), responseType);
+				const res = await request("GET", url.toString(), responseType);
 
 				let data = res.response;
 				if (responseType === "blob") {

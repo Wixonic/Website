@@ -181,11 +181,11 @@ main video {
 
 main .screen {
 	position: absolute;
-	left: 25%;
-	top: 25%;
+	left: 33%;
+	top: 33%;
 
-	width: 50%;
-	height: 50%;
+	width: 66%;
+	height: 66%;
 
 	z-index: 10;
 }

@@ -58,9 +58,13 @@ const navigate = async (currentPath) => {
 			return module;
 		};
 
+		/** @type {() => void} */
+		let resolveLoaded;
+		const onLoaded = new Promise((resolve) => resolveLoaded = resolve);
+
 		const [targetModule] = await Promise.all([
-			loadTargetModuleAndComponents(targetModulePath),
-			loader.init()
+			loadTargetModuleAndComponents(targetModulePath).then((m) => { resolveLoaded(); return m; }),
+			loader.init(onLoaded)
 		]);
 
 		updateMetadata(targetModule.metadata);

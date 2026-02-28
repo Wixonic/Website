@@ -160,7 +160,7 @@ const playVideoItem = async (item, _isLoopContinuation = false) => {
 	requestAudioPermission();
 
 	videoElement.src = blobURL;
-	videoElement.loop = false;
+	videoElement.loop = item.options.loop;
 
 	await setVideoAudioRouting(item.options.withAudio);
 
@@ -170,19 +170,22 @@ const playVideoItem = async (item, _isLoopContinuation = false) => {
 		logger.warn(`[Media] video.play() rejected for "${item.id}"`, e.message);
 	});
 
+	if (item.options.loop) {
+		// Native loop — no ended event, resolve only via stop() or playVideo() interruption
+		return new Promise((resolve) => {
+			currentVideoResolve = resolve;
+		});
+	}
+
 	return new Promise((resolve) => {
-		if (!_isLoopContinuation) currentVideoResolve = resolve;
+		currentVideoResolve = resolve;
 
 		videoElement.addEventListener("ended", () => {
-			if (item.options.loop) {
-				playVideoItem(item, true);
-			} else {
-				currentVideoResolve = null;
-				resolve();
-				const next = videoQueue.shift();
-				if (next) playVideoItem(next).then(next._resolve);
-				else currentVideo = null;
-			}
+			currentVideoResolve = null;
+			resolve();
+			const next = videoQueue.shift();
+			if (next) playVideoItem(next).then(next._resolve);
+			else currentVideo = null;
 		}, { once: true });
 	});
 };

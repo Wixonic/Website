@@ -43,7 +43,8 @@ export type ComponentType = keyof ContentMap;
 export interface Component<T extends ComponentType = ComponentType> {
 	id: string;
 	type: T;
-	url: URL;
+	url?: URL;
+	sources?: Record<string, URL>;
 	optional?: boolean;
 }
 
