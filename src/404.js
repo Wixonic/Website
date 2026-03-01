@@ -7,7 +7,7 @@ const components = [
 		type: "video",
 		sources: {
 			"video/webm; codecs=vp9": new URL("/animation/404/web.webm", path.assets),
-			"video/mp4; codecs=\"hvc1.2.4.L153.B0\"": new URL("/animation/404/web.mp4", path.assets)
+			"video/mp4; codecs=hvc1": new URL("/animation/404/web.mp4", path.assets)
 		}
 	}
 ];
