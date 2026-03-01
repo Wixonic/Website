@@ -6,8 +6,8 @@ const components = [
 		id: "404",
 		type: "video",
 		sources: {
-			"video/webm; codecs=vp9": new URL("/animation/404/web.webm", path.assets),
-			"video/mp4; codecs=hvc1": new URL("/animation/404/web.mp4", path.assets)
+			"video/quicktime; codecs=hvc1": new URL("/animation/404/web.mov", path.assets),
+			"video/webm; codecs=vp9": new URL("/animation/404/web.webm", path.assets)
 		}
 	}
 ];
