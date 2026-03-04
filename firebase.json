@@ -3,9 +3,7 @@
 		{
 			"target": "root",
 			"public": "./websites/root",
-			"ignore": [
-				".DS_Store"
-			],
+			"ignore": [".DS_Store"],
 			"rewrites": [
 				{
 					"source": "**",
@@ -27,9 +25,7 @@
 		{
 			"target": "assets",
 			"public": "./websites/assets",
-			"ignore": [
-				".DS_Store"
-			],
+			"ignore": [".DS_Store"],
 			"rewrites": [
 				{
 					"source": "**",

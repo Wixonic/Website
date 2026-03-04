@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 
 <html lang="en-US">
-
 	<head>
-
 		<title>Wixonic</title>
 		<meta charset="utf-8" />
 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+		/>
 
 		<meta name="author" content="Wixonic, contact@wixonic.fr" />
 		<meta name="description" content="" />
@@ -21,58 +22,68 @@
 
 		<meta rel="canonical" href="{{ path.root }}" />
 
-		<link rel="icon" type="image/svg+xml" href="{{ path.assets }}/icon/logo.svg" />
-		<link rel="apple-touch-icon" href="{{ path.assets }}/icon/logo/180.png" />
-		<link rel="icon" type="image/png" sizes="192x192" href="{{ path.assets }}/icon/logo/round/196.png" />
-		<link rel="icon" type="image/png" sizes="512x512" href="{{ path.assets }}/icon/logo/round/512.png" />
+		<link
+			rel="icon"
+			type="image/svg+xml"
+			href="{{ path.assets }}/icon/logo.svg"
+		/>
+		<link
+			rel="apple-touch-icon"
+			href="{{ path.assets }}/icon/logo/180.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="192x192"
+			href="{{ path.assets }}/icon/logo/round/196.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="512x512"
+			href="{{ path.assets }}/icon/logo/round/512.png"
+		/>
 
 		<script>
 
 			window.path = {{ path | json | safe }};
-
 		</script>
 
 		<link rel="stylesheet" href="/src/main.css" />
 		<script type="module" src="/src/main.js"></script>
-
 	</head>
 
 	<body>
-
 		<noscript>
-
-			<span>This website relies heavily on JavaScript to render complex animations and interactive content.<br />Please enable JavaScript in your browser settings to access the site.</span>
-
+			<span
+				>This website relies heavily on JavaScript to render complex
+				animations and interactive content.<br />Please enable
+				JavaScript in your browser settings to access the site.</span
+			>
 		</noscript>
 
 		<div id="orientation-lock">
-
-			<span>This website offers an immersive visual experience that requires a wider screen.<br /><br />Please rotate your device to landscape mode or increase your window size to continue.</span>
-
+			<span
+				>This website offers an immersive visual experience that
+				requires a wider screen.<br /><br />Please rotate your device to
+				landscape mode or increase your window size to continue.</span
+			>
 		</div>
 
 		<div id="fatal-error" class="hidden">
-
-			<span>The site has encountered an unexpected error and is temporarily unavailable.<br /><br />Please refresh the page or try again later.</span>
-
+			<span
+				>The site has encountered an unexpected error and is temporarily
+				unavailable.<br /><br />Please refresh the page or try again
+				later.</span
+			>
 		</div>
 
 		<main>
-
 			<video autoplay loop muted playsinline nocontrols></video>
 
 			<div id="layer">
-
-				<div id="screen">
-
-
-
-				</div>
-
+				<div id="screen"></div>
 			</div>
-
 		</main>
-
 	</body>
-
 </html>

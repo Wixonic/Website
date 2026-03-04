@@ -1,4 +1,3 @@
-
 /** @type {HTMLElement | null} */
 let currentBanner = null;
 
@@ -35,12 +34,16 @@ const showBanner = ({ message, actions }) => {
 			button.textContent = action.label;
 			button.disabled = true;
 
-			button.addEventListener("click", () => {
-				const res = currentResolve;
-				currentResolve = null;
-				hideBanner();
-				if (res) res(action.value);
-			}, { once: true });
+			button.addEventListener(
+				"click",
+				() => {
+					const res = currentResolve;
+					currentResolve = null;
+					hideBanner();
+					if (res) res(action.value);
+				},
+				{ once: true },
+			);
 
 			actionsEl.appendChild(button);
 		}
@@ -53,7 +56,9 @@ const showBanner = ({ message, actions }) => {
 		currentBanner = banner;
 
 		setTimeout(() => {
-			for (const button of /** @type {NodeListOf<HTMLButtonElement>} */ (actionsEl.querySelectorAll(".banner-action"))) {
+			for (const button of /** @type {NodeListOf<HTMLButtonElement>} */ (
+				actionsEl.querySelectorAll(".banner-action")
+			)) {
 				button.disabled = false;
 			}
 		}, 250);

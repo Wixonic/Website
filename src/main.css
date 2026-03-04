@@ -17,7 +17,6 @@ body {
 
 	--background-selection: hsl(0, 0%, 0%);
 
-
 	--text: hsl(0, 0%, 5%);
 	--text-muted: hsl(0, 0%, 30%);
 
@@ -28,7 +27,6 @@ body {
 
 	--border-color: hsla(0, 0%, 50%, 0.2);
 	--border-subtle: hsla(0, 0%, 50%, 0.05);
-
 
 	--danger: hsl(0, 100%, 60%);
 	--danger-text: hsl(0, 0%, 100%);
@@ -76,8 +74,12 @@ body {
 	/* SIZES */
 
 	/* FONT */
-	--font-family: "Open Sans", "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", "Helvetica Neue", Arial, sans-serif;
-	--stylized-font-family: "VT323", ui-monospace, "Cascadia Mono", "Segoe UI Mono", "Liberation Mono", Menlo, Monaco, Consolas, "Courier New", monospace;
+	--font-family:
+		"Open Sans", "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI",
+		"Noto Sans", "Helvetica Neue", Arial, sans-serif;
+	--stylized-font-family:
+		"VT323", ui-monospace, "Cascadia Mono", "Segoe UI Mono",
+		"Liberation Mono", Menlo, Monaco, Consolas, "Courier New", monospace;
 	/* FONT */
 }
 
