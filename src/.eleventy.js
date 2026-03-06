@@ -7,6 +7,26 @@ export const config = {
 	htmlTemplateEngine: "njk",
 };
 
+const findFiles = async (dir, extensions) => {
+	const results = [];
+
+	try {
+		const entries = await fsp.readdir(dir, { withFileTypes: true });
+
+		for (const entry of entries) {
+			const fullPath = path.join(dir, entry.name);
+
+			if (entry.isDirectory()) {
+				results.push(...await findFiles(fullPath, extensions));
+			} else if (extensions.some(ext => entry.name.endsWith(ext))) {
+				results.push(fullPath);
+			}
+		}
+	} catch (e) { }
+
+	return results;
+};
+
 export default (config) => {
 	const isEmulator = process.env.dev === "true";
 	const isClear = process.env.clear === "true";
@@ -23,6 +43,28 @@ export default (config) => {
 		server: "https://server.wixonic.fr",
 	};
 
+	const esbuildOptions = {
+		bundle: !isClear,
+		minify: !isClear,
+		sourcemap: !isClear,
+		splitting: !isClear,
+		format: "esm",
+		target: ["es2020"],
+	};
+
+	// --- Directories ---
+	config.setInputDirectory("../websites/");
+	config.setOutputDirectory("../build/");
+
+	// --- Templates ---
+	config.setTemplateFormats(["njk", "html"]);
+
+	// --- Passthrough ---
+	for (const ext of ["svg", "png", "webp", "webm", "mov", "mp3", "woff2"]) {
+		config.addPassthroughCopy(`../websites/**/*.${ext}`);
+	}
+
+	// --- Global data ---
 	config.addGlobalData("path", pathConfig);
 	config.addGlobalData("eleventyComputed", {
 		permalink: (data) => {
@@ -34,11 +76,18 @@ export default (config) => {
 		}
 	});
 
-	config.setOutputDirectory("../build/");
+	// --- Filters ---
+	config.addFilter("cleanPath", (filePath) => {
+		if (!filePath) return pathConfig.root;
+		return pathConfig.root + filePath;
+	});
 
+	config.addFilter("json", (content) => JSON.stringify(content));
+
+	// --- Esbuild ---
 	config.on("eleventy.before", async () => {
-		const nunjucksPathPlugin = {
-			name: "nunjucks-path",
+		const cleanPath = {
+			name: "clean-path",
 			setup(build) {
 				build.onLoad({ filter: /\.(css|js)$/ }, async (args) => {
 					let source = await fsp.readFile(args.path, "utf8");
@@ -47,7 +96,6 @@ export default (config) => {
 						/\{\{\s*path\.(\w+)\s*\}\}/g,
 						(match, key) => {
 							if (pathConfig[key]) return pathConfig[key];
-
 							console.warn(`[Build] Unknown path key "{{ path.${key} }}" in ${args.path}`);
 							return match;
 						}
@@ -55,7 +103,7 @@ export default (config) => {
 
 					return {
 						contents: source,
-						loader: args.path.endsWith(".css") ? "css" : "js"
+						loader: args.path.endsWith(".css") ? "css" : "js",
 					};
 				});
 			}
@@ -65,57 +113,68 @@ export default (config) => {
 			name: "resolve-root",
 			setup(build) {
 				build.onResolve({ filter: /^\// }, (args) => {
-					const fullPath = path.join(
-						process.cwd(),
-						args.path.replace(/^\//, "").replace(/^src\//, ""),
-					);
+					if (args.kind === "entry-point") return;
 
-					return { path: fullPath, external: false };
+					return {
+						path: path.join(process.cwd(), args.path.replace(/^\//, "").replace(/^src\//, "")),
+						external: false,
+					};
 				});
 			}
 		};
 
-		console.log("[Esbuild] Starting src build...");
+		const plugins = [cleanPath, resolveRootPlugin];
 
-		await esbuild.build({
-			entryPoints: [
-				"./main.js",
-				"./main.css",
-				"./404.js",
-				"./script/**/*.js",
-				"./style/**/*.css",
-			],
-			outdir: "../build",
-			bundle: !isClear,
-			minify: !isClear,
-			sourcemap: !isClear,
-			splitting: !isClear,
-			format: "esm",
-			target: ["es2020"],
-			outbase: ".",
-			plugins: [nunjucksPathPlugin, resolveRootPlugin]
-		});
+		console.log("[Esbuild] Starting build...");
 
-		console.log(`[Esbuild] Build completed.`);
+		const websites = await fsp.readdir("../websites", { withFileTypes: true });
+
+		for (const site of websites) {
+			if (!site.isDirectory()) continue;
+
+			const siteDir = path.resolve(`../websites/${site.name}`);
+
+			// Shared src/ entry points
+			await esbuild.build({
+				...esbuildOptions,
+				entryPoints: [
+					"./main.js",
+					"./main.css",
+					"./404.js",
+					"./script/**/*.js",
+					"./style/**/*.css",
+				],
+				outdir: `../build/${site.name}/src`,
+				outbase: ".",
+				plugins,
+			});
+
+			// Site-specific JS/CSS
+			const siteEntryPoints = await findFiles(siteDir, [".js", ".css"]);
+
+			if (siteEntryPoints.length > 0) {
+				await esbuild.build({
+					...esbuildOptions,
+					entryPoints: siteEntryPoints,
+					outdir: `../build/${site.name}`,
+					outbase: siteDir,
+					plugins,
+				});
+			}
+		}
+
+		console.log("[Esbuild] Build completed.");
 	});
 
-	config.addFilter("cleanPath", (filePath) => {
-		if (!filePath) return pathConfig.root;
-		return pathConfig.root + filePath;
-	});
-
-	config.addFilter("json", (content) => JSON.stringify(content));
-
+	// --- HTML minification ---
 	if (!isClear) {
 		config.addTransform("htmlmin", function (content) {
 			if ((this.page.outputPath || "").endsWith(".html")) {
-				let minified = htmlMinifier.minify(content, {
+				return htmlMinifier.minify(content, {
 					useShortDoctype: true,
 					removeComments: true,
-					collapseWhitespace: true
+					collapseWhitespace: true,
 				});
-
-				return minified;
 			}
 
 			return content;

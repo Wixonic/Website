@@ -2,7 +2,7 @@
 	"hosting": [
 		{
 			"target": "root",
-			"public": "./websites/root",
+			"public": "./build/root",
 			"ignore": [
 				".DS_Store"
 			],
@@ -26,7 +26,7 @@
 		},
 		{
 			"target": "assets",
-			"public": "./websites/assets",
+			"public": "./build/assets",
 			"ignore": [
 				".DS_Store"
 			],

@@ -15,7 +15,7 @@ let masterGain = null;
 /** @type {boolean | null} */
 let audioAllowed = null;
 
-let permissionRequested = false;
+let permissionRequested = audioAllowed !== null;
 
 /** @returns {AudioContext} */
 const getContext = () => {
@@ -58,9 +58,7 @@ const requestAudioPermission = () => {
 			}
 
 			if (currentVideo && currentVideo.options.withAudio) setVideoAudioRouting(true);
-		} else {
-			audioAllowed = false;
-		}
+		} else audioAllowed = false;
 	});
 };
 
@@ -379,23 +377,33 @@ const stop = () => {
 	videoQueue = [];
 	videoPaused = false;
 
-	// Audio
-	if (masterGain) {
-		const ctx = getContext();
-		masterGain.gain.setValueAtTime(masterGain.gain.value, ctx.currentTime);
-		masterGain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.02);
-		setTimeout(() => {
-			if (audioAllowed) masterGain.gain.value = 1;
-		}, 30);
-	}
-
-	for (const track of activeTracks) {
-		try { track.source.stop(); } catch (_) { }
-		track._resolve();
-	}
+	// Audio — fade out then stop
+	const tracksToStop = [...activeTracks];
 	activeTracks = [];
 	for (const item of audioQueue) item._resolve();
 	audioQueue = [];
+
+	for (const track of tracksToStop) {
+		track.item.options.loop = false;
+		track._resolve();
+	}
+
+	if (masterGain) {
+		const ctx = getContext();
+		masterGain.gain.setValueAtTime(masterGain.gain.value, ctx.currentTime);
+		masterGain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.05);
+
+		setTimeout(() => {
+			for (const track of tracksToStop) {
+				try { track.source.stop(); } catch (_) { }
+			}
+			if (audioAllowed) masterGain.gain.value = 1;
+		}, 60);
+	} else {
+		for (const track of tracksToStop) {
+			try { track.source.stop(); } catch (_) { }
+		}
+	}
 };
 
 /**

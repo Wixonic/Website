@@ -6,7 +6,7 @@
 	font-weight: 400;
 
 	src: local("VT323"),
-	url("{{ path.assets }}/font/VT323/regular.ttf") format("truetype-variations");
+	url("{{ path.assets }}/font/VT323/regular.woff2") format("woff2");
 }
 
 @font-face {
@@ -17,7 +17,7 @@
 	font-weight: 300 800;
 
 	src: local("Open Sans"),
-	url("{{ path.assets }}/font/OpenSans/regular.ttf") format("truetype-variations");
+	url("{{ path.assets }}/font/OpenSans/regular.woff2") format("woff2");
 }
 
 @font-face {
@@ -28,5 +28,5 @@
 	font-weight: 300 800;
 
 	src: local("Open Sans"),
-	url("{{ path.assets }}/font/OpenSans/italic.ttf") format("truetype-variations");
+	url("{{ path.assets }}/font/OpenSans/italic.woff2") format("woff2");
 }
