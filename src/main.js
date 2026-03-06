@@ -10,20 +10,17 @@ const updateMetadata = (metadata) => {
 
 	if (metadata.title) {
 		document.title = metadata.title;
+
 		const ogTitle = document.querySelector(`meta[property="og:title"]`);
 		if (ogTitle) ogTitle.setAttribute("content", metadata.title);
 	}
 
 	if (metadata.description) {
 		const description = document.querySelector(`meta[name="description"]`);
-		if (description)
-			description.setAttribute("content", metadata.description);
+		if (description) description.setAttribute("content", metadata.description);
 
-		const ogDescription = document.querySelector(
-			`meta[property="og:description"]`,
-		);
-		if (ogDescription)
-			ogDescription.setAttribute("content", metadata.description);
+		const ogDescription = document.querySelector(`meta[property="og:description"]`);
+		if (ogDescription) ogDescription.setAttribute("content", metadata.description);
 	}
 
 	if (metadata.image) {
@@ -49,23 +46,16 @@ const navigate = async (currentPath) => {
 
 		const loadTargetModuleAndComponents = async (path) => {
 			let module;
+
 			try {
 				module = await import(path);
 			} catch (unsafeError) {
-				const e =
-					unsafeError instanceof Error
-						? unsafeError
-						: new Error(unsafeError);
-				logger.warn(
-					`[Router] Module not found at ${path}, falling back to 404`,
-					e.message,
-					e.stack,
-				);
+				const e = unsafeError instanceof Error ? unsafeError : new Error(unsafeError);
+				logger.warn(`[Router] Module not found at ${path}, falling back to 404`, e.message, e.stack);
 				module = await import("/src/404.js");
 			}
 
-			if (module.components && module.components.length > 0)
-				await loadComponents(module.components);
+			if (module.components && module.components.length > 0) await loadComponents(module.components);
 
 			return module;
 		};
@@ -75,25 +65,27 @@ const navigate = async (currentPath) => {
 		const onLoaded = new Promise((resolve) => (resolveLoaded = resolve));
 
 		const [targetModule] = await Promise.all([
-			loadTargetModuleAndComponents(targetModulePath).then((m) => {
-				resolveLoaded();
-				return m;
-			}),
-			loader.init(onLoaded),
+			loadTargetModuleAndComponents(targetModulePath)
+				.then((m) => {
+					resolveLoaded();
+					return m;
+				}),
+			loader.init(onLoaded)
 		]);
 
 		updateMetadata(targetModule.metadata);
 
 		const currentURL = location.href;
+
 		const opengraphURL = document.querySelector(`meta[property="og:url"]`);
 		if (opengraphURL) opengraphURL.setAttribute("content", currentURL);
+
 		const canonical = document.querySelector(`meta[rel="canonical"]`);
 		if (canonical) canonical.setAttribute("href", currentURL);
 
 		if (targetModule.init) await targetModule.init();
 	} catch (unsafeError) {
-		const e =
-			unsafeError instanceof Error ? unsafeError : new Error(unsafeError);
+		const e = unsafeError instanceof Error ? unsafeError : new Error(unsafeError);
 		logger.fatalError("[Router] 404 module not found", e.message, e.stack);
 	}
 };
@@ -123,16 +115,12 @@ addEventListener("DOMContentLoaded", async () => {
 
 addEventListener("error", (event) => {
 	event.preventDefault();
-	const e =
-		event.error instanceof Error
-			? event.error
-			: new Error(event.error || event.message);
+	const e = event.error instanceof Error ? event.error : new Error(event.error || event.message);
 	logger.fatalError("Uncaught Exception", e.message, e.stack);
 });
 
 addEventListener("unhandledrejection", (event) => {
 	event.preventDefault();
-	const e =
-		event.reason instanceof Error ? event.reason : new Error(event.reason);
+	const e = event.reason instanceof Error ? event.reason : new Error(event.reason);
 	logger.fatalError("Unhandled Promise Rejection", e.message, e.stack);
 });

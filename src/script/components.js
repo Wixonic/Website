@@ -51,6 +51,7 @@ const loadComponents = async (components) => {
 				const canPlay = video.canPlayType(mime);
 				return canPlay === "probably" || canPlay === "maybe";
 			});
+
 			url = component.sources[supported ?? mimeTypes[mimeTypes.length - 1]];
 		}
 

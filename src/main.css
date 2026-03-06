@@ -74,12 +74,8 @@ body {
 	/* SIZES */
 
 	/* FONT */
-	--font-family:
-		"Open Sans", "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI",
-		"Noto Sans", "Helvetica Neue", Arial, sans-serif;
-	--stylized-font-family:
-		"VT323", ui-monospace, "Cascadia Mono", "Segoe UI Mono",
-		"Liberation Mono", Menlo, Monaco, Consolas, "Courier New", monospace;
+	--font-family: "Open Sans", "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+	--stylized-font-family: "VT323", ui-monospace, "Cascadia Mono", "Segoe UI Mono", "Liberation Mono", Menlo, Monaco, Consolas, "Courier New", monospace;
 	/* FONT */
 }
 
