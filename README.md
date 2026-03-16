@@ -1,4 +1,6 @@
-[![Wakatime](https://wakatime.com/badge/github/Wixonic/Website.svg?style=flat)](https://wakatime.com/badge/github/Wixonic/Website) [![Patreon](https://img.shields.io/badge/Patreon-black?style=flat&logo=patreon)](https://patreon.com/Wixonic)
+# Website
+
+[![Wakatime](https://wakatime.com/badge/github/Wixonic/Website.svg?style=flat)](https://wakatime.com/badge/github/Wixonic/Website)
 
 - [Support](https://github.com/Wixonic/Website/blob/Default/.github/SUPPORT.md)
 - [Code of Conduct](https://github.com/Wixonic/Website/blob/Default/.github/CODE_OF_CONDUCT.md)
