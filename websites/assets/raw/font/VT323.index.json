@@ -1,0 +1,18 @@
+{
+	"ready": false,
+	"type": "font",
+	"name": "VT323",
+	"description": "Pixelated monospace font used in the main website.",
+	"copyright": null,
+	"download": false,
+	"link": null,
+	"author": null,
+	"files": [
+		{
+			"path": "VT323/regular.woff2",
+			"size": 12028,
+			"format": "woff2",
+			"style": "Regular"
+		}
+	]
+}

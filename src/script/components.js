@@ -1,5 +1,5 @@
-import logger from "/src/script/logger.js";
-import { request } from "/src/script/request.js";
+import logger from "/script/logger.js";
+import { request } from "/script/request.js";
 
 let progress = 0;
 const getProgress = () => progress;
@@ -20,7 +20,7 @@ const getComponent = (id) => loadedComponents.get(id);
 
 /**
  * Loads an array of components and updates the internal progress.
- * @param {import("/src/types.d.ts").Component[]} components
+ * @param {import("/types.d.ts").Component[]} components
  * @returns {Promise<void>}
  */
 const loadComponents = async (components) => {

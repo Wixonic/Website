@@ -2,6 +2,7 @@ import esbuild from "esbuild";
 import * as fsp from "fs/promises";
 import path from "path";
 import htmlMinifier from "html-minifier";
+import { generateAndCheckIndexes } from "./indexer.js";
 
 export const config = {
 	htmlTemplateEngine: "njk",
@@ -22,7 +23,7 @@ const findFiles = async (dir, extensions) => {
 				results.push(fullPath);
 			}
 		}
-	} catch (e) { }
+	} catch (error) { }
 
 	return results;
 };
@@ -53,15 +54,16 @@ export default (config) => {
 	};
 
 	// --- Directories ---
-	config.setInputDirectory("../websites/");
-	config.setOutputDirectory("../build/");
+	config.setInputDirectory("websites/");
+	config.setOutputDirectory("build/");
+	config.setIncludesDirectory("../src");
 
 	// --- Templates ---
 	config.setTemplateFormats(["njk", "html"]);
 
 	// --- Passthrough ---
 	for (const ext of ["svg", "png", "webp", "webm", "mov", "mp3", "woff2"]) {
-		config.addPassthroughCopy(`../websites/**/*.${ext}`);
+		config.addPassthroughCopy(`websites/**/*.${ext}`);
 	}
 
 	// --- Global data ---
@@ -86,6 +88,7 @@ export default (config) => {
 
 	// --- Esbuild ---
 	config.on("eleventy.before", async () => {
+		await generateAndCheckIndexes();
 		const cleanPath = {
 			name: "clean-path",
 			setup(build) {
@@ -103,50 +106,60 @@ export default (config) => {
 
 					return {
 						contents: source,
-						loader: args.path.endsWith(".css") ? "css" : "js",
+						loader: args.path.endsWith(".css") ? "css" : "js"
 					};
 				});
 			}
 		};
 
-		const resolveRootPlugin = {
+		const createResolveRootPlugin = (siteDirectory) => ({
 			name: "resolve-root",
 			setup(build) {
-				build.onResolve({ filter: /^\// }, (args) => {
+				build.onResolve({ filter: /^\// }, async (args) => {
 					if (args.kind === "entry-point") return;
 
-					return {
-						path: path.join(process.cwd(), args.path.replace(/^\//, "").replace(/^src\//, "")),
-						external: false,
-					};
+					const relativePath = args.path.replace(/^\//, "").replace(/^src\//, "");
+
+					const sitePath = path.join(siteDirectory, relativePath);
+					try {
+						await fsp.access(sitePath);
+						return {
+							path: sitePath,
+							external: false
+						};
+					} catch (error) {
+						return {
+							path: path.join(process.cwd(), "src", relativePath),
+							external: false
+						};
+					}
 				});
 			}
-		};
-
-		const plugins = [cleanPath, resolveRootPlugin];
+		});
 
 		console.log("[Esbuild] Starting build...");
 
-		const websites = await fsp.readdir("../websites", { withFileTypes: true });
+		const websites = await fsp.readdir("websites", { withFileTypes: true });
 
 		for (const site of websites) {
 			if (!site.isDirectory()) continue;
 
-			const siteDir = path.resolve(`../websites/${site.name}`);
+			const siteDir = path.resolve(`websites/${site.name}`);
+			const plugins = [cleanPath, createResolveRootPlugin(siteDir)];
 
 			// Shared src/ entry points
 			await esbuild.build({
 				...esbuildOptions,
 				entryPoints: [
-					"./main.js",
-					"./main.css",
-					"./404.js",
-					"./script/**/*.js",
-					"./style/**/*.css",
+					"src/main.js",
+					"src/main.css",
+					"src/404.js",
+					"src/script/**/*.js",
+					"src/style/**/*.css",
 				],
-				outdir: `../build/${site.name}/src`,
-				outbase: ".",
-				plugins,
+				outdir: `build/${site.name}`,
+				outbase: "src",
+				plugins
 			});
 
 			// Site-specific JS/CSS
@@ -156,9 +169,9 @@ export default (config) => {
 				await esbuild.build({
 					...esbuildOptions,
 					entryPoints: siteEntryPoints,
-					outdir: `../build/${site.name}`,
+					outdir: `build/${site.name}`,
 					outbase: siteDir,
-					plugins,
+					plugins
 				});
 			}
 		}
@@ -173,7 +186,7 @@ export default (config) => {
 				return htmlMinifier.minify(content, {
 					useShortDoctype: true,
 					removeComments: true,
-					collapseWhitespace: true,
+					collapseWhitespace: true
 				});
 			}
 

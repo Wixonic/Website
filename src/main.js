@@ -1,9 +1,9 @@
-import { loadComponents } from "/src/script/components.js";
-import logger from "/src/script/logger.js";
+import { loadComponents } from "/script/components.js";
+import logger from "/script/logger.js";
 
 /**
  * Updates the page metadata (title, description, and OpenGraph image).
- * @param {import("/src/types.d.ts").Module["metadata"]} metadata
+ * @param {import("/types.d.ts").Module["metadata"]} metadata
  */
 const updateMetadata = (metadata) => {
 	if (!metadata) return;
@@ -35,8 +35,8 @@ const updateMetadata = (metadata) => {
  */
 const navigate = async (currentPath) => {
 	try {
-		/** @type {import("/src/types.d.ts").Module} */
-		const loader = await import("/src/script/loader.js");
+		/** @type {import("/types.d.ts").Module} */
+		const loader = await import("/script/loader.js");
 
 		if (loader.components) await loadComponents(loader.components);
 
@@ -52,7 +52,7 @@ const navigate = async (currentPath) => {
 			} catch (unsafeError) {
 				const e = unsafeError instanceof Error ? unsafeError : new Error(unsafeError);
 				logger.warn(`[Router] Module not found at ${path}, falling back to 404`, e.message, e.stack);
-				module = await import("/src/404.js");
+				module = await import("/404.js");
 			}
 
 			if (module.components && module.components.length > 0) await loadComponents(module.components);

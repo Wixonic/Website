@@ -1,4 +1,4 @@
-import logger from "/src/script/logger.js";
+import logger from "/script/logger.js";
 
 let storage;
 

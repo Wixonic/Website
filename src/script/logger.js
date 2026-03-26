@@ -1,4 +1,4 @@
-/** @typedef {import("/src/types.d.ts").LoggerFunction} LoggerFunction */
+/** @typedef {import("/types.d.ts").LoggerFunction} LoggerFunction */
 
 /** @type {LoggerFunction} */
 const fatalError = (reason = "No reason", message = "No message", trace = "No trace") => {
@@ -18,5 +18,5 @@ const warn = (reason = "No reason", message = "No message", trace = "No trace") 
 	console.warn(reason, message, trace);
 };
 
-/** @type {import("/src/types.d.ts").Logger} */
+/** @type {import("/types.d.ts").Logger} */
 export default { fatalError, error, warn };

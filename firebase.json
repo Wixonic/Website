@@ -9,7 +9,7 @@
 			"rewrites": [
 				{
 					"source": "**",
-					"destination": "/src/main.html"
+					"destination": "/main.html"
 				}
 			],
 			"headers": [
@@ -33,7 +33,7 @@
 			"rewrites": [
 				{
 					"source": "**",
-					"destination": "/src/main.html"
+					"destination": "/main.html"
 				}
 			],
 			"headers": [

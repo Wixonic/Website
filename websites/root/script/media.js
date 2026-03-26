@@ -1,6 +1,6 @@
-import { showBanner } from "/src/script/banner.js";
-import { getComponent } from "/src/script/components.js";
-import logger from "/src/script/logger.js";
+import { showBanner } from "/script/banner.js";
+import { getComponent } from "/script/components.js";
+import logger from "/script/logger.js";
 
 // ---------------------------------------------------------------------------
 // AudioContext (lazy, shared)
@@ -75,13 +75,13 @@ let videoAudioSource = null;
 /** @type {GainNode | null} */
 let videoGainNode = null;
 
-/** @type {import("/src/types.d.ts").MediaQueueItem | null} */
+/** @type {import("/types.d.ts").MediaQueueItem | null} */
 let currentVideo = null;
 
 /** @type {(() => void) | null} */
 let currentVideoResolve = null;
 
-/** @type {Array<import("/src/types.d.ts").MediaQueueItem & { _resolve: () => void }>} */
+/** @type {Array<import("/types.d.ts").MediaQueueItem & { _resolve: () => void }>} */
 let videoQueue = [];
 
 /** @type {boolean} */
@@ -96,14 +96,14 @@ let videoPaused = false;
  * @property {string} id
  * @property {AudioBufferSourceNode} source
  * @property {GainNode} gain
- * @property {import("/src/types.d.ts").MediaQueueItem} item
+ * @property {import("/types.d.ts").MediaQueueItem} item
  * @property {() => void} _resolve
  */
 
 /** @type {AudioTrack[]} */
 let activeTracks = [];
 
-/** @type {Array<import("/src/types.d.ts").MediaQueueItem & { _resolve: () => void }>} */
+/** @type {Array<import("/types.d.ts").MediaQueueItem & { _resolve: () => void }>} */
 let audioQueue = [];
 
 // ---------------------------------------------------------------------------
@@ -136,7 +136,7 @@ const setVideoAudioRouting = async (withAudio) => {
 /**
  * Plays the given queue item on the video element immediately.
  * Resolves when playback ends naturally. For looping items, resolves only via stop().
- * @param {import("/src/types.d.ts").MediaQueueItem} item
+ * @param {import("/types.d.ts").MediaQueueItem} item
  * @param {boolean} [_isLoopContinuation] — internal flag, do not pass
  * @returns {Promise<void>}
  */
@@ -206,7 +206,7 @@ const decodeblobURL = async (blobURL) => {
 /**
  * Plays the given queue item as audio via WebAudio API.
  * Resolves when playback ends. For looping items, resolves only via stop().
- * @param {import("/src/types.d.ts").MediaQueueItem} item
+ * @param {import("/types.d.ts").MediaQueueItem} item
  * @param {(() => void) | null} [_originalResolve] — internal, carries the root resolve through loop iterations
  * @returns {Promise<void>}
  */
@@ -267,7 +267,7 @@ const playAudioItem = async (item, _originalResolve = null) => {
  * Plays a video component immediately, interrupting the current one.
  * The video queue stays intact and resumes after this item ends.
  * @param {string} id
- * @param {import("/src/types.d.ts").MediaOptions} [options]
+ * @param {import("/types.d.ts").MediaOptions} [options]
  * @returns {Promise<void>} Resolves when playback ends.
  */
 const playVideo = (id, options = {}) => {
@@ -288,7 +288,7 @@ const playVideo = (id, options = {}) => {
  * Adds a video component to the video queue.
  * If nothing is playing, starts immediately.
  * @param {string} id
- * @param {import("/src/types.d.ts").MediaOptions} [options]
+ * @param {import("/types.d.ts").MediaOptions} [options]
  * @returns {Promise<void>} Resolves when this item's playback ends.
  */
 const enqueueVideo = (id, options = {}) => {
@@ -305,7 +305,7 @@ const enqueueVideo = (id, options = {}) => {
 /**
  * Plays an audio component immediately (additive — does not interrupt other audio).
  * @param {string} id
- * @param {import("/src/types.d.ts").MediaOptions} [options]
+ * @param {import("/types.d.ts").MediaOptions} [options]
  * @returns {Promise<void>} Resolves when playback ends.
  */
 const playAudio = (id, options = {}) => {
@@ -317,7 +317,7 @@ const playAudio = (id, options = {}) => {
  * Adds an audio component to the audio queue.
  * If no audio is currently playing (no active tracks), starts immediately.
  * @param {string} id
- * @param {import("/src/types.d.ts").MediaOptions} [options]
+ * @param {import("/types.d.ts").MediaOptions} [options]
  * @returns {Promise<void>} Resolves when this item's playback ends.
  */
 const enqueueAudio = (id, options = {}) => {
@@ -423,10 +423,10 @@ const getCurrentVideoId = () => currentVideo?.id ?? null;
 /** @returns {string | null} — the id of all active audio tracks (first one) */
 const getCurrentAudioId = () => activeTracks[0]?.id ?? null;
 
-/** @returns {import("/src/types.d.ts").MediaQueueItem[]} */
+/** @returns {import("/types.d.ts").MediaQueueItem[]} */
 const getVideoQueue = () => [...videoQueue];
 
-/** @returns {import("/src/types.d.ts").MediaQueueItem[]} */
+/** @returns {import("/types.d.ts").MediaQueueItem[]} */
 const getAudioQueue = () => [...audioQueue];
 
 /** @returns {boolean} */

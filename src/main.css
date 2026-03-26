@@ -1,5 +1,5 @@
-@import url("/src/style/banner.css");
-@import url("/src/style/font.css");
+@import url("/style/banner.css");
+@import url("/style/font.css");
 
 body {
 	/* COLORS */
@@ -174,7 +174,13 @@ main video {
 
 	pointer-events: none;
 
+	opacity: 0;
+
 	z-index: 10;
+}
+
+main video[src] {
+	opacity: 1;
 }
 
 main .screen {

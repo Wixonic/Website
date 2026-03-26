@@ -1,0 +1,156 @@
+{
+	"ready": true,
+	"type": "image",
+	"name": "logo",
+	"description": "My logo",
+	"copyright": "Wixonic",
+	"download": false,
+	"link": null,
+	"author": "Wixonic",
+	"files": [
+		{
+			"path": "logo/16.png",
+			"size": 270,
+			"format": "png",
+			"codec": "png",
+			"width": 16,
+			"height": 16
+		},
+		{
+			"path": "logo/24.png",
+			"size": 424,
+			"format": "png",
+			"codec": "png",
+			"width": 24,
+			"height": 24
+		},
+		{
+			"path": "logo/32.png",
+			"size": 518,
+			"format": "png",
+			"codec": "png",
+			"width": 32,
+			"height": 32
+		},
+		{
+			"path": "logo/48.png",
+			"size": 804,
+			"format": "png",
+			"codec": "png",
+			"width": 48,
+			"height": 48
+		},
+		{
+			"path": "logo/64.png",
+			"size": 1053,
+			"format": "png",
+			"codec": "png",
+			"width": 64,
+			"height": 64
+		},
+		{
+			"path": "logo/96.png",
+			"size": 1487,
+			"format": "png",
+			"codec": "png",
+			"width": 96,
+			"height": 96
+		},
+		{
+			"path": "logo/120.png",
+			"size": 1810,
+			"format": "png",
+			"codec": "png",
+			"width": 120,
+			"height": 120
+		},
+		{
+			"path": "logo/144.png",
+			"size": 2038,
+			"format": "png",
+			"codec": "png",
+			"width": 144,
+			"height": 144
+		},
+		{
+			"path": "logo/152.png",
+			"size": 2149,
+			"format": "png",
+			"codec": "png",
+			"width": 152,
+			"height": 152
+		},
+		{
+			"path": "logo/167.png",
+			"size": 2321,
+			"format": "png",
+			"codec": "png",
+			"width": 167,
+			"height": 167
+		},
+		{
+			"path": "logo/180.png",
+			"size": 2476,
+			"format": "png",
+			"codec": "png",
+			"width": 180,
+			"height": 180
+		},
+		{
+			"path": "logo/196.png",
+			"size": 2243,
+			"format": "png",
+			"codec": "png",
+			"width": 196,
+			"height": 196
+		},
+		{
+			"path": "logo/256.png",
+			"size": 2762,
+			"format": "png",
+			"codec": "png",
+			"width": 256,
+			"height": 256
+		},
+		{
+			"path": "logo/384.png",
+			"size": 3921,
+			"format": "png",
+			"codec": "png",
+			"width": 384,
+			"height": 384
+		},
+		{
+			"path": "logo/512.png",
+			"size": 5127,
+			"format": "png",
+			"codec": "png",
+			"width": 512,
+			"height": 512
+		},
+		{
+			"path": "logo/1024.png",
+			"size": 11399,
+			"format": "png",
+			"codec": "png",
+			"width": 1024,
+			"height": 1024
+		},
+		{
+			"path": "logo.svg",
+			"size": 1292,
+			"format": "svg",
+			"codec": "svg",
+			"width": null,
+			"height": null
+		},
+		{
+			"path": "logo/pixelated.png",
+			"size": 7691,
+			"format": "png",
+			"codec": "png",
+			"width": 2048,
+			"height": 2048
+		}
+	]
+}

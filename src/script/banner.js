@@ -6,7 +6,7 @@ let currentResolve = null;
 
 /**
  * Displays a banner with a message and action buttons.
- * @param {import("/src/types.d.ts").BannerOptions} options
+ * @param {import("/types.d.ts").BannerOptions} options
  * @returns {Promise<any>} Resolves with the value of the chosen action.
  */
 const showBanner = ({ message, actions }) => {

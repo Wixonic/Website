@@ -1,0 +1,24 @@
+{
+	"ready": false,
+	"type": "font",
+	"name": "OpenSans",
+	"description": "Primary font used across the website.",
+	"copyright": null,
+	"download": false,
+	"link": null,
+	"author": null,
+	"files": [
+		{
+			"path": "OpenSans/italic.woff2",
+			"size": 313136,
+			"format": "woff2",
+			"style": "Italic"
+		},
+		{
+			"path": "OpenSans/regular.woff2",
+			"size": 279760,
+			"format": "woff2",
+			"style": "Regular"
+		}
+	]
+}

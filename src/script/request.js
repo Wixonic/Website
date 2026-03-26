@@ -1,5 +1,5 @@
-import logger from "/src/script/logger.js";
-import storage from "/src/script/storage.js";
+import logger from "/script/logger.js";
+import storage from "/script/storage.js";
 
 /**
  * @typedef {Object} Response
