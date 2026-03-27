@@ -62,7 +62,7 @@ export default (config) => {
 	config.setTemplateFormats(["njk", "html"]);
 
 	// --- Passthrough ---
-	for (const ext of ["svg", "png", "webp", "webm", "mov", "mp3", "woff2"]) {
+	for (const ext of ["svg", "png", "webp", "webm", "mov", "mp3", "woff2", "index.json"]) {
 		config.addPassthroughCopy(`websites/**/*.${ext}`);
 	}
 

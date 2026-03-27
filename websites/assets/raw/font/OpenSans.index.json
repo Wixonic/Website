@@ -1,12 +1,12 @@
 {
-	"ready": false,
+	"ready": true,
 	"type": "font",
 	"name": "OpenSans",
 	"description": "Primary font used across the website.",
-	"copyright": null,
+	"copyright": "The Open Sans Project Authors",
 	"download": false,
-	"link": null,
-	"author": null,
+	"link": "https://github.com/googlefonts/opensans",
+	"author": "Steve Matteson",
 	"files": [
 		{
 			"path": "OpenSans/italic.woff2",

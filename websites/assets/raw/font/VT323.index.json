@@ -1,12 +1,12 @@
 {
-	"ready": false,
+	"ready": true,
 	"type": "font",
 	"name": "VT323",
 	"description": "Pixelated monospace font used in the main website.",
-	"copyright": null,
+	"copyright": "The VT323 Project Authors (peter.hull@oikoi.com)",
 	"download": false,
-	"link": null,
-	"author": null,
+	"link": "https://github.com/phoikoi/VT323",
+	"author": "Peter Hull",
 	"files": [
 		{
 			"path": "VT323/regular.woff2",

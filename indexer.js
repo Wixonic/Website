@@ -171,7 +171,7 @@ export const generateAndCheckIndexes = async () => {
 	let notReadyFiles = [];
 
 	const indexFiles = allFiles.filter((f) => f.endsWith(".index.json"));
-	const indexedMediaPaths = new Set();
+	const indexedMediaPaths = {};
 
 	for (const indexFile of indexFiles) {
 		try {
@@ -184,10 +184,10 @@ export const generateAndCheckIndexes = async () => {
 			}
 
 			if (Array.isArray(indexData.files)) {
-				for (const f of indexData.files) {
-					if (f.path) {
-						const fullPath = path.join(path.dirname(indexFile), f.path);
-						indexedMediaPaths.add(fullPath);
+				for (const file of indexData.files) {
+					if (file.path) {
+						const fullPath = path.join(path.dirname(indexFile), file.path);
+						indexedMediaPaths[fullPath] = indexFile;
 					}
 				}
 			}
@@ -197,7 +197,7 @@ export const generateAndCheckIndexes = async () => {
 	}
 
 	for (const file of mediaFiles) {
-		if (indexedMediaPaths.has(file)) continue;
+		if (indexedMediaPaths[file]) continue;
 
 		const indexFile = file + ".index.json";
 
@@ -286,6 +286,15 @@ export const generateAndCheckIndexes = async () => {
 		for (const f of notReadyFiles) console.error(`  - ${f}`);
 		throw new Error("Assets not ready");
 	}
+
+	const outputIndex = {};
+	for (const [key, value] of Object.entries(indexedMediaPaths)) {
+		outputIndex[key.replace("websites/assets/raw/", "/raw/")] = value.replace("websites/assets/raw/", "/raw/");
+	}
+
+	const mainIndexPath = path.join("websites", "assets", "index.json");
+	await fsp.writeFile(mainIndexPath, JSON.stringify(outputIndex, null, "\t"));
+	console.log(`[Indexer] Main index saved to ${mainIndexPath}`);
 
 	console.log("[Indexer] All assets are properly indexed and ready.");
 };
