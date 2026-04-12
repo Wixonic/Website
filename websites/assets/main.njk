@@ -1,11 +1,36 @@
 {% extends "main.njk" %}
 
+{% block bodyAttributes %} is-one-page-website="true" {% endblock %}
+
 {% block content %}
 
 <main>
 
-	This asset viewer is not ready yet!<br />
-	If you want to see the content, please add /raw to the URL, like this: /raw/asset.ext
+	<div class="path"></div>
+
+	<div class="canvas"></div>
+
+	<div class="bar">
+
+		<div class="toolbox">
+
+			<div class="name"></div>
+
+			<div class="files"></div>
+
+			<div class="toolbox">
+
+				<button class="website"></button>
+
+				<button class="download"></button>
+
+			</div>
+
+		</div>
+
+		<div class="description"></div>
+
+	</div>
 
 </main>
 
