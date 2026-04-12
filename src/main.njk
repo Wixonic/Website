@@ -2,67 +2,67 @@
 
 <html lang="en-US">
 
-<head>
+	<head>
 
-	<title>Wixonic</title>
-	<meta charset="utf-8" />
+		<title>Wixonic</title>
+		<meta charset="utf-8" />
 
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
-	<meta name="author" content="Wixonic, contact@wixonic.fr" />
-	<meta name="description" content="" />
-	<meta name="robots" content="index,follow" />
+		<meta name="author" content="Wixonic, contact@wixonic.fr" />
+		<meta name="description" content="" />
+		<meta name="robots" content="index,follow" />
 
-	<meta property="og:type" content="website" />
-	<meta property="og:locale" content="en_US" />
-	<meta property="og:title" content="Wixonic" />
-	<meta property="og:description" content="" />
-	<meta property="og:url" content="{{ path.root }}" />
+		<meta property="og:type" content="website" />
+		<meta property="og:locale" content="en_US" />
+		<meta property="og:title" content="Wixonic" />
+		<meta property="og:description" content="" />
+		<meta property="og:url" content="{{ path.root }}" />
 
-	<meta rel="canonical" href="{{ path.root }}" />
+		<meta rel="canonical" href="{{ path.root }}" />
 
-	<link rel="icon" type="image/svg+xml" href="{{ path.assets }}/raw/icon/logo.svg" />
-	<link rel="apple-touch-icon" href="{{ path.assets }}/raw/icon/logo/180.png" />
-	<link rel="icon" type="image/png" sizes="192x192" href="{{ path.assets }}/raw/icon/logo/round/196.png" />
-	<link rel="icon" type="image/png" sizes="512x512" href="{{ path.assets }}/raw/icon/logo/round/512.png" />
+		<link rel="icon" type="image/svg+xml" href="{{ path.assets }}/raw/icon/logo.svg" />
+		<link rel="apple-touch-icon" href="{{ path.assets }}/raw/icon/logo/180.png" />
+		<link rel="icon" type="image/png" sizes="192x192" href="{{ path.assets }}/raw/icon/logo/round/196.png" />
+		<link rel="icon" type="image/png" sizes="512x512" href="{{ path.assets }}/raw/icon/logo/round/512.png" />
 
-	<script>
-		window.path = {{ path | json | safe }};
-	</script>
+		<script>
+			window.path = {{ path | json | safe }};
+		</script>
 
-	<link rel="stylesheet" href="/main.css" />
-	<script type="module" src="/main.js"></script>
+		<link rel="stylesheet" href="/main.css" />
+		<script type="module" src="/main.js"></script>
 
-</head>
+	</head>
 
-<body>
+	<body>
 
-	<noscript>
+		<noscript>
 
-		<span>
-			This website relies heavily on JavaScript to render complex animations and interactive
-			content.<br />
-			Please enable JavaScript in your browser settings to access the site.
-		</span>
+			<span>
+				This website relies heavily on JavaScript to render complex animations and interactive
+				content.<br />
+				Please enable JavaScript in your browser settings to access the site.
+			</span>
 
-	</noscript>
+		</noscript>
 
-	{% block overlayer %}
-	{% endblock %}
+		{% block overlayer %}
+		{% endblock %}
 
-	<div id="fatal-error" class="hidden">
+		<div id="fatal-error" class="hidden">
 
-		<span>
-			The site has encountered an unexpected error and is temporarily unavailable.<br /><br />
-			Please refresh the page or try again later.
-		</span>
+			<span>
+				The site has encountered an unexpected error and is temporarily unavailable.<br /><br />
+				Please refresh the page or try again later.
+			</span>
 
-	</div>
+		</div>
 
-	{% block content %}
-	<main></main>
-	{% endblock %}
+		{% block content %}
+		<main></main>
+		{% endblock %}
 
-</body>
+	</body>
 
 </html>

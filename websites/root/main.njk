@@ -1,26 +1,30 @@
 {% extends "main.njk" %}
 
 {% block overlayer %}
-	<div id="orientation-lock">
-		
-		<span>
-			This website offers an immersive visual experience that requires a wider screen.<br /><br />
-			Please rotate your device to landscape mode or increase your window size to continue.
-		</span>
 
-	</div>
+<div id="orientation-lock">
+
+	<span>
+		This website offers an immersive visual experience that requires a wider screen.<br /><br />
+		Please rotate your device to landscape mode or increase your window size to continue.
+	</span>
+
+</div>
+
 {% endblock %}
 
 {% block content %}
-	<main>
 
-		<video autoplay loop muted playsinline nocontrols></video>
+<main>
 
-		<div id="layer">
+	<video autoplay loop muted playsinline nocontrols></video>
 
-			<div id="screen"></div>
+	<div id="layer">
 
-		</div>
+		<div id="screen"></div>
 
-	</main>
+	</div>
+
+</main>
+
 {% endblock %}
