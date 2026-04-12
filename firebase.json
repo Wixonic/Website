@@ -8,7 +8,15 @@
 			],
 			"rewrites": [
 				{
-					"source": "**",
+					"source": "/",
+					"destination": "/main.html"
+				},
+				{
+					"source": "/!(robots.txt)",
+					"destination": "/main.html"
+				},
+				{
+					"source": "/!(robots.txt)/**",
 					"destination": "/main.html"
 				}
 			],
@@ -32,7 +40,15 @@
 			],
 			"rewrites": [
 				{
-					"source": "**",
+					"source": "/",
+					"destination": "/main.html"
+				},
+				{
+					"source": "/!(index.json|robots.txt)",
+					"destination": "/main.html"
+				},
+				{
+					"source": "/!(index.json|robots.txt)/**",
 					"destination": "/main.html"
 				}
 			],
