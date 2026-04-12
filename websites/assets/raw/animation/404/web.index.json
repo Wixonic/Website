@@ -4,7 +4,7 @@
 	"name": "web",
 	"description": "404 web animation for root website.",
 	"copyright": "Wixonic",
-	"download": false,
+	"download": true,
 	"link": null,
 	"author": "Wixonic",
 	"date": "2026-03-01",

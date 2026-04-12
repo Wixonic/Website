@@ -4,7 +4,7 @@
 	"name": "logo",
 	"description": "My logo",
 	"copyright": "Wixonic",
-	"download": false,
+	"download": true,
 	"link": null,
 	"author": "Wixonic",
 	"files": [

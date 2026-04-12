@@ -4,7 +4,7 @@
 	"name": "round",
 	"description": "My logo with a round transparent shape.",
 	"copyright": "Wixonic",
-	"download": false,
+	"download": true,
 	"link": null,
 	"author": "Wixonic",
 	"files": [
