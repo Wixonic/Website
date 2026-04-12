@@ -40,9 +40,7 @@ const navigate = async (currentPath) => {
 
 		if (loader.components) await loadComponents(loader.components);
 
-		let targetModulePath = currentPath;
-		if (targetModulePath.endsWith("/")) targetModulePath += "index.js";
-		else targetModulePath += "/index.js";
+		const targetModulePath = document.body.getAttribute("is-one-page-website") == "true" ? "/index.js" : currentPath + (currentPath.endsWith("/") ? "index.js" : "/index.js");
 
 		const loadTargetModuleAndComponents = async (path) => {
 			let module;
@@ -50,8 +48,8 @@ const navigate = async (currentPath) => {
 			try {
 				module = await import(path);
 			} catch (unsafeError) {
-				const e = unsafeError instanceof Error ? unsafeError : new Error(unsafeError);
-				logger.warn(`[Router] Module not found at ${path}, falling back to 404`, e.message, e.stack);
+				const error = unsafeError instanceof Error ? unsafeError : new Error(unsafeError);
+				logger.warn(`[Router] Module not found at ${path}, falling back to 404`, error.message, error.stack);
 				module = await import("/404.js");
 			}
 
@@ -85,8 +83,8 @@ const navigate = async (currentPath) => {
 
 		if (targetModule.init) await targetModule.init();
 	} catch (unsafeError) {
-		const e = unsafeError instanceof Error ? unsafeError : new Error(unsafeError);
-		logger.fatalError("[Router] 404 module not found", e.message, e.stack);
+		const error = unsafeError instanceof Error ? unsafeError : new Error(unsafeError);
+		logger.fatalError("[Router] 404 module not found", error.message, error.stack);
 	}
 };
 
@@ -115,12 +113,12 @@ addEventListener("DOMContentLoaded", async () => {
 
 addEventListener("error", (event) => {
 	event.preventDefault();
-	const e = event.error instanceof Error ? event.error : new Error(event.error || event.message);
-	logger.fatalError("Uncaught Exception", e.message, e.stack);
+	const error = event.error instanceof Error ? event.error : new Error(event.error || event.message);
+	logger.fatalError("Uncaught Exception", error.message, error.stack);
 });
 
 addEventListener("unhandledrejection", (event) => {
 	event.preventDefault();
-	const e = event.reason instanceof Error ? event.reason : new Error(event.reason);
-	logger.fatalError("Unhandled Promise Rejection", e.message, e.stack);
+	const error = event.reason instanceof Error ? event.reason : new Error(event.reason);
+	logger.fatalError("Unhandled Promise Rejection", error.message, error.stack);
 });

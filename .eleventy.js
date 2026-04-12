@@ -8,20 +8,17 @@ export const config = {
 	htmlTemplateEngine: "njk",
 };
 
-const findFiles = async (dir, extensions) => {
+const findFiles = async (directory, extensions) => {
 	const results = [];
 
 	try {
-		const entries = await fsp.readdir(dir, { withFileTypes: true });
+		const entries = await fsp.readdir(directory, { withFileTypes: true });
 
 		for (const entry of entries) {
-			const fullPath = path.join(dir, entry.name);
+			const fullPath = path.join(directory, entry.name);
 
-			if (entry.isDirectory()) {
-				results.push(...await findFiles(fullPath, extensions));
-			} else if (extensions.some(ext => entry.name.endsWith(ext))) {
-				results.push(fullPath);
-			}
+			if (entry.isDirectory()) results.push(...await findFiles(fullPath, extensions));
+			else if (extensions.some((extension) => entry.name.endsWith(extension))) results.push(fullPath);
 		}
 	} catch (error) { }
 
@@ -62,9 +59,11 @@ export default (config) => {
 	config.setTemplateFormats(["njk", "html"]);
 
 	// --- Passthrough ---
-	for (const ext of ["svg", "png", "webp", "webm", "mov", "mp3", "woff2", "index.json"]) {
+	for (const ext of ["svg", "png", "webp", "webm", "mov", "mp3", "woff2", "json"]) {
 		config.addPassthroughCopy(`websites/**/*.${ext}`);
 	}
+
+	config.addPassthroughCopy("websites/**/robots.txt");
 
 	// --- Global data ---
 	config.addGlobalData("path", pathConfig);

@@ -23,8 +23,8 @@ const findFiles = async (dir) => {
 
 export const generateAndCheckIndexes = async () => {
 	console.log("[Indexer] Checking assets indexes...");
-	const rawDir = path.join("websites", "assets", "raw");
-	const allFiles = await findFiles(rawDir);
+	const rawDirectory = path.join("websites", "assets", "raw");
+	const allFiles = await findFiles(rawDirectory);
 
 	const mediaFiles = allFiles.filter((f) => !f.endsWith(".index.json") && !f.endsWith(".DS_Store"));
 	const mediaTypeMap = {
@@ -289,7 +289,7 @@ export const generateAndCheckIndexes = async () => {
 
 	const outputIndex = {};
 	for (const [key, value] of Object.entries(indexedMediaPaths)) {
-		outputIndex[key.replace("websites/assets/raw/", "/raw/")] = value.replace("websites/assets/raw/", "/raw/");
+		outputIndex[key.replace("websites/assets/raw/", "/")] = value.replace("websites/assets/raw/", "/raw/");
 	}
 
 	const mainIndexPath = path.join("websites", "assets", "index.json");
