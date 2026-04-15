@@ -9,15 +9,15 @@
 			"rewrites": [
 				{
 					"source": "/",
-					"destination": "/main.html"
+					"destination": "/index.html"
 				},
 				{
 					"source": "/!(robots.txt)",
-					"destination": "/main.html"
+					"destination": "/index.html"
 				},
 				{
 					"source": "/!(robots.txt)/**",
-					"destination": "/main.html"
+					"destination": "/index.html"
 				}
 			],
 			"headers": [
@@ -41,15 +41,15 @@
 			"rewrites": [
 				{
 					"source": "/",
-					"destination": "/main.html"
+					"destination": "/index.html"
 				},
 				{
 					"source": "/!(index.json|robots.txt)",
-					"destination": "/main.html"
+					"destination": "/index.html"
 				},
 				{
 					"source": "/!(index.json|robots.txt)/**",
-					"destination": "/main.html"
+					"destination": "/index.html"
 				}
 			],
 			"headers": [

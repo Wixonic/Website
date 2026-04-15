@@ -1,6 +1,13 @@
 import { request } from "/script/request.js";
 
-const main = async () => {
+const metadata = {
+	title: "Asset Viewer - Wixonic",
+	description: ""
+};
+
+const components = [];
+
+const init = async () => {
 	const indexRequest = await request("GET", "/index.json", "json");
 
 	if (indexRequest.status == 200) {
@@ -40,4 +47,8 @@ const main = async () => {
 	}
 };
 
-main();
+export {
+	components,
+	init,
+	metadata
+};

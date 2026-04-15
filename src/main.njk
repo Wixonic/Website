@@ -33,6 +33,10 @@
 		<link rel="stylesheet" href="/main.css" />
 		<script type="module" src="/main.js"></script>
 
+		{% block head %}
+		<link rel="stylesheet" href="index.css" />
+		{% endblock %}
+
 	</head>
 
 	<body {% block bodyAttributes %} {% endblock %}>
