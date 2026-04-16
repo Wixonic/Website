@@ -36,6 +36,10 @@ const init = async () => {
 				path.innerHTML = location.pathname;
 				if (asset.name) { name.innerHTML = asset.name; } else name.classList.add("hidden");
 				if (asset.description) { description.innerHTML = asset.description; } else description.classList.add("hidden");
+				if (asset.download) download.addEventListener("click", () => open(asset.url, "_blank"));
+				else download.classList.add("hidden");
+				if (asset.url) download.addEventListener("click", () => open(asset.url, "_blank"));
+				else download.classList.add("hidden");
 
 				const currentFile = asset.files.find((file) => file.path == currentFilePath);
 				console.log(currentFile);
