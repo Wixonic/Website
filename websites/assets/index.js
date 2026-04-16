@@ -19,31 +19,42 @@ const init = async () => {
 			const assetRequest = await request("GET", new URL(assetIndexPath, location.origin), "json");
 
 			if (assetRequest.status == 200) {
-				const asset = assetRequest.response;
+				const directory = assetIndexPath.replace("raw/", "").split("/").slice(0, -1).join("/") + "/";
+				const currentFilePath = location.pathname.replace(directory, "");
 
-				console.log(asset);
+				const asset = assetRequest.response;
 
 				const path = document.querySelector(".path");
 				const canvas = document.querySelector(".canvas");
 				const name = document.querySelector(".name");
+				const files = document.querySelector(".files");
+				const download = document.querySelector(".toolbox .download");
+				const website = document.querySelector(".toolbox .website");
 				const description = document.querySelector(".description");
+				const details = document.querySelector(".details");
 
 				path.innerHTML = location.pathname;
 				if (asset.name) { name.innerHTML = asset.name; } else name.classList.add("hidden");
 				if (asset.description) { description.innerHTML = asset.description; } else description.classList.add("hidden");
 
+				const currentFile = asset.files.find((file) => file.path == currentFilePath);
+				console.log(currentFile);
+
 				switch (asset.type) {
+					case "image":
+						{
+							const image = document.createElement("image");
+
+						}
+						break;
+
 					default:
 						{
 							canvas.innerHTML = `Oh no! It looks like previewing this type of asset (${asset.type}) isn't supported yet.`;
 						}
 				}
-			} else {
-				console.warn("Failed to load asset index for this page. Falling back to default assets.");
-			}
-		} else {
-			console.warn("No asset index found for this page.");
-		}
+			} else console.warn("Failed to load asset index for this page.");
+		} else console.warn("No asset index found for this page.");
 	}
 };
 
