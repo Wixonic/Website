@@ -1,0 +1,90 @@
+button {
+	position: relative;
+
+	background: transparent;
+
+	border: none;
+
+	cursor: pointer;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+	margin: 0.35rem 0 0 0;
+	padding: 0;
+
+	transition: filter 0.25s;
+}
+
+button .shadow {
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	height: 100%;
+	width: 100%;
+
+	background: var(--theme-primary-shadow-light);
+
+	border-radius: 0.5rem;
+
+	filter: blur(0.08rem);
+	transform: translateY(0.1rem);
+
+	transition: transform 0.6s cubic-bezier(0.3, 0.7, 0.4, 1);
+	will-change: transform;
+}
+
+button .edge {
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	height: 100%;
+	width: 100%;
+
+	background: var(--theme-primary-dark);
+
+	border-radius: 0.5rem;
+}
+
+button .content {
+	display: block;
+
+	position: relative;
+
+	background: var(--theme-primary);
+
+	color: var(--theme-primary-text);
+	font-weight: 700;
+	font-size: 1rem;
+
+	border-radius: 0.5rem;
+
+	padding: 0.5rem 1rem;
+
+	transform: translateY(-0.25rem);
+	transition: transform 0.6s cubic-bezier(0.3, 0.7, 0.4, 1);
+}
+
+button:hover {
+	filter: brightness(120%);
+}
+
+button:hover .content {
+	transform: translateY(-0.3rem);
+	transition: transform 0.25s cubic-bezier(0.3, 0.7, 0.4, 1.5);
+}
+
+button:active .content {
+	transform: translateY(-0.1rem);
+	transition: transform 0.03s;
+}
+
+button:hover .shadow {
+	transform: translateY(0.15rem);
+	transition: transform 0.25s cubic-bezier(0.3, 0.7, 0.4, 1.5);
+}
+
+button:active .shadow {
+	transform: translateY(0.05rem);
+	transition: transform 0.03s;
+}
