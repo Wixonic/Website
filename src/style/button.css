@@ -3,34 +3,15 @@ button {
 
 	background: transparent;
 
+	font-size: 1rem;
+
 	border: none;
 
 	cursor: pointer;
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
-	margin: 0.35rem 0 0 0;
+	margin: 0.35em 0 0 0;
 	padding: 0;
-
-	transition: filter 0.25s;
-}
-
-button .shadow {
-	position: absolute;
-	top: 0;
-	left: 0;
-
-	height: 100%;
-	width: 100%;
-
-	background: var(--theme-primary-shadow-light);
-
-	border-radius: 0.5rem;
-
-	filter: blur(0.08rem);
-	transform: translateY(0.1rem);
-
-	transition: transform 0.6s cubic-bezier(0.3, 0.7, 0.4, 1);
-	will-change: transform;
 }
 
 button .edge {
@@ -41,9 +22,12 @@ button .edge {
 	height: 100%;
 	width: 100%;
 
-	background: var(--theme-primary-dark);
+	background: var(--theme-dark);
 
-	border-radius: 0.5rem;
+	border: 0.05em solid var(--theme-border-subtle);
+	border-radius: 0.5em;
+
+	z-index: -1;
 }
 
 button .content {
@@ -51,40 +35,60 @@ button .content {
 
 	position: relative;
 
-	background: var(--theme-primary);
+	background: var(--theme);
 
-	color: var(--theme-primary-text);
+	color: var(--theme-text);
 	font-weight: 700;
-	font-size: 1rem;
+	font-size: 1em;
+	text-shadow: 0 0.05em 0 var(--theme-border);
 
-	border-radius: 0.5rem;
+	border: 0.05em solid var(--theme-border-subtle);
+	border-radius: 0.5em;
 
-	padding: 0.5rem 1rem;
+	padding: 0.5em 1em;
 
-	transform: translateY(-0.25rem);
+	transform: translateY(-0.25em);
+
 	transition: transform 0.6s cubic-bezier(0.3, 0.7, 0.4, 1);
 }
 
-button:hover {
-	filter: brightness(120%);
+button .shadow {
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	height: 100%;
+	width: 100%;
+
+	background: var(--theme-shadow-light);
+
+	border-radius: 0.5em;
+
+	filter: blur(0.08em);
+	transform: translateY(0.1em);
+
+	transition: transform 0.6s cubic-bezier(0.3, 0.7, 0.4, 1);
+	will-change: transform;
+
+	z-index: -2;
 }
 
 button:hover .content {
-	transform: translateY(-0.3rem);
+	transform: translateY(-0.3em);
 	transition: transform 0.25s cubic-bezier(0.3, 0.7, 0.4, 1.5);
 }
 
 button:active .content {
-	transform: translateY(-0.1rem);
+	transform: translateY(-0.1em);
 	transition: transform 0.03s;
 }
 
 button:hover .shadow {
-	transform: translateY(0.15rem);
+	transform: translateY(0.15em);
 	transition: transform 0.25s cubic-bezier(0.3, 0.7, 0.4, 1.5);
 }
 
 button:active .shadow {
-	transform: translateY(0.05rem);
+	transform: translateY(0.05em);
 	transition: transform 0.03s;
 }

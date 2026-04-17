@@ -1,0 +1,32 @@
+.glow {
+	position: relative;
+
+	transition: transform 0.4s cubic-bezier(0.3, 0.7, 0.4, 1);
+}
+
+.glow:hover {
+	transform: translateY(-0.15em) scale(1.01);
+}
+
+.glow::after {
+	content: "";
+	
+	position: absolute;
+	inset: 0;
+
+	border-radius: inherit;
+	
+	backdrop-filter: brightness(105%);
+	
+	mask-image: radial-gradient(circle 7.5rem at var(--x, 50%) var(--y, 50%), black 0%, transparent 100%);
+	
+	opacity: 0;
+	
+	transition: opacity 0.3s ease;
+
+	z-index: 1;
+}
+
+.glow:hover::after {
+	opacity: 1;
+}

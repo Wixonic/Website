@@ -109,6 +109,20 @@ addEventListener("DOMContentLoaded", async () => {
 
 	addEventListener("popstate", () => navigate(location.pathname));
 	navigate(location.pathname);
+
+	// Glow effect
+	document.addEventListener("mousemove", (event) => {
+		const glowElements = document.querySelectorAll(".glow");
+
+		for (const element of glowElements) {
+			const rect = element.getBoundingClientRect();
+			const x = event.clientX - rect.left;
+			const y = event.clientY - rect.top;
+
+			element.style.setProperty("--x", `${x}px`);
+			element.style.setProperty("--y", `${y}px`);
+		}
+	});
 });
 
 addEventListener("error", (event) => {
