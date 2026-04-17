@@ -18,7 +18,7 @@
 	
 	backdrop-filter: brightness(105%);
 	
-	mask-image: radial-gradient(circle 7.5rem at var(--x, 50%) var(--y, 50%), black 0%, transparent 100%);
+	mask-image: radial-gradient(circle 15rem at var(--x, 50%) var(--y, 50%), black 0%, transparent 100%);
 	
 	opacity: 0;
 	

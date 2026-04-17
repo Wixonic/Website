@@ -24,31 +24,31 @@ const init = async () => {
 
 				const asset = assetRequest.response;
 
-				const path = document.querySelector(".path");
-				const canvas = document.querySelector(".canvas");
-				const name = document.querySelector(".name");
-				const files = document.querySelector(".files");
-				const download = document.querySelector(".toolbox .download");
-				const website = document.querySelector(".toolbox .website");
-				const description = document.querySelector(".description");
-				const details = document.querySelector(".details");
+				const canvasElement = document.querySelector(".canvas");
+				const nameElement = document.querySelector(".name");
+				const filesElement = document.querySelector(".files");
+				const downloadElement = document.querySelector(".toolbox .download");
+				const websiteElement = document.querySelector(".toolbox .website");
+				const descriptionElement = document.querySelector(".description");
+				const detailsElement = document.querySelector(".details");
 
-				path.innerHTML = location.pathname;
-				if (asset.name) { name.innerHTML = asset.name; } else name.classList.add("hidden");
-				if (asset.description) { description.innerHTML = asset.description; } else description.classList.add("hidden");
-				if (asset.download) download.addEventListener("click", () => open(asset.url, "_blank"));
-				else download.classList.add("hidden");
-				if (asset.url) download.addEventListener("click", () => open(asset.url, "_blank"));
-				else download.classList.add("hidden");
+				if (asset.name) { nameElement.innerHTML = asset.name; } else nameElement.classList.add("hidden");
+				if (asset.description) { descriptionElement.innerHTML = asset.description; } else descriptionElement.classList.add("hidden");
+				if (asset.download) downloadElement.addEventListener("click", () => open(asset.url, "_blank"));
+				else downloadElement.classList.add("hidden");
+				if (asset.url) downloadElement.addEventListener("click", () => open(asset.url, "_blank"));
+				else downloadElement.classList.add("hidden");
 
 				const currentFile = asset.files.find((file) => file.path == currentFilePath);
 				console.log(currentFile);
 
+				const details = {};
+
 				switch (asset.type) {
 					case "image":
 						{
-							const image = document.createElement("image");
-
+							details["Dimensions"] = `${currentFile.width}<span class="subtle">x</span>${currentFile.height}`;
+							details["Codec"] = currentFile.codec;
 						}
 						break;
 
@@ -56,6 +56,12 @@ const init = async () => {
 						{
 							canvas.innerHTML = `Oh no! It looks like previewing this type of asset (${asset.type}) isn't supported yet.`;
 						}
+				}
+
+				for (const key in details) {
+					const element = document.createElement("div");
+					element.innerHTML = `<span class="key">${key}</span><span class="subtle">:</span> ${details[key]}`;
+					detailsElement.append(element);
 				}
 			} else console.warn("Failed to load asset index for this page.");
 		} else console.warn("No asset index found for this page.");
