@@ -28,19 +28,20 @@ const init = async () => {
 				const nameElement = document.querySelector(".name");
 				const filesElement = document.querySelector(".files");
 				const downloadElement = document.querySelector(".toolbox .download");
-				const websiteElement = document.querySelector(".toolbox .website");
+				const linkElement = document.querySelector(".toolbox .website");
 				const descriptionElement = document.querySelector(".description");
 				const detailsElement = document.querySelector(".details");
 
+				const currentFile = asset.files.find((file) => file.path == currentFilePath);
+
+				console.log(asset, currentFile);
+
 				if (asset.name) { nameElement.innerHTML = asset.name; } else nameElement.classList.add("hidden");
 				if (asset.description) { descriptionElement.innerHTML = asset.description; } else descriptionElement.classList.add("hidden");
-				if (asset.download) downloadElement.addEventListener("click", () => open(asset.url, "_blank"));
+				if (asset.download) downloadElement.addEventListener("click", () => open(new URL(directory + currentFile.path, location.origin), "_blank"));
 				else downloadElement.classList.add("hidden");
-				if (asset.url) downloadElement.addEventListener("click", () => open(asset.url, "_blank"));
-				else downloadElement.classList.add("hidden");
-
-				const currentFile = asset.files.find((file) => file.path == currentFilePath);
-				console.log(currentFile);
+				if (asset.link) linkElement.addEventListener("click", () => open(asset.link, "_blank"));
+				else linkElement.classList.add("hidden");
 
 				const details = {};
 
@@ -54,7 +55,7 @@ const init = async () => {
 
 					default:
 						{
-							canvas.innerHTML = `Oh no! It looks like previewing this type of asset (${asset.type}) isn't supported yet.`;
+							canvasElement.innerHTML = `Oh no! It looks like previewing this type of asset (${asset.type}) isn't supported yet.`;
 						}
 				}
 
