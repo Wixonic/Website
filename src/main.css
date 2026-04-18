@@ -29,18 +29,26 @@ body {
 	--theme-primary-text: hsl(241, 100%, 95%);
 	--theme-primary-border: hsla(241, 100%, 80%, 25%);
 	--theme-primary-border-subtle: hsla(241, 100%, 80%, 5%);
-	--theme-primary-shadow: hsl(241, 100%, 85%);
-	--theme-primary-shadow-subtle: hsl(241, 100%, 85%);
+	--theme-primary-shadow: hsla(241, 100%, 45%, 25%);
+	--theme-primary-shadow-subtle: hsla(241, 100%, 45%, 15%);
 
 	--theme-danger-dark: hsl(0, 100%, 40%);
 	--theme-danger: hsl(0, 100%, 60%);
 	--theme-danger-light: hsl(0, 100%, 80%);
-	--theme-danger-text: hsl(0, 0%, 100%);
-	--theme-danger-shadow-light: hsl(0, 100%, 85%);
+	--theme-danger-text: hsl(0, 100%, 95%);
 	--theme-danger-border: hsla(0, 100%, 80%, 25%);
 	--theme-danger-border-subtle: hsla(0, 100%, 80%, 5%);
-	--theme-danger-shadow: hsl(0, 100%, 85%);
-	--theme-danger-shadow-subtle: hsl(0, 100%, 85%);
+	--theme-danger-shadow: hsla(0, 100%, 50%, 30%);
+	--theme-danger-shadow-subtle: hsla(0, 100%, 50%, 20%);
+
+	--theme-success-dark: hsl(120, 100%, 30%);
+	--theme-success: hsl(120, 100%, 40%);
+	--theme-success-light: hsl(120, 100%, 50%);
+	--theme-success-text: hsl(120, 100%, 95%);
+	--theme-success-border: hsla(120, 100%, 80%, 15%);
+	--theme-success-border-subtle: hsla(120, 100%, 80%, 5%);
+	--theme-success-shadow: hsla(120, 100%, 40%, 30%);
+	--theme-success-shadow-subtle: hsla(120, 100%, 40%, 20%);
 	/* COLORS */
 
 	/* FONT */
@@ -69,11 +77,14 @@ body {
 		--theme-shadow: hsla(0, 0%, 0%, 35%);
 		--theme-shadow-subtle: hsla(0, 0%, 0%, 20%);
 
-		--theme-primary-shadow: hsl(241, 40%, 35%);
-		--theme-primary-shadow-subtle: hsl(241, 40%, 20%);
+		--theme-primary-shadow: hsla(241, 100%, 60%, 60%);
+		--theme-primary-shadow-subtle: hsla(241, 100%, 60%, 40%);
 
-		--theme-danger-shadow: hsl(0, 40%, 35%);
-		--theme-danger-shadow-subtle: hsl(0, 40%, 20%);
+		--theme-danger-shadow: hsla(0, 100%, 70%, 30%);
+		--theme-danger-shadow-subtle: hsla(0, 100%, 70%, 20%);
+
+		--theme-success-shadow: hsla(120, 100%, 30%, 30%);
+		--theme-success-shadow-subtle: hsla(120, 100%, 30%, 20%);
 		/* COLORS */
 	}
 }
@@ -86,7 +97,8 @@ body {
 	--theme-text: var(--theme-primary-text);
 	--theme-border: var(--theme-primary-border);
 	--theme-border-subtle: var(--theme-primary-border-subtle);
-	--theme-shadow-light: var(--theme-primary-shadow-light);
+	--theme-shadow: var(--theme-primary-shadow);
+	--theme-shadow-subtle: var(--theme-primary-shadow-subtle);
 }
 
 .danger {
@@ -96,7 +108,19 @@ body {
 	--theme-text: var(--theme-danger-text);
 	--theme-border: var(--theme-danger-border);
 	--theme-border-subtle: var(--theme-danger-border-subtle);
-	--theme-shadow-light: var(--theme-danger-shadow-light);
+	--theme-shadow: var(--theme-danger-shadow);
+	--theme-shadow-subtle: var(--theme-danger-shadow-subtle);
+}
+
+.success {
+	--theme-dark: var(--theme-success-dark);
+	--theme: var(--theme-success);
+	--theme-light: var(--theme-success-light);
+	--theme-text: var(--theme-success-text);
+	--theme-border: var(--theme-success-border);
+	--theme-border-subtle: var(--theme-success-border-subtle);
+	--theme-shadow: var(--theme-success-shadow);
+	--theme-shadow-subtle: var(--theme-success-shadow-subtle);
 }
 /* THEMES */
 

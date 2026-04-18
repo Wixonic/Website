@@ -5,14 +5,14 @@ let storage;
 try {
 	storage = localStorage;
 } catch (unsafeError) {
-	const e = unsafeError instanceof Error ? unsafeError : new Error(unsafeError);
-	logger.warn("Failed to access localStorage, switching to sessionStorage", e.message, e.stack);
+	const error = unsafeError instanceof Error ? unsafeError : new Error(unsafeError);
+	logger.warn("Failed to access localStorage, switching to sessionStorage", error.message, error.stack);
 
 	try {
 		storage = sessionStorage;
 	} catch (unsafeError) {
-		const e = unsafeError instanceof Error ? unsafeError : new Error(unsafeError);
-		logger.error("Failed to access sessionStorage, switching to placeboStorage", e.message, e.stack);
+		const error = unsafeError instanceof Error ? unsafeError : new Error(unsafeError);
+		logger.error("Failed to access sessionStorage, switching to placeboStorage", error.message, error.stack);
 
 		storage = {
 			getItem: () => null,

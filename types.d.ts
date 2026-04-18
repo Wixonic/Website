@@ -10,6 +10,7 @@ declare global {
 export interface Module {
 	components: Component[];
 	init: () => void | Promise<void>;
+	destroy?: () => void | Promise<void>;
 	metadata?: {
 		title?: string;
 		description?: string;

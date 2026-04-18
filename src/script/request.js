@@ -37,8 +37,8 @@ const request = (method, url, type = "text", mimeType = null, body = null, cache
 							return;
 						}
 					} catch (unsafeError) {
-						const e = unsafeError instanceof Error ? unsafeError : new Error(unsafeError);
-						logger.warn("Failed to parse cached response", e.message, e.stack);
+						const error = unsafeError instanceof Error ? unsafeError : new Error(unsafeError);
+						logger.warn("Failed to parse cached response", error.message, error.stack);
 					}
 				}
 			}
@@ -78,8 +78,8 @@ const request = (method, url, type = "text", mimeType = null, body = null, cache
 					try {
 						storage.setItem(cacheKey, JSON.stringify(responseData));
 					} catch (unsafeError) {
-						const e = unsafeError instanceof Error ? unsafeError : new Error(unsafeError);
-						logger.warn("[Request] Quota exceeded or storage error", e.message, e.stack);
+						const error = unsafeError instanceof Error ? unsafeError : new Error(unsafeError);
+						logger.warn("[Request] Quota exceeded or storage error", error.message, error.stack);
 					}
 				}
 
@@ -91,8 +91,8 @@ const request = (method, url, type = "text", mimeType = null, body = null, cache
 
 			xhr.send(body);
 		} catch (unsafeError) {
-			const e = unsafeError instanceof Error ? unsafeError : new Error(unsafeError);
-			reject(e);
+			const error = unsafeError instanceof Error ? unsafeError : new Error(unsafeError);
+			reject(error);
 		}
 	});
 };

@@ -73,6 +73,38 @@
 			]
 		},
 		{
+			"target": "docs",
+			"public": "./build/docs",
+			"ignore": [
+				".DS_Store"
+			],
+			"rewrites": [
+				{
+					"source": "/",
+					"destination": "/main.html"
+				},
+				{
+					"source": "/!(robots.txt)",
+					"destination": "/main.html"
+				},
+				{
+					"source": "/!(robots.txt)/**",
+					"destination": "/main.html"
+				}
+			],
+			"headers": [
+				{
+					"source": "**",
+					"headers": [
+						{
+							"key": "Cache-Control",
+							"value": "max-age=7200, must-revalidate"
+						}
+					]
+				}
+			]
+		},
+		{
 			"target": "redirects",
 			"redirects": [
 				{

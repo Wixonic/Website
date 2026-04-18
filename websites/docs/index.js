@@ -3,7 +3,7 @@ const components = [];
 
 /** @type {import("/types.d.ts").Module["metadata"]} */
 const metadata = {
-	title: "Testing Ground - Wixonic",
+	title: "Testing Ground - Docs - Wixonic",
 	description: "Currently testing my UI elements."
 };
 
@@ -25,7 +25,6 @@ const init = async () => {
 
 	<button>Button</button>
 	<button class="primary">Primary Button</button>
-	<button class="secondary">Secondary Button</button>
 	<button class="danger">Danger Button</button>
 	<button class="success">Success Button</button>
 	<button disabled>Disabled Button</button>

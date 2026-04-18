@@ -1,5 +1,8 @@
-import { loadComponents } from "/script/components.js";
+import { loadComponents, cleanupComponents } from "/script/components.js";
 import logger from "/script/logger.js";
+
+/** @type {import("/types.d.ts").Module | null} */
+let currentModule = null;
 
 /**
  * Updates the page metadata (title, description, and OpenGraph image).
@@ -81,7 +84,25 @@ const navigate = async (currentPath) => {
 		const canonical = document.querySelector(`meta[rel="canonical"]`);
 		if (canonical) canonical.setAttribute("href", currentURL);
 
+		if (currentModule && currentModule.destroy) {
+			try {
+				await currentModule.destroy();
+			} catch (unsafeError) {
+				const error = unsafeError instanceof Error ? unsafeError : new Error(unsafeError);
+				logger.error(`[Router] Failed to destroy previous module`, error.message, error.stack);
+			}
+		}
+
 		if (targetModule.init) await targetModule.init();
+
+		currentModule = targetModule;
+
+		const activeComponentIds = [
+			...(loader.components || []),
+			...(targetModule.components || [])
+		].map((component) => component.id);
+
+		cleanupComponents(activeComponentIds);
 	} catch (unsafeError) {
 		const error = unsafeError instanceof Error ? unsafeError : new Error(unsafeError);
 		logger.fatalError("[Router] 404 module not found", error.message, error.stack);
@@ -110,19 +131,63 @@ addEventListener("DOMContentLoaded", async () => {
 	addEventListener("popstate", () => navigate(location.pathname));
 	navigate(location.pathname);
 
+	// Format buttons
+	const formatButton = (button) => {
+		if (button.dataset.formatted) return;
+		button.dataset.formatted = "true";
+
+		const glows = button.classList.contains("glow");
+		if (glows) button.classList.remove("glow");
+
+		const edge = document.createElement("span");
+		edge.className = "edge" + (glows ? " glow" : "");
+
+		const content = document.createElement("span");
+		content.className = "content" + (glows ? " glow" : "");
+
+		while (button.firstChild) content.appendChild(button.firstChild); // Move children to preserve events
+
+		const shadow = document.createElement("span");
+		shadow.className = "shadow";
+
+		button.appendChild(edge);
+		button.appendChild(content);
+		button.appendChild(shadow);
+	};
+
+	for (const button of document.body.getElementsByTagName("button")) formatButton(button);
+
 	// Glow effect
 	document.addEventListener("mousemove", (event) => {
-		const glowElements = document.querySelectorAll(".glow");
+		const element = event.target.closest(".glow");
+		if (!element) return;
 
-		for (const element of glowElements) {
-			const rect = element.getBoundingClientRect();
-			const x = event.clientX - rect.left;
-			const y = event.clientY - rect.top;
+		const rect = element.getBoundingClientRect();
+		const x = event.clientX - rect.left;
+		const y = event.clientY - rect.top;
 
-			element.style.setProperty("--x", `${x}px`);
-			element.style.setProperty("--y", `${y}px`);
+		element.style.setProperty("--x", `${x}px`);
+		element.style.setProperty("--y", `${y}px`);
+	});
+
+	// Mutation Observer
+	const observer = new MutationObserver((mutations) => {
+		for (const mutation of mutations) {
+			if (mutation.type === "childList") {
+				for (const node of mutation.addedNodes) {
+					if (node.nodeType === Node.ELEMENT_NODE) {
+						if (node.tagName === "BUTTON") formatButton(node);
+						else {
+							const buttons = node.getElementsByTagName("button");
+							for (const button of buttons) formatButton(button);
+						}
+					}
+				}
+			}
 		}
 	});
+
+	observer.observe(document.body, { childList: true, subtree: true });
 });
 
 addEventListener("error", (event) => {

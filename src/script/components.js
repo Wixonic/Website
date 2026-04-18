@@ -79,12 +79,12 @@ const loadComponents = async (components) => {
 				loadedComponents.set(component.id, data);
 				break;
 			} catch (unsafeError) {
-				const e = unsafeError instanceof Error ? unsafeError : new Error(unsafeError);
+				const error = unsafeError instanceof Error ? unsafeError : new Error(unsafeError);
 				attempt++;
 
 				if (attempt >= maxAttempts) {
-					if (!component.optional) logger.fatalError(`[components.js] Failed to load component ${component.id} after ${maxAttempts} attempts`, e.message, e.stack);
-					else logger.error(`[components.js] Failed to load component ${component.id} after ${maxAttempts} attempts`, e.message, e.stack);
+					if (!component.optional) logger.fatalError(`[components.js] Failed to load component ${component.id} after ${maxAttempts} attempts`, error.message, error.stack);
+					else logger.error(`[components.js] Failed to load component ${component.id} after ${maxAttempts} attempts`, error.message, error.stack);
 					break;
 				} else logger.warn(`[components.js] Attempt ${attempt} failed for component ${component.id}`);
 			}
@@ -96,4 +96,19 @@ const loadComponents = async (components) => {
 	await Promise.all(loadPromises);
 };
 
-export { getProgress, resetProgress, getComponent, loadComponents };
+/**
+ * Revokes and deletes component data not present in the active list to free up memory.
+ * @param {string[]} activeComponentIds
+ */
+const cleanupComponents = (activeComponentIds) => {
+	for (const [id, data] of loadedComponents.entries()) {
+		if (!activeComponentIds.includes(id)) {
+			if (typeof data === "string" && data.startsWith("blob:")) {
+				URL.revokeObjectURL(data);
+			}
+			loadedComponents.delete(id);
+		}
+	}
+};
+
+export { getProgress, resetProgress, getComponent, loadComponents, cleanupComponents };

@@ -45,8 +45,8 @@ const requestAudioPermission = () => {
 		try {
 			await getContext().resume();
 		} catch (unsafeError) {
-			const e = unsafeError instanceof Error ? unsafeError : new Error(String(unsafeError));
-			logger.error("[Media] Failed to resume AudioContext", e.message, e.stack);
+			const error = unsafeError instanceof Error ? unsafeError : new Error(String(unsafeError));
+			logger.error("[Media] Failed to resume AudioContext", error.message, error.stack);
 		}
 
 		if (value === true) {
@@ -163,9 +163,9 @@ const playVideoItem = async (item, _isLoopContinuation = false) => {
 	await setVideoAudioRouting(item.options.withAudio);
 
 	videoElement.play().catch((unsafeError) => {
-		const e = unsafeError instanceof Error ? unsafeError : new Error(String(unsafeError));
-		if (e.name === "AbortError" || e.message.includes("aborted")) return;
-		logger.warn(`[Media] video.play() rejected for "${item.id}"`, e.message);
+		const error = unsafeError instanceof Error ? unsafeError : new Error(String(unsafeError));
+		if (error.name === "AbortError" || error.message.includes("aborted")) return;
+		logger.warn(`[Media] video.play() rejected for "${item.id}"`, error.message);
 	});
 
 	if (item.options.loop) {
@@ -223,8 +223,8 @@ const playAudioItem = async (item, _originalResolve = null) => {
 	try {
 		buffer = await decodeblobURL(blobURL);
 	} catch (unsafeError) {
-		const e = unsafeError instanceof Error ? unsafeError : new Error(String(unsafeError));
-		logger.error(`[Media] Failed to decode audio "${item.id}"`, e.message, e.stack);
+		const error = unsafeError instanceof Error ? unsafeError : new Error(String(unsafeError));
+		logger.error(`[Media] Failed to decode audio "${item.id}"`, error.message, error.stack);
 		return;
 	}
 

@@ -60,7 +60,7 @@ button .shadow {
 	height: 100%;
 	width: 100%;
 
-	background: var(--theme-shadow-light);
+	background: var(--theme-shadow-subtle);
 
 	border-radius: 0.5em;
 
@@ -73,22 +73,42 @@ button .shadow {
 	z-index: -2;
 }
 
-button:hover .content {
+button:hover:not(:disabled) .content {
 	transform: translateY(-0.3em);
 	transition: transform 0.25s cubic-bezier(0.3, 0.7, 0.4, 1.5);
 }
 
-button:active .content {
+button:active:not(:disabled) .content {
 	transform: translateY(-0.1em);
 	transition: transform 0.03s;
 }
 
-button:hover .shadow {
+button:hover:not(:disabled) .shadow {
 	transform: translateY(0.15em);
 	transition: transform 0.25s cubic-bezier(0.3, 0.7, 0.4, 1.5);
 }
 
-button:active .shadow {
+button:active:not(:disabled) .shadow {
+	transform: translateY(0.05em);
+	transition: transform 0.03s;
+}
+
+button:disabled:hover .content {
+	transform: translateY(-0.3em);
+	transition: transform 0.25s cubic-bezier(0.3, 0.7, 0.4, 1.5);
+}
+
+button:disabled:active .content {
+	transform: translateY(-0.1em);
+	transition: transform 0.03s;
+}
+
+button:disabled:hover .shadow {
+	transform: translateY(0.15em);
+	transition: transform 0.25s cubic-bezier(0.3, 0.7, 0.4, 1.5);
+}
+
+button:disabled:active .shadow {
 	transform: translateY(0.05em);
 	transition: transform 0.03s;
 }

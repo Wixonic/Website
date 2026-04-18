@@ -44,7 +44,7 @@ export default (config) => {
 	const esbuildOptions = {
 		bundle: !isClear,
 		minify: !isClear,
-		sourcemap: !isClear,
+		sourcemap: isEmulator,
 		splitting: !isClear,
 		format: "esm",
 		target: ["es2020"],
@@ -176,6 +176,114 @@ export default (config) => {
 		}
 
 		console.log("[Esbuild] Build completed.");
+	});
+
+	config.on("eleventy.after", async () => {
+		console.log("[Auto-SEO] Starting SEO generation...");
+
+		const applySEO = (html, meta) => {
+			let output = html;
+			if (meta.title) output = output.replace(/<title>.*?<\/title>/i, `<title>${meta.title}</title>`).replace(/<meta property="og:title" content="[^"]*" \/>/i, `<meta property="og:title" content="${meta.title}" />`);
+			if (meta.description) output = output.replace(/<meta name="description" content="[^"]*" \/>/i, `<meta name="description" content="${meta.description}" />`).replace(/<meta property="og:description" content="[^"]*" \/>/i, `<meta property="og:description" content="${meta.description}" />`);
+			if (meta.url) output = output.replace(/<meta property="og:url" content="[^"]*" \/>/i, `<meta property="og:url" content="${meta.url}" />`);
+
+			let ogMedia = "";
+			if (meta.image) ogMedia += `<meta property="og:image" content="${meta.image}" />`;
+			if (meta.video) ogMedia += `<meta property="og:video" content="${meta.video}" /><meta property="og:video:type" content="video/mp4" />`;
+			if (meta.audio) ogMedia += `<meta property="og:audio" content="${meta.audio}" />`;
+
+			if (ogMedia) output = output.replace(/<\/head>/i, `${ogMedia}</head>`);
+
+			return output;
+		};
+
+		try {
+			const websites = await fsp.readdir("build", { withFileTypes: true });
+
+			for (const site of websites) {
+				if (!site.isDirectory()) continue;
+
+				try {
+					const mainHtmlPath = path.join("build", site.name, "main.html");
+					const mainHtml = await fsp.readFile(mainHtmlPath, "utf8");
+
+					if (site.name === "assets") {
+						try {
+							const indexJsonPath = path.join("build", "assets", "index.json");
+							const masterIndexStr = await fsp.readFile(indexJsonPath, "utf8");
+							const masterIndex = JSON.parse(masterIndexStr);
+
+							for (const [virtualPath, rawPath] of Object.entries(masterIndex)) {
+								const itemIndexJsonPath = path.join("build", "assets", rawPath);
+
+								try {
+									const itemIndexStr = await fsp.readFile(itemIndexJsonPath, "utf8");
+									const itemIndex = JSON.parse(itemIndexStr);
+
+									const publicUrl = `${pathConfig.assets}${virtualPath}`;
+									const rawUrl = `${pathConfig.assets}${virtualPath.replace(/^\//, "/raw/")}`;
+
+									const meta = {
+										title: `${itemIndex.name} - Wixonic Assets`,
+										description: itemIndex.description || "",
+										url: publicUrl
+									};
+
+									if (["image", "font"].includes(itemIndex.type)) meta.image = rawUrl;
+									else if (itemIndex.type === "video") meta.video = rawUrl;
+									else if (itemIndex.type === "audio") meta.audio = rawUrl;
+
+									const targetDir = path.join("build", "assets", virtualPath);
+									await fsp.mkdir(targetDir, { recursive: true });
+									await fsp.writeFile(path.join(targetDir, "index.html"), applySEO(mainHtml, meta));
+								} catch (error) {
+									console.warn(`[Auto-SEO] Could not process asset: ${itemIndexJsonPath}`);
+								}
+							}
+						} catch (error) {
+							console.warn(`[Auto-SEO] No assets master index found.`);
+						}
+					} else {
+						const siteDir = path.join("build", site.name);
+						const allJsFiles = await findFiles(siteDir, [".js"]);
+
+						for (const jsFile of allJsFiles) {
+							if (!jsFile.endsWith("index.js")) continue;
+
+							try {
+								const source = await fsp.readFile(jsFile, "utf8");
+								const titleMatch = source.match(/title:\s*["']([^"']+)["']/);
+								const descMatch = source.match(/description:\s*["']([^"']+)["']/);
+
+								if (titleMatch || descMatch) {
+									let virtualPath = jsFile.replace(siteDir, "").replace(/index\.js$/, "");
+									// Normalize Windows paths
+									virtualPath = virtualPath.split(path.sep).join("/");
+
+									const meta = {
+										title: titleMatch ? titleMatch[1] : undefined,
+										description: descMatch ? descMatch[1] : undefined,
+										url: `${pathConfig[site.name] || pathConfig.root}${virtualPath}`
+									};
+
+									const targetDir = path.dirname(jsFile);
+									await fsp.mkdir(targetDir, { recursive: true });
+									await fsp.writeFile(path.join(targetDir, "index.html"), applySEO(mainHtml, meta));
+								}
+							} catch (error) {
+								console.warn(`[Auto-SEO] Could not process JS file: ${jsFile}`);
+							}
+						}
+					}
+				} catch (error) {
+					// Silently ignore folders without main.html
+				}
+			}
+		} catch (error) {
+			console.error(`[Auto-SEO] Fatal error during generation: ${error}`);
+		}
+
+		console.log("[Auto-SEO] Generation completed.");
 	});
 
 	// --- HTML minification ---

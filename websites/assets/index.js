@@ -1,26 +1,30 @@
 import { request } from "/script/request.js";
 
+/** @type {import("/types.d.ts").Module["components"]} */
+const components = [];
+
+/** @type {import("/types.d.ts").Module["metadata"]} */
 const metadata = {
 	title: "Asset Viewer - Wixonic",
 	description: ""
 };
 
-const components = [];
-
+/** @type {import("/types.d.ts").Module["init"]} */
 const init = async () => {
 	const indexRequest = await request("GET", "/index.json", "json");
 
 	if (indexRequest.status == 200) {
 		const index = indexRequest.response;
+		const pathname = location.pathname.endsWith("/") ? location.pathname.slice(0, -1) : location.pathname;
 
-		const assetIndexPath = index[location.pathname];
+		const assetIndexPath = index[pathname];
 
 		if (assetIndexPath) {
 			const assetRequest = await request("GET", new URL(assetIndexPath, location.origin), "json");
 
 			if (assetRequest.status == 200) {
 				const directory = assetIndexPath.replace("raw/", "").split("/").slice(0, -1).join("/") + "/";
-				const currentFilePath = location.pathname.replace(directory, "");
+				const currentFilePath = pathname.replace(directory, "");
 
 				const asset = assetRequest.response;
 
