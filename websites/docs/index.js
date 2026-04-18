@@ -27,7 +27,16 @@ const init = async () => {
 	<button class="primary">Primary Button</button>
 	<button class="danger">Danger Button</button>
 	<button class="success">Success Button</button>
+
 	<button disabled>Disabled Button</button>
+	<button class="primary" disabled>Primary Disabled</button>
+	<button class="danger" disabled>Danger Disabled</button>
+	<button class="success" disabled>Success Disabled</button>
+
+	<button class="glow">Glowing Button</button>
+	<button class="primary glow">Glowing Primary Button</button>
+	<button class="danger glow">Glowing Danger Button</button>
+	<button class="success glow">Glowing Success Button</button>
 	`;
 };
 

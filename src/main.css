@@ -41,9 +41,9 @@ body {
 	--theme-danger-shadow: hsla(0, 100%, 50%, 30%);
 	--theme-danger-shadow-subtle: hsla(0, 100%, 50%, 20%);
 
-	--theme-success-dark: hsl(120, 100%, 30%);
-	--theme-success: hsl(120, 100%, 40%);
-	--theme-success-light: hsl(120, 100%, 50%);
+	--theme-success-dark: hsl(120, 100%, 25%);
+	--theme-success: hsl(120, 100%, 35%);
+	--theme-success-light: hsl(120, 100%, 45%);
 	--theme-success-text: hsl(120, 100%, 95%);
 	--theme-success-border: hsla(120, 100%, 80%, 15%);
 	--theme-success-border-subtle: hsla(120, 100%, 80%, 5%);

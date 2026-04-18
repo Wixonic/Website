@@ -136,14 +136,11 @@ addEventListener("DOMContentLoaded", async () => {
 		if (button.dataset.formatted) return;
 		button.dataset.formatted = "true";
 
-		const glows = button.classList.contains("glow");
-		if (glows) button.classList.remove("glow");
-
 		const edge = document.createElement("span");
-		edge.className = "edge" + (glows ? " glow" : "");
+		edge.className = "edge";
 
 		const content = document.createElement("span");
-		content.className = "content" + (glows ? " glow" : "");
+		content.className = "content";
 
 		while (button.firstChild) content.appendChild(button.firstChild); // Move children to preserve events
 
