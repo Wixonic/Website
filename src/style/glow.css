@@ -8,7 +8,9 @@
 	transform: translateY(-0.15em) scale(1.01);
 }
 
-.glow::after {
+.glow::after,
+button.glow .content::after,
+button.glow .edge::after {
 	content: "";
 	
 	position: absolute;
@@ -27,15 +29,14 @@
 	z-index: 1;
 }
 
-.glow:hover::after {
+.glow:hover::after,
+button.glow:hover .content::after,
+button.glow:hover .edge::after {
 	opacity: 1;
 }
 
 /* Fix glow effect on buttons */
-button.glow {
-	transform: none !important;
-}
-
+button.glow,
 button.glow:hover {
 	transform: none !important;
 }
@@ -46,26 +47,9 @@ button.glow::after {
 
 button.glow .content::after,
 button.glow .edge::after {
-	content: "";
-	
-	position: absolute;
-	inset: 0;
-
-	border-radius: inherit;
-	
-	backdrop-filter: brightness(115%);
-	
-	mask-image: radial-gradient(circle 5rem at var(--x, 50%) var(--y, 50%), black 0%, transparent 100%);
-	
-	opacity: 0;
-	
-	transition: opacity 0.3s ease;
-
 	pointer-events: none;
-	z-index: 10;
 }
 
-/* Compensate for .content being translated vertically earlier */
 button.glow .content::after {
 	mask-image: radial-gradient(circle 5rem at var(--x, 50%) calc(var(--y, 50%) + 0.25em), black 0%, transparent 100%);
 }
@@ -76,9 +60,4 @@ button.glow:hover .content::after {
 
 button.glow:active .content::after {
 	mask-image: radial-gradient(circle 5rem at var(--x, 50%) calc(var(--y, 50%) + 0.1em), black 0%, transparent 100%);
-}
-
-button.glow:hover .content::after,
-button.glow:hover .edge::after {
-	opacity: 1;
 }
