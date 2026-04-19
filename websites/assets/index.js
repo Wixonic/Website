@@ -1,3 +1,4 @@
+import { formatDuration, formatSize } from "/script/format.js";
 import { request } from "/script/request.js";
 
 /** @type {import("/types.d.ts").Module["components"]} */
@@ -7,6 +8,19 @@ const components = [];
 const metadata = {
 	title: "Asset Viewer - Wixonic",
 	description: ""
+};
+
+/**
+ * @param {string} url
+ * @param {string?} fileName
+ */
+const downloadFile = (url, fileName) => {
+	const link = document.createElement("a");
+	link.href = url;
+	link.download = fileName || "download";
+	document.body.append(link);
+	link.click();
+	link.remove();
 };
 
 /** @type {import("/types.d.ts").Module["init"]} */
@@ -42,7 +56,10 @@ const init = async () => {
 
 				if (asset.name) { nameElement.innerHTML = asset.name; } else nameElement.classList.add("hidden");
 				if (asset.description) { descriptionElement.innerHTML = asset.description; } else descriptionElement.classList.add("hidden");
-				if (asset.download) downloadElement.addEventListener("click", () => open(new URL(directory + currentFile.path, location.origin), "_blank"));
+				if (asset.download) {
+					downloadElement.querySelector(".content").innerHTML += currentFile.size == null ? "" : ` (${formatSize(currentFile.size)})`;
+					downloadElement.addEventListener("click", () => downloadFile(new URL("raw" + directory + currentFile.path, location.origin), asset.name));
+				}
 				else downloadElement.classList.add("hidden");
 				if (asset.link) linkElement.addEventListener("click", () => open(asset.link, "_blank"));
 				else linkElement.classList.add("hidden");
@@ -50,12 +67,48 @@ const init = async () => {
 				const details = {};
 
 				switch (asset.type) {
+					case "audio":
+						{
+							details["Format"] = currentFile.format;
+							details["Duration"] = formatDuration(asset.duration, 3);
+							details["Sample Rate"] = formatSize(currentFile.sampleRate, "Hz", 1);
+							details["Bitrate"] = formatSize(currentFile.bitrate);
+							details["Codec"] = currentFile.codec;
+							details["MIME"] = currentFile.mime ?? "Unknown";
+						}
+						break
+
+					case "video":
+						{
+							details["Format"] = currentFile.format;
+							details["Dimensions"] = `${currentFile.width}<span class="subtle">x</span>${currentFile.height}`;
+							details["Duration"] = formatDuration(asset.duration, 3);
+							details["FPS"] = currentFile.fps;
+							details["Bitrate"] = `${currentFile.audioBitrate == null ? "No audio" : formatSize(currentFile.audioBitrate)}<span class="subtle"> - </span>${currentFile.videoBitrate == null ? "No video" : formatSize(currentFile.videoBitrate)}`;
+							details["Codec"] = `${currentFile.audioCodec ?? "No audio"}<span class="subtle"> - </span>${currentFile.videoCodec ?? "No video"}`;
+							details["MIME"] = `${currentFile.audioMime ?? "No audio"}<span class="subtle"> - </span>${currentFile.videoMime ?? "No video"}`;
+
+							const audioDetails = [];
+							if (currentFile.channels != null) audioDetails.push(`${currentFile.channels}ch`);
+							if (currentFile.channelLayout) audioDetails.push(currentFile.channelLayout);
+							if (currentFile.sampleRate != null) audioDetails.push(formatSize(currentFile.sampleRate, "Hz", 1));
+							if (audioDetails.length) details["Audio"] = audioDetails.join(`<span class="subtle"> - </span>`);
+						}
+						break
+
 					case "image":
 						{
 							details["Dimensions"] = `${currentFile.width}<span class="subtle">x</span>${currentFile.height}`;
 							details["Codec"] = currentFile.codec;
+							details["MIME"] = currentFile.mime ?? "Unknown";
 						}
 						break;
+
+					case "font":
+						{
+							details["Style"] = currentFile.style;
+						}
+						break
 
 					default:
 						{

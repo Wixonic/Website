@@ -11,11 +11,8 @@ const findFiles = async (dir) => {
 		const entries = await fsp.readdir(dir, { withFileTypes: true });
 		for (const entry of entries) {
 			const fullPath = path.join(dir, entry.name);
-			if (entry.isDirectory()) {
-				results.push(...await findFiles(fullPath));
-			} else {
-				results.push(fullPath);
-			}
+			if (entry.isDirectory()) results.push(...await findFiles(fullPath));
+			else results.push(fullPath);
 		}
 	} catch (error) { }
 	return results;
@@ -26,7 +23,7 @@ export const generateAndCheckIndexes = async () => {
 	const rawDirectory = path.join("websites", "assets", "raw");
 	const allFiles = await findFiles(rawDirectory);
 
-	const mediaFiles = allFiles.filter((f) => !f.endsWith(".index.json") && !f.endsWith(".DS_Store"));
+	const mediaFiles = allFiles.filter((file) => !file.endsWith(".index.json") && !file.endsWith(".DS_Store"));
 	const mediaTypeMap = {
 		".mp3": "audio", ".wav": "audio",
 		".mov": "video", ".webm": "video", ".mp4": "video",
@@ -47,7 +44,7 @@ export const generateAndCheckIndexes = async () => {
 
 	const createIndexData = (basicType, { fileContext, probe }) => {
 		const { file, ext, fileSize } = fileContext;
-		const { tags, duration, container, audio, video } = probe;
+		const { tags, duration, bitrate, container, audio, video } = probe;
 		const fileName = path.basename(file);
 		const fallbackName = path.basename(file, ext);
 		const imageOrFontFormat = ext.replace(".", "");
@@ -63,7 +60,6 @@ export const generateAndCheckIndexes = async () => {
 				album: tags.album || null,
 				genre: tags.genre || null,
 				date: tags.date || null,
-				encoder: tags.encoder || null,
 				duration,
 				files: [
 					{
@@ -74,7 +70,8 @@ export const generateAndCheckIndexes = async () => {
 						bitrate: audio.bitrate,
 						channels: audio.channels,
 						channelLayout: audio.channelLayout,
-						sampleRate: audio.sampleRate
+						sampleRate: audio.sampleRate,
+						mime: audio.mime
 					}
 				]
 			};
@@ -89,23 +86,25 @@ export const generateAndCheckIndexes = async () => {
 					author: tags.artist || null
 				}),
 				date: tags.date || null,
-				encoder: tags.encoder || null,
 				duration,
 				files: [
 					{
 						path: fileName,
-						size: fileSize,
-						format: container,
-						videoCodec: video.codec,
-						videoBitrate: video.bitrate,
 						width: video.width,
 						height: video.height,
 						fps: video.fps,
+						size: fileSize,
+						videoCodec: video.codec,
+						videoBitrate: video.bitrate ?? bitrate,
+						format: container,
+						videoMime: video.mime,
+
 						audioCodec: audio.codec,
 						audioBitrate: audio.bitrate,
 						channels: audio.channels,
 						channelLayout: audio.channelLayout,
-						sampleRate: audio.sampleRate
+						sampleRate: audio.sampleRate,
+						audioMime: audio.mime
 					}
 				]
 			};
@@ -122,11 +121,12 @@ export const generateAndCheckIndexes = async () => {
 				files: [
 					{
 						path: fileName,
+						width: video.width,
+						height: video.height,
 						size: fileSize,
 						format: imageOrFontFormat,
 						codec: video.codec,
-						width: video.width,
-						height: video.height
+						mime: video.mime,
 					}
 				]
 			};
@@ -170,7 +170,7 @@ export const generateAndCheckIndexes = async () => {
 	let hasNotReady = false;
 	let notReadyFiles = [];
 
-	const indexFiles = allFiles.filter((f) => f.endsWith(".index.json"));
+	const indexFiles = allFiles.filter((file) => file.endsWith(".index.json"));
 	const indexedMediaPaths = {};
 
 	for (const indexFile of indexFiles) {
@@ -218,14 +218,16 @@ export const generateAndCheckIndexes = async () => {
 				bitrate: null,
 				channels: null,
 				channelLayout: null,
-				sampleRate: null
+				sampleRate: null,
+				mime: null
 			},
 			video: {
 				codec: null,
 				bitrate: null,
 				width: null,
 				height: null,
-				fps: null
+				fps: null,
+				mime: null
 			}
 		};
 
@@ -234,15 +236,22 @@ export const generateAndCheckIndexes = async () => {
 				const { stdout } = await execAsync(`ffprobe -v quiet -print_format json -show_format -show_streams "${file}"`);
 				const ffprobe = JSON.parse(stdout);
 
+				console.log(`[Indexer] ffprobe data for ${file}:`, ffprobe);
+
 				if (ffprobe.format) {
 					if (ffprobe.format.tags) probe.tags = ffprobe.format.tags;
 					if (ffprobe.format.duration) probe.duration = parseFloat(ffprobe.format.duration);
 					if (ffprobe.format.bit_rate) probe.bitrate = parseInt(ffprobe.format.bit_rate);
-					probe.container = ffprobe.format.format_name;
+					probe.container = ffprobe.format.format_long_name;
 				}
 
 				if (ffprobe.streams) {
 					for (const stream of ffprobe.streams) {
+						if (stream.mime_codec_string) {
+							if (stream.codec_type === "audio" && !probe.audio.mime) probe.audio.mime = stream.mime_codec_string;
+							if (stream.codec_type === "video" && !probe.video.mime) probe.video.mime = stream.mime_codec_string;
+						}
+
 						if (stream.codec_type === "audio" && !probe.audio.codec) {
 							probe.audio.codec = stream.codec_name;
 							if (stream.bit_rate) probe.audio.bitrate = parseInt(stream.bit_rate);
@@ -253,7 +262,7 @@ export const generateAndCheckIndexes = async () => {
 
 						if (stream.codec_type === "video" && !probe.video.codec) {
 							if (basicType === "audio" && ["mjpeg", "png"].includes(stream.codec_name)) continue;
-							probe.video.codec = stream.codec_name;
+							probe.video.codec = stream.codec_long_name || stream.codec_name;
 							if (stream.bit_rate) probe.video.bitrate = parseInt(stream.bit_rate);
 							probe.video.width = stream.width;
 							probe.video.height = stream.height;

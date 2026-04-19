@@ -1,6 +1,8 @@
 .glow {
 	position: relative;
 
+	transform: translateY(0) scale(1);
+
 	transition: transform 0.4s cubic-bezier(0.3, 0.7, 0.4, 1);
 }
 
@@ -18,7 +20,7 @@ button.glow .edge::after {
 
 	border-radius: inherit;
 	
-	backdrop-filter: brightness(115%);
+	backdrop-filter: brightness(105%);
 	
 	mask-image: radial-gradient(circle 5rem at var(--x, 50%) var(--y, 50%), black 0%, transparent 100%);
 	

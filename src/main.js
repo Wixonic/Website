@@ -67,9 +67,9 @@ const navigate = async (currentPath) => {
 
 		const [targetModule] = await Promise.all([
 			loadTargetModuleAndComponents(targetModulePath)
-				.then((m) => {
+				.then((module) => {
 					resolveLoaded();
-					return m;
+					return module;
 				}),
 			loader.init(onLoaded)
 		]);
@@ -93,7 +93,12 @@ const navigate = async (currentPath) => {
 			}
 		}
 
-		if (targetModule.init) await targetModule.init();
+		try {
+			if (targetModule.init) await targetModule.init();
+		} catch (unsafeError) {
+			const error = unsafeError instanceof Error ? unsafeError : new Error(unsafeError);
+			logger.error(`[Router] Failed to initialize target module`, error.message, error.stack);
+		}
 
 		currentModule = targetModule;
 
@@ -113,12 +118,10 @@ addEventListener("DOMContentLoaded", async () => {
 	document.addEventListener("click", (event) => {
 		const target = event.target.closest("a");
 
-		if (!target || !target.href) return;
-		if (target.target === "_blank") return;
-
-		event.preventDefault();
+		if (!target || !target.href || target.target === "_blank" || target.hasAttribute("download")) return;
 
 		const url = new URL(target.href);
+		event.preventDefault();
 		const path = url.pathname;
 
 		if (url.pathname !== location.pathname) {

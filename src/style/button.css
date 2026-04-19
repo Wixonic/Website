@@ -73,42 +73,22 @@ button .shadow {
 	z-index: -2;
 }
 
-button:hover:not(:disabled) .content {
+button:hover .content {
 	transform: translateY(-0.3em);
 	transition: transform 0.25s cubic-bezier(0.3, 0.7, 0.4, 1.5);
 }
 
-button:active:not(:disabled) .content {
+button:active .content {
 	transform: translateY(-0.1em);
 	transition: transform 0.03s;
 }
 
-button:hover:not(:disabled) .shadow {
+button:hover .shadow {
 	transform: translateY(0.15em);
 	transition: transform 0.25s cubic-bezier(0.3, 0.7, 0.4, 1.5);
 }
 
-button:active:not(:disabled) .shadow {
-	transform: translateY(0.05em);
-	transition: transform 0.03s;
-}
-
-button:disabled:hover .content {
-	transform: translateY(-0.3em);
-	transition: transform 0.25s cubic-bezier(0.3, 0.7, 0.4, 1.5);
-}
-
-button:disabled:active .content {
-	transform: translateY(-0.1em);
-	transition: transform 0.03s;
-}
-
-button:disabled:hover .shadow {
-	transform: translateY(0.15em);
-	transition: transform 0.25s cubic-bezier(0.3, 0.7, 0.4, 1.5);
-}
-
-button:disabled:active .shadow {
+button:active .shadow {
 	transform: translateY(0.05em);
 	transition: transform 0.03s;
 }

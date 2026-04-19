@@ -10,19 +10,19 @@
 	"album": null,
 	"genre": "Lo-Fi Hip Hop",
 	"date": "2025",
-	"encoder": "Lavf62.3.100",
 	"duration": 156.404739,
 	"bitrate": 320883,
 	"files": [
 		{
 			"path": "NCS_sakuracloud_miffy-cafe.mp3",
 			"size": 6273456,
-			"format": "mp3",
+			"format": "MP2/3 (MPEG audio layer 2/3)",
 			"codec": "mp3",
 			"bitrate": 320000,
 			"channels": 2,
 			"channelLayout": "stereo",
-			"sampleRate": 44100
+			"sampleRate": 44100,
+			"mime": "mp4a.40.34"
 		}
 	]
 }
