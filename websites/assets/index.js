@@ -6,7 +6,7 @@ const components = [];
 
 /** @type {import("/types.d.ts").Module["metadata"]} */
 const metadata = {
-	title: "Asset Viewer - Wixonic",
+	title: "Asset Viewer | Wixonic",
 	description: ""
 };
 
@@ -21,6 +21,10 @@ const downloadFile = (url, fileName) => {
 	document.body.append(link);
 	link.click();
 	link.remove();
+};
+
+const notFound = () => {
+
 };
 
 /** @type {import("/types.d.ts").Module["init"]} */
@@ -121,8 +125,17 @@ const init = async () => {
 					element.innerHTML = `<span class="key">${key}</span><span class="subtle">:</span> ${details[key]}`;
 					detailsElement.append(element);
 				}
-			} else console.warn("Failed to load asset index for this page.");
-		} else console.warn("No asset index found for this page.");
+			} else {
+				console.warn("Failed to load asset index for this page.");
+				notFound();
+			}
+		} else {
+			console.warn("No asset index found for this page.");
+			notFound();
+		}
+	} else {
+		console.warn("Failed to load main index.");
+		notFound();
 	}
 };
 

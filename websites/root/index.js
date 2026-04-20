@@ -1,3 +1,5 @@
+import footer from "/script/footer.js";
+
 /** @type {import("/types.d.ts").Module["components"]} */
 const components = [];
 
@@ -9,9 +11,10 @@ const metadata = {
 
 /** @type {import("/types.d.ts").Module["init"]} */
 const init = async () => {
-	console.log("Hello!");
+	document.body.append(footer());
 
-	const screen = document.getElementById("screen");
+	const layer = document.querySelector("#layer");
+	const screen = document.querySelector("#screen");
 
 	// screen.append();
 };

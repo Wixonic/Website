@@ -1,3 +1,5 @@
+import footer from "/script/footer.js";
+
 /** @type {import("/types.d.ts").Module["components"]} */
 const components = [];
 
@@ -8,6 +10,8 @@ const metadata = {
 };
 
 /** @type {import("/types.d.ts").Module["init"]} */
-const init = async () => { };
+const init = async () => {
+	document.body.append(footer());
+};
 
 export { components, metadata, init };

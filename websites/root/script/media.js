@@ -114,7 +114,7 @@ let audioQueue = [];
  * Connects or disconnects the video element's audio to the AudioContext.
  * @param {boolean} withAudio
  */
-const setVideoAudioRouting = async (withAudio) => {
+const setVideoAudioRouting = (withAudio) => {
 	if (!videoElement) return;
 
 	if (withAudio && audioAllowed === true) {
@@ -130,6 +130,7 @@ const setVideoAudioRouting = async (withAudio) => {
 		videoElement.muted = false;
 	} else {
 		videoElement.muted = true;
+		videoElement.defaultMuted = true;
 	}
 };
 
@@ -155,12 +156,21 @@ const playVideoItem = async (item, _isLoopContinuation = false) => {
 	currentVideo = item;
 	videoPaused = false;
 
+	// Keep autoplay compatible while audio permission is still pending.
+	videoElement.muted = true;
+	videoElement.defaultMuted = true;
+
 	requestAudioPermission();
 
 	videoElement.src = blobURL;
 	videoElement.loop = item.options.loop;
 
-	await setVideoAudioRouting(item.options.withAudio);
+	try {
+		setVideoAudioRouting(item.options.withAudio);
+	} catch (unsafeError) {
+		const error = unsafeError instanceof Error ? unsafeError : new Error(String(unsafeError));
+		logger.warn(`[Media] Failed to configure video audio routing for "${item.id}"`, error.message);
+	}
 
 	videoElement.play().catch((unsafeError) => {
 		const error = unsafeError instanceof Error ? unsafeError : new Error(String(unsafeError));

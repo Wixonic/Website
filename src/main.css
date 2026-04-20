@@ -1,7 +1,9 @@
 @import url("/style/banner.css");
 @import url("/style/button.css");
 @import url("/style/font.css");
+@import url("/style/footer.css");
 @import url("/style/glow.css");
+@import url("/style/section.css");
 
 body {
 	/* COLORS */
@@ -149,7 +151,12 @@ body {
 }
 
 body {
+	display: flex;
+	flex-direction: column;
+
 	position: relative;
+
+	min-height: 100vh;
 
 	background: var(--background);
 
@@ -164,7 +171,11 @@ body {
 	margin: 0;
 	padding: 0;
 
-	overflow: hidden;
+	overflow: auto;
+}
+
+main {
+	flex: 1;
 }
 
 noscript,
