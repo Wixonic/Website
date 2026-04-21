@@ -1,10 +1,11 @@
-{% extends "main.njk" %}
-
-{% block head %}
-<link rel="stylesheet" href="/index.css" />
-{% endblock %}
-
-{% block overlayer %}
+---
+layout: main.njk
+title: Wixonic
+description: Learn more about Wixonic.
+styles:
+- /index.css
+bodyAttributes: 'is-one-page-website="true"'
+---
 
 <div id="orientation-lock">
 
@@ -14,10 +15,6 @@
 	</span>
 
 </div>
-
-{% endblock %}
-
-{% block content %}
 
 <main>
 
@@ -31,4 +28,4 @@
 
 </main>
 
-{% endblock %}
+{% include "footer.njk" %}

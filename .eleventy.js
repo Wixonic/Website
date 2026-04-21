@@ -53,7 +53,8 @@ export default (config) => {
 	// --- Directories ---
 	config.setInputDirectory("websites/");
 	config.setOutputDirectory("build/");
-	config.setIncludesDirectory("../src");
+	config.setIncludesDirectory("../src/njk/");
+	config.setLayoutsDirectory("../src/layouts/");
 
 	// --- Templates ---
 	config.setTemplateFormats(["njk", "html"]);

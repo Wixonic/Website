@@ -1,4 +1,3 @@
-import footer from "/script/footer.js";
 import { playVideo } from "/script/media.js";
 
 /** @type {import("/types.d.ts").Module["components"]} */
@@ -21,8 +20,6 @@ const metadata = {
 
 /** @type {import("/types.d.ts").Module["init"]} */
 const init = async () => {
-	document.body.append(footer());
-
 	await playVideo("404");
 };
 
