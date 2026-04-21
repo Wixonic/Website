@@ -54,7 +54,7 @@ export default (config) => {
 	config.setInputDirectory("websites/");
 	config.setOutputDirectory("build/");
 	config.setIncludesDirectory("../src/njk/");
-	config.setLayoutsDirectory("../src/layouts/");
+	config.setLayoutsDirectory("../src/njk/");
 
 	// --- Templates ---
 	config.setTemplateFormats(["njk", "html"]);
@@ -225,7 +225,7 @@ export default (config) => {
 									const rawUrl = `${pathConfig.assets}${virtualPath.replace(/^\//, "/raw/")}`;
 
 									const meta = {
-										title: `${itemIndex.name} - Wixonic Assets`,
+										title: `${itemIndex.name} - Assets Viewer | Wixonic`,
 										description: itemIndex.description || "",
 										url: publicUrl
 									};
