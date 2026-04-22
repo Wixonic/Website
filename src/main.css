@@ -1,4 +1,3 @@
-@import url("/style/banner.css");
 @import url("/style/button.css");
 @import url("/style/font.css");
 @import url("/style/footer.css");
@@ -124,6 +123,7 @@ body {
 	--theme-shadow: var(--theme-success-shadow);
 	--theme-shadow-subtle: var(--theme-success-shadow-subtle);
 }
+
 /* THEMES */
 
 * {

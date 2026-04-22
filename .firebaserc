@@ -1,21 +1,18 @@
 {
 	"projects": {
-		"default": "wixonic-website-2"
+		"default": "wixonic-v5-website"
 	},
 	"targets": {
-		"wixonic-website-2": {
+		"wixonic-v5-website": {
 			"hosting": {
 				"root": [
-					"wixonic-website-2"
-				],
-				"docs": [
-					"docs-wixonic-website-2"
+					"wixonic-v5-website"
 				],
 				"assets": [
-					"assets-wixonic-website-2"
+					"assets-wixonic-v5-website"
 				],
 				"redirects": [
-					"redirect-wixonic-website-2"
+					"redirects-wixonic-v5-website"
 				]
 			}
 		}

@@ -4,27 +4,39 @@
 
 	<head>
 
-		<title>Wixonic</title>
+		<title>{{ (title or "Wixonic") | escape }}</title>
 		<meta charset="utf-8" />
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
 		<meta name="author" content="Wixonic, contact@wixonic.fr" />
-		<meta name="description" content="" />
+		<meta name="description" content="{{ (description or '') | escape }}" />
 		<meta name="robots" content="index,follow" />
 
 		<meta property="og:type" content="website" />
 		<meta property="og:locale" content="en_US" />
-		<meta property="og:title" content="Wixonic" />
-		<meta property="og:description" content="" />
-		<meta property="og:url" content="{{ path.root }}" />
+		<meta property="og:title" content="{{ (title or 'Wixonic') | escape }}" />
+		<meta property="og:description" content="{{ (description or '') | escape }}" />
+		<meta property="og:url" content="{{ (url or path.root) | escape }}" />
 
-		<meta rel="canonical" href="{{ path.root }}" />
+		<meta rel="canonical" href="{{ (canonical or url or path.root) | escape }}" />
 
 		<link rel="icon" type="image/svg+xml" href="{{ path.assets }}/raw/icon/logo.svg" />
 		<link rel="apple-touch-icon" href="{{ path.assets }}/raw/icon/logo/180.png" />
 		<link rel="icon" type="image/png" sizes="192x192" href="{{ path.assets }}/raw/icon/logo/round/196.png" />
 		<link rel="icon" type="image/png" sizes="512x512" href="{{ path.assets }}/raw/icon/logo/round/512.png" />
+
+		{% if image %}
+		<meta property="og:image" content="{{ image | escape }}" />
+		{% endif %}
+
+		{% if audio %}
+		<meta property="og:audio" content="{{ audio | escape }}" />
+		{% endif %}
+
+		{% if video %}
+		<meta property="og:video" content="{{ video | escape }}" />
+		{% endif %}
 
 		<script>
 			window.path = {{ path | json | safe }};
@@ -33,13 +45,21 @@
 		<link rel="stylesheet" href="/main.css" />
 		<script type="module" src="/main.js"></script>
 
-		{% block head %}
-		<link rel="stylesheet" href="index.css" />
-		{% endblock %}
+		{% if styles %}
+		{% for style in styles %}
+		<link rel="stylesheet" href="{{ style | escape }}" />
+		{% endfor %}
+		{% endif %}
+
+		{% if scripts %}
+		{% for script in scripts %}
+		<script type="module" src="{{ script | escape }}"></script>
+		{% endfor %}
+		{% endif %}
 
 	</head>
 
-	<body {% block bodyAttributes %} {% endblock %}>
+	<body>
 
 		<noscript>
 
@@ -51,9 +71,6 @@
 
 		</noscript>
 
-		{% block overlayer %}
-		{% endblock %}
-
 		<div id="fatal-error" class="hidden">
 
 			<span>
@@ -63,9 +80,7 @@
 
 		</div>
 
-		{% block content %}
-		<main></main>
-		{% endblock %}
+		{{ content | safe }}
 
 	</body>
 

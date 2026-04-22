@@ -11,11 +11,6 @@ export interface Module {
 	components: Component[];
 	init: () => void | Promise<void>;
 	destroy?: () => void | Promise<void>;
-	metadata?: {
-		title?: string;
-		description?: string;
-		image?: string;
-	};
 }
 
 export type LoggerFunction = (reason?: any, message?: any, trace?: any) => void;

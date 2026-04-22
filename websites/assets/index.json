@@ -1,6 +1,4 @@
 {
-	"/animation/404/web.mov": "/raw/animation/404/web.index.json",
-	"/animation/404/web.webm": "/raw/animation/404/web.index.json",
 	"/font/OpenSans/italic.woff2": "/raw/font/OpenSans.index.json",
 	"/font/OpenSans/regular.woff2": "/raw/font/OpenSans.index.json",
 	"/font/VT323/regular.woff2": "/raw/font/VT323.index.json",
@@ -38,6 +36,5 @@
 	"/icon/logo/round/384.png": "/raw/icon/round.index.json",
 	"/icon/logo/round/512.png": "/raw/icon/round.index.json",
 	"/icon/logo/round/1024.png": "/raw/icon/round.index.json",
-	"/icon/logo/round/pixelated.png": "/raw/icon/round.index.json",
-	"/song/animation/NCS_sakuracloud_miffy-cafe.mp3": "/raw/song/animation/NCS_sakuracloud_miffy-cafe.mp3.index.json"
+	"/icon/logo/round/pixelated.png": "/raw/icon/round.index.json"
 }

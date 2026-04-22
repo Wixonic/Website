@@ -8,16 +8,8 @@
 			],
 			"rewrites": [
 				{
-					"source": "/",
-					"destination": "/main.html"
-				},
-				{
-					"source": "/!(robots.txt)",
-					"destination": "/main.html"
-				},
-				{
-					"source": "/!(robots.txt)/**",
-					"destination": "/main.html"
+					"source": "**",
+					"destination": "/404.html"
 				}
 			],
 			"headers": [
@@ -40,16 +32,8 @@
 			],
 			"rewrites": [
 				{
-					"source": "/",
-					"destination": "/main.html"
-				},
-				{
-					"source": "/!(index.json|robots.txt)",
-					"destination": "/main.html"
-				},
-				{
-					"source": "/!(index.json|robots.txt)/**",
-					"destination": "/main.html"
+					"source": "**",
+					"destination": "/index.html"
 				}
 			],
 			"headers": [
@@ -73,39 +57,8 @@
 			]
 		},
 		{
-			"target": "docs",
-			"public": "./build/docs",
-			"ignore": [
-				".DS_Store"
-			],
-			"rewrites": [
-				{
-					"source": "/",
-					"destination": "/main.html"
-				},
-				{
-					"source": "/!(robots.txt)",
-					"destination": "/main.html"
-				},
-				{
-					"source": "/!(robots.txt)/**",
-					"destination": "/main.html"
-				}
-			],
-			"headers": [
-				{
-					"source": "**",
-					"headers": [
-						{
-							"key": "Cache-Control",
-							"value": "max-age=7200, must-revalidate"
-						}
-					]
-				}
-			]
-		},
-		{
 			"target": "redirects",
+			"public": "./build/redirects",
 			"redirects": [
 				{
 					"regex": "/discord(?:.*)",
@@ -114,7 +67,7 @@
 				},
 				{
 					"regex": "/help(?:.*)",
-					"destination": "",
+					"destination": "https://discord.gg/wVHSFqG85J",
 					"type": 301
 				},
 				{
@@ -136,11 +89,12 @@
 					"regex": "/youtube(?:.*)",
 					"destination": "https://www.youtube.com/channel/UCnPN_SkWcIDNL-BjJGeDzQA",
 					"type": 301
-				},
+				}
+			],
+			"rewrites": [
 				{
 					"source": "**",
-					"destination": "https://wixonic.fr",
-					"type": 301
+					"destination": "/404.html"
 				}
 			],
 			"headers": [
