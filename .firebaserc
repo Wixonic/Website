@@ -5,14 +5,26 @@
 	"targets": {
 		"wixonic-v5-website": {
 			"hosting": {
-				"root": [
-					"wixonic-v5-website"
+				"accounts": [
+					"accounts-wixonic-v5-website"
+				],
+				"admin": [
+					"admin-wixonic-v5-website"
 				],
 				"assets": [
 					"assets-wixonic-v5-website"
 				],
+				"functions": [
+					"functions-wixonic-v5-website"
+				],
+				"knowledge": [
+					"knowledge-wixonic-v5-website"
+				],
 				"redirects": [
 					"redirects-wixonic-v5-website"
+				],
+				"root": [
+					"wixonic-v5-website"
 				]
 			}
 		}

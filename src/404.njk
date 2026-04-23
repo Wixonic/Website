@@ -2,11 +2,19 @@
 layout: main.njk
 title: Oops! Page Not Found | Wixonic
 description: The page you are looking for does not exist!
+styles:
+- /404.css
+scripts:
+- /404.js
 ---
 
 <main>
 
+	<h1>Oops!</h1>
 
+	<p>Seems like you lost your way!</p>
+
+	<p>This page does not exist. If you think it should, please <a href="{{ path.redirects }}/help">contact us</a></p>
 
 </main>
 

@@ -25,18 +25,51 @@ const findFiles = async (directory, extensions) => {
 	return results;
 };
 
+const createPathTokenPlugin = (pathConfig) => ({
+	name: "replace-path-tokens",
+	setup(build) {
+		build.onLoad({ filter: /\.(css|js)$/ }, async (args) => {
+			const source = await fsp.readFile(args.path, "utf8");
+			const contents = source.replace(/{{\s*path\.([\w]+)\s*}}/g, (match, key) => {
+				if (!pathConfig[key]) return match;
+
+				return pathConfig[key];
+			});
+
+			return {
+				contents,
+				loader: args.path.endsWith(".css") ? "css" : "js"
+			};
+		});
+	}
+});
+
 export default (config) => {
 	const isEmulator = process.env.dev === "true";
 	const isClear = process.env.clear === "true";
 
 	const pathConfig = isEmulator ? {
 		root: "http://localhost:2005",
-		assets: "http://localhost:2010",
-		redirects: "http://localhost:2011",
-		server: "http://localhost:999"
+		accounts: "http://localhost:2010",
+		admin: "http://localhost:2011",
+		assets: "http://localhost:2012",
+		functions: "http://localhost:2013",
+		knowledge: "http://localhost:2014",
+		redirects: "http://localhost:2015",
+		server: "http://localhost:999",
+		firebase: {
+			auth: "http://localhost:2001",
+			firestore: { domain: "localhost", port: 2002 },
+			storage: { domain: "localhost", port: 2003 },
+			functions: { domain: "localhost", port: 2004 }
+		}
 	} : {
 		root: "https://wixonic.fr",
+		accounts: "https://accounts.wixonic.fr",
+		admin: "https://admin.wixonic.fr",
 		assets: "https://assets.wixonic.fr",
+		functions: "https://functions.wixonic.fr",
+		knowledge: "https://knowledge.wixonic.fr",
 		redirects: "https://go.wixonic.fr",
 		server: "https://server.wixonic.fr"
 	};
@@ -47,14 +80,15 @@ export default (config) => {
 		sourcemap: isEmulator,
 		splitting: !isClear,
 		format: "esm",
-		target: ["es2020"]
+		target: ["es2020"],
+		plugins: [createPathTokenPlugin(pathConfig)]
 	};
 
 	// --- Directories ---
 	config.setInputDirectory("websites/");
 	config.setOutputDirectory("build/");
 	config.setIncludesDirectory("../src/njk/");
-	config.setLayoutsDirectory("../src/");
+	config.setLayoutsDirectory("../src/layout/");
 
 	// --- Templates ---
 	config.setTemplateFormats(["njk"]);

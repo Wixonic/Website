@@ -1,5 +1,6 @@
 .firebase/
 build/
+emulator/
 node_modules/
 private/
 

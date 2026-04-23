@@ -1,6 +1,6 @@
 {
 	"scripts": {
-		"serve": "clear; npm run testbuild && firebase emulators:start",
+		"serve": "clear; npm run testbuild && firebase emulators:start --import=\"emulator/data\" --export-on-exit",
 		"prepublish": "clear; npm run build",
 		"publish": "clear; firebase deploy",
 		"build": "clear; rm -rf build/; npx @11ty/eleventy",
