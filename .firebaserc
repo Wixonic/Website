@@ -14,11 +14,17 @@
 				"assets": [
 					"assets-wixonic-v5-website"
 				],
+				"discord": [
+					"discord-wixonic-v5-website"
+				],
 				"functions": [
 					"functions-wixonic-v5-website"
 				],
 				"knowledge": [
 					"knowledge-wixonic-v5-website"
+				],
+				"onion": [
+					"onion-wixonic-v5-website"
 				],
 				"redirects": [
 					"redirects-wixonic-v5-website"

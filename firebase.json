@@ -105,6 +105,30 @@
 			]
 		},
 		{
+			"target": "discord",
+			"public": "./build/discord",
+			"ignore": [
+				".DS_Store"
+			],
+			"rewrites": [
+				{
+					"source": "**",
+					"destination": "/404.html"
+				}
+			],
+			"headers": [
+				{
+					"source": "**",
+					"headers": [
+						{
+							"key": "Cache-Control",
+							"value": "max-age=7200, must-revalidate"
+						}
+					]
+				}
+			]
+		},
+		{
 			"target": "functions",
 			"rewrites": [
 				{
@@ -139,6 +163,30 @@
 			]
 		},
 		{
+			"target": "onion",
+			"public": "./build/onion",
+			"ignore": [
+				".DS_Store"
+			],
+			"rewrites": [
+				{
+					"source": "**",
+					"destination": "/404.html"
+				}
+			],
+			"headers": [
+				{
+					"source": "**",
+					"headers": [
+						{
+							"key": "Cache-Control",
+							"value": "max-age=7200, must-revalidate"
+						}
+					]
+				}
+			]
+		},
+		{
 			"target": "redirects",
 			"public": "./build/redirects",
 			"redirects": [
@@ -149,11 +197,21 @@
 				},
 				{
 					"regex": "/help(?:.*)",
+					"destination": "https://wixonic.fr/contact",
+					"type": 301
+				},
+				{
+					"regex": "/help/discord(?:.*)",
 					"destination": "https://discord.gg/wVHSFqG85J",
 					"type": 301
 				},
 				{
 					"regex": "/funding(?:.*)",
+					"destination": "https://discord.wixonic.fr/funding",
+					"type": 301
+				},
+				{
+					"regex": "/funding/discord(?:.*)",
 					"destination": "https://discord.gg/2QB7QkPtrA",
 					"type": 301
 				},
@@ -163,8 +221,23 @@
 					"type": 301
 				},
 				{
-					"regex": "/patreon(?:.*)",
-					"destination": "https://patreon.com/Wixonic",
+					"regex": "/gravatar(?:.*)",
+					"destination": "https://gravatar.com/wixonic12",
+					"type": 301
+				},
+				{
+					"regex": "/reddit(?:.*)",
+					"destination": "https://www.reddit.com/user/Wixonic12",
+					"type": 301
+				},
+				{
+					"regex": "/twitch(?:.*)",
+					"destination": "https://www.twitch.tv/wixonic",
+					"type": 301
+				},
+				{
+					"regex": "/wakatime(?:.*)",
+					"destination": "https://wakatime.com/@Wixonic",
 					"type": 301
 				},
 				{
