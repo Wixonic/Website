@@ -146,8 +146,12 @@
 			],
 			"rewrites": [
 				{
+					"source": "/",
+					"destination": "/index.html"
+				},
+				{
 					"source": "**",
-					"destination": "/404.html"
+					"destination": "/wiki/index.html"
 				}
 			],
 			"headers": [

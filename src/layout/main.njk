@@ -43,7 +43,7 @@
 		</script>
 
 		<link rel="stylesheet" href="/main.css" />
-		<script type="module" src="/main.js"></script>
+		<script defer type="module" src="/main.js"></script>
 
 		{% if styles %}
 		{% for style in styles %}
@@ -53,7 +53,7 @@
 
 		{% if scripts %}
 		{% for script in scripts %}
-		<script type="module" src="{{ script | escape }}"></script>
+		<script defer type="module" src="{{ script | escape }}"></script>
 		{% endfor %}
 		{% endif %}
 

@@ -1,15 +1,27 @@
 rules_version = "2";
 
-service cloud.storage {
+service firebase.storage {
 	match /b/{bucket}/o {
-		match /{allPaths=**} {
-			allow read, write: if false;
+		function getUserPermissions() {
+			return firestore.get(/databases/(default)/documents/users/$(request.auth.uid)/permissions/storage).data;
 		}
-	}
 
-	match /b/knowledge/o {
-		match /{allPaths=**} {
-			allow read, write: if false;
+		function hasRole(role) {
+			return request.auth != null && request.auth.token[role] == true;
+		}
+
+		function can(path, action) {
+			return request.auth != null && path in getUserPermissions()[action];
+		}
+
+		match /knowledge/private/{privatePath=**} {
+			allow read: if request.auth != null && (hasRole("admin") || can("knowledge/private/" + string(privatePath), "read"));
+			allow write: if request.auth != null && (hasRole("admin") || can("knowledge/private/" + string(privatePath), "write"));
+		}
+
+		match /knowledge/{filePath=**} {
+			allow read: if !string(filePath).startsWith("private/");
+			allow write: if request.auth != null && (hasRole("admin") || hasRole("editor") || can("knowledge/" + string(filePath), "write"));
 		}
 	}
 }

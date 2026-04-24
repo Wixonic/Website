@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
 import { getAuth, connectAuthEmulator, setPersistence, browserLocalPersistence, signInWithCustomToken, signInWithEmailAndPassword, updateProfile, signOut, applyActionCode } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
-import { getFirestore, connectFirestoreEmulator, doc, getDoc, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
+import { getFirestore, connectFirestoreEmulator, doc, updateDoc } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
 import { getFunctions, connectFunctionsEmulator } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-functions.js";
 import { getStorage, connectStorageEmulator } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-storage.js";
 
@@ -19,37 +19,56 @@ window.firebase = {
 	localEnvironment: location.hostname == "localhost"
 };
 
-firebase.auth = getAuth(firebase.app);
-firebase.firestore = getFirestore(firebase.app);
-firebase.functions = getFunctions(firebase.app, path.functions);
-firebase.storage = getStorage(firebase.app);
+if (firebase.localEnvironment) console.warn("Running in local environment");
 
-if (firebase.localEnvironment) {
-	console.warn("Running in local environment");
+firebase.getAuth = (...args) => {
+	const auth = getAuth(firebase.app, ...args);
+	if (firebase.localEnvironment) connectAuthEmulator(auth, path.firebase.auth);
+	return auth;
+};
 
-	connectAuthEmulator(firebase.auth, path.firebase.auth);
-	connectFirestoreEmulator(firebase.firestore, path.firebase.firestore.domain, path.firebase.firestore.port);
-	connectFunctionsEmulator(firebase.functions, path.firebase.functions.domain, path.firebase.functions.port);
-	connectStorageEmulator(firebase.storage, path.firebase.storage.domain, path.firebase.storage.port);
-}
+firebase.getFirestore = (...args) => {
+	const firestore = getFirestore(firebase.app, ...args);
+	if (firebase.localEnvironment) connectFirestoreEmulator(firestore, path.firebase.firestore.domain, path.firebase.firestore.port);
+	return firestore;
+};
+
+firebase.getFunctions = (...args) => {
+	const functions = getFunctions(firebase.app, path.functions, ...args);
+	if (firebase.localEnvironment) connectFunctionsEmulator(functions, path.firebase.functions.domain, path.firebase.functions.port);
+	return functions;
+};
+
+firebase.getStorage = (...args) => {
+	const storage = getStorage(firebase.app, ...args);
+	if (firebase.localEnvironment) connectStorageEmulator(storage, path.firebase.storage.domain, path.firebase.storage.port);;
+	return storage;
+};
+
+firebase.default = {
+	auth: firebase.getAuth(),
+	firestore: firebase.getFirestore(),
+	functions: firebase.getFunctions(),
+	storage: firebase.getStorage()
+};
 
 firebase.getUser = async (force) => {
-	await setPersistence(firebase.auth, browserLocalPersistence);
+	await setPersistence(firebase.default.auth, browserLocalPersistence);
 
-	if (firebase.auth.fetchedUser && !force) {
-		firebase.auth.fetchedUser.cached = true;
-		return firebase.auth.fetchedUser;
-	} else if (firebase.auth.currentUser) {
-		const claims = (await firebase.auth.currentUser.getIdTokenResult()).claims;
+	if (firebase.default.auth.fetchedUser && !force) {
+		firebase.default.auth.fetchedUser.cached = true;
+		return firebase.default.auth.fetchedUser;
+	} else if (firebase.default.auth.currentUser) {
+		const claims = (await firebase.default.auth.currentUser.getIdTokenResult()).claims;
 
-		firebase.auth.fetchedUser = {
+		firebase.default.auth.fetchedUser = {
 			cached: false,
 			claims,
-			user: firebase.auth.currentUser,
+			user: firebase.default.auth.currentUser,
 			valid: true
 		};
 
-		return firebase.auth.fetchedUser;
+		return firebase.default.auth.fetchedUser;
 	}
 
 	try {
@@ -57,34 +76,34 @@ firebase.getUser = async (force) => {
 		const customToken = req.response.customToken;
 
 		if (customToken) {
-			const credentials = await signInWithCustomToken(firebase.auth, customToken);
+			const credentials = await signInWithCustomToken(firebase.default.auth, customToken);
 			const claims = (await credentials.user.getIdTokenResult()).claims;
 
-			firebase.auth.fetchedUser = {
+			firebase.default.auth.fetchedUser = {
 				cached: false,
 				claims,
 				user: credentials.user,
 				valid: true
 			};
 
-			return firebase.auth.fetchedUser;
+			return firebase.default.auth.fetchedUser;
 		}
 	} catch (error) {
 		console.warn("Failed to auth with custom token:", error);
 	}
 
-	firebase.auth.fetchedUser = {
+	firebase.default.auth.fetchedUser = {
 		claims: {},
 		user: null,
 		valid: false
 	};
 
-	return firebase.auth.fetchedUser;
+	return firebase.default.auth.fetchedUser;
 };
 
 firebase.signInWithEmail = async (email, password) => {
 	try {
-		const credentials = await signInWithEmailAndPassword(firebase.auth, email, password);
+		const credentials = await signInWithEmailAndPassword(firebase.default.auth, email, password);
 		const idToken = await credentials.user.getIdToken();
 
 		const response = await request("POST", new URL("/auth/token/", path.functions), "json", "application/json", JSON.stringify({
@@ -99,7 +118,7 @@ firebase.signInWithEmail = async (email, password) => {
 
 firebase.signInWithCustomToken = async (customToken) => {
 	try {
-		const credentials = await signInWithCustomToken(firebase.auth, customToken);
+		const credentials = await signInWithCustomToken(firebase.default.auth, customToken);
 		const idToken = await credentials.user.getIdToken();
 
 		const response = await request("POST", new URL("/auth/token/", path.functions), "json", "application/json", JSON.stringify({
@@ -113,37 +132,22 @@ firebase.signInWithCustomToken = async (customToken) => {
 };
 
 firebase.updateProfile = async (data) => {
-	const ref = doc(firebase.firestore, "users", firebase.auth.currentUser.uid);
+	const ref = doc(firebase.default.firestore, "users", firebase.default.auth.currentUser.uid);
 	await updateDoc(ref, data);
 
-	if (data.displayName) await updateProfile(firebase.auth.currentUser, {
+	if (data.displayName) await updateProfile(firebase.default.auth.currentUser, {
 		displayName: data.displayName
 	});
 };
 
 firebase.updatePrivateProfile = async (data) => {
-	const ref = doc(firebase.firestore, "privateUsers", firebase.auth.currentUser.uid);
+	const ref = doc(firebase.default.firestore, "privateUsers", firebase.default.auth.currentUser.uid);
 	await updateDoc(ref, data);
-};
-
-firebase.isLinked = async (platform, uid) => {
-	try {
-		const ref = doc(firebase.firestore, "users", uid ?? firebase.auth.currentUser.uid, "links", platform);
-		const snap = await getDoc(ref);
-		return snap.data();
-	} catch {
-		return null;
-	}
-};
-
-firebase.link = async (platform, data = {}) => {
-	const ref = doc(firebase.firestore, "users", firebase.auth.currentUser.uid, "links", platform);
-	await setDoc(ref, data);
 };
 
 firebase.signOut = async (reload = true) => {
 	try {
-		await signOut(firebase.auth);
+		await signOut(firebase.default.auth);
 		await request("DELETE", new URL("/auth/token/", path.functions), "text", null, null, -1, true);
 		if (reload) location.reload();
 	} catch (error) {
@@ -151,4 +155,4 @@ firebase.signOut = async (reload = true) => {
 	}
 };
 
-firebase.applyActionCode = (...any) => applyActionCode(firebase.auth, ...any);
+firebase.applyActionCode = (...any) => applyActionCode(firebase.default.auth, ...any);
