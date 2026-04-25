@@ -52,6 +52,8 @@ section {
 
 	position: relative;
 
+	background: var(--background);
+
 	border-radius: var(--section-border-radius);
 	border: 0.2rem solid var(--section-border-color);
 
