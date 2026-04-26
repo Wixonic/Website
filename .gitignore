@@ -1,4 +1,5 @@
 .firebase/
+.generated/
 build/
 emulator/
 node_modules/

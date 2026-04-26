@@ -1,4 +1,4 @@
-@import url("/lib/main.css");
+@import url("/main.css");
 
 section {
 	width: min(30rem, calc(100% - 2rem));

@@ -87,7 +87,8 @@ export default (config) => {
 		splitting: !isClear,
 		format: "esm",
 		target: ["es2020"],
-		plugins: [createPathTokenPlugin(pathConfig)]
+		plugins: [createPathTokenPlugin(pathConfig)],
+		external: ["three"]
 	};
 
 	// --- Directories ---
@@ -183,8 +184,8 @@ export default (config) => {
 
 	// --- HTML minification ---
 	if (!isClear) {
-		config.addTransform("html-minifier", (content) => {
-			if ((this.page.outputPath || "").endsWith(".html")) {
+		config.addTransform("html-minifier", (content, outputPath) => {
+			if ((outputPath || "").endsWith(".html")) {
 				return htmlMinifier.minify(content, {
 					useShortDoctype: true,
 					removeComments: true,
