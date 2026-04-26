@@ -53,11 +53,12 @@ export default (config) => {
 		accounts: "http://localhost:2010",
 		admin: "http://localhost:2011",
 		assets: "http://localhost:2012",
-		discord: "http://localhost:2013",
-		functions: "http://localhost:2014",
-		knowledge: "http://localhost:2015",
-		onion: "http://localhost:2016",
-		redirects: "http://localhost:2017",
+		camera: "http://localhost:2013",
+		discord: "http://localhost:2014",
+		functions: "http://localhost:2015",
+		knowledge: "http://localhost:2016",
+		onion: "http://localhost:2017",
+		redirects: "http://localhost:2018",
 		server: "http://localhost:999",
 		firebase: {
 			auth: "http://localhost:2001",
@@ -70,6 +71,7 @@ export default (config) => {
 		accounts: "https://accounts.wixonic.fr",
 		admin: "https://admin.wixonic.fr",
 		assets: "https://assets.wixonic.fr",
+		camera: "https://camera.wixonic.fr",
 		discord: "https://discord.wixonic.fr",
 		functions: "https://functions.wixonic.fr",
 		knowledge: "https://knowledge.wixonic.fr",
@@ -103,7 +105,8 @@ export default (config) => {
 		"webm", "mov",
 		"mp3",
 		"woff2",
-		"json"
+		"json",
+		"glb"
 	]) config.addPassthroughCopy(`websites/**/*.${extension}`);
 
 	config.addPassthroughCopy("websites/**/robots.txt");
