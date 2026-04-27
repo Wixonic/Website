@@ -270,7 +270,7 @@
 				},
 				{
 					"regex": "/youtube(?:.*)",
-					"destination": "https://www.youtube.com/channel/UCnPN_SkWcIDNL-BjJGeDzQA",
+					"destination": "https://www.youtube.com/@Wixonic",
 					"type": 301
 				}
 			],

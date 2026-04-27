@@ -22,19 +22,24 @@ addEventListener("DOMContentLoaded", async () => {
 		button.appendChild(shadow);
 	};
 
-	for (const button of document.body.getElementsByTagName("button")) formatButton(button);
+	for (const button of document.body.querySelectorAll("button")) formatButton(button);
+	for (const button of document.body.querySelectorAll("a.button")) formatButton(button);
 
 	// Glow effect
 	document.addEventListener("mousemove", (event) => {
-		const element = event.target.closest(".glow");
-		if (!element) return;
+		let element = event.target;
+		while (element && element.classList) {
+			if (element.classList.contains("glow")) {
+				const rect = element.getBoundingClientRect();
+				const x = event.clientX - rect.left;
+				const y = event.clientY - rect.top;
 
-		const rect = element.getBoundingClientRect();
-		const x = event.clientX - rect.left;
-		const y = event.clientY - rect.top;
+				element.style.setProperty("--x", `${x}px`);
+				element.style.setProperty("--y", `${y}px`);
+			}
 
-		element.style.setProperty("--x", `${x}px`);
-		element.style.setProperty("--y", `${y}px`);
+			element = element.parentElement;
+		}
 	});
 
 	// Mutation Observer

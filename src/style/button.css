@@ -1,8 +1,10 @@
-button {
+button,
+a.button {
+	display: inline-block;
+
 	position: relative;
 
 	background: transparent;
-
 	font-size: 1rem;
 
 	border: none;
@@ -14,7 +16,8 @@ button {
 	padding: 0;
 }
 
-button .edge {
+button .edge,
+a.button .edge {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -27,10 +30,11 @@ button .edge {
 	border: 0.05em solid var(--theme-border-subtle);
 	border-radius: 0.5em;
 
-	z-index: -1;
+	z-index: 1;
 }
 
-button .content {
+button .content,
+a.button .content {
 	display: block;
 
 	position: relative;
@@ -40,7 +44,6 @@ button .content {
 	color: var(--theme-text);
 	font-weight: 700;
 	font-size: 1em;
-	text-shadow: 0 0.05em 0 var(--theme-border);
 
 	border: 0.05em solid var(--theme-border-subtle);
 	border-radius: 0.5em;
@@ -50,9 +53,12 @@ button .content {
 	transform: translateY(-0.25em);
 
 	transition: transform 0.6s cubic-bezier(0.3, 0.7, 0.4, 1);
+
+	z-index: 2;
 }
 
-button .shadow {
+button .shadow,
+a.button .shadow {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -70,25 +76,29 @@ button .shadow {
 	transition: transform 0.6s cubic-bezier(0.3, 0.7, 0.4, 1);
 	will-change: transform;
 
-	z-index: -2;
+	z-index: 0;
 }
 
-button:hover .content {
+button:hover .content,
+a.button:hover .content {
 	transform: translateY(-0.3em);
-	transition: transform 0.25s cubic-bezier(0.3, 0.7, 0.4, 1.5);
+	transition: transform 0.25s cubic-bezier(0.3, 0.7, 0.4, 1);
 }
 
-button:active .content {
+button:active .content,
+a.button:active .content {
 	transform: translateY(-0.1em);
 	transition: transform 0.03s;
 }
 
-button:hover .shadow {
+button:hover .shadow,
+a.button:hover .shadow {
 	transform: translateY(0.15em);
-	transition: transform 0.25s cubic-bezier(0.3, 0.7, 0.4, 1.5);
+	transition: transform 0.25s cubic-bezier(0.3, 0.7, 0.4, 1);
 }
 
-button:active .shadow {
+button:active .shadow,
+a.button:active .shadow {
 	transform: translateY(0.05em);
 	transition: transform 0.03s;
 }

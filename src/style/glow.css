@@ -1,4 +1,7 @@
 .glow {
+	--glow-brightness: 110%;
+	--glow-saturation: 105%;
+
 	position: relative;
 
 	transform: translateY(0) scale(1);
@@ -12,20 +15,22 @@
 
 .glow::after,
 button.glow .content::after,
-button.glow .edge::after {
+a.button.glow .content::after,
+button.glow .edge::after,
+a.button.glow .edge::after {
 	content: "";
-	
+
 	position: absolute;
 	inset: 0;
 
 	border-radius: inherit;
-	
-	backdrop-filter: brightness(105%);
-	
-	mask-image: radial-gradient(circle 5rem at var(--x, 50%) var(--y, 50%), black 0%, transparent 100%);
-	
+
+	backdrop-filter: brightness(var(--glow-brightness)) saturate(var(--glow-saturation));
+
+	mask-image: radial-gradient(circle 10rem at var(--x, 50%) var(--y, 50%), black 0%, transparent 100%);
+
 	opacity: 0;
-	
+
 	transition: opacity 0.3s ease;
 
 	z-index: 1;
@@ -33,33 +38,43 @@ button.glow .edge::after {
 
 .glow:hover::after,
 button.glow:hover .content::after,
-button.glow:hover .edge::after {
+a.button.glow:hover .content::after,
+button.glow:hover .edge::after,
+a.button.glow:hover .edge::after {
 	opacity: 1;
 }
 
 /* Fix glow effect on buttons */
 button.glow,
-button.glow:hover {
+a.button.glow,
+button.glow:hover,
+a.button.glow:hover {
 	transform: none !important;
 }
 
-button.glow::after {
+button.glow::after,
+a.button.glow::after {
 	display: none;
 }
 
 button.glow .content::after,
-button.glow .edge::after {
+a.button.glow .content::after,
+button.glow .edge::after,
+a.button.glow .edge::after {
 	pointer-events: none;
 }
 
-button.glow .content::after {
-	mask-image: radial-gradient(circle 5rem at var(--x, 50%) calc(var(--y, 50%) + 0.25em), black 0%, transparent 100%);
+button.glow .content::after,
+a.button.glow .content::after {
+	mask-image: radial-gradient(circle 10rem at var(--x, 50%) calc(var(--y, 50%) + 0.25em), black 0%, transparent 100%);
 }
 
-button.glow:hover .content::after {
-	mask-image: radial-gradient(circle 5rem at var(--x, 50%) calc(var(--y, 50%) + 0.3em), black 0%, transparent 100%);
+button.glow:hover .content::after,
+a.button.glow:hover .content::after {
+	mask-image: radial-gradient(circle 10rem at var(--x, 50%) calc(var(--y, 50%) + 0.3em), black 0%, transparent 100%);
 }
 
-button.glow:active .content::after {
-	mask-image: radial-gradient(circle 5rem at var(--x, 50%) calc(var(--y, 50%) + 0.1em), black 0%, transparent 100%);
+button.glow:active .content::after,
+a.button.glow:active .content::after {
+	mask-image: radial-gradient(circle 10rem at var(--x, 50%) calc(var(--y, 50%) + 0.1em), black 0%, transparent 100%);
 }

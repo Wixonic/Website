@@ -87,9 +87,9 @@ export default (config) => {
 		splitting: !isClear,
 		format: "esm",
 		target: ["es2020"],
-		plugins: [createPathTokenPlugin(pathConfig)],
-		external: ["three"]
+		plugins: [createPathTokenPlugin(pathConfig)]
 	};
+	if (!isClear) esbuildOptions.external = ["three"]
 
 	// --- Directories ---
 	config.setInputDirectory("websites/");
