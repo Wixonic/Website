@@ -219,6 +219,16 @@
 			"public": "./build/redirects",
 			"redirects": [
 				{
+					"regex": "/about(?:.*)",
+					"destination": "https://wixonic.fr/about",
+					"type": 301
+				},
+				{
+					"regex": "/contact(?:.*)",
+					"destination": "https://wixonic.fr/help",
+					"type": 301
+				},
+				{
 					"regex": "/discord(?:.*)",
 					"destination": "https://discord.gg/BcXFAVKJZQ",
 					"type": 301
@@ -230,7 +240,7 @@
 				},
 				{
 					"regex": "/help(?:.*)",
-					"destination": "https://wixonic.fr/contact",
+					"destination": "https://wixonic.fr/help",
 					"type": 301
 				},
 				{
