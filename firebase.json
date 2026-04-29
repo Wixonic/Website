@@ -224,23 +224,23 @@
 					"type": 301
 				},
 				{
-					"regex": "/help(?:.*)",
-					"destination": "https://wixonic.fr/contact",
-					"type": 301
-				},
-				{
 					"regex": "/help/discord(?:.*)",
 					"destination": "https://discord.gg/wVHSFqG85J",
 					"type": 301
 				},
 				{
-					"regex": "/funding(?:.*)",
-					"destination": "https://discord.wixonic.fr/funding",
+					"regex": "/help(?:.*)",
+					"destination": "https://wixonic.fr/contact",
 					"type": 301
 				},
 				{
 					"regex": "/funding/discord(?:.*)",
 					"destination": "https://discord.gg/2QB7QkPtrA",
+					"type": 301
+				},
+				{
+					"regex": "/funding(?:.*)",
+					"destination": "https://discord.wixonic.fr/funding",
 					"type": 301
 				},
 				{
@@ -266,6 +266,11 @@
 				{
 					"regex": "/wakatime(?:.*)",
 					"destination": "https://wakatime.com/@Wixonic",
+					"type": 301
+				},
+				{
+					"regex": "/youtube/clips(?:.*)",
+					"destination": "https://www.youtube.com/@Wixonic-Clips",
 					"type": 301
 				},
 				{
