@@ -156,7 +156,7 @@ export class Avatar {
 			this.headTargetPosition.set(
 				Math.min(Math.max(-m[12], -15), 15) / 15,
 				Math.min(Math.max(m[13], -12), 12) / 25,
-				Math.min((m[14] + 45) / 15, 0)
+				Math.min((m[14] + 45) / 20, 0.8)
 			);
 
 			const headTargetRotation = new THREE.Euler(
