@@ -107,7 +107,8 @@ export default (config) => {
 		"mp3",
 		"woff2",
 		"json",
-		"glb"
+		"glb",
+		"xml"
 	]) config.addPassthroughCopy(`websites/**/*.${extension}`);
 
 	config.addPassthroughCopy("websites/**/robots.txt");
