@@ -9,9 +9,9 @@ export class SceneManager {
 		this.camera = null;
 		this.renderer = null;
 
-		this.cameraPosition = [0, 0.15, 0.7];
-		this.primaryLightPos = [4, 5, 10];
-		this.secondaryLightPos = [-5, 2, 5];
+		this.cameraPosition = [0, 0.15, 1.0];
+		this.primaryLightPos = [4, 15, 3];
+		this.secondaryLightPos = [-5, -5, 5];
 
 		this.resizeObserver = null;
 	}
@@ -28,10 +28,10 @@ export class SceneManager {
 
 		const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
 
-		const primaryDirectionalLight = new THREE.DirectionalLight(0xffffff, 3);
+		const primaryDirectionalLight = new THREE.DirectionalLight(0xffffff, 10);
 		primaryDirectionalLight.position.set(...this.primaryLightPos);
 
-		const secondaryDirectionalLight = new THREE.DirectionalLight(0xffffff, 1);
+		const secondaryDirectionalLight = new THREE.DirectionalLight(0xffffff, 6);
 		secondaryDirectionalLight.position.set(...this.secondaryLightPos);
 
 		this.scene.add(ambientLight, primaryDirectionalLight, secondaryDirectionalLight);

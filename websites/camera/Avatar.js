@@ -15,14 +15,14 @@ export class Avatar {
 		this.eyesInitialPosition = new THREE.Vector3(0.07, 0.22, 0.245);
 		this.eyeMovementCoeff = { x: 15, y: 15 };
 		this.blinkState = { left: false, right: false };
-		this.blinkingThresholdOn = 0.6;
-		this.blinkingThresholdOff = 0.4;
+		this.blinkingThresholdOn = 0.5;
+		this.blinkingThresholdOff = 0.3;
 		this.eyesSyncThreshold = 0.2;
 		this.smilingFactor = 0.3;
 
 		this.eyeBaseCoeff = 0.1;
-		this.headPositionBaseCoeff = 0.1;
-		this.headQuaternionBaseCoeff = 0.1;
+		this.headPositionBaseCoeff = 0.05;
+		this.headQuaternionBaseCoeff = 0.05;
 		this.blendShapeBaseCoeff = {
 			9: 0.5, // eyeBlinkLeft
 			10: 0.5, // eyeBlinkRight
