@@ -1,2 +1,4 @@
 User-agent: *
 Allow: *
+
+Sitemap: https://go.wixonic.fr/sitemap.xml
