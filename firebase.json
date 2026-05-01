@@ -279,11 +279,6 @@
 					"type": 301
 				},
 				{
-					"regex": "/youtube/clips(?:.*)",
-					"destination": "https://www.youtube.com/@Wixonic-Clips",
-					"type": 301
-				},
-				{
 					"regex": "/youtube(?:.*)",
 					"destination": "https://www.youtube.com/@Wixonic",
 					"type": 301
