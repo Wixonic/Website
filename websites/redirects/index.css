@@ -81,3 +81,14 @@
 	--theme-shadow: hsl(0, 0%, 0%, 20%);
 	--theme-shadow-subtle: hsl(0, 0%, 0%, 10%);
 }
+
+.osu-theme {
+	--theme-dark: hsl(327, 85%, 57%);
+	--theme: hsl(333, 100%, 70%);
+	--theme-light: hsl(330, 100%, 80%);
+	--theme-text: hsl(330, 100%, 93%);
+	--theme-border: hsl(324, 83%, 40%);
+	--theme-border-subtle: hsla(324, 83%, 40%, 50%);
+	--theme-shadow: hsla(333, 100%, 70%, 50%);
+	--theme-shadow-subtle: hsla(333, 100%, 70%, 30%);
+}

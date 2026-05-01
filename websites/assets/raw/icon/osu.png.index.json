@@ -1,0 +1,21 @@
+{
+	"ready": true,
+	"type": "image",
+	"name": "Osu!",
+	"description": "Osu! icon since 2024",
+	"copyright": "Copyright © 2024 <a href=\"mailto:contact@ppy.sh\">ppy Pty Ltd</a> - MIT License",
+	"download": false,
+	"link": "https://github.com/ppy/osu/blob/master/assets/lazer.png",
+	"author": "Dean Lewis Herbert",
+	"files": [
+		{
+			"path": "osu.png",
+			"width": 1024,
+			"height": 1024,
+			"size": 448852,
+			"format": "png",
+			"codec": "PNG image",
+			"mime": "image/png"
+		}
+	]
+}

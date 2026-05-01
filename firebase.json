@@ -264,6 +264,11 @@
 					"type": 301
 				},
 				{
+					"regex": "/osu(?:.*)",
+					"destination": "https://osu.ppy.sh/users/36630136",
+					"type": 301
+				},
+				{
 					"regex": "/reddit(?:.*)",
 					"destination": "https://www.reddit.com/user/Wixonic12",
 					"type": 301

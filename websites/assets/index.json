@@ -20,6 +20,7 @@
 	"/icon/logo/1024.png": "/raw/icon/logo.index.json",
 	"/icon/logo.svg": "/raw/icon/logo.index.json",
 	"/icon/logo/pixelated.png": "/raw/icon/logo.index.json",
+	"/icon/osu.png": "/raw/icon/osu.png.index.json",
 	"/icon/logo/round/16.png": "/raw/icon/round.index.json",
 	"/icon/logo/round/24.png": "/raw/icon/round.index.json",
 	"/icon/logo/round/32.png": "/raw/icon/round.index.json",
