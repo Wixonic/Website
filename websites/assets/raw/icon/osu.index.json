@@ -14,8 +14,8 @@
 			"height": 1024,
 			"size": 448852,
 			"format": "png",
-			"codec": "PNG image",
-			"mime": "image/png"
+			"codec": "PNG (Portable Network Graphics) image",
+			"mime": "png"
 		}
 	]
 }

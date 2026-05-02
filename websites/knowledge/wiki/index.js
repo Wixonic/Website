@@ -29,6 +29,12 @@ const display = (content, assets) => {
 		});
 	});
 	loader.remove();
+
+	container.querySelectorAll("img").forEach((element) => {
+		const src = element.getAttribute("src");
+		if (assets[src]) element.src = URL.createObjectURL(assets[src]);
+		else element.src = new URL("/raw/icon/image_not_found.png", path.assets).href;
+	});
 };
 
 const load = async (asset, format = "blob") => {

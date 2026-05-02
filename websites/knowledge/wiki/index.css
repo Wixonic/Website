@@ -3,7 +3,7 @@ main {
 	flex-direction: column;
 	align-items: center;
 
-	max-width: 75rem;
+	max-width: 50rem;
 
 	margin: 0 auto;
 	padding: 0.8rem;
@@ -243,4 +243,18 @@ section.example::after {
 	to {
 		transform: translateY(-2rem) scale(0.9, 1.1);
 	}
+}
+
+img {
+	display: block;
+
+	background: var(--background-front);
+
+	max-height: 15rem;
+	max-width: 100%;
+
+	border: 0.05rem solid var(--background-deep);
+	border-radius: 0.2rem;
+
+	margin: 1rem;
 }

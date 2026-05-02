@@ -1,0 +1,21 @@
+{
+	"ready": true,
+	"type": "image",
+	"name": "Image Not Found",
+	"description": "A simple image to indicate that an image could not be found.<br />This file is licensed under the Creative Commons Attribution-Share Alike 4.0 International license.",
+	"copyright": null,
+	"download": false,
+	"link": "https://commons.wikimedia.org/wiki/File:Image-not-found.png",
+	"author": "Dang1702",
+	"files": [
+		{
+			"path": "image_not_found.png",
+			"width": 225,
+			"height": 225,
+			"size": 809,
+			"format": "png",
+			"codec": "PNG (Portable Network Graphics) image",
+			"mime": "png"
+		}
+	]
+}
