@@ -99,7 +99,8 @@ section.example {
 }
 
 section.definition {
-	--section-border-color: #06F;
+	--section-background: #07F1;
+	--section-border-color: #07F;
 }
 
 section.definition::after {
@@ -107,7 +108,7 @@ section.definition::after {
 }
 
 section.notation {
-	--section-border-color: #60F;
+	--section-border-color: #80F;
 }
 
 section.notation::after {
@@ -115,7 +116,7 @@ section.notation::after {
 }
 
 section.comment {
-	--section-border-color: #8888;
+	--section-border-color: #07F;
 }
 
 section.comment::after {
@@ -123,8 +124,8 @@ section.comment::after {
 }
 
 section.proposition {
-	--section-border-color: #F00;
 	--section-background: #F001;
+	--section-border-color: #F00;
 }
 
 section.proposition::after {
@@ -132,8 +133,8 @@ section.proposition::after {
 }
 
 section.theorem {
-	--section-background: #F001;
-	--section-border-color: #F00;
+	--section-background: #A041;
+	--section-border-color: #A04;
 }
 
 section.theorem::after {
@@ -186,7 +187,18 @@ section.proof::after {
 }
 
 section.example {
-	border: none;
+	--section-border-color: #0005;
+	--section-border-radius: 0;
+
+	border-top: none;
+	border-right: none;
+	border-bottom: none;
+}
+
+@media (prefers-color-scheme: dark) {
+	section.example {
+		--section-border-color: #FFF5;
+	}
 }
 
 section.example::after {
