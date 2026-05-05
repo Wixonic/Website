@@ -7,21 +7,25 @@ service firebase.storage {
 		}
 
 		function hasRole(role) {
-			return request.auth != null && request.auth.token[role] == true;
+			return request.auth != null && role in request.auth.token && request.auth.token[role] == true;
 		}
 
-		function can(path, action) {
-			return request.auth != null && path in getUserPermissions()[action];
+		function can(action) {
+			return request.auth != null && getPath() in getUserPermissions()[action];
+		}
+
+		function getPath() {
+			return request.resource != null ? request.resource.name : (resource != null ? resource.name : "");
 		}
 
 		match /knowledge/private/{privatePath=**} {
-			allow read: if request.auth != null && (hasRole("admin") || can("knowledge/private/" + string(privatePath), "read"));
-			allow write: if request.auth != null && (hasRole("admin") || can("knowledge/private/" + string(privatePath), "write"));
+			allow read: if request.auth != null && (hasRole("admin") || can("read"));
+			allow write: if request.auth != null && (hasRole("admin") || can("write"));
 		}
 
 		match /knowledge/{filePath=**} {
-			allow read: if !string(filePath).startsWith("private/");
-			allow write: if request.auth != null && (hasRole("admin") || hasRole("editor") || can("knowledge/" + string(filePath), "write"));
+			allow read: if !getPath().startsWith("knowledge/private/");
+			allow write: if request.auth != null && (hasRole("admin") || hasRole("editor") || can("write"));
 		}
 	}
 }
