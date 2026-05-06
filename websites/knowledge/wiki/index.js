@@ -56,6 +56,10 @@ addEventListener("DOMContentLoaded", async () => {
 
 		try {
 			const metadatas = await load("index.json", "json");
+
+			document.body.setAttribute("lang", metadatas.lang);
+			document.body.setAttribute("model", metadatas.model);
+
 			const content = await load(metadatas.content, "text");
 
 			const assetsRequests = metadatas.assets.map((asset) => load(asset));
