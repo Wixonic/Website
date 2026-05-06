@@ -97,7 +97,7 @@ body {
 
 /* THEMES */
 .primary,
-a:not(.button) {
+a[href]:not(.button) {
 	--theme-dark: var(--theme-primary-dark);
 	--theme: var(--theme-primary);
 	--theme-light: var(--theme-primary-light);
@@ -108,7 +108,8 @@ a:not(.button) {
 	--theme-shadow-subtle: var(--theme-primary-shadow-subtle);
 }
 
-.danger {
+.danger,
+a:not(.button) {
 	--theme-dark: var(--theme-danger-dark);
 	--theme: var(--theme-danger);
 	--theme-light: var(--theme-danger-light);

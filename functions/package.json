@@ -4,7 +4,7 @@
 	"description": "Cloud Functions for my website.",
 	"author": "Wixonic <contact@wixonic.fr> (https://wixonic.fr)",
 	"engines": {
-		"node": "26"
+		"node": "24"
 	},
 	"main": "index.js",
 	"dependencies": {
