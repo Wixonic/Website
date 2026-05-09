@@ -105,30 +105,6 @@
 			]
 		},
 		{
-			"target": "camera",
-			"public": "./build/camera",
-			"ignore": [
-				".DS_Store"
-			],
-			"rewrites": [
-				{
-					"source": "**",
-					"destination": "/"
-				}
-			],
-			"headers": [
-				{
-					"source": "**",
-					"headers": [
-						{
-							"key": "Cache-Control",
-							"value": "max-age=7200, must-revalidate"
-						}
-					]
-				}
-			]
-		},
-		{
 			"target": "discord",
 			"public": "./build/discord",
 			"ignore": [
