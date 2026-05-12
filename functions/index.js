@@ -16,7 +16,7 @@ server.use(logger);
 
 server.use("/auth", auth);
 
-exports.httpServer = functions.onRequest({
+exports.http_server = functions.onRequest({
 	cors: false,
 	memory: "256MiB",
 	region: "europe-west1",

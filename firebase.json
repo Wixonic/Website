@@ -133,7 +133,7 @@
 			"rewrites": [
 				{
 					"source": "**",
-					"function": "httpServer",
+					"function": "http_server",
 					"region": "europe-west1"
 				}
 			]

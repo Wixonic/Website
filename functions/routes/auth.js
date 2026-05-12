@@ -13,7 +13,7 @@ const sendVerificationEmail = async (email, newEmail) => {
 	url.searchParams.set("oobCode", verificationLink.searchParams.get("oobCode"));
 
 	await transporter.sendMail({
-		from: "Wixonic <contact@wixonic.fr>",
+		from: "Wixonic <noreply@wixonic.fr>",
 		replyTo: "contact@wixonic.fr",
 		to: email,
 		subject: "Verify your email",
@@ -122,9 +122,9 @@ router.post(["/join", "/join/"], async (req, res) => {
 
 	try {
 		const credentials = await clientAuthLibrary.createUserWithEmailAndPassword(clientAuth, email, password);
-		const displayName = credentials.user.email == "internal@wixonic.fr" ? "Admin" : "user_" + credentials.user.uid.slice(-16, -1);
+		const displayName = credentials.user.email == "contact@wixonic.fr" ? "Admin" : "user_" + credentials.user.uid.slice(-16, -1);
 
-		if (credentials.user.email == "internal@wixonic.fr") {
+		if (credentials.user.email == "contact@wixonic.fr") {
 			await adminAuth.setCustomUserClaims(credentials.user.uid, {
 				admin: true
 			});
