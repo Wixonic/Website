@@ -44,6 +44,15 @@ const createPathTokenPlugin = (pathConfig) => ({
 	}
 });
 
+const absoluteCssExternalPlugin = {
+	name: "absolute-css-external",
+	setup(build) {
+		build.onResolve({ filter: /^\// }, (args) => {
+			if (args.kind === "import-rule") return { path: args.path, external: true };
+		});
+	}
+};
+
 export default (config) => {
 	const isEmulator = process.env.dev === "true";
 	const isClear = process.env.clear === "true";
@@ -87,9 +96,12 @@ export default (config) => {
 		splitting: !isClear,
 		format: "esm",
 		target: ["es2020"],
-		plugins: [createPathTokenPlugin(pathConfig)]
+		plugins: [
+			createPathTokenPlugin(pathConfig),
+			absoluteCssExternalPlugin
+		]
 	};
-	if (!isClear) esbuildOptions.external = ["three"]
+	if (!isClear) esbuildOptions.external = ["three"];
 
 	// --- Directories ---
 	config.setInputDirectory("websites/");
