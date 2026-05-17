@@ -260,6 +260,11 @@
 					"type": 301
 				},
 				{
+					"regex": "/youtube/secondary(?:.*)",
+					"destination": "https://www.youtube.com/@WixonicClips",
+					"type": 301
+				},
+				{
 					"regex": "/youtube(?:.*)",
 					"destination": "https://www.youtube.com/@Wixonic",
 					"type": 301
