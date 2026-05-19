@@ -11,21 +11,6 @@
         <priority>1.0</priority>
     </url>
 	<url>
-        <loc>https://discord.wixonic.fr/</loc>
-        <changefreq>monthly</changefreq>
-        <priority>1.0</priority>
-    </url>
-	<url>
-        <loc>https://knowledge.wixonic.fr/</loc>
-        <changefreq>weekly</changefreq>
-        <priority>0.7</priority>
-    </url>
-	<url>
-        <loc>https://accounts.wixonic.fr/</loc>
-        <changefreq>yearly</changefreq>
-        <priority>0.2</priority>
-    </url>
-	<url>
         <loc>https://assets.wixonic.fr/</loc>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
@@ -36,13 +21,13 @@
         <priority>0.25</priority>
     </url>
 	<url>
+        <loc>https://status.wixonic.fr/</loc>
+        <changefreq>daily</changefreq>
+        <priority>0.2</priority>
+    </url>
+	<url>
         <loc>https://camera.wixonic.fr/</loc>
         <changefreq>never</changefreq>
         <priority>0.1</priority>
-    </url>
-	<url>
-        <loc>https://admin.wixonic.fr/</loc>
-        <changefreq>yearly</changefreq>
-        <priority>0.0</priority>
     </url>
 </urlset>

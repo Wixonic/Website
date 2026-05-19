@@ -1,59 +1,18 @@
-@import url("/style/button.css");
 @import url("/style/font.css");
-@import url("/style/footer.css");
-@import url("/style/glow.css");
-@import url("/style/link.css");
-@import url("/style/section.css");
 
 body {
 	/* COLORS */
-	--background-deep: hsl(0, 0%, 100%);
-	--background-deep-seethrough: hsla(0, 0%, 100%, 80%);
-	--background: hsl(0, 0%, 95%);
-	--background-seethrough: hsla(0, 0%, 95%, 80%);
-	--background-front: hsl(0, 0%, 90%);
-	--background-front-seethrough: hsla(0, 0%, 90%, 80%);
+	--background-deep: hsl(0, 0%, 5%);
+	--background-deep-seethrough: hsla(0, 0%, 5%, 80%);
+	--background: hsl(0, 0%, 10%);
+	--background-seethrough: hsla(0, 0%, 10%, 80%);
+	--background-front: hsl(0, 0%, 15%);
+	--background-front-seethrough: hsla(0, 0%, 15%, 80%);
 
-	--text: hsl(0, 0%, 5%);
+	--text: hsl(0, 0%, 95%);
 
-	--shadow: hsla(0, 0%, 0%, 15%);
-	--shadow-subtle: hsla(0, 0%, 0%, 5%);
-
-	--theme-dark: hsl(0, 0%, 75%);
-	--theme: hsl(0, 0%, 85%);
-	--theme-light: hsl(0, 0%, 95%);
-	--theme-text: var(--text);
-	--theme-border: hsla(0, 0%, 80%, 50%);
-	--theme-border-subtle: hsla(0, 0%, 80%, 10%);
-	--theme-shadow: var(--shadow);
-	--theme-shadow-subtle: var(--shadow-subtle);
-
-	--theme-primary-dark: hsl(241, 80%, 45%);
-	--theme-primary: hsl(241, 100%, 60%);
-	--theme-primary-light: hsl(241, 100%, 80%);
-	--theme-primary-text: hsl(241, 100%, 95%);
-	--theme-primary-border: hsla(241, 100%, 80%, 50%);
-	--theme-primary-border-subtle: hsla(241, 100%, 80%, 10%);
-	--theme-primary-shadow: hsla(241, 100%, 45%, 25%);
-	--theme-primary-shadow-subtle: hsla(241, 100%, 45%, 15%);
-
-	--theme-danger-dark: hsl(0, 100%, 40%);
-	--theme-danger: hsl(0, 100%, 60%);
-	--theme-danger-light: hsl(0, 100%, 80%);
-	--theme-danger-text: hsl(0, 100%, 95%);
-	--theme-danger-border: hsla(0, 100%, 80%, 50%);
-	--theme-danger-border-subtle: hsla(0, 100%, 80%, 10%);
-	--theme-danger-shadow: hsla(0, 100%, 50%, 30%);
-	--theme-danger-shadow-subtle: hsla(0, 100%, 50%, 20%);
-
-	--theme-success-dark: hsl(120, 100%, 25%);
-	--theme-success: hsl(120, 100%, 35%);
-	--theme-success-light: hsl(120, 100%, 45%);
-	--theme-success-text: hsl(120, 100%, 95%);
-	--theme-success-border: hsla(120, 100%, 80%, 50%);
-	--theme-success-border-subtle: hsla(120, 100%, 80%, 10%);
-	--theme-success-shadow: hsla(120, 100%, 40%, 30%);
-	--theme-success-shadow-subtle: hsla(120, 100%, 40%, 20%);
+	--shadow: hsla(0, 0%, 0%, 35%);
+	--shadow-subtle: hsla(0, 0%, 0%, 20%);
 	/* COLORS */
 
 	/* FONT */
@@ -61,77 +20,6 @@ body {
 	--pixelized-font-family: "VT323", ui-monospace, "Cascadia Mono", "Segoe UI Mono", "Liberation Mono", Menlo, Monaco, Consolas, "Courier New", monospace;
 	/* FONT */
 }
-
-@media (prefers-color-scheme: dark) {
-	body {
-		/* COLORS */
-		--background-deep: hsl(0, 0%, 5%);
-		--background-deep-seethrough: hsla(0, 0%, 5%, 80%);
-		--background: hsl(0, 0%, 10%);
-		--background-seethrough: hsla(0, 0%, 10%, 80%);
-		--background-front: hsl(0, 0%, 15%);
-		--background-front-seethrough: hsla(0, 0%, 15%, 80%);
-
-		--text: hsl(0, 0%, 95%);
-
-		--shadow: hsla(0, 0%, 0%, 35%);
-		--shadow-subtle: hsla(0, 0%, 0%, 20%);
-
-		--theme-dark: hsl(0, 0%, 20%);
-		--theme: hsl(0, 0%, 25%);
-		--theme-light: hsl(0, 0%, 30%);
-		--theme-border: hsla(0, 0%, 20%, 50%);
-		--theme-border-subtle: hsla(0, 0%, 20%, 10%);
-
-		--theme-primary-shadow: hsla(241, 100%, 40%, 60%);
-		--theme-primary-shadow-subtle: var(--shadow-subtle);
-
-		--theme-danger-shadow: hsla(0, 100%, 50%, 30%);
-		--theme-danger-shadow-subtle: var(--shadow-subtle);
-
-		--theme-success-shadow: hsla(120, 100%, 30%, 30%);
-		--theme-success-shadow-subtle: var(--shadow-subtle);
-		/* COLORS */
-	}
-}
-
-/* THEMES */
-.primary,
-a[href]:not(.button) {
-	--theme-dark: var(--theme-primary-dark);
-	--theme: var(--theme-primary);
-	--theme-light: var(--theme-primary-light);
-	--theme-text: var(--theme-primary-text);
-	--theme-border: var(--theme-primary-border);
-	--theme-border-subtle: var(--theme-primary-border-subtle);
-	--theme-shadow: var(--theme-primary-shadow);
-	--theme-shadow-subtle: var(--theme-primary-shadow-subtle);
-}
-
-.danger,
-a:not(.button) {
-	--theme-dark: var(--theme-danger-dark);
-	--theme: var(--theme-danger);
-	--theme-light: var(--theme-danger-light);
-	--theme-text: var(--theme-danger-text);
-	--theme-border: var(--theme-danger-border);
-	--theme-border-subtle: var(--theme-danger-border-subtle);
-	--theme-shadow: var(--theme-danger-shadow);
-	--theme-shadow-subtle: var(--theme-danger-shadow-subtle);
-}
-
-.success {
-	--theme-dark: var(--theme-success-dark);
-	--theme: var(--theme-success);
-	--theme-light: var(--theme-success-light);
-	--theme-text: var(--theme-success-text);
-	--theme-border: var(--theme-success-border);
-	--theme-border-subtle: var(--theme-success-border-subtle);
-	--theme-shadow: var(--theme-success-shadow);
-	--theme-shadow-subtle: var(--theme-success-shadow-subtle);
-}
-
-/* THEMES */
 
 * {
 	flex-shrink: 0;
@@ -186,7 +74,6 @@ main {
 }
 
 noscript,
-#orientation-lock,
 #fatal-error {
 	display: flex;
 	flex-direction: column;
@@ -210,9 +97,8 @@ noscript,
 	z-index: 1000;
 }
 
-noscript span,
-#orientation-lock span,
-#fatal-error span {
+noscript p,
+#fatal-error p {
 	max-width: max(50rem, 95%);
 
 	word-wrap: break-word;

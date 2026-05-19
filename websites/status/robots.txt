@@ -1,0 +1,4 @@
+User-agent: *
+Allow: *
+
+Sitemap: https://status.wixonic.fr/sitemap.xml

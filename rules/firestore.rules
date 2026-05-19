@@ -2,6 +2,10 @@ rules_version = "2";
 
 service cloud.firestore {
 	match /databases/{database}/documents {
+		function hasRole(role) {
+			return request.auth != null && role in request.auth.token && request.auth.token[role] == true;
+		}
+
 		function isValidDisplayName(name) {
 			return name is string && name.matches("^[\\p{L}\\p{N}_\\- ]{4,20}$");
 		}

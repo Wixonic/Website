@@ -5,23 +5,8 @@
 	"targets": {
 		"wixonic-v5-website": {
 			"hosting": {
-				"accounts": [
-					"accounts-wixonic-v5-website"
-				],
-				"admin": [
-					"admin-wixonic-v5-website"
-				],
 				"assets": [
 					"assets-wixonic-v5-website"
-				],
-				"discord": [
-					"discord-wixonic-v5-website"
-				],
-				"functions": [
-					"functions-wixonic-v5-website"
-				],
-				"knowledge": [
-					"knowledge-wixonic-v5-website"
 				],
 				"onion": [
 					"onion-wixonic-v5-website"
@@ -31,6 +16,9 @@
 				],
 				"root": [
 					"wixonic-v5-website"
+				],
+				"status": [
+					"status-wixonic-v5-website"
 				]
 			}
 		}

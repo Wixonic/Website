@@ -1,4 +1,0 @@
-User-agent: *
-Allow: *
-
-Sitemap: https://knowledge.wixonic.fr/sitemap.xml

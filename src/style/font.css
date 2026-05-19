@@ -1,15 +1,4 @@
 @font-face {
-	font-family: "VT323";
-
-	font-display: swap;
-	font-style: normal;
-	font-weight: 400;
-
-	src: local("VT323"),
-	url("{{ path.assets }}/raw/font/VT323/regular.woff2") format("woff2");
-}
-
-@font-face {
 	font-family: "Open Sans";
 
 	font-display: swap;
@@ -29,16 +18,4 @@
 
 	src: local("Open Sans"),
 	url("{{ path.assets }}/raw/font/OpenSans/italic.woff2") format("woff2");
-}
-
-.icon {
-	display: inline-block;
-
-	width: 1em;
-	height: 1em;
-
-	vertical-align: -0.125em;
-	fill: currentColor;
-
-	margin: 0 0.25em;
 }

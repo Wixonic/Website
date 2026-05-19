@@ -59,32 +59,23 @@ export default (config) => {
 
 	const pathConfig = isEmulator ? {
 		root: "http://localhost:2005",
-		accounts: "http://localhost:2010",
-		admin: "http://localhost:2011",
-		assets: "http://localhost:2012",
-		discord: "http://localhost:2013",
-		functions: "http://localhost:2014",
-		knowledge: "http://localhost:2015",
-		onion: "http://localhost:2016",
-		redirects: "http://localhost:2017",
+		assets: "http://localhost:2010",
+		onion: "http://localhost:2011",
+		redirects: "http://localhost:2012",
+		status: "http://localhost:2013",
+
 		server: "http://localhost:999",
+
 		firebase: {
-			auth: "http://localhost:2001",
-			firestore: { domain: "localhost", port: 2002 },
-			storage: { domain: "localhost", port: 2003 },
-			functions: { domain: "localhost", port: 2004 }
+			firestore: { domain: "localhost", port: 2002 }
 		}
 	} : {
 		root: "https://wixonic.fr",
-		accounts: "https://accounts.wixonic.fr",
-		admin: "https://admin.wixonic.fr",
 		assets: "https://assets.wixonic.fr",
-		camera: "https://camera.wixonic.fr",
-		discord: "https://discord.wixonic.fr",
-		functions: "https://functions.wixonic.fr",
-		knowledge: "https://knowledge.wixonic.fr",
 		onion: "https://onion.wixonic.fr",
 		redirects: "https://go.wixonic.fr",
+		status: "https://status.wixonic.fr",
+
 		server: "https://server.wixonic.fr"
 	};
 
