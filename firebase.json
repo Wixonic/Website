@@ -120,6 +120,11 @@
 					"type": 301
 				},
 				{
+					"regex": "/github/commits(?:.*)",
+					"destination": "https://github.com/search?q=author:Wixonic&type=commits&s=committer-date&o=desc",
+					"type": 301
+				},
+				{
 					"regex": "/github(?:.*)",
 					"destination": "https://github.com/Wixonic",
 					"type": 301
@@ -150,7 +155,7 @@
 					"type": 301
 				},
 				{
-					"regex": "/youtube/secondary(?:.*)",
+					"regex": "/youtube/clips(?:.*)",
 					"destination": "https://www.youtube.com/@WixonicClips",
 					"type": 301
 				},
