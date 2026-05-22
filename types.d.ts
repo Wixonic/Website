@@ -1,29 +1,24 @@
 declare global {
 	const path: {
 		root: string;
-		accounts: string;
-		admin: string;
 		assets: string;
-		functions: string;
-		knowledge: string;
 		redirects: string;
+		status: string;
 		server: string;
 
-		firebase?: {
-			auth: string;
-			firestore: {
+		github: {
+			username: string;
+		};
+
+		firebase: {
+			version: string;
+			isEmulator: boolean;
+
+			firestore?: {
 				domain: string;
 				port: number;
 			};
-			functions: {
-				domain: string;
-				port: number;
-			};
-			storage: {
-				domain: string;
-				port: number;
-			};
-		}
+		};
 	};
 }
 

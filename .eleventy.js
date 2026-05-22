@@ -30,10 +30,12 @@ const createPathTokenPlugin = (pathConfig) => ({
 	setup(build) {
 		build.onLoad({ filter: /\.(css|js)$/ }, async (args) => {
 			const source = await fsp.readFile(args.path, "utf8");
-			const contents = source.replace(/{{\s*path\.([\w]+)\s*}}/g, (match, key) => {
-				if (!pathConfig[key]) return match;
+			const contents = source.replace(/{{\s*path\.([\w.]+)\s*}}/g, (match, keyPath) => {
+				const value = keyPath.split(".").reduce((currentValue, key) => currentValue?.[key], pathConfig);
 
-				return pathConfig[key];
+				if (value === undefined) return match;
+
+				return value;
 			});
 
 			return {
@@ -58,16 +60,22 @@ export default (config) => {
 	const isClear = process.env.clear === "true";
 
 	const pathConfig = isEmulator ? {
-		root: "http://localhost:2005",
-		assets: "http://localhost:2010",
-		onion: "http://localhost:2011",
-		redirects: "http://localhost:2012",
-		status: "http://localhost:2013",
+		root: "http://127.0.0.1:2005",
+		assets: "http://127.0.0.1:2010",
+		onion: "http://127.0.0.1:2011",
+		redirects: "http://127.0.0.1:2012",
+		status: "http://127.0.0.1:2013",
 
-		server: "http://localhost:999",
+		server: "http://127.0.0.1:999",
+
+		github: {
+			username: "Wixonic"
+		},
 
 		firebase: {
-			firestore: { domain: "localhost", port: 2002 }
+			version: "12.13.0",
+			isEmulator: true,
+			firestore: { domain: "127.0.0.1", port: 2002 }
 		}
 	} : {
 		root: "https://wixonic.fr",
@@ -76,7 +84,16 @@ export default (config) => {
 		redirects: "https://go.wixonic.fr",
 		status: "https://status.wixonic.fr",
 
-		server: "https://server.wixonic.fr"
+		server: "https://server.wixonic.fr",
+
+		github: {
+			username: "Wixonic"
+		},
+
+		firebase: {
+			version: "12.13.0",
+			isEmulator: false
+		}
 	};
 
 	const esbuildOptions = {

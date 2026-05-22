@@ -2,12 +2,7 @@
 
 body {
 	/* COLORS */
-	--background-deep: hsl(0, 0%, 5%);
-	--background-deep-seethrough: hsla(0, 0%, 5%, 80%);
 	--background: hsl(0, 0%, 10%);
-	--background-seethrough: hsla(0, 0%, 10%, 80%);
-	--background-front: hsl(0, 0%, 15%);
-	--background-front-seethrough: hsla(0, 0%, 15%, 80%);
 
 	--text: hsl(0, 0%, 95%);
 

@@ -207,15 +207,15 @@
 		"singleProjectMode": true,
 		"ui": {
 			"enabled": true,
-			"host": "localhost",
+			"host": "127.0.0.1",
 			"port": 2000
 		},
 		"firestore": {
-			"host": "localhost",
+			"host": "127.0.0.1",
 			"port": 2002
 		},
 		"hosting": {
-			"host": "localhost",
+			"host": "127.0.0.1",
 			"port": 2005
 		}
 	},

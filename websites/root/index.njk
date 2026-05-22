@@ -2,15 +2,181 @@
 layout: main.njk
 title: Wixonic
 description: Learn more about Wixonic.
+styles:
+- index.css
+scripts:
+- index.js
 ---
 
 {% include "header.njk" %}
 
 <main>
 
-	<h1>Wixonic's Website</h1>
+	<section class="events">
 
-	<p>This website is currently under construction.</p>
+		<h2>Events</h2>
+
+		<a id="view-more-events" class="button" href="/events/">View more</button>
+
+	</section>
+
+	<section class="news">
+
+		<h2>News</h2>
+
+		<article class="news">
+
+			<div class="tag discord">Discord</div>
+
+			<h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h3>
+
+			<div class="content">Sed a suscipit felis, in semper metus. Proin molestie libero a vehicula condimentum. Nunc rutrum sagittis diam. In eleifend mollis laoreet. Vivamus tincidunt in ligula quis ullamcorper. Etiam eleifend laoreet maximus. Mauris iaculis nec elit in molestie. Etiam in luctus ante, eget interdum leo. Nullam vestibulum rutrum risus id commodo.</div>
+
+		</article>
+
+		<article class="news">
+
+			<div class="tag youtube">YouTube</div>
+
+			<h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h3>
+
+			<div class="content">Sed a suscipit felis, in semper metus. Proin molestie libero a vehicula condimentum. Nunc rutrum sagittis diam. In eleifend mollis laoreet. Vivamus tincidunt in ligula quis ullamcorper. Etiam eleifend laoreet maximus. Mauris iaculis nec elit in molestie. Etiam in luctus ante, eget interdum leo. Nullam vestibulum rutrum risus id commodo.</div>
+
+		</article>
+
+		<article class="news">
+
+			<h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h3>
+
+			<div class="content">Sed a suscipit felis, in semper metus. Proin molestie libero a vehicula condimentum. Nunc rutrum sagittis diam. In eleifend mollis laoreet. Vivamus tincidunt in ligula quis ullamcorper. Etiam eleifend laoreet maximus. Mauris iaculis nec elit in molestie. Etiam in luctus ante, eget interdum leo. Nullam vestibulum rutrum risus id commodo.</div>
+
+		</article>
+
+		<a id="view-more-news" class="button" href="/news/">View more</button>
+
+	</section>
+
+	<section class="projects">
+
+		<h2>Projects</h2>
+
+		<article class="project">
+
+			<div class="tag pinned">Pinned</div>
+
+			<h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h3>
+
+			<div class="content">Sed a suscipit felis, in semper metus. Proin molestie libero a vehicula condimentum. Nunc rutrum sagittis diam. In eleifend mollis laoreet. Vivamus tincidunt in ligula quis ullamcorper. Etiam eleifend laoreet maximus. Mauris iaculis nec elit in molestie. Etiam in luctus ante, eget interdum leo. Nullam vestibulum rutrum risus id commodo.</div>
+
+		</article>
+
+		<article class="external github project">
+
+			<div class="tag pinned">Pinned</div>
+
+			<h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h3>
+
+			<div class="content">Sed a suscipit felis, in semper metus. Proin molestie libero a vehicula condimentum. Nunc rutrum sagittis diam. In eleifend mollis laoreet. Vivamus tincidunt in ligula quis ullamcorper. Etiam eleifend laoreet maximus. Mauris iaculis nec elit in molestie. Etiam in luctus ante, eget interdum leo. Nullam vestibulum rutrum risus id commodo.</div>
+
+		</article>
+
+		<article class="external project">
+
+			<h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h3>
+
+			<div class="content">Sed a suscipit felis, in semper metus. Proin molestie libero a vehicula condimentum. Nunc rutrum sagittis diam. In eleifend mollis laoreet. Vivamus tincidunt in ligula quis ullamcorper. Etiam eleifend laoreet maximus. Mauris iaculis nec elit in molestie. Etiam in luctus ante, eget interdum leo. Nullam vestibulum rutrum risus id commodo.</div>
+
+		</article>
+
+		<article class="external locked github project">
+
+			<h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h3>
+
+			<div class="content">Sed a suscipit felis, in semper metus. Proin molestie libero a vehicula condimentum. Nunc rutrum sagittis diam. In eleifend mollis laoreet. Vivamus tincidunt in ligula quis ullamcorper. Etiam eleifend laoreet maximus. Mauris iaculis nec elit in molestie. Etiam in luctus ante, eget interdum leo. Nullam vestibulum rutrum risus id commodo.</div>
+
+		</article>
+
+		<article class="project">
+
+			<h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h3>
+
+			<div class="content">Sed a suscipit felis, in semper metus. Proin molestie libero a vehicula condimentum. Nunc rutrum sagittis diam. In eleifend mollis laoreet. Vivamus tincidunt in ligula quis ullamcorper. Etiam eleifend laoreet maximus. Mauris iaculis nec elit in molestie. Etiam in luctus ante, eget interdum leo. Nullam vestibulum rutrum risus id commodo.</div>
+
+		</article>
+
+		<article class="commits">
+
+			<h3>Recent commits</h3>
+
+			<div class="content">
+
+				<a class="unlink commit" href="https://github.com/pathtocommit">
+
+					<div class="hash">abc1234</div>
+
+					<h4>Lorem ipsum</h4>
+
+					<div class="date">3h ago</div>
+
+					<div class="message">Sed a suscipit felis, in semper metus. Proin molestie libero a vehicula condimentum. Nunc rutrum sagittis diam. In eleifend mollis laoreet. Vivamus tincidunt in ligula quis ullamcorper. Etiam eleifend laoreet maximus. Mauris iaculis nec elit in molestie. Etiam in luctus ante, eget interdum leo. Nullam vestibulum rutrum risus id commodo.</div>
+
+				</a>
+
+				<a class="unlink commit" href="https://github.com/pathtocommit">
+
+					<div class="hash">abc1234</div>
+
+					<h4>Lorem ipsum</h4>
+
+					<div class="date">3h ago</div>
+
+					<div class="message">Sed a suscipit felis, in semper metus. Proin molestie libero a vehicula condimentum. Nunc rutrum sagittis diam. In eleifend mollis laoreet. Vivamus tincidunt in ligula quis ullamcorper. Etiam eleifend laoreet maximus. Mauris iaculis nec elit in molestie. Etiam in luctus ante, eget interdum leo. Nullam vestibulum rutrum risus id commodo.</div>
+
+				</a>
+
+				<a class="unlink commit" href="https://github.com/pathtocommit">
+
+					<div class="hash">abc1234</div>
+
+					<h4>Lorem ipsum</h4>
+
+					<div class="date">3h ago</div>
+
+					<div class="message">Sed a suscipit felis, in semper metus. Proin molestie libero a vehicula condimentum. Nunc rutrum sagittis diam. In eleifend mollis laoreet. Vivamus tincidunt in ligula quis ullamcorper. Etiam eleifend laoreet maximus. Mauris iaculis nec elit in molestie. Etiam in luctus ante, eget interdum leo. Nullam vestibulum rutrum risus id commodo.</div>
+
+				</a>
+
+				<a class="unlink commit" href="https://github.com/pathtocommit">
+
+					<div class="hash">abc1234</div>
+
+					<h4>Lorem ipsum</h4>
+
+					<div class="date">3h ago</div>
+
+					<div class="message">Sed a suscipit felis, in semper metus. Proin molestie libero a vehicula condimentum. Nunc rutrum sagittis diam. In eleifend mollis laoreet. Vivamus tincidunt in ligula quis ullamcorper. Etiam eleifend laoreet maximus. Mauris iaculis nec elit in molestie. Etiam in luctus ante, eget interdum leo. Nullam vestibulum rutrum risus id commodo.</div>
+
+				</a>
+
+			</div>
+
+			<a id="view-more-commits" class="button" href="{{ path.redirects }}/github/commits">Full changelog</a>
+
+		</article>
+
+		<a id="view-more-project" class="button" href="/projects/">All projects</button>
+
+	</section>
+
+	<section class="about">
+
+		<h2>About Me</h2>
+
+		<img class="avatar" src="{{ path.assets }}/avatar/transparent/512.webp" alt="Wixonic's current avatar" />
+
+		<div class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a suscipit felis, in semper metus. Proin molestie libero a vehicula condimentum. Nunc rutrum sagittis diam. In eleifend mollis laoreet. Vivamus tincidunt in ligula quis ullamcorper. Etiam eleifend laoreet maximus. Mauris iaculis nec elit in molestie. Etiam in luctus ante, eget interdum leo. Nullam vestibulum rutrum risus id commodo.</div>
+
+	</section>
 
 </main>
 
