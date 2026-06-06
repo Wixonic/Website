@@ -181,6 +181,7 @@ addEventListener("DOMContentLoaded", async () => {
 				.slice(0, 5);
 
 			const commitContainer = document.querySelector("section.projects article.commits .content");
+			const commitElements = [];
 			for (const commit of commits) {
 				console.log(commit);
 				const commitElement = document.createElement("a");
@@ -204,8 +205,11 @@ addEventListener("DOMContentLoaded", async () => {
 				dateElement.textContent = `${parseDuration(Date.now() - commitDate.getTime())} ago`;
 				commitElement.append(dateElement);
 
-				commitContainer.append(commitElement);
+				commitElements.push(commitElement);
 			}
+
+			commitContainer.innerHTML = "";
+			commitContainer.append(...commitElements);
 		} else logger.warn("GitHub API request failed", `Status: ${githubEventsRequest.status}`);
 	} catch (error) {
 		logger.error("Data import failed", error.message, error.stack);

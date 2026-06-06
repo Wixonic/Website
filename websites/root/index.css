@@ -54,3 +54,57 @@ section.events a#view-more-events {
 	grid-column: 2;
 	grid-row: 4;
 }
+
+/* --- Commits --- */
+section.projects article.commits .commit {
+	position: relative;
+
+	display: grid;
+	grid-template-columns: auto 1fr;
+	grid-template-areas: "hash date" "source source";
+	gap: 0.5rem 1rem;
+
+	padding-left: 2rem;
+	padding-bottom: 2rem;
+}
+
+section.projects article.commits .commit .hash {
+	grid-area: hash;
+
+	display: flex;
+	align-items: center;
+
+	background: hsla(var(--background-light), 50%);
+	box-shadow: 0 0 0.5rem hsla(var(--theme-light), 30%);
+
+	color: hsla(var(--theme-light), 75%);
+	font-size: 0.8rem;
+
+	border: 0.03rem solid hsla(var(--theme-light), 50%);
+	border-radius: 0.2rem;
+
+	padding: 0.1rem 0.2rem;
+
+	transition: background 0.3s, color 0.3s, border-color 0.3s;
+}
+
+section.projects article.commits .commit:hover .hash {
+	background: hsla(var(--theme), 25%);
+
+	color: hsl(var(--theme-light));
+
+	border-color: hsla(var(--theme-light), 75%);
+}
+
+section.projects article.commits .commit .date {
+	grid-area: date;
+
+	display: flex;
+	align-items: center;
+
+	color: hsla(var(--text), 40%);
+}
+
+section.projects article.commits .commit .source {
+	grid-area: source;
+}
