@@ -1,0 +1,63 @@
+header {
+	display: grid;
+	grid-template-columns: fit-content auto fit-content;
+	grid-template-rows: auto;
+}
+
+header .root {
+	grid-column: 1;
+	grid-row: 1;
+
+	display: flex;
+	align-items: center;
+	width: fit-content;
+	gap: 0.5rem;
+	padding: 0.5rem;
+}
+
+header .root .logo {
+	height: 2rem;
+}
+
+header .root .text {
+	height: 2rem;
+}
+
+header nav {
+	grid-column: 3;
+	grid-row: 1;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 1rem;
+
+	width: fit-content;
+
+	margin-left: auto;
+	padding: 0.5rem;
+}
+
+header nav a {}
+
+header nav a .icon {}
+
+@media (min-width: 40rem) {
+	header nav a .icon {
+		display: none;
+	}
+}
+
+@media (max-width: 40rem) {
+	header {
+		grid-template-columns: 2rem auto;
+	}
+
+	header .text {
+		display: none;
+	}
+
+	header nav a .subtext {
+		font-size: 0.7rem;
+	}
+}

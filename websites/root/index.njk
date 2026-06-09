@@ -8,7 +8,39 @@ scripts:
 - index.js
 ---
 
-{% include "header.njk" %}
+<header>
+
+	{% include "header.njk" %}
+
+	<nav>
+
+		<a class="unlink" href="/events/">
+			<img class="icon" src="{{ path.assets }}/icon/events.svg" alt="Events icon" />
+
+			<div class="subtext">Events</div>
+		</a>
+
+		<a class="unlink" href="/news/">
+			<img class="icon" src="{{ path.assets }}/icon/news.svg" alt="News icon" />
+
+			<div class="subtext">News</div>
+		</a>
+
+		<a class="unlink" href="/projects/">
+			<img class="icon" src="{{ path.assets }}/icon/projects.svg" alt="Projects icon" />
+
+			<div class="subtext">Projects</div>
+		</a>
+
+		<a class="unlink" href="/about/">
+			<img class="icon" src="{{ path.assets }}/icon/about.svg" alt="About icon" />
+
+			<div class="subtext">About</div>
+		</a>
+
+	</nav>
+
+</header>
 
 <main>
 
@@ -91,4 +123,8 @@ scripts:
 
 </main>
 
-{% include "footer.njk" %}
+<footer>
+
+	{% include "footer.njk" %}
+
+</footer>

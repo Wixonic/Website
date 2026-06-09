@@ -1,10 +1,11 @@
 @import url("/style/button.css");
 @import url("/style/font.css");
+@import url("/style/header.css");
 @import url("/style/link.css");
 
 body {
 	/* COLORS */
-	--background: 0, 0%, 10%;
+	--background: 241, 5%, 7%;
 	--background-light: 0, 0%, 20%;
 
 	--text: 0, 0%, 95%;

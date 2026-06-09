@@ -1,3 +1,7 @@
+a {
+	cursor: pointer;
+}
+
 a.unlink {
 	text-decoration: none;
 }
