@@ -61,7 +61,7 @@ import { parseDuration } from "/script/utils.js";
 
 addEventListener("DOMContentLoaded", async () => {
 	try {
-		const pinnedEventsQuery = query(collection(db, "events"), where("pinned", "==", true), orderBy("startDate", "desc"), limit(4));
+		/* const pinnedEventsQuery = query(collection(db, "events"), where("pinned", "==", true), orderBy("startDate", "desc"), limit(4));
 		const pinnedNewsQuery = query(collection(db, "news"), where("pinned", "==", true), orderBy("date", "desc"), limit(3));
 		const pinnedProjectsQuery = query(collection(db, "projects"), where("pinned", "==", true), orderBy("date", "desc"), limit(5));
 
@@ -69,15 +69,19 @@ addEventListener("DOMContentLoaded", async () => {
 			getDocs(pinnedEventsQuery),
 			getDocs(pinnedNewsQuery),
 			getDocs(pinnedProjectsQuery)
-		]);
+		]); */
 
 		/** @type {Event[]} */
-		const events = pinnedEventsSnap.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+		// const events = pinnedEventsSnap.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+		const events = [];
 		/** @type {News[]} */
-		const news = pinnedNewsSnap.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+		// const news = pinnedNewsSnap.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+		const news = [];
 		/** @type {Project[]} */
-		const projects = pinnedProjectsSnap.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+		// const projects = pinnedProjectsSnap.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+		const projects = [];
 
+		/*
 		let eventsQuery, newsQuery, projectsQuery = [new Promise(() => { }), new Promise(() => []), new Promise(() => { })];
 		if (4 - events.length > 0) eventsQuery = query(collection(db, "events"), where("pinned", "==", false), orderBy("startDate", "desc"), limit(4 - events.length));
 		if (3 - news.length > 0) newsQuery = query(collection(db, "news"), where("pinned", "==", false), orderBy("date", "desc"), limit(3 - news.length));
@@ -92,6 +96,7 @@ addEventListener("DOMContentLoaded", async () => {
 		events.push(...eventsSnap.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
 		news.push(...newsSnap.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
 		projects.push(...projectsSnap.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
+		*/
 
 		const eventContainer = document.querySelector("section.events .content");
 		const eventElements = [];
@@ -111,7 +116,7 @@ addEventListener("DOMContentLoaded", async () => {
 
 			eventElements.push(eventElement);
 		}
-		eventContainer.innerHTML = "";
+		// eventContainer.innerHTML = "";
 		eventContainer.append(...eventElements);
 
 		const newsContainer = document.querySelector("section.news .content");
@@ -139,7 +144,7 @@ addEventListener("DOMContentLoaded", async () => {
 
 			newsElements.push(newsElement);
 		}
-		newsContainer.innerHTML = "";
+		// newsContainer.innerHTML = "";
 		newsContainer.append(...newsElements);
 
 		const projectsContainer = document.querySelector("section.projects .content");
@@ -169,7 +174,7 @@ addEventListener("DOMContentLoaded", async () => {
 
 			projectsElements.push(projectElement);
 		}
-		projectsContainer.innerHTML = "";
+		// projectsContainer.innerHTML = "";
 		projectsContainer.append(...projectsElements);
 
 		const githubEventsRequest = await request("GET", `https://api.github.com/users/{{ path.github.username }}/events/public?per_page=3`, "json", null, null, 300);

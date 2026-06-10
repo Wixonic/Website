@@ -1,59 +1,43 @@
-section.events {
-	display: grid;
+/* --- Common --- */
+section.events .content .event,
+section.news .content .news,
+section.projects .content .project {
+	display: block;
+}
+
+section.events .content .event.loading,
+section.news .content .news.loading,
+section.projects .content .project.loading {
+	background: linear-gradient(45deg, transparent, transparent 10rem, hsla(var(--background-light), 10%) 15rem, hsla(var(--background-light), 20%) 20rem, hsla(var(--background-light), 10%) 25rem, transparent 30rem, transparent);
+	background-size: 400% 100%;
+	animation: loading 1s linear infinite;
+}
+
+@keyframes loading {
+	from {
+		background-position: -100%;
+	}
+
+	to {
+		background-position: 100%;
+	}
+}
+
+/* --- Events --- */
+section.events .content {
+	s display: grid;
 	grid-template-columns: repeat(2, min(40rem, 50%));
-	grid-template-rows: 2rem repeat(3, 5rem) 1rem;
+	grid-template-rows: repeat(3, 5rem);
 	gap: 1rem;
 }
 
-section.events article.event {
-	display: grid;
-	grid-template-columns: 1fr 5rem;
-	grid-template-rows: 1fr 1.7rem 1.5rem;
-}
-
-section.events article.event h3.title {
-	grid-row: 2;
-	grid-column: 1;
-
-	font-size: 1.2rem;
-	font-weight: 500;
-}
-
-section.events article.event p.summary {
-	grid-row: 3;
-	grid-column: 1;
-
-	max-width: max-content;
-	max-height: 1.2rem;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
-
-section.events article.event button:first {
-	grid-row: 3;
-	grid-column: 2;
-}
-
-section.events article.event button:last {
-	grid-row: 2;
-	grid-column: 2;
-}
-
-section.events article.event:first {
-	grid-column: 1;
+section.events .content .event:first-child {
 	grid-row: 1 / 4;
+	grid-column: 1;
 }
 
-section.events h2 {
-	grid-column: 1 / 3;
-	grid-row: 1;
-}
+/* --- Projects --- */
 
-section.events a#view-more-events {
-	grid-column: 2;
-	grid-row: 4;
-}
 
 /* --- Commits --- */
 section.projects article.commits .commit {
