@@ -9,7 +9,11 @@ section.events .content .event.loading,
 section.news .content .news.loading,
 section.projects .content .project.loading {
 	background: linear-gradient(45deg, transparent, transparent 10rem, hsla(var(--background-light), 10%) 15rem, hsla(var(--background-light), 20%) 20rem, hsla(var(--background-light), 10%) 25rem, transparent 30rem, transparent);
-	background-size: 400% 100%;
+	background-size: 200% 100%;
+
+	border: 0.06rem solid hsla(var(--background-light), 50%);
+	border-radius: 0.4rem;
+
 	animation: loading 1s linear infinite;
 }
 
@@ -25,10 +29,12 @@ section.projects .content .project.loading {
 
 /* --- Events --- */
 section.events .content {
-	s display: grid;
-	grid-template-columns: repeat(2, min(40rem, 50%));
+	display: grid;
+	grid-template-columns: repeat(2, min(40rem, calc(50vw - 1.5rem)));
 	grid-template-rows: repeat(3, 5rem);
 	gap: 1rem;
+
+	padding: 1rem;
 }
 
 section.events .content .event:first-child {
@@ -36,10 +42,32 @@ section.events .content .event:first-child {
 	grid-column: 1;
 }
 
-/* --- Projects --- */
+/* --- News --- */
+section.news .content {
+	display: grid;
+	grid-template-columns: repeat(3, min(26.33rem, calc(33.6vw - 1.5rem)));
+	grid-template-rows: 10rem;
+	gap: 1rem;
 
+	padding: 1rem;
+}
+
+/* --- Projects --- */
+section.projects .content {
+	display: grid;
+	grid-template-columns: repeat(2, min(40rem, calc(50vw - 1.5rem)));
+	grid-template-rows: repeat(3, 10rem);
+	gap: 1rem;
+
+	padding: 1rem;
+}
 
 /* --- Commits --- */
+section.projects article.commits {
+	grid-row: 3;
+	grid-column: 3;
+}
+
 section.projects article.commits .commit {
 	position: relative;
 

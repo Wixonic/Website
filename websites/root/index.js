@@ -174,7 +174,7 @@ addEventListener("DOMContentLoaded", async () => {
 
 			projectsElements.push(projectElement);
 		}
-		// projectsContainer.innerHTML = "";
+		// projectsContainer.querySelectorAll("a.project").forEach((node) => node.remove());
 		projectsContainer.append(...projectsElements);
 
 		const githubEventsRequest = await request("GET", `https://api.github.com/users/{{ path.github.username }}/events/public?per_page=3`, "json", null, null, 300);
@@ -213,7 +213,7 @@ addEventListener("DOMContentLoaded", async () => {
 				commitElements.push(commitElement);
 			}
 
-			commitContainer.innerHTML = "";
+			// commitContainer.innerHTML = "";
 			commitContainer.append(...commitElements);
 		} else logger.warn("GitHub API request failed", `Status: ${githubEventsRequest.status}`);
 	} catch (error) {
