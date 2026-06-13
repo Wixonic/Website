@@ -84,8 +84,8 @@ addEventListener("DOMContentLoaded", async () => {
 		/*
 		let eventsQuery, newsQuery, projectsQuery = [new Promise(() => { }), new Promise(() => []), new Promise(() => { })];
 		if (4 - events.length > 0) eventsQuery = query(collection(db, "events"), where("pinned", "==", false), orderBy("startDate", "desc"), limit(4 - events.length));
-		if (3 - news.length > 0) newsQuery = query(collection(db, "news"), where("pinned", "==", false), orderBy("date", "desc"), limit(3 - news.length));
-		if (5 - projects.length > 0) projectsQuery = query(collection(db, "projects"), where("pinned", "==", false), orderBy("date", "desc"), limit(5 - projects.length));
+		if (4 - news.length > 0) newsQuery = query(collection(db, "news"), where("pinned", "==", false), orderBy("date", "desc"), limit(3 - news.length));
+		if (7 - projects.length > 0) projectsQuery = query(collection(db, "projects"), where("pinned", "==", false), orderBy("date", "desc"), limit(5 - projects.length));
 
 		const [eventsSnap, newsSnap, projectsSnap] = await Promise.all([
 			getDocs(eventsQuery),

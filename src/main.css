@@ -108,12 +108,6 @@ noscript p,
 	line-height: 1.6;
 }
 
-@media (orientation: landscape) {
-	#orientation-lock {
-		display: none;
-	}
-}
-
 .hidden {
 	display: none !important;
 }

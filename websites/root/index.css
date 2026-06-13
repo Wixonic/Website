@@ -1,18 +1,22 @@
 /* --- Common --- */
 section.events .content .event,
 section.news .content .news,
-section.projects .content .project {
+section.projects .content .project,
+section.projects .content .commits {
 	display: block;
+
+	background: hsla(var(--background-light), 10%);
+
+	border: 0.06rem solid hsla(var(--background-light), 50%);
+	border-radius: 0.4rem;
 }
 
 section.events .content .event.loading,
 section.news .content .news.loading,
-section.projects .content .project.loading {
+section.projects .content .project.loading,
+section.projects .content .commits .commit.loading {
 	background: linear-gradient(45deg, transparent, transparent 10rem, hsla(var(--background-light), 10%) 15rem, hsla(var(--background-light), 20%) 20rem, hsla(var(--background-light), 10%) 25rem, transparent 30rem, transparent);
 	background-size: 200% 100%;
-
-	border: 0.06rem solid hsla(var(--background-light), 50%);
-	border-radius: 0.4rem;
 
 	animation: loading 1s linear infinite;
 }
@@ -45,8 +49,8 @@ section.events .content .event:first-child {
 /* --- News --- */
 section.news .content {
 	display: grid;
-	grid-template-columns: repeat(3, min(26.33rem, calc(33.6vw - 1.5rem)));
-	grid-template-rows: 10rem;
+	grid-template-columns: repeat(2, min(40rem, calc(50vw - 1.5rem)));
+	grid-template-rows: repeat(2, 10rem);
 	gap: 1rem;
 
 	padding: 1rem;
@@ -63,60 +67,38 @@ section.projects .content {
 }
 
 /* --- Commits --- */
-section.projects article.commits {
-	grid-row: 3;
-	grid-column: 3;
+section.projects .content .commits {
+	grid-row: 2 / 4;
+	grid-column: 2;
 }
 
-section.projects article.commits .commit {
+@media (min-width: 40rem) {
+	section.projects .content {
+		grid-template-columns: repeat(3, min(26.67rem, calc(33.33vw - 1.5rem)));
+	}
+
+	section.projects .content .commits {
+		grid-column: 3;
+	}
+}
+
+@media (max-width: 40rem) {
+
+	section.projects .content .project:nth-child(5),
+	section.projects .content .project:nth-child(6),
+	section.projects .content .project:nth-child(7) {
+		display: none;
+	}
+}
+
+section.projects .commits .content {
 	position: relative;
 
 	display: grid;
-	grid-template-columns: auto 1fr;
-	grid-template-areas: "hash date" "source source";
-	gap: 0.5rem 1rem;
+	grid-template-columns: min(40rem, calc(50vw - 1.5rem));
+	grid-template-rows: repeat(3, 2rem);
+	gap: 0.5rem;
 
 	padding-left: 2rem;
 	padding-bottom: 2rem;
-}
-
-section.projects article.commits .commit .hash {
-	grid-area: hash;
-
-	display: flex;
-	align-items: center;
-
-	background: hsla(var(--background-light), 50%);
-	box-shadow: 0 0 0.5rem hsla(var(--theme-light), 30%);
-
-	color: hsla(var(--theme-light), 75%);
-	font-size: 0.8rem;
-
-	border: 0.03rem solid hsla(var(--theme-light), 50%);
-	border-radius: 0.2rem;
-
-	padding: 0.1rem 0.2rem;
-
-	transition: background 0.3s, color 0.3s, border-color 0.3s;
-}
-
-section.projects article.commits .commit:hover .hash {
-	background: hsla(var(--theme), 25%);
-
-	color: hsl(var(--theme-light));
-
-	border-color: hsla(var(--theme-light), 75%);
-}
-
-section.projects article.commits .commit .date {
-	grid-area: date;
-
-	display: flex;
-	align-items: center;
-
-	color: hsla(var(--text), 40%);
-}
-
-section.projects article.commits .commit .source {
-	grid-area: source;
 }
