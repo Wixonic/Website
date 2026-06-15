@@ -116,7 +116,7 @@
 				},
 				{
 					"regex": "/funding(?:.*)",
-					"destination": "https://discord.wixonic.fr/funding",
+					"destination": "https://wixonic.fr/funding",
 					"type": 301
 				},
 				{
