@@ -38,5 +38,6 @@
 	"/icon/logo/round/384.png": "/raw/icon/round.index.json",
 	"/icon/logo/round/512.png": "/raw/icon/round.index.json",
 	"/icon/logo/round/1024.png": "/raw/icon/round.index.json",
-	"/icon/logo/round/pixelated.png": "/raw/icon/round.index.json"
+	"/icon/logo/round/pixelated.png": "/raw/icon/round.index.json",
+	"/minecraft/pack/hdshield.zip": "/raw/minecraft/pack/hdshield.index.json"
 }
