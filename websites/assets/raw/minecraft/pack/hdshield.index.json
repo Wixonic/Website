@@ -1,0 +1,16 @@
+{
+	"ready": true,
+	"type": "minecraft-resourcepack",
+	"name": "hdshield",
+	"description": "Update shields to high definition banner textures.",
+	"copyright": null,
+	"download": true,
+	"link": "https://modrinth.com/resourcepack/hd-shield",
+	"author": "d_de_diego_d",
+	"files": [
+		{
+			"path": "hdshield.zip",
+			"size": 57199
+		}
+	]
+}
