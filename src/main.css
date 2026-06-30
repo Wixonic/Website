@@ -40,6 +40,7 @@ body {
 	outline: none;
 
 	scrollbar-color: inherit;
+	overscroll-behavior: contain;
 
 	-webkit-user-select: inherit;
 	user-select: inherit;

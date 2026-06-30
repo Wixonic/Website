@@ -115,6 +115,11 @@
 					"type": 301
 				},
 				{
+					"regex": "/funding/github(?:.*)",
+					"destination": "https://github.com/sponsors/Wixonic",
+					"type": 301
+				},
+				{
 					"regex": "/funding(?:.*)",
 					"destination": "https://wixonic.fr/funding",
 					"type": 301
