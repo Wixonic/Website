@@ -31,19 +31,19 @@ body {
 
 	box-sizing: border-box;
 
+	overscroll-behavior: contain;
+	scrollbar-color: inherit;
+
 	-webkit-appearance: none;
 	appearance: none;
 
-	cursor: inherit;
-	caret-color: inherit;
 	pointer-events: inherit;
-	outline: none;
-
-	scrollbar-color: inherit;
-	overscroll-behavior: contain;
-
 	-webkit-user-select: inherit;
 	user-select: inherit;
+
+	cursor: inherit;
+	caret-color: inherit;
+	outline: none;
 
 	-webkit-tap-highlight-color: transparent;
 }
