@@ -98,7 +98,7 @@ addEventListener("DOMContentLoaded", async () => {
 		projects.push(...projectsSnap.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
 		*/
 
-		const eventContainer = document.querySelector("section.events .content");
+		const eventContainer = document.querySelector(".events .content");
 		const eventElements = [];
 		for (const event of events) {
 			const eventElement = document.createElement("article");
@@ -119,7 +119,7 @@ addEventListener("DOMContentLoaded", async () => {
 		// eventContainer.innerHTML = "";
 		eventContainer.append(...eventElements);
 
-		const newsContainer = document.querySelector("section.news .content");
+		const newsContainer = document.querySelector(".news .content");
 		const newsElements = [];
 		for (const newsItem of news) {
 			const newsElement = document.createElement("article");
@@ -147,7 +147,7 @@ addEventListener("DOMContentLoaded", async () => {
 		// newsContainer.innerHTML = "";
 		newsContainer.append(...newsElements);
 
-		const projectsContainer = document.querySelector("section.projects .content");
+		const projectsContainer = document.querySelector(".projects .content");
 		const projectsElements = [];
 		for (const project of projects) {
 			const projectElement = document.createElement("article");
@@ -174,46 +174,80 @@ addEventListener("DOMContentLoaded", async () => {
 
 			projectsElements.push(projectElement);
 		}
-		// projectsContainer.querySelectorAll("a.project").forEach((node) => node.remove());
+		// projectsContainer.querySelectorAll(".project").forEach((node) => node.remove());
 		projectsContainer.append(...projectsElements);
 
 		const githubEventsRequest = await request("GET", `https://api.github.com/users/{{ path.github.username }}/events/public?per_page=3`, "json", null, null, 300);
 		const githubEvents = githubEventsRequest.response;
 
 		if (githubEventsRequest.status === 200) {
-			const commits = githubEvents
-				.filter((event) => event.type === "PushEvent" && event.public === true)
-				.slice(0, 5);
+			const pushEvents = githubEvents.filter((event) => event.type === "PushEvent" && event.public === true).slice(0, 3);
+			const commitsWithDetails = await Promise.all(pushEvents.map(async (event) => {
+				try {
+					const detail = await request("GET", `https://api.github.com/repos/${event.repo.name}/commits/${event.payload.head}`, "json", null, null, 0);
+					return { event, message: detail.response.commit.message };
+				} catch (error) {
+					logger.warn("Failed to fetch commit details", error);
+					return { event, message: "No message available" };
+				}
+			}));
 
-			const commitContainer = document.querySelector("section.projects article.commits .content");
+			const commitContainer = document.querySelector(".projects .commits .content");
 			const commitElements = [];
-			for (const commit of commits) {
-				console.log(commit);
+			for (const { event, message } of commitsWithDetails) {
 				const commitElement = document.createElement("a");
-				commitElement.href = `https://github.com/${commit.repo.name}/commit/${commit.payload.head}`;
+				commitElement.href = `https://github.com/${event.repo.name}/commit/${event.payload.head}`;
 				commitElement.target = "_blank";
 				commitElement.classList.add("commit", "unlink");
 
-				const hashElement = document.createElement("div");
+				const hashElement = document.createElement("span");
 				hashElement.classList.add("hash");
-				hashElement.textContent = commit.payload.head.substring(0, 7);
+				hashElement.textContent = event.payload.head.substring(0, 7);
 				commitElement.append(hashElement);
 
-				const sourceElement = document.createElement("div");
+				const sourceElement = document.createElement("span");
 				sourceElement.classList.add("source");
-				sourceElement.textContent = commit.repo.name.replace("{{ path.github.username }}/", "");
+				sourceElement.textContent = event.repo.name.replace("{{ path.github.username }}/", "");
 				commitElement.append(sourceElement);
 
-				const dateElement = document.createElement("div");
+				const messageElement = document.createElement("div");
+				messageElement.classList.add("message");
+
+				const dateElement = document.createElement("span");
 				dateElement.classList.add("date");
-				const commitDate = new Date(commit.created_at);
+				const commitDate = new Date(event.created_at);
 				dateElement.textContent = `${parseDuration(Date.now() - commitDate.getTime())} ago`;
+
+				const commitRegex = /^([a-zA-Z0-9_-]+)(?:\(([^)]+)\))?(!)?:\s*(.*)$/s;
+				const match = message.match(commitRegex);
+
+				if (match) {
+					const [_, type, scope, isBreaking, cleanedMessage] = match;
+
+					if (scope) messageElement.innerHTML = `<b>${scope}</b>: ${cleanedMessage}`;
+					else messageElement.textContent = cleanedMessage;
+
+					const typeTag = document.createElement("span");
+					typeTag.classList.add("tag", `tag-${type.toLowerCase()}`);
+					typeTag.textContent = type;
+					if (isBreaking) typeTag.classList.add("with-breaking");
+					commitElement.append(typeTag);
+
+					if (isBreaking) {
+						const breakingTag = document.createElement("span");
+						breakingTag.classList.add("tag", "tag-breaking");
+						breakingTag.textContent = "breaking";
+						commitElement.append(breakingTag);
+					}
+				} else messageElement.textContent = message;
+
+				commitElement.append(messageElement);
 				commitElement.append(dateElement);
 
 				commitElements.push(commitElement);
 			}
 
-			// commitContainer.innerHTML = "";
+			commitContainer.innerHTML = "";
 			commitContainer.append(...commitElements);
 		} else logger.warn("GitHub API request failed", `Status: ${githubEventsRequest.status}`);
 	} catch (error) {
