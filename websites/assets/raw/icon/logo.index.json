@@ -2,173 +2,92 @@
 	"ready": true,
 	"type": "image",
 	"name": "logo",
-	"description": "My logo",
+	"description": "Wixonic's icon",
 	"copyright": "Wixonic",
 	"download": true,
 	"link": null,
 	"author": "Wixonic",
 	"files": [
 		{
-			"path": "logo/16.png",
-			"width": 16,
-			"height": 16,
-			"size": 270,
-			"format": "png",
-			"codec": "PNG (Portable Network Graphics) image",
-			"mime": "png"
-		},
-		{
-			"path": "logo/24.png",
-			"width": 24,
-			"height": 24,
-			"size": 424,
-			"format": "png",
-			"codec": "PNG (Portable Network Graphics) image",
-			"mime": "png"
-		},
-		{
-			"path": "logo/32.png",
-			"width": 32,
-			"height": 32,
-			"size": 518,
-			"format": "png",
-			"codec": "PNG (Portable Network Graphics) image",
-			"mime": "png"
-		},
-		{
-			"path": "logo/48.png",
-			"width": 48,
-			"height": 48,
-			"size": 804,
-			"format": "png",
-			"codec": "PNG (Portable Network Graphics) image",
-			"mime": "png"
-		},
-		{
-			"path": "logo/64.png",
-			"width": 64,
-			"height": 64,
-			"size": 1053,
-			"format": "png",
-			"codec": "PNG (Portable Network Graphics) image",
-			"mime": "png"
-		},
-		{
-			"path": "logo/96.png",
-			"width": 96,
-			"height": 96,
-			"size": 1487,
-			"format": "png",
-			"codec": "PNG (Portable Network Graphics) image",
-			"mime": "png"
-		},
-		{
-			"path": "logo/120.png",
-			"width": 120,
-			"height": 120,
-			"size": 1810,
-			"format": "png",
-			"codec": "PNG (Portable Network Graphics) image",
-			"mime": "png"
-		},
-		{
-			"path": "logo/144.png",
-			"width": 144,
-			"height": 144,
-			"size": 2038,
-			"format": "png",
-			"codec": "PNG (Portable Network Graphics) image",
-			"mime": "png"
-		},
-		{
-			"path": "logo/152.png",
-			"width": 152,
-			"height": 152,
-			"size": 2149,
-			"format": "png",
-			"codec": "PNG (Portable Network Graphics) image",
-			"mime": "png"
-		},
-		{
-			"path": "logo/167.png",
-			"width": 167,
-			"height": 167,
-			"size": 2321,
-			"format": "png",
-			"codec": "PNG (Portable Network Graphics) image",
-			"mime": "png"
-		},
-		{
-			"path": "logo/180.png",
-			"width": 180,
-			"height": 180,
-			"size": 2476,
-			"format": "png",
-			"codec": "PNG (Portable Network Graphics) image",
-			"mime": "png"
-		},
-		{
-			"path": "logo/196.png",
-			"width": 196,
-			"height": 196,
-			"size": 2243,
-			"format": "png",
-			"codec": "PNG (Portable Network Graphics) image",
-			"mime": "png"
-		},
-		{
-			"path": "logo/256.png",
-			"width": 256,
-			"height": 256,
-			"size": 2762,
-			"format": "png",
-			"codec": "PNG (Portable Network Graphics) image",
-			"mime": "png"
-		},
-		{
-			"path": "logo/384.png",
-			"width": 384,
-			"height": 384,
-			"size": 3921,
-			"format": "png",
-			"codec": "PNG (Portable Network Graphics) image",
-			"mime": "png"
-		},
-		{
-			"path": "logo/512.png",
-			"width": 512,
-			"height": 512,
-			"size": 5127,
-			"format": "png",
-			"codec": "PNG (Portable Network Graphics) image",
-			"mime": "png"
-		},
-		{
-			"path": "logo/1024.png",
-			"width": 1024,
-			"height": 1024,
-			"size": 11399,
-			"format": "png",
-			"codec": "PNG (Portable Network Graphics) image",
-			"mime": "png"
-		},
-		{
 			"path": "logo.svg",
-			"width": 621,
-			"height": 763,
-			"size": 1292,
+			"width": 144,
+			"height": 104,
+			"size": 676,
 			"format": "svg",
 			"codec": "Scalable Vector Graphics",
 			"mime": "svg"
 		},
 		{
-			"path": "logo/pixelated.png",
-			"width": 2048,
-			"height": 2048,
-			"size": 7691,
+			"path": "logo.png",
+			"width": 4096,
+			"height": 4096,
+			"size": 3076344,
 			"format": "png",
 			"codec": "PNG (Portable Network Graphics) image",
 			"mime": "png"
+		},
+		{
+			"path": "logo.light.png",
+			"width": 4096,
+			"height": 4096,
+			"size": 1784590,
+			"format": "png",
+			"codec": "PNG (Portable Network Graphics) image",
+			"mime": "png"
+		},
+		{
+			"path": "logo.dark.png",
+			"width": 4096,
+			"height": 4096,
+			"size": 1459268,
+			"format": "png",
+			"codec": "PNG (Portable Network Graphics) image",
+			"mime": "png"
+		},
+		{
+			"path": "logo.min.png",
+			"width": 256,
+			"height": 256,
+			"size": 50104,
+			"format": "png",
+			"codec": "PNG (Portable Network Graphics) image",
+			"mime": "png"
+		},
+		{
+			"path": "logo.jpeg",
+			"width": 4096,
+			"height": 4096,
+			"size": 420921,
+			"format": "jpeg",
+			"codec": "MJPEG (Motion JPEG) image",
+			"mime": "jpeg"
+		},
+		{
+			"path": "logo.light.jpeg",
+			"width": 4096,
+			"height": 4096,
+			"size": 303372,
+			"format": "jpeg",
+			"codec": "Motion JPEG",
+			"mime": "jpeg"
+		},
+		{
+			"path": "logo.dark.jpeg",
+			"width": 4096,
+			"height": 4096,
+			"size": 152200,
+			"format": "jpeg",
+			"codec": "MJPEG (Motion JPEG) image",
+			"mime": "jpeg"
+		},
+		{
+			"path": "logo.ico",
+			"width": 256,
+			"height": 256,
+			"size": 302430,
+			"format": "ico",
+			"codec": "Icon image",
+			"mime": "x-icon"
 		}
 	]
 }

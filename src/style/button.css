@@ -1,4 +1,2 @@
 button,
-.button {
-	background: hsla(var(--theme), 20%);
-}
+.button {}

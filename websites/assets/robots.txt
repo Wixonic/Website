@@ -1,4 +1,5 @@
 User-agent: *
 Disallow: *
 
+Content-Signal: ai-train=no, search=yes, ai-input=yes
 Sitemap: https://assets.wixonic.fr/sitemap.xml

@@ -15,6 +15,11 @@
         <changefreq>yearly</changefreq>
         <priority>0.8</priority>
     </url>
+    <url>
+        <loc>https://wixonic.fr/terms/</loc>
+        <changefreq>yearly</changefreq>
+        <priority>0.8</priority>
+    </url>
 	<url>
         <loc>https://go.wixonic.fr/</loc>
         <changefreq>monthly</changefreq>

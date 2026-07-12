@@ -21,10 +21,8 @@
 
 		<meta rel="canonical" href="{{ (canonical or url or path.root) | escape }}" />
 
-		<link rel="icon" type="image/svg+xml" href="{{ path.assets }}/raw/icon/logo.svg" />
-		<link rel="apple-touch-icon" href="{{ path.assets }}/raw/icon/logo/180.png" />
-		<link rel="icon" type="image/png" sizes="192x192" href="{{ path.assets }}/raw/icon/logo/round/196.png" />
-		<link rel="icon" type="image/png" sizes="512x512" href="{{ path.assets }}/raw/icon/logo/round/512.png" />
+		<link rel="icon" sizes="16x16 32x32 48x48 64x64 256x256" href="{{ path.assets }}/raw/icon/logo.ico" />
+		<link rel="apple-touch-icon-precomposed" href="{{ path.assets }}/raw/icon/logo.min.png">
 
 		{% if image %}
 		<meta property="og:image" content="{{ image | escape }}" />
