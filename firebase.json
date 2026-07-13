@@ -81,8 +81,8 @@
 			]
 		},
 		{
-			"target": "redirects",
-			"public": "./build/redirects",
+			"target": "links",
+			"public": "./build/links",
 			"redirects": [
 				{
 					"regex": "/about(?:.*)",

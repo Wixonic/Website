@@ -2,92 +2,74 @@
 	"ready": true,
 	"type": "image",
 	"name": "logo",
-	"description": "Wixonic's icon",
+	"description": "Wixonic's logo with text and icon",
 	"copyright": "Wixonic",
 	"download": true,
 	"link": null,
 	"author": "Wixonic",
 	"files": [
 		{
-			"path": "logo/file.svg",
-			"width": 144,
-			"height": 104,
-			"size": 676,
-			"format": "svg",
-			"codec": "Scalable Vector Graphics",
-			"mime": "svg"
-		},
-		{
-			"path": "logo/default.png",
+			"path": "full/default.png",
 			"width": 4096,
 			"height": 4096,
-			"size": 5471201,
+			"size": 1009851,
 			"format": "png",
 			"codec": "PNG (Portable Network Graphics) image",
 			"mime": "png"
 		},
 		{
-			"path": "logo/light.png",
+			"path": "full/light.png",
 			"width": 4096,
 			"height": 4096,
-			"size": 3280684,
+			"size": 674888,
 			"format": "png",
 			"codec": "PNG (Portable Network Graphics) image",
 			"mime": "png"
 		},
 		{
-			"path": "logo/dark.png",
+			"path": "full/dark.png",
 			"width": 4096,
 			"height": 4096,
-			"size": 2629886,
+			"size": 712946,
 			"format": "png",
 			"codec": "PNG (Portable Network Graphics) image",
 			"mime": "png"
 		},
 		{
-			"path": "logo/min.png",
+			"path": "full/min.png",
 			"width": 512,
 			"height": 512,
-			"size": 89709,
+			"size": 33928,
 			"format": "png",
 			"codec": "PNG (Portable Network Graphics) image",
 			"mime": "png"
 		},
 		{
-			"path": "logo/default.jpeg",
+			"path": "full/default.jpeg",
 			"width": 4096,
 			"height": 4096,
-			"size": 718151,
+			"size": 167328,
 			"format": "jpeg",
 			"codec": "MJPEG (Motion JPEG) image",
 			"mime": "jpeg"
 		},
 		{
-			"path": "logo/light.jpeg",
+			"path": "full/light.jpeg",
 			"width": 4096,
 			"height": 4096,
-			"size": 536718,
+			"size": 124487,
 			"format": "jpeg",
 			"codec": "Motion JPEG",
 			"mime": "jpeg"
 		},
 		{
-			"path": "logo/dark.jpeg",
+			"path": "full/dark.jpeg",
 			"width": 4096,
 			"height": 4096,
-			"size": 216319,
+			"size": 135179,
 			"format": "jpeg",
 			"codec": "MJPEG (Motion JPEG) image",
 			"mime": "jpeg"
-		},
-		{
-			"path": ".logo/default.ico",
-			"width": 256,
-			"height": 256,
-			"size": 302430,
-			"format": "ico",
-			"codec": "Icon image",
-			"mime": "x-icon"
 		}
 	]
 }

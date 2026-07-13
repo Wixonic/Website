@@ -11,7 +11,7 @@
 				"onion": [
 					"onion-wixonic-v5-website"
 				],
-				"redirects": [
+				"links": [
 					"redirects-wixonic-v5-website"
 				],
 				"root": [

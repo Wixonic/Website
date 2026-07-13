@@ -9,9 +9,14 @@ header {
 header .root {
 	display: flex;
 	align-items: center;
-	width: fit-content;
 	gap: 0.5rem;
-	padding: 0.5rem;
+
+	width: fit-content;
+	height: 2rem;
+
+	overflow: hidden;
+
+	padding: 0.5rem 0;
 }
 
 header .root .logo {
@@ -19,14 +24,10 @@ header .root .logo {
 }
 
 header .root .text {
-	height: 2rem;
+	height: 6rem;
 }
 
 @media (max-width: 45rem) {
-	header .root {
-		padding: 0.5rem 0;
-	}
-
 	header .root .text {
 		display: none;
 	}

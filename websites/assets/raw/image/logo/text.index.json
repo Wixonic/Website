@@ -2,92 +2,74 @@
 	"ready": true,
 	"type": "image",
 	"name": "logo",
-	"description": "Wixonic's icon",
+	"description": "Wixonic's text logo",
 	"copyright": "Wixonic",
 	"download": true,
 	"link": null,
 	"author": "Wixonic",
 	"files": [
 		{
-			"path": "logo/file.svg",
-			"width": 144,
-			"height": 104,
-			"size": 676,
-			"format": "svg",
-			"codec": "Scalable Vector Graphics",
-			"mime": "svg"
-		},
-		{
-			"path": "logo/default.png",
+			"path": "text/default.png",
 			"width": 4096,
 			"height": 4096,
-			"size": 5471201,
+			"size": 1279344,
 			"format": "png",
 			"codec": "PNG (Portable Network Graphics) image",
 			"mime": "png"
 		},
 		{
-			"path": "logo/light.png",
+			"path": "text/light.png",
 			"width": 4096,
 			"height": 4096,
-			"size": 3280684,
+			"size": 838497,
 			"format": "png",
 			"codec": "PNG (Portable Network Graphics) image",
 			"mime": "png"
 		},
 		{
-			"path": "logo/dark.png",
+			"path": "text/dark.png",
 			"width": 4096,
 			"height": 4096,
-			"size": 2629886,
+			"size": 848223,
 			"format": "png",
 			"codec": "PNG (Portable Network Graphics) image",
 			"mime": "png"
 		},
 		{
-			"path": "logo/min.png",
+			"path": "text/min.png",
 			"width": 512,
 			"height": 512,
-			"size": 89709,
+			"size": 36199,
 			"format": "png",
 			"codec": "PNG (Portable Network Graphics) image",
 			"mime": "png"
 		},
 		{
-			"path": "logo/default.jpeg",
+			"path": "text/default.jpeg",
 			"width": 4096,
 			"height": 4096,
-			"size": 718151,
+			"size": 188446,
 			"format": "jpeg",
 			"codec": "MJPEG (Motion JPEG) image",
 			"mime": "jpeg"
 		},
 		{
-			"path": "logo/light.jpeg",
+			"path": "text/light.jpeg",
 			"width": 4096,
 			"height": 4096,
-			"size": 536718,
+			"size": 141753,
 			"format": "jpeg",
 			"codec": "Motion JPEG",
 			"mime": "jpeg"
 		},
 		{
-			"path": "logo/dark.jpeg",
+			"path": "text/dark.jpeg",
 			"width": 4096,
 			"height": 4096,
-			"size": 216319,
+			"size": 141003,
 			"format": "jpeg",
 			"codec": "MJPEG (Motion JPEG) image",
 			"mime": "jpeg"
-		},
-		{
-			"path": ".logo/default.ico",
-			"width": 256,
-			"height": 256,
-			"size": 302430,
-			"format": "ico",
-			"codec": "Icon image",
-			"mime": "x-icon"
 		}
 	]
 }
