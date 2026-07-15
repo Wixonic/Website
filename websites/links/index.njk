@@ -16,26 +16,22 @@ scripts:
 
 <main>
 
-	<section class="links">
+	<a id="website" href="{{ path.root }}" target="_blank">
 
-		<a id="website" href="{{ path.root }}" target="_blank">
+		<img src="{{ path.assets }}/raw/image/link/website.min.png" alt="Website" />
 
-			<img src="{{ path.assets }}/raw/image/link/website.min.png" alt="Website" />
+	</a>
 
-		</a>
+	<a id="discord" href="/discord" target="_blank">
 
-		<a id="discord" href="/discord" target="_blank">
+		<img src="{{ path.assets }}/raw/image/link/discord.min.png" alt="Discord" />
 
-			<img src="{{ path.assets }}/raw/image/link/discord.min.png" alt="Discord" />
+	</a>
 
-		</a>
+	<footer>
 
-		<footer>
+		{% include "footer.njk" %}
 
-			{% include "footer.njk" %}
-
-		</footer>
-
-	</section>
+	</footer>
 
 </main>

@@ -4,15 +4,17 @@ body {
 
 main {
 	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-}
+	inset: 0;
 
-.links {
-	display: block;
+	display: flex;
+	flex-direction: column;
 
+	width: 100vw;
+	max-width: unset;
 	height: 100vh;
+
+	margin: 0;
+	padding: 0;
 
 	overflow-y: scroll;
 	scroll-snap-type: y mandatory;
@@ -21,25 +23,29 @@ main {
 	-ms-overflow-style: none;
 }
 
-.links::-webkit-scrollbar {
+main::-webkit-scrollbar {
 	display: none;
 }
 
-.links>* {
+main>* {
 	display: block;
+
+	max-width: 70rem !important;
 
 	scroll-snap-align: center;
 
 	opacity: 0.5;
 
 	transition: opacity 0.3s ease-in-out;
+
+	margin: 0 auto;
 }
 
-.links>*.active {
+main>*.active {
 	opacity: 1;
 }
 
-.links>* img {
+main>* img {
 	width: 100%;
 }
 
@@ -53,14 +59,7 @@ footer {
 		padding-bottom: 0;
 	}
 
-	main {
-		width: 100%;
-		max-width: 100%;
-
-		padding: 0;
-	}
-
-	.links>* {
+	main>* {
 		display: flex;
 		justify-content: center;
 		align-items: center;

@@ -1,12 +1,12 @@
 addEventListener("DOMContentLoaded", () => {
-	const linkSection = document.querySelector(".links");
+	const container = document.querySelector("main");
 
-	if (linkSection.getBoundingClientRect().width > 1024) {
-		for (const image of linkSection.querySelectorAll("img")) image.src = image.src.replace(".min", "");
+	if (container.getBoundingClientRect().width > 1024) {
+		for (const image of container.querySelectorAll("img")) image.src = image.src.replace(".min", "");
 		console.log("Switched to full-size images.");
 	}
 
-	const links = linkSection.querySelectorAll("a");
+	const links = container.querySelectorAll("a");
 	const ratios = new Map();
 
 	const observer = new IntersectionObserver((entries) => {
@@ -27,7 +27,7 @@ addEventListener("DOMContentLoaded", () => {
 			else link.classList.remove("active");
 		}
 	}, {
-		root: linkSection,
+		root: container,
 		threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.6, 0.7, 0.8, 0.9, 1.0]
 	});
 
