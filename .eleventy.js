@@ -63,7 +63,7 @@ export default (config) => {
 		root: "http://127.0.0.1:2005",
 		assets: "http://127.0.0.1:2010",
 		onion: "http://127.0.0.1:2011",
-		redirects: "http://127.0.0.1:2012",
+		links: "http://127.0.0.1:2012",
 		status: "http://127.0.0.1:2013",
 
 		server: "http://127.0.0.1:999",
@@ -81,7 +81,7 @@ export default (config) => {
 		root: "https://wixonic.fr",
 		assets: "https://assets.wixonic.fr",
 		onion: "https://onion.wixonic.fr",
-		redirects: "https://go.wixonic.fr",
+		links: "https://go.wixonic.fr",
 		status: "https://status.wixonic.fr",
 
 		server: "https://server.wixonic.fr",

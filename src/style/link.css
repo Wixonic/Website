@@ -1,8 +1,17 @@
-a,
+a:not(.unlink):not(.button),
 .a {
+	text-decoration: none;
+
+	border-bottom: 1px solid hsla(var(--text), 50%);
+
+	transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
+
 	cursor: pointer;
 }
 
-a.unlink {
-	text-decoration: none;
+a:not(.unlink):not(.button):hover,
+.a:hover {
+	color: hsl(var(--theme));
+
+	border-bottom-color: hsla(var(--theme), 50%);
 }
