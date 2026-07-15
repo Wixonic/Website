@@ -1,0 +1,30 @@
+{
+	"ready": true,
+	"type": "image",
+	"name": "Website Link",
+	"description": null,
+	"copyright": "Wixonic",
+	"download": false,
+	"link": null,
+	"author": "Wixonic",
+	"files": [
+		{
+			"path": "website.png",
+			"width": 2048,
+			"height": 1024,
+			"size": 476896,
+			"format": "png",
+			"codec": "PNG (Portable Network Graphics) image",
+			"mime": "png"
+		},
+		{
+			"path": "website.min.png",
+			"width": 1024,
+			"height": 512,
+			"size": 141777,
+			"format": "png",
+			"codec": "PNG (Portable Network Graphics) image",
+			"mime": "png"
+		}
+	]
+}

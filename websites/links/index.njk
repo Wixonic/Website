@@ -2,6 +2,10 @@
 layout: main.njk
 title: Links | Wixonic
 description: All links and redirects to Wixonic's products, services, resources, and social media channels.
+styles:
+- index.css
+scripts:
+- index.js
 ---
 
 <header>
@@ -12,14 +16,26 @@ description: All links and redirects to Wixonic's products, services, resources,
 
 <main>
 
-	<h1>Links</h1>
+	<section class="links">
 
-	<p>This website is currently under construction.</p>
+		<a id="website" href="{{ path.root }}" target="_blank">
+
+			<img src="{{ path.assets }}/raw/image/link/website.min.png" alt="Website" />
+
+		</a>
+
+		<a id="discord" href="/discord" target="_blank">
+
+			<img src="{{ path.assets }}/raw/image/link/discord.min.png" alt="Discord" />
+
+		</a>
+
+		<footer>
+
+			{% include "footer.njk" %}
+
+		</footer>
+
+	</section>
 
 </main>
-
-<footer>
-
-	{% include "footer.njk" %}
-
-</footer>
