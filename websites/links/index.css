@@ -13,6 +13,8 @@ main {
 	max-width: unset;
 	height: 100vh;
 
+	background: transparent;
+
 	margin: 0;
 	padding: 0;
 
@@ -30,7 +32,6 @@ main::-webkit-scrollbar {
 main>* {
 	display: block;
 
-	width: 100%;
 	max-width: 70rem !important;
 
 	scroll-snap-align: center;
@@ -55,8 +56,7 @@ main>* img {
 }
 
 footer {
-	height: fit-content !important;
-	opacity: 1 !important;
+	display: none;
 }
 
 @media (max-width: 45rem) {

@@ -7,6 +7,7 @@
 body {
 	/* COLORS */
 	--background: 252, 42%, 98%;
+	--deep-background: 252, 42%, 95%;
 
 	--text: 0, 0%, 0%;
 	--theme: 252, 42%, 62%;
@@ -64,7 +65,7 @@ body {
 
 	min-height: 100vh;
 
-	background: hsl(var(--background));
+	background: hsl(var(--deep-background));
 
 	color: hsl(var(--text));
 	font-family: var(--font-family);
@@ -92,11 +93,20 @@ footer {
 main {
 	flex: 1;
 
+	background: hsl(var(--background));
+
 	padding: 0 1.5rem;
 }
 
+@media (min-width: 70rem) {
+	main {
+		border-radius: 0.25rem;
+	}
+}
+
 noscript,
-#fatal-error {
+#fatal-error,
+.fullscreen {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -109,7 +119,7 @@ noscript,
 	width: 100%;
 	height: 100%;
 
-	background: hsl(var(--background));
+	background: hsl(var(--deep-background));
 
 	color: hsl(var(--text));
 	text-align: center;
@@ -120,8 +130,9 @@ noscript,
 }
 
 noscript p,
-#fatal-error p {
-	max-width: max(50rem, 95%);
+#fatal-error p,
+.fullscreen p {
+	max-width: max(70rem, 95%);
 
 	word-wrap: break-word;
 	overflow-wrap: break-word;
