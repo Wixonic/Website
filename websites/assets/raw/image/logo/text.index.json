@@ -9,40 +9,40 @@
 	"author": "Wixonic",
 	"files": [
 		{
-			"path": "text/default.png",
+			"path": "text/default.webp",
 			"width": 4096,
 			"height": 4096,
-			"size": 1279344,
-			"format": "png",
-			"codec": "PNG (Portable Network Graphics) image",
-			"mime": "png"
+			"size": 893046,
+			"format": "webp",
+			"codec": "WebP",
+			"mime": "webp"
 		},
 		{
-			"path": "text/light.png",
+			"path": "text/light.webp",
 			"width": 4096,
 			"height": 4096,
-			"size": 838497,
-			"format": "png",
-			"codec": "PNG (Portable Network Graphics) image",
-			"mime": "png"
+			"size": 562136,
+			"format": "webp",
+			"codec": "WebP",
+			"mime": "webp"
 		},
 		{
-			"path": "text/dark.png",
+			"path": "text/dark.webp",
 			"width": 4096,
 			"height": 4096,
-			"size": 848223,
-			"format": "png",
-			"codec": "PNG (Portable Network Graphics) image",
-			"mime": "png"
+			"size": 555120,
+			"format": "webp",
+			"codec": "WebP",
+			"mime": "webp"
 		},
 		{
-			"path": "text/min.png",
+			"path": "text/min.webp",
 			"width": 512,
 			"height": 512,
-			"size": 36199,
-			"format": "png",
-			"codec": "PNG (Portable Network Graphics) image",
-			"mime": "png"
+			"size": 26938,
+			"format": "webp",
+			"codec": "WebP",
+			"mime": "webp"
 		},
 		{
 			"path": "text/default.jpeg",

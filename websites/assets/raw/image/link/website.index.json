@@ -9,22 +9,22 @@
 	"author": "Wixonic",
 	"files": [
 		{
-			"path": "website.png",
+			"path": "website.webp",
 			"width": 2048,
 			"height": 1024,
-			"size": 427009,
-			"format": "png",
-			"codec": "PNG (Portable Network Graphics) image",
-			"mime": "png"
+			"size": 316708,
+			"format": "webp",
+			"codec": "WebP",
+			"mime": "webp"
 		},
 		{
-			"path": "website.min.png",
+			"path": "website.min.webp",
 			"width": 1024,
 			"height": 512,
-			"size": 126233,
-			"format": "png",
-			"codec": "PNG (Portable Network Graphics) image",
-			"mime": "png"
+			"size": 91888,
+			"format": "webp",
+			"codec": "WebP",
+			"mime": "webp"
 		}
 	]
 }

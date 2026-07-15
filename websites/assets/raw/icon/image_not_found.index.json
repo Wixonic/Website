@@ -9,13 +9,13 @@
 	"author": "Dang1702",
 	"files": [
 		{
-			"path": "image_not_found.png",
+			"path": "image_not_found.webp",
 			"width": 225,
 			"height": 225,
-			"size": 809,
-			"format": "png",
-			"codec": "PNG (Portable Network Graphics) image",
-			"mime": "png"
+			"size": 576,
+			"format": "webp",
+			"codec": "WebP",
+			"mime": "webp"
 		}
 	]
 }

@@ -121,7 +121,7 @@ export default (config) => {
 
 	// --- Passthrough ---
 	for (const extension of [
-		"svg", "png", "webp",
+		"svg", "png", "webp", "ico",
 		"webm", "mov",
 		"mp3",
 		"woff2",

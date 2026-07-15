@@ -9,22 +9,22 @@
 	"author": "Wixonic",
 	"files": [
 		{
-			"path": "discord.png",
+			"path": "discord.webp",
 			"width": 2048,
 			"height": 1024,
-			"size": 774066,
-			"format": "png",
-			"codec": "PNG (Portable Network Graphics) image",
-			"mime": "png"
+			"size": 590300,
+			"format": "webp",
+			"codec": "WebP",
+			"mime": "webp"
 		},
 		{
-			"path": "discord.min.png",
+			"path": "discord.min.webp",
 			"width": 1024,
 			"height": 512,
-			"size": 290456,
-			"format": "png",
-			"codec": "PNG (Portable Network Graphics) image",
-			"mime": "png"
+			"size": 227452,
+			"format": "webp",
+			"codec": "WebP",
+			"mime": "webp"
 		}
 	]
 }
