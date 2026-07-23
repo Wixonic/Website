@@ -1,0 +1,30 @@
+{
+	"ready": true,
+	"type": "image",
+	"name": "Links Arrow",
+	"description": "Links Arrow image on the main page of the website",
+	"copyright": "CC0",
+	"download": true,
+	"link": null,
+	"author": "Wixonic",
+	"files": [
+		{
+			"path": "links-arrow.webp",
+			"width": 960,
+			"height": 320,
+			"size": 6738,
+			"format": "webp",
+			"codec": "WebP",
+			"mime": "webp"
+		},
+		{
+			"path": "links-arrow.mobile.webp",
+			"width": 480,
+			"height": 320,
+			"size": 1622,
+			"format": "webp",
+			"codec": "WebP",
+			"mime": "webp"
+		}
+	]
+}

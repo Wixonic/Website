@@ -15,7 +15,7 @@ body {
 
 	/* FONT */
 	--font-family: "Open Sans", "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", "Helvetica Neue", Arial, sans-serif;
-	--header-font-family: "Rametto One", var(--font-family);
+	--title-font-family: "Rametto One", var(--font-family);
 
 	--terminal-font-family: ui-monospace, "Cascadia Mono", "Segoe UI Mono", "Liberation Mono", Menlo, Monaco, Consolas, "Courier New", monospace;
 	--pixelated-font-family: "VT323", var(--terminal-font-family);

@@ -1,11 +1,6 @@
 addEventListener("DOMContentLoaded", () => {
 	const container = document.querySelector("main");
 
-	if (container.getBoundingClientRect().width > 1024) {
-		for (const image of container.querySelectorAll("img")) image.src = image.src.replace(".min", "");
-		console.log("Switched to full-size images.");
-	}
-
 	const links = container.querySelectorAll("a");
 	const ratios = new Map();
 

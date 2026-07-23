@@ -30,7 +30,7 @@ main::-webkit-scrollbar {
 }
 
 main>* {
-	display: block;
+	display: flow-root;
 
 	max-width: 70rem !important;
 
@@ -51,8 +51,13 @@ main>*.active {
 	transform: scale(1);
 }
 
+main>* picture,
 main>* img {
+	display: flow-root;
+
 	width: 100%;
+	height: auto;
+	aspect-ratio: 2 / 1;
 }
 
 footer {

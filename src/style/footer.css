@@ -20,10 +20,6 @@ footer .license {
 	margin: auto 0;
 }
 
-footer .right {
-	margin-left: auto;
-}
-
 footer nav {
 	display: flex;
 	align-items: center;
@@ -31,6 +27,8 @@ footer nav {
 }
 
 footer a {
+	width: fit-content;
+
 	border-bottom-color: transparent !important;
 }
 
@@ -39,7 +37,7 @@ footer a:hover {
 }
 
 footer hr {
-	display: block;
+	display: flow-root;
 
 	width: 1px;
 	height: 1.1em;
@@ -52,6 +50,12 @@ footer hr {
 	padding: 0;
 }
 
+@media (min-width: 45rem) {
+	footer .right {
+		margin-left: auto;
+	}
+}
+
 @media (max-width: 45rem) {
 	footer {
 		grid-template-columns: 1fr;
@@ -59,8 +63,6 @@ footer hr {
 
 	footer>* {
 		text-align: center;
-
-		margin: auto !important;
 	}
 
 	footer nav {
@@ -71,10 +73,10 @@ footer hr {
 	}
 
 	footer nav a:first-of-type {
-		text-align: right;
+		margin-left: auto !important;
 	}
 
 	footer nav a:last-of-type {
-		text-align: left;
+		margin-right: auto !important;
 	}
 }

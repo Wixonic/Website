@@ -2,6 +2,8 @@
 layout: main.njk
 title: Wixonic
 description: Learn more about Wixonic.
+styles:
+- index.css
 ---
 
 <header>
@@ -12,7 +14,75 @@ description: Learn more about Wixonic.
 
 <main>
 
-	<p>This website is currently under construction. Come back later!</p>
+	<section class="hi">
+
+		<picture>
+
+			<source media="(min-width: 1025px)" srcset="{{ path.assets }}/raw/image/root/hi.webp" />
+			<img src="{{ path.assets }}/raw/image/root/hi.min.webp" alt="A Wixi (my avatar) waving their hand" />
+
+		</picture>
+
+		<h1>Hi!</h1>
+
+		<p>I'm Wixonic (<a href="https://r12a.github.io/scripts/apps/ipa_analyser/index?q=wiks%C9%94nik" class="ipa" lang="fr-fonipa" target="_blank">/wiksɔnik/</a>), but you can call me Wix!</p>
+
+	</section>
+
+	<section class="about">
+
+		<h2>About me</h2>
+
+		<p class="tagline"></p>
+
+		<p></p>
+
+		<a class="button" href="/about">Learn more about me</a>
+
+	</section>
+
+	<section class="news">
+
+		<h2>News</h2>
+
+		<nav>
+
+
+
+		</nav>
+
+		<a class="button" href="/news">See all news</a>
+
+	</section>
+
+	<section class="projects">
+
+		<h2>Projects</h2>
+
+		<nav>
+
+
+
+		</nav>
+
+		<a class="button" href="/projects">See all projects</a>
+
+	</section>
+
+	<section class="links">
+
+		<h3>Links</h3>
+
+		<p>Wrong page &gt;:(<br />Just click below like just here</p>
+
+		<picture>
+
+			<source media="(max-width: 45rem)" srcset="{{ path.assets }}/raw/image/root/links-arrow.mobile.webp" />
+			<img src="{{ path.assets }}/raw/image/root/links-arrow.webp" alt="Arrow pointing to links in the footer" />
+
+		</picture>
+
+	</section>
 
 </main>
 

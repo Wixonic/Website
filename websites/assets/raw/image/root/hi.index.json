@@ -1,0 +1,30 @@
+{
+	"ready": true,
+	"type": "image",
+	"name": "Hi!",
+	"description": "A Wixi waving they hand!",
+	"copyright": "Wixonic",
+	"download": true,
+	"link": null,
+	"author": "Wixonic",
+	"files": [
+		{
+			"path": "hi.min.webp",
+			"width": 512,
+			"height": 512,
+			"size": 86922,
+			"format": "webp",
+			"codec": "WebP",
+			"mime": "webp"
+		},
+		{
+			"path": "hi.webp",
+			"width": 1024,
+			"height": 1024,
+			"size": 327432,
+			"format": "webp",
+			"codec": "WebP",
+			"mime": "webp"
+		}
+	]
+}

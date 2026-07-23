@@ -18,13 +18,25 @@ scripts:
 
 	<a id="website" class="unlink" href="{{ path.root }}" target="_blank">
 
-		<img src="{{ path.assets }}/raw/image/link/website.min.webp" alt="Website" />
+		<picture>
+
+			<source media="(min-width: 1025px)" srcset="{{ path.assets }}/raw/image/link/website.webp" />
+
+			<img src="{{ path.assets }}/raw/image/link/website.min.webp" alt="Website" width="2048" height="1024" />
+
+		</picture>
 
 	</a>
 
 	<a id="discord" class="unlink" href="/discord" target="_blank">
 
-		<img src="{{ path.assets }}/raw/image/link/discord.min.webp" alt="Discord" />
+		<picture>
+
+			<source media="(min-width: 1025px)" srcset="{{ path.assets }}/raw/image/link/discord.webp" />
+
+			<img src="{{ path.assets }}/raw/image/link/discord.min.webp" alt="Discord" width="2048" height="1024" />
+
+		</picture>
 
 	</a>
 

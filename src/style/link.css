@@ -4,7 +4,7 @@ a:not(.unlink):not(.button),
 
 	border-bottom: 1px solid hsla(var(--text), 50%);
 
-	transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
+	transition: color 0.1s ease-in-out, border-bottom-color 0.1s ease-in-out;
 
 	cursor: pointer;
 }

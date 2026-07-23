@@ -46,11 +46,20 @@ const createPathTokenPlugin = (pathConfig) => ({
 	}
 });
 
-const absoluteCssExternalPlugin = {
-	name: "absolute-css-external",
+const resolveAbsoluteCssPlugin = {
+	name: "resolve-absolute-css",
 	setup(build) {
 		build.onResolve({ filter: /^\// }, (args) => {
-			if (args.kind === "import-rule") return { path: args.path, external: true };
+			if (args.kind !== "import-rule") return;
+
+			const srcPath = path.resolve("src");
+			if (args.importer.startsWith(srcPath)) return { path: path.resolve(srcPath, args.path.slice(1)) };
+
+			const websitesPath = path.resolve("websites");
+			if (args.importer.startsWith(websitesPath)) {
+				const siteName = path.relative(websitesPath, args.importer).split(path.sep)[0];
+				return { path: path.resolve(websitesPath, siteName, args.path.slice(1)) };
+			}
 		});
 	}
 };
@@ -105,7 +114,7 @@ export default (config) => {
 		target: ["es2020"],
 		plugins: [
 			createPathTokenPlugin(pathConfig),
-			absoluteCssExternalPlugin
+			resolveAbsoluteCssPlugin
 		]
 	};
 	if (!isClear) esbuildOptions.external = ["three"];
