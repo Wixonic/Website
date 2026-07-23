@@ -13,6 +13,20 @@ section {
 	padding: 0 1.5rem;
 }
 
+section:nth-of-type(2) {
+	position: relative;
+	margin-top: -0.25rem;
+}
+
+@media (min-width: 70rem) {
+	section:nth-of-type(2) {
+		border-top-left-radius: 0.25rem;
+		border-top-right-radius: 0.25rem;
+	}
+}
+
+
+
 section.hi {
 	background: hsl(var(--deep-background));
 
@@ -33,17 +47,115 @@ section.hi p {
 	margin: 0;
 }
 
-section:nth-of-type(2) {
-	position: relative;
-	margin-top: -0.25rem;
+
+
+section.projects nav {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, 20.5rem);
+	grid-auto-rows: 6.85rem;
+	grid-gap: 1rem;
+
+	max-width: min(100%, 70rem);
 }
 
-@media (min-width: 70rem) {
-	section:nth-of-type(2) {
-		border-top-left-radius: 0.25rem;
-		border-top-right-radius: 0.25rem;
-	}
+section.projects nav article.project {
+	display: grid;
+	grid-gap: 0.5rem;
+
+	width: 100%;
+	max-width: 20.5rem;
+	height: 6.85rem;
+
+	background: hsla(var(--theme), 0.1);
+
+	border: 1px solid hsla(var(--theme), 0.1);
+	border-radius: 1rem;
+
+	padding: 0.5rem;
 }
+
+section.projects nav article.project * {
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+section.projects nav article.project .separator {
+	opacity: 0.5;
+}
+
+section.projects nav article.project .title {
+	font-weight: 650;
+}
+
+section.projects nav article.project .summary {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+
+	font-size: 0.85rem;
+}
+
+section.projects nav article.project.github {
+	grid-template-columns: 1.25rem auto 5rem;
+	grid-template-rows: 1.25rem 1rem 1rem 0.95rem;
+}
+
+section.projects nav article.project.github .avatar {
+	grid-area: 1 / 1 / 2 / 2;
+
+	width: 1.25rem;
+	height: 1.25rem;
+
+	border: 1px solid hsla(var(--theme), 0.1);
+	border-radius: 50%;
+}
+
+section.projects nav article.project.github .title {
+	grid-area: 1 / 2 / 2 / 4;
+
+	display: flex;
+	justify-content: left;
+	align-items: center;
+}
+
+section.projects nav article.project.github .title .author {
+	color: hsl(var(--theme));
+}
+
+section.projects nav article.project.github .title .separator {
+	font-weight: 300;
+}
+
+section.projects nav article.project.github .status {
+	--status-color: 140, 70%, 40%;
+
+	grid-area: 1 / 4 / 2 / 5;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	background: hsla(var(--status-color), 0.75);
+
+	font-size: 0.75rem;
+
+	border: 1px solid hsl(var(--status-color));
+	border-radius: 0.625rem;
+
+	margin-left: auto;
+	padding: 0 0.3rem;
+}
+
+section.projects nav article.project.github .status.wip {
+	--status-color: 40, 70%, 60%;
+}
+
+section.projects nav article.project.github .summary {
+	grid-area: 2 / 1 / 4 / 4;
+	-webkit-line-clamp: 2;
+	line-clamp: 2;
+}
+
+
 
 section.links picture,
 section.links picture img {
@@ -78,8 +190,13 @@ section.links picture img {
 		left: 0;
 	}
 
-
 	section.links picture img {
 		height: 10rem;
+	}
+}
+
+@media (max-width: 22rem) {
+	#width-too-small {
+		display: flex !important;
 	}
 }
