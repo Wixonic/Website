@@ -1,7 +1,8 @@
 import logger from "/script/logger.js";
+import { init as initIcons } from "/script/icons.js";
 
 addEventListener("DOMContentLoaded", async () => {
-
+	initIcons();
 });
 
 addEventListener("error", (event) => {

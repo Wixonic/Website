@@ -1,0 +1,56 @@
+@import url("/style/projects.blender.css");
+@import url("/style/projects.github.css");
+
+section.projects h2 {
+	margin-bottom: 0;
+}
+
+section.projects nav {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, 20.5rem);
+	grid-auto-rows: 6.35rem;
+	grid-gap: 1rem;
+
+	width: fit-content;
+	max-width: min(100%, 70rem);
+
+	margin: 0 auto;
+}
+
+section.projects nav article.project {
+	display: grid;
+	grid-gap: 0.25rem;
+
+	width: 100%;
+	max-width: 20.5rem;
+	height: 6.35rem;
+
+	background: hsla(var(--theme), 0.1);
+
+	border: 1px solid hsla(var(--theme), 0.1);
+	border-radius: 1rem;
+
+	padding: 0.5rem;
+
+	cursor: pointer;
+}
+
+section.projects nav article.project * {
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+section.projects nav article.project .separator {
+	opacity: 0.5;
+}
+
+section.projects nav article.project .title {
+	font-weight: 650;
+}
+
+section.projects nav article.project .summary {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+
+	font-size: 0.85rem;
+}

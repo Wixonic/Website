@@ -13,17 +13,22 @@ body {
 	--theme: 252, 42%, 62%;
 	/* COLORS */
 
-	/* FONT */
+	/* FONTS */
 	--font-family: "Open Sans", "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", "Helvetica Neue", Arial, sans-serif;
 	--title-font-family: "Rametto One", var(--font-family);
 
 	--terminal-font-family: ui-monospace, "Cascadia Mono", "Segoe UI Mono", "Liberation Mono", Menlo, Monaco, Consolas, "Courier New", monospace;
 	--pixelated-font-family: "VT323", var(--terminal-font-family);
-	/* FONT */
+	/* FONTS */
 
 	/* LAYOUT */
 	--footer-height: 4rem;
 	/* LAYOUT */
+
+	/* TRANSITIONS */
+	--default-transition-function: cubic-bezier(0.25, 0, 0.1, 1);
+	/* TRANSITIONS */
+
 }
 
 @media (max-width: 45rem) {
@@ -104,6 +109,36 @@ main {
 	}
 }
 
+.hidden {
+	display: none !important;
+}
+
+.redacted {
+	--redacted-color: hsl(var(--color));
+
+	display: inline !important;
+
+	color: transparent;
+	text-decoration: line-through;
+	text-decoration-thickness: 1.2em;
+	text-decoration-color: var(--redacted-color);
+	text-decoration-skip-ink: none;
+
+	-webkit-user-select: none;
+	user-select: none;
+
+	cursor: not-allowed;
+}
+
+img {
+	-webkit-touch-callout: none;
+	-webkit-user-drag: none;
+}
+
+.no-drag {
+	-webkit-user-drag: none !important;
+}
+
 .fullscreen {
 	display: flex;
 	flex-direction: column;
@@ -135,6 +170,22 @@ main {
 	line-height: 1.6;
 }
 
-.hidden {
-	display: none !important;
+::selection {
+	background: hsla(var(--theme), 0.25);
+}
+
+.icon {
+	width: 1.2em;
+	height: 1.2em;
+
+	vertical-align: -0.225em;
+
+	margin: 0;
+	padding: 0;
+}
+
+.icon img,
+.icon svg {
+	width: 100%;
+	height: 100%;
 }

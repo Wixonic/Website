@@ -1,2 +1,51 @@
 button,
-.button {}
+.button {
+	display: inline-block;
+
+	width: fit-content;
+
+	background: hsla(var(--theme), 0.1);
+
+	font-size: 0.85rem;
+	font-weight: 550;
+	text-decoration: none;
+
+	border: 0.1rem solid hsla(var(--theme), 0.1);
+	border-radius: 1rem;
+
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
+	padding: 0.5rem 1rem;
+
+	cursor: pointer;
+
+	transition: background 0.15s var(--default-transition-function), color 0.15s var(--default-transition-function), border-color 0.15s var(--default-transition-function), transform 0.2s var(--default-transition-function);
+}
+
+button:hover,
+.button:hover {
+	background: hsla(var(--theme), 0.2);
+}
+
+button.primary,
+.button.primary {
+	display: block;
+
+	background: hsl(var(--theme));
+	box-shadow: 0 0.25rem 0.5rem hsla(var(--theme), 0.25);
+
+	color: white;
+
+	border-color: hsla(0, 0%, 100%, 0.1);
+}
+
+button:hover,
+.button:hover {
+	background: hsl(var(--background));
+
+	color: hsl(var(--theme));
+
+	border-color: hsl(var(--theme));
+
+	transform: scale(1.05);
+}

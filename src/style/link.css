@@ -2,11 +2,16 @@ a:not(.unlink):not(.button),
 .a {
 	text-decoration: none;
 
-	border-bottom: 1px solid hsla(var(--text), 50%);
+	border-bottom: 1px solid transparent;
 
-	transition: color 0.1s ease-in-out, border-bottom-color 0.1s ease-in-out;
+	transition: color 0.15s var(--default-transition-function), border-bottom-color 0.15s var(--default-transition-function);
 
 	cursor: pointer;
+}
+
+a:not(.unlink):not(.button):not(.stealth),
+.a:not(.stealth) {
+	border-bottom: 1px solid hsla(var(--text), 50%);
 }
 
 a:not(.unlink):not(.button):hover,
