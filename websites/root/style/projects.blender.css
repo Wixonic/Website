@@ -1,0 +1,29 @@
+section.projects nav article.project.blender .title {
+	grid-area: 1 / 1 / 1 / 3;
+}
+
+section.projects nav article.project.blender .summary {
+	grid-area: 2 / 1 / 3 / 4;
+	-webkit-line-clamp: 3;
+	line-clamp: 3;
+}
+
+section.projects nav article.project.blender .status.writing {
+	--status-color: 170, 70%, 60%, 75%;
+}
+
+section.projects nav article.project.blender .status.modeling {
+	--status-color: 200, 70%, 60%, 75%;
+}
+
+section.projects nav article.project.blender .status.rendering {
+	--status-color: 0, 70%, 60%, 75%;
+}
+
+section.projects nav article.project.blender .status.editing {
+	--status-color: 100, 70%, 60%, 75%;
+}
+
+section.projects nav article.project.blender .status.done {
+	--status-color: var(--theme), 50%;
+}

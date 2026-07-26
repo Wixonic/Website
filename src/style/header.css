@@ -20,6 +20,7 @@ header .root {
 }
 
 header .root .logo {
+	width: unset;
 	height: 2rem;
 }
 

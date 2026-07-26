@@ -3,9 +3,10 @@
 main {
 	display: flex;
 	flex-direction: column;
-	gap: 1rem;
 
 	padding: 0;
+
+	overflow: hidden;
 }
 
 section {
@@ -26,8 +27,8 @@ section:nth-of-type(2) {
 
 @media (min-width: 70rem) {
 	section:nth-of-type(2) {
-		border-top-left-radius: 0.25rem;
-		border-top-right-radius: 0.25rem;
+		border-top-left-radius: 0.5rem;
+		border-top-right-radius: 0.5rem;
 	}
 }
 
@@ -36,23 +37,16 @@ section h2 {
 	font-size: 1.25rem;
 }
 
-section.news h2,
-section.projects h2 {
-	text-align: center;
-}
-
-section .button {
-	margin-left: auto;
-	margin-right: auto;
-}
-
 
 
 section.hi {
+	max-width: 100%;
+
 	background: hsl(var(--deep-background));
 
 	text-align: center;
 
+	margin: 0;
 	padding-bottom: 1rem;
 }
 
@@ -98,6 +92,22 @@ section.links picture img {
 }
 
 @media (max-width: 45rem) {
+
+	section h2 {
+		text-align: center;
+	}
+
+	section {
+		max-width: fit-content;
+
+		margin: 0 auto;
+	}
+
+	section .button {
+		margin-left: auto;
+		margin-right: auto;
+	}
+
 	section.links picture {
 		justify-content: center;
 		left: 0;

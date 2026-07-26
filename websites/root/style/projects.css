@@ -7,22 +7,29 @@ section.projects h2 {
 
 section.projects nav {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, 20.5rem);
+	grid-template-columns: repeat(auto-fit, 20.75rem);
 	grid-auto-rows: 6.35rem;
 	grid-gap: 1rem;
 
 	width: fit-content;
 	max-width: min(100%, 70rem);
 
-	margin: 0 auto;
+	margin: 0.5rem 0 1rem 0;
+}
+
+@media (max-width: 45rem) {
+	section.projects nav {
+		margin: 0 auto;
+	}
 }
 
 section.projects nav article.project {
 	display: grid;
+	grid-template-columns: 1.25rem 1fr auto;
+	grid-template-rows: 1.25rem 2.5rem 1rem;
 	grid-gap: 0.25rem;
 
-	width: 100%;
-	max-width: 20.5rem;
+	width: 20.75rem;
 	height: 6.35rem;
 
 	background: hsla(var(--theme), 0.1);
@@ -36,6 +43,8 @@ section.projects nav article.project {
 }
 
 section.projects nav article.project * {
+	--redacted-color: hsla(var(--theme), 0.1);
+
 	text-overflow: ellipsis;
 	overflow: hidden;
 }
@@ -45,6 +54,11 @@ section.projects nav article.project .separator {
 }
 
 section.projects nav article.project .title {
+	display: flex;
+	justify-content: left;
+	align-items: center;
+
+	font-size: 0.95rem;
 	font-weight: 650;
 }
 
@@ -53,4 +67,28 @@ section.projects nav article.project .summary {
 	-webkit-box-orient: vertical;
 
 	font-size: 0.85rem;
+}
+
+section.projects nav article.project .status {
+	--status-color: 210, 5%, 85%, 75%;
+
+	grid-area: 1 / 3 / 2 / 4;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	background: hsla(var(--status-color));
+
+	font-size: 0.75rem;
+
+	border: 1px solid hsla(var(--status-color));
+	border-radius: 0.625rem;
+
+	margin-left: auto;
+	padding: 0 0.3rem;
+}
+
+section.projects nav article.project .icon {
+	grid-area: 3 / 1;
 }

@@ -1,3 +1,4 @@
+import logger from "/script/logger.js";
 import { join } from "/script/path.js";
 import storage from "/script/storage.js";
 import { parseDuration } from "/script/utils.js";
@@ -9,17 +10,30 @@ const loadProject = {
 
 		const titleElement = document.createElement("div");
 		titleElement.classList.add("title");
-		titleElement.textContent = data.name;
 
 		const statusElement = document.createElement("div");
-		statusElement.classList.add("status", ...(data.status === "Private" ? ["private"] : []));
+		statusElement.classList.add("status", data.status.toLowerCase());
 		statusElement.textContent = data.status;
 
 		const summaryElement = document.createElement("div");
 		summaryElement.classList.add("summary");
-		summaryElement.textContent = data.summary;
 
-		containerElement.append(statusElement, summaryElement, titleElement);
+		if ((data.redacted ?? []).includes("title")) {
+			titleElement.classList.add("redacted");
+			titleElement.innerText = "REDACTED Project"
+		} else titleElement.textContent = data.name ?? "Unknown Project";
+
+		if ((data.redacted ?? []).includes("summary")) {
+			summaryElement.classList.add("redacted");
+			summaryElement.innerText = "This project is private and cannot be displayed, and it's not by looking at the source code that you can see it either. >:(";
+		} else summaryElement.textContent = data.summary ?? "No description provided.";
+
+		const blenderElement = document.createElement("div");
+		blenderElement.classList.add("blender", "icon");
+		blenderElement.dataset.icon = "blender";
+		blenderElement.dataset.style = "brand";
+
+		containerElement.append(titleElement, statusElement, summaryElement, blenderElement);
 		return containerElement;
 	},
 	github: async (owner, repo) => {
@@ -36,9 +50,14 @@ const loadProject = {
 		}
 
 		if (!response) {
-			response = await fetch(`https://api.github.com/repos/${owner}/${repo}`);
-			data = await response.json();
-			if (response.status != 403) storage.setItem(cacheKey, JSON.stringify({ ok: response.ok, timestamp: Date.now(), data }));
+			try {
+				response = await fetch(`https://api.github.com/repos/${owner}/${repo}`);
+				data = await response.json();
+				if (response.status != 403) storage.setItem(cacheKey, JSON.stringify({ ok: response.ok, timestamp: Date.now(), data }));
+			} catch (error) {
+				response = { ok: false };
+				logger.error(`Failed to load project ${owner}/${repo}`, error.message, error.trace);
+			}
 		}
 
 		const containerElement = document.createElement("article");
@@ -111,11 +130,16 @@ const loadProject = {
 			if (response.status === 403) summaryElement.innerHTML = `GitHub rate limit reached for your IP, please try again in ${parseDuration(Number(response.headers.get("x-ratelimit-reset") * 1000) - Date.now())}.`;
 			else {
 				summaryElement.classList.add("redacted");
-				summaryElement.innerHTML = `This project is private and cannot be displayed, and it's not by looking at the source code that you can see it either. >:(`;
+				summaryElement.innerHTML = "This project is private and cannot be displayed, and it's not by looking at the source code that you can see it either. >:(";
 			}
 		}
 
-		containerElement.append(avatarElement, titleElement, statusElement, summaryElement);
+		const githubElement = document.createElement("div");
+		githubElement.classList.add("github", "icon");
+		githubElement.dataset.icon = "github";
+		githubElement.dataset.style = "brand";
+
+		containerElement.append(avatarElement, titleElement, statusElement, summaryElement, githubElement);
 		console.log(data);
 		return containerElement;
 
@@ -133,18 +157,29 @@ const loadProject = {
 };
 
 addEventListener("DOMContentLoaded", async () => {
-	const projectsContainer = document.querySelector(".projects nav");
-	projectsContainer.append(...(await Promise.all([
+	const projectsWrapper = document.querySelector(".projects");
+	const projectsContainer = projectsWrapper.querySelector("nav");
+
+	const projects = [
 		loadProject.github("Wixonic", "Mercury"),
 		loadProject.github("Wixonic", "TIPE"),
 		loadProject.github("Wixonic", "WixiBot"),
-		/* loadProject.blender({
-			name: "REDACTED",
-			summary: "REDACTED",
-			status: "Private",
-			redacted: ["name", "summary"]
-		}), */
+		loadProject.blender({
+			status: "Writing",
+			redacted: ["title", "summary"]
+		}),
 		loadProject.github("Wixonic", "12th-Client"),
 		loadProject.github("Wixonic", "YouTube-Alt")
-	])));
+	];
+
+	projectsContainer.append(...(await Promise.all(projects)));
+
+	if (projects.length > 0) projectsWrapper.classList.remove("hidden");
+
+	const newsWrapper = document.querySelector(".news");
+	const newsContainer = newsWrapper.querySelector("nav");
+
+	const news = [];
+
+	if (news.length > 0) newsWrapper.classList.remove("hidden");
 });
