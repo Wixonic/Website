@@ -30,8 +30,9 @@ const loadProject = {
 
 		const blenderElement = document.createElement("div");
 		blenderElement.classList.add("blender", "icon");
-		blenderElement.dataset.icon = "blender";
+		blenderElement.dataset.icon = "blender_community_badge";
 		blenderElement.dataset.style = "brand";
+		blenderElement.addEventListener("click", (event) => event.stopPropagation());
 
 		containerElement.append(titleElement, statusElement, summaryElement, blenderElement);
 		return containerElement;
@@ -79,6 +80,7 @@ const loadProject = {
 			ownerElement.textContent = owner;
 			ownerElement.href = `https://github.com/${owner}`;
 			ownerElement.target = "_blank";
+			ownerElement.addEventListener("click", (event) => event.stopPropagation());
 
 			const titleSeparator = document.createElement("span");
 			titleSeparator.classList.add("separator");
@@ -138,6 +140,7 @@ const loadProject = {
 		githubElement.classList.add("github", "icon");
 		githubElement.dataset.icon = "github";
 		githubElement.dataset.style = "brand";
+		githubElement.addEventListener("click", (event) => event.stopPropagation());
 
 		containerElement.append(avatarElement, titleElement, statusElement, summaryElement, githubElement);
 		console.log(data);

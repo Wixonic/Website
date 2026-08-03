@@ -1,0 +1,85 @@
+main {
+	display: flex;
+	flex-direction: column;
+
+	padding: 0;
+
+	overflow: hidden;
+}
+
+section {
+	display: flow-root;
+
+	background: hsl(var(--background));
+
+	height: 100%;
+
+	margin: 0;
+	padding: 0 1.5rem;
+}
+
+section.emergency {
+	background: hsl(var(--deep-background));
+
+	text-align: center;
+}
+
+section.emergency .button.primary:hover {
+	background: hsl(var(--deep-background));
+}
+
+section.emergency h1 {
+	margin: 0;
+}
+
+section.emergency .toolbar {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+section.emergency .toolbar:not(.vertical) {
+	gap: 0.5rem;
+}
+
+section.emergency .toolbar.vertical {
+	flex-direction: column;
+}
+
+section.emergency #emergency-112 {
+	--theme: 202, 100%, 50%;
+}
+
+section.emergency #emergency-911 {
+	--theme: 3, 100%, 59%;
+}
+
+section.emergency #emergency-emotional {
+	--theme: 135, 59%, 49%;
+}
+
+section.emergency #emergency-list {
+	animation: emergency 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes emergency {
+	from {
+		--theme: 202, 100%, 50%;
+	}
+
+	to {
+		--theme: 3, 100%, 59%;
+	}
+}
+
+section:nth-of-type(2) {
+	position: relative;
+	margin-top: -0.25rem;
+}
+
+@media (min-width: 70rem) {
+	section:nth-of-type(2) {
+		border-top-left-radius: 0.5rem;
+		border-top-right-radius: 0.5rem;
+	}
+}

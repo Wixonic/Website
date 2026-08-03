@@ -1,0 +1,19 @@
+{
+	"ready": true,
+	"type": "image",
+	"name": "GitHub",
+	"description": "GitHub Brand Logo",
+	"copyright": "GitHub, Inc. All rights reserved.",
+	"download": false,
+	"link": "https://brand.github.com/foundations/logo",
+	"author": "GitHub, Inc.",
+	"files": [
+		{
+			"path": "github.svg",
+			"size": 1313,
+			"format": "svg",
+			"codec": "Scalable Vector Graphics",
+			"mime": "svg+xml"
+		}
+	]
+}

@@ -2,6 +2,8 @@
 layout: main.njk
 title: Contact | Wixonic
 description: Find help or contact me.
+styles:
+- index.css
 ---
 
 <header>
@@ -16,20 +18,20 @@ description: Find help or contact me.
 
 		<h1>Emergency</h1>
 
-		<div class="toolbar">
+		<div class="toolbar vertical">
 
 			<div class="toolbar">
 
-				<a href="tel:112" class="button danger">Call 112</a>
-				<a href="tel:911" class="button danger">Call 911</a>
+				<a id="emergency-112" href="tel:112" class="button primary">Call 112</a>
+				<a id="emergency-911" href="tel:911" class="button primary">Call 911</a>
 
 			</div>
 
-			<a href="https://findahelpline.com" class="button danger" target="_blank" rel="noopener noreferrer">Free emotional support</a>
+			<a id="emergency-emotional" href="https://findahelpline.com" class="button primary" target="_blank" rel="noopener noreferrer">Free emotional support</a>
 
 		</div>
 
-		<p>Find your local emergency services on <a href="https://en.wikipedia.org/wiki/List_of_emergency_telephone_numbers" target="_blank" rel="noopener noreferrer">Wikipedia</a>.</p>
+		<p>Find your local emergency services on <a id="emergency-list" href="https://en.wikipedia.org/wiki/List_of_emergency_telephone_numbers" target="_blank" rel="noopener noreferrer">Wikipedia</a>.</p>
 
 	</section>
 
@@ -37,7 +39,7 @@ description: Find help or contact me.
 
 		<h1>Need help?</h1>
 
-		<p>You can <a href="https://go.wixonic.fr/help/discord" target="_blank">create a ticket on Discord</a>.</p>
+		<p>You can <a href="{{ path.links }}/help/discord" target="_blank">create a ticket on Discord</a>.</p>
 
 		<p>If you prefer to contact me another way, you can <a href="mailto:contact@wixonic.fr">send me an email</a>.</p>
 

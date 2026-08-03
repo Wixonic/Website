@@ -1,14 +1,26 @@
+import { join } from "/script/path.js";
+import { request } from "/script/request.js";
+
 export const icons = {
 	eye: {
 		fill: "M247.31,124.76c-.35-.79-8.82-19.58-27.65-38.41C194.57,61.26,162.88,48,128,48S61.43,61.26,36.34,86.35C17.51,105.18,9,124,8.69,124.76a8,8,0,0,0,0,6.5c.35.79,8.82,19.57,27.65,38.4C61.43,194.74,93.12,208,128,208s66.57-13.26,91.66-38.34c18.83-18.83,27.3-37.61,27.65-38.4A8,8,0,0,0,247.31,124.76ZM128,168a40,40,0,1,1,40-40A40,40,0,0,1,128,168Z"
 	},
 	star: {
 		fill: "M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z"
+	},
+	brand: {
+		blender_community_badge: null,
+		github: null
 	}
 };
 
 export const parseIcon = (iconElement) => {
 	if (iconElement.dataset.done) return;
+
+	if (iconElement.dataset.style === "brand") {
+		iconElement.dataset.style = iconElement.dataset.icon;
+		iconElement.dataset.icon = "brand";
+	}
 
 	const name = iconElement.dataset.icon;
 	if (!name || !icons[name]) return;
@@ -38,7 +50,12 @@ const parseElement = (element) => {
 	element.querySelectorAll(".icon").forEach((iconElement) => parseIcon(iconElement));
 };
 
-export const init = () => {
+export const init = async () => {
+	await Promise.all(Object.entries(icons.brand).map(async ([name]) => {
+		const req = await request("GET", join(path.assets, `raw/icon/${name}.svg`), "text");
+		if (req.status === 200) icons.brand[name] = `<a href="${join(path.assets, `icon/${name}.svg`)}" target="_blank">${req.response}</a>`;
+	}));
+
 	document.querySelectorAll(".icon").forEach((iconElement) => parseIcon(iconElement));
 
 	const observer = new MutationObserver((mutations) => {

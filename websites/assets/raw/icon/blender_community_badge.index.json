@@ -1,0 +1,19 @@
+{
+	"ready": true,
+	"type": "image",
+	"name": "Blender Community Badge",
+	"description": "Blender Community Badge",
+	"copyright": "Blender Foundation",
+	"download": false,
+	"link": "https://www.blender.org/about/logo/",
+	"author": "Blender Foundation",
+	"files": [
+		{
+			"path": "blender_community_badge.svg",
+			"size": 10371,
+			"format": "svg",
+			"codec": "Scalable Vector Graphics",
+			"mime": "svg+xml"
+		}
+	]
+}

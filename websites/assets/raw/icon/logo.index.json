@@ -10,12 +10,10 @@
 	"files": [
 		{
 			"path": "logo/file.svg",
-			"width": 144,
-			"height": 104,
 			"size": 676,
 			"format": "svg",
 			"codec": "Scalable Vector Graphics",
-			"mime": "svg"
+			"mime": "svg+xml"
 		},
 		{
 			"path": "logo/default.webp",

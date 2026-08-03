@@ -10,6 +10,8 @@ section.projects nav article.project.github .avatar {
 
 section.projects nav article.project.github .title {
 	grid-area: 1 / 2 / 2 / 3;
+
+	gap: 0.15rem;
 }
 
 section.projects nav article.project.github .title .author {
