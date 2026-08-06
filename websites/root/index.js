@@ -44,7 +44,7 @@ const loadProject = {
 		const cached = storage.getItem(cacheKey);
 		if (cached) {
 			const cache = JSON.parse(cached);
-			if (Date.now() - cache.timestamp < 1000 * 60 * 10) response = {
+			if (Date.now() - cache.timestamp < 1000 * 60 * 15) response = {
 				ok: cache.ok
 			};
 			data = cache.data;

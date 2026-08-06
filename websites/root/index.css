@@ -20,9 +20,11 @@ section {
 	padding: 0 1.5rem;
 }
 
-section:nth-of-type(2) {
-	position: relative;
-	margin-top: -0.25rem;
+@media (min-width: 45rem) {
+	section:nth-of-type(2) {
+		position: relative;
+		margin-top: -0.25rem;
+	}
 }
 
 @media (min-width: 70rem) {
@@ -30,11 +32,6 @@ section:nth-of-type(2) {
 		border-top-left-radius: 0.5rem;
 		border-top-right-radius: 0.5rem;
 	}
-}
-
-section h2 {
-	font-family: var(--title-font-family);
-	font-size: 1.25rem;
 }
 
 

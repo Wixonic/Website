@@ -18,16 +18,20 @@ scripts:
 
 	<section class="hi">
 
-		<picture>
+		<a class="unlink" href="{{ path.assets }}/image/root/hi.webp" target="_blank">
 
-			<source media="(min-width: 1025px)" srcset="{{ path.assets }}/raw/image/root/hi.webp" />
-			<img src="{{ path.assets }}/raw/image/root/hi.min.webp" alt="A Wixi (my avatar) waving their hand" />
+			<picture>
 
-		</picture>
+				<source media="(min-width: 1025px)" srcset="{{ path.assets }}/raw/image/root/hi.webp" />
+				<img src="{{ path.assets }}/raw/image/root/hi.min.webp" alt="A Wixi (my avatar) waving their hand" />
+
+			</picture>
+
+		</a>
 
 		<h1>Hi!</h1>
 
-		<p>I'm Wixonic (<a href="https://r12a.github.io/scripts/apps/ipa_analyser/index?q=wiks%C9%94nik" class="ipa stealth" lang="fr-fonipa" target="_blank">/wiksɔnik/</a>), but you can call me Wix!</p>
+		<p>I'm Wixonic (<a href="https://r12a.github.io/scripts/apps/ipa_analyser/index?q=wiks%C9%94nik" class="ipa stealth" lang="fr-fonipa" target="_blank" rel="noopener noreferrer">/wiksɔnik/</a>), but you can call me Wix!</p>
 
 	</section>
 
@@ -35,7 +39,23 @@ scripts:
 
 		<h2>About me</h2>
 
-		<p>Casual 3D artist, web designer, and developer.</p>
+		<article class="discord hidden">
+
+			<img src="" class="avatar-decoration" alt="Wixonic's Discord avatar decoration" />
+			<img src="" class="avatar" alt="Wixonic's Discord avatar" />
+
+			<div class="status-icon"></div>
+
+			<div class="username"></div>
+			<div class="status"></div>
+
+		</article>
+
+		<p>
+			Hard to fit into a single box, but here’s the short version:<br />
+			<b>Artist, web designer, developer</b>.<br /><br />
+			Want to see how it all comes together?
+		</p>
 
 		<a class="button primary" href="/about">Learn more about me</a>
 

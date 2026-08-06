@@ -1,0 +1,19 @@
+{
+	"ready": true,
+	"type": "image",
+	"name": "YouTube",
+	"description": "YouTube Brand Icon",
+	"copyright": "Google LLC",
+	"download": false,
+	"link": "https://brand.youtube",
+	"author": "YouTube",
+	"files": [
+		{
+			"path": "youtube.svg",
+			"size": 1122,
+			"format": "svg",
+			"codec": "Scalable Vector Graphics",
+			"mime": "svg+xml"
+		}
+	]
+}

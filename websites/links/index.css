@@ -19,7 +19,7 @@ main {
 	padding: 0;
 
 	overflow-y: scroll;
-	scroll-snap-type: y mandatory;
+	scroll-snap-type: y proximity;
 
 	scrollbar-width: none;
 	-ms-overflow-style: none;
@@ -58,6 +58,34 @@ main>* img {
 	width: 100%;
 	height: auto;
 	aspect-ratio: 2 / 1;
+}
+
+.button:hover {
+	background: hsl(var(--deep-background));
+}
+
+nav.other {
+	height: fit-content;
+}
+
+nav.other .separator {
+	font-weight: 300;
+
+	opacity: 0.5;
+
+	margin: 0 0.2rem;
+}
+
+nav.other .button .icon {
+	font-size: 1.2rem;
+}
+
+nav.other .button.youtube {
+	--theme: 348, 100%, 50%;
+}
+
+nav.other .button.youtube .separator {
+	margin-left: 0.1rem;
 }
 
 footer {

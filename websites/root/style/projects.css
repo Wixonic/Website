@@ -7,7 +7,7 @@ section.projects h2 {
 
 section.projects nav {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, 20.75rem);
+	grid-template-columns: repeat(auto-fit, 20.5rem);
 	grid-auto-rows: 6.35rem;
 	grid-gap: 1rem;
 
@@ -29,7 +29,7 @@ section.projects nav article.project {
 	grid-template-rows: 1.25rem 2.5rem 1rem;
 	grid-gap: 0.25rem;
 
-	width: 20.75rem;
+	width: 20.5rem;
 	height: 6.35rem;
 
 	background: hsla(var(--theme), 0.1);
