@@ -10,6 +10,7 @@ export const icons = {
 	},
 	brand: {
 		blender_community_badge: null,
+		discord: null,
 		github: null,
 		youtube: null
 	}
@@ -54,7 +55,7 @@ const parseElement = (element) => {
 export const init = async () => {
 	await Promise.all(Object.entries(icons.brand).map(async ([name]) => {
 		const req = await request("GET", join(path.assets, `raw/icon/${name}.svg`), "text");
-		if (req.status === 200) icons.brand[name] = `<a href="${join(path.assets, `icon/${name}.svg`)}" target="_blank" class="unlink">${req.response}</a>`;
+		if (req.status === 200) icons.brand[name] = req.response;
 	}));
 
 	document.querySelectorAll(".icon").forEach((iconElement) => parseIcon(iconElement));

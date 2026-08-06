@@ -1,3 +1,4 @@
+import { getDiscordProfile } from "/script/discord.profile.js";
 import logger from "/script/logger.js";
 import { join } from "/script/path.js";
 import storage from "/script/storage.js";
@@ -186,4 +187,28 @@ addEventListener("DOMContentLoaded", async () => {
 	const news = [];
 
 	if (news.length > 0) newsWrapper.classList.remove("hidden");
+
+	const discordProfile = await getDiscordProfile();
+
+	const updateDiscordPresence = (profile) => {
+		const discordElement = document.querySelector("article.discord");
+		discordElement.classList.remove("hidden");
+
+		const youBarElement = discordElement.querySelector(".you-bar");
+		youBarElement.addEventListener("click", () => open(join(path.links, "/discord/"), "_blank", "noopener noreferrer"));
+
+		youBarElement.querySelector(".avatar image").setAttribute("href", profile.avatar);
+		if (profile.avatarDecoration) youBarElement.querySelector(".avatar-decoration image").setAttribute("href", profile.avatarDecoration);
+		youBarElement.querySelector(".username").textContent = profile.username;
+		youBarElement.querySelector(".status-icon").setAttribute("class", `status-icon ${profile.presence.status}`);
+
+		console.log(profile);
+	};
+
+	if (discordProfile) updateDiscordPresence(discordProfile);
+
+	setInterval(async () => {
+		const discordProfile = await getDiscordProfile();
+		if (discordProfile) updateDiscordPresence(discordProfile);
+	}, 30 * 1000);
 });

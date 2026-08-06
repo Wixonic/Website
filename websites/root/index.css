@@ -61,6 +61,186 @@ section.hi p {
 
 
 
+section.about {
+	position: relative;
+
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
+section.about article.discord {
+	position: relative;
+
+	background: linear-gradient(180deg, black, hsl(252, 40%, 45%));
+	box-shadow: 0 0 2rem hsla(var(--theme), 50%);
+
+	color: #FFF;
+
+	border: 0.1rem solid #AAA;
+	border-radius: 2.25rem 2.25rem 0.75rem 0.75rem;
+
+	margin: 1rem;
+	padding: 1rem;
+}
+
+section.about article.discord .you-bar {
+	border-radius: 2.25rem;
+
+	cursor: pointer;
+}
+
+section.about article.discord .you-bar .avatar {
+	position: absolute;
+	top: 0.375rem;
+	left: 0.375rem;
+
+	width: 3.75rem;
+	height: 3.75rem;
+}
+
+section.about article.discord .you-bar .avatar-decoration {
+	position: absolute;
+	top: 0rem;
+	left: 0rem;
+
+	width: 4.5rem;
+	height: 4.5rem;
+}
+
+section.about article.discord .you-bar .status-icon {
+	position: absolute;
+	top: 3.0625rem;
+	left: 3.0625rem;
+
+	width: 1rem;
+	height: 1rem;
+}
+
+section.about article.discord .you-bar .status-icon .status-fill {
+	fill: #80848E;
+	transition: fill 0.5s ease;
+}
+
+section.about article.discord .you-bar .status-icon .cutout-moon,
+section.about article.discord .you-bar .status-icon .cutout-ring {
+	r: 0px;
+	transition: r0.5s ease;
+}
+
+section.about article.discord .you-bar .status-icon .cutout-bar {
+	y: 50px;
+	height: 0px;
+	transition: y 0.5s ease, height 0.5s ease;
+}
+
+section.about article.discord .you-bar .status-icon.online .status-fill {
+	fill: #45A366;
+}
+
+section.about article.discord .you-bar .status-icon.idle .status-fill {
+	fill: #FFC04E;
+}
+
+section.about article.discord .you-bar .status-icon.idle .cutout-moon {
+	r: 37.5px;
+}
+
+section.about article.discord .you-bar .status-icon.dnd .status-fill {
+	fill: #FF0006;
+}
+
+section.about article.discord .you-bar .status-icon.dnd .cutout-bar {
+	y: 37.5px;
+	height: 25px;
+}
+
+section.about article.discord .you-bar .status-icon.offline .cutout-ring {
+	r: 25px;
+}
+
+section.about article.discord .you-bar .discord-icon {
+	color: #E0E3FF;
+
+	opacity: 0.4;
+}
+
+@media (max-width: 45rem) {
+	section.about {
+		grid-template-columns: 1fr;
+
+		max-width: 100%;
+		width: 100%;
+
+		margin: 0;
+	}
+
+	section.about article.discord {
+		position: absolute;
+		top: 0.5rem;
+		right: 0.5rem;
+
+		width: 6.25rem;
+		height: 3.375rem;
+
+		box-shadow: none;
+
+		border: none;
+		border-radius: 3.375rem;
+	}
+
+	section.about article.discord .you-bar .avatar {
+		position: absolute;
+		top: 0.28125rem;
+		left: 0.28125rem;
+
+		width: 2.8125rem;
+		height: 2.8125rem;
+	}
+
+	section.about article.discord .you-bar .avatar-decoration {
+		width: 3.375rem;
+		height: 3.375rem;
+	}
+
+	section.about article.discord .you-bar .status-icon {
+		position: absolute;
+		top: 2.30rem;
+		left: 2.30rem;
+
+		width: 0.75rem;
+		height: 0.75rem;
+	}
+
+	section.about article.discord .you-bar .username,
+	section.about article.discord .you-bar .status,
+	section.about article.discord .activities {
+		display: none;
+	}
+
+	section.about article.discord .you-bar .discord-icon {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	section.about article.discord .you-bar .discord-icon {
+		position: absolute;
+		top: 0;
+		right: 0;
+
+		width: 3.375rem;
+		height: 3.375rem;
+	}
+
+	section.about article.discord .you-bar .discord-icon svg {
+		width: 1.40625rem;
+		height: 1.40625rem;
+	}
+}
+
+
+
+
 section.links picture,
 section.links picture img {
 	pointer-events: none;

@@ -2,7 +2,7 @@ declare global {
 	const path: {
 		root: string;
 		assets: string;
-		redirects: string;
+		links: string;
 		status: string;
 		server: string;
 
@@ -20,7 +20,7 @@ declare global {
 			};
 		};
 	};
-}
+};
 
 export type LoggerFunction = (reason?: any, message?: any, trace?: any) => void;
 
@@ -28,4 +28,4 @@ export interface Logger {
 	fatalError: LoggerFunction;
 	error: LoggerFunction;
 	warn: LoggerFunction;
-}
+};

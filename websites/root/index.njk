@@ -37,27 +37,66 @@ scripts:
 
 	<section class="about">
 
-		<h2>About me</h2>
+		<article>
 
-		<article class="discord hidden">
+			<h2>About me</h2>
 
-			<img src="" class="avatar-decoration" alt="Wixonic's Discord avatar decoration" />
-			<img src="" class="avatar" alt="Wixonic's Discord avatar" />
+			<p>
+				Hard to fit into a single box, but here’s the short version:<br />
+				<b>Artist, web designer, developer</b>.<br /><br />
+				Want to see how it all comes together?
+			</p>
 
-			<div class="status-icon"></div>
-
-			<div class="username"></div>
-			<div class="status"></div>
+			<a class="button primary" href="/about">Learn more about me</a>
 
 		</article>
 
-		<p>
-			Hard to fit into a single box, but here’s the short version:<br />
-			<b>Artist, web designer, developer</b>.<br /><br />
-			Want to see how it all comes together?
-		</p>
+		<article class="discord hidden">
 
-		<a class="button primary" href="/about">Learn more about me</a>
+			<div class="you-bar">
+
+				<svg class="avatar-decoration" viewBox="0 0 100 100" aria-label="Wixonic's Discord avatar decoration">
+					<defs>
+						<mask id="avatar-decoration-mask">
+							<rect fill="white" width="100" height="100" />
+							<circle fill="black" cx="79.17" cy="79.17" r="14.58" />
+						</mask>
+					</defs>
+					<image width="100" height="100" mask="url(#avatar-decoration-mask)" />
+				</svg>
+
+				<svg class="avatar" viewBox="0 0 100 100" aria-label="Wixonic's Discord avatar">
+					<defs>
+						<mask id="avatar-mask">
+							<circle fill="white" cx="50" cy="50" r="50" />
+							<circle fill="black" cx="85" cy="85" r="17.5" />
+						</mask>
+					</defs>
+					<image width="100" height="100" mask="url(#avatar-mask)" />
+				</svg>
+
+				<svg class="status-icon" viewBox="0 0 100 100">
+					<defs>
+						<mask id="status-icon-mask">
+							<circle fill="white" cx="50" cy="50" r="50" />
+							<circle class="cutout-moon" fill="black" cx="25" cy="25" r="0" />
+							<circle class="cutout-ring" fill="black" cx="50" cy="50" r="0" />
+							<rect class="cutout-bar" fill="black" x="12.5" y="50" width="75" height="0" rx="12.5" ry="12.5" />
+						</mask>
+					</defs>
+					<circle class="status-fill" cx="50" cy="50" r="50" mask="url(#status-icon-mask)" />
+				</svg>
+
+				<div class="username"></div>
+				<div class="status"></div>
+
+				<div class="discord-icon icon" data-icon="discord" data-style="brand"></div>
+
+			</div>
+
+			<div class="activites"></div>
+
+		</article>
 
 	</section>
 

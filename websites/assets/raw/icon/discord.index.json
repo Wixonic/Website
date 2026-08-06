@@ -1,0 +1,19 @@
+{
+	"ready": true,
+	"type": "image",
+	"name": "Discord Icon",
+	"description": "Discord Brand Icon",
+	"copyright": "Discord Inc. All rights reserved.",
+	"download": false,
+	"link": "https://discord.com/branding",
+	"author": "Discord Inc.",
+	"files": [
+		{
+			"path": "discord.svg",
+			"size": 1132,
+			"format": "svg",
+			"codec": "Scalable Vector Graphics",
+			"mime": "svg+xml"
+		}
+	]
+}
