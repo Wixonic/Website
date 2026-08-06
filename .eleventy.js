@@ -75,7 +75,10 @@ export default (config) => {
 		links: "http://127.0.0.1:2012",
 		status: "http://127.0.0.1:2013",
 
-		server: "http://127.0.0.1:999",
+		server: {
+			default: "http://127.0.0.1:1200",
+			discord: "http://127.0.0.1:1201"
+		},
 
 		github: {
 			username: "Wixonic"
@@ -93,7 +96,10 @@ export default (config) => {
 		links: "https://go.wixonic.fr",
 		status: "https://status.wixonic.fr",
 
-		server: "https://server.wixonic.fr",
+		server: {
+			default: "https://server.wixonic.fr",
+			discord: "https://discord.wixonic.fr"
+		},
 
 		github: {
 			username: "Wixonic"
