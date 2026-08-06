@@ -64,7 +64,7 @@ const loadProject = {
 		const containerElement = document.createElement("article");
 		containerElement.classList.add("project", "github");
 
-		containerElement.addEventListener("click", () => open(`https://github.com/${owner}/${repo}`, "_blank"));
+		containerElement.addEventListener("click", () => open(`https://github.com/${owner}/${repo}`, "_blank", "noopener noreferrer"));
 
 		const headerElement = document.createElement("div");
 		headerElement.classList.add("header");
