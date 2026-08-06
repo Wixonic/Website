@@ -80,6 +80,7 @@ const loadProject = {
 			ownerElement.textContent = owner;
 			ownerElement.href = `https://github.com/${owner}`;
 			ownerElement.target = "_blank";
+			ownerElement.rel = "noopener noreferrer";
 			ownerElement.addEventListener("click", (event) => event.stopPropagation());
 
 			const titleSeparator = document.createElement("span");
