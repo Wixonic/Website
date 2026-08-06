@@ -1,0 +1,82 @@
+main {
+	display: flex;
+	flex-direction: column;
+
+	padding: 0;
+
+	overflow: hidden;
+}
+
+section {
+	display: flow-root;
+
+	background: hsl(var(--background));
+
+	height: 100%;
+
+	margin: 0;
+	padding: 1rem 2.5rem;
+}
+
+section.hero {
+	background: hsl(var(--deep-background));
+
+	text-align: center;
+
+	padding: 0;
+}
+
+section.hero .button.primary {
+	margin: 1.5rem auto 3rem auto;
+}
+
+section.hero .button.primary:hover {
+	background: hsl(var(--deep-background));
+}
+
+section.hero h1 {
+	margin: 0;
+}
+
+section h2 {
+	position: relative;
+
+	counter-increment: h2counter;
+	counter-reset: h3counter;
+}
+
+section h2::before {
+	display: inline-block;
+
+	content: counter(h2counter, upper-latin) ". ";
+
+	margin-right: 0.5rem;
+}
+
+section h3 {
+	position: relative;
+
+	counter-increment: h3counter;
+}
+
+section h3::before {
+	display: inline-block;
+
+	content: counter(h3counter, decimal) ". ";
+
+	margin-right: 0.5rem;
+}
+
+@media (min-width: 45rem) {
+	section:nth-of-type(2) {
+		position: relative;
+		margin-top: -0.25rem;
+	}
+}
+
+@media (min-width: 70rem) {
+	section:nth-of-type(2) {
+		border-top-left-radius: 0.5rem;
+		border-top-right-radius: 0.5rem;
+	}
+}

@@ -2,6 +2,8 @@
 layout: main.njk
 title: Privacy Policy | Wixonic
 description: Our privacy policy is designed to protect your privacy, because privacy is a fundamental human right.
+styles:
+- index.css
 ---
 
 <header>
@@ -12,9 +14,114 @@ description: Our privacy policy is designed to protect your privacy, because pri
 
 <main>
 
-	<h1>Privacy Policy</h1>
+	<section class="hero">
 
-	<p>This website is currently under construction. Come back later!</p>
+		<h1>Wait a minute!</h1>
+
+		<p>You want to delete your data and don't know how? Send us an email below!</p>
+
+		<a href="mailto:privacy@wixonic.fr" class="button primary">Contact me</a>
+
+	</section>
+
+	<section>
+
+		<h1>Privacy Policy</h1>
+
+		<p>
+			This privacy policy describes how we manage and protect your personal information.<br />
+			It applies across all Wixonic services, including our <a href="https://github.com/Wixonic/Website" target="_blank" rel="noopener noreferrer">websites</a>, backend infrastructure (<a href="https://github.com/Wixonic/Server" target="_blank" rel="noopener noreferrer">Server</a>), Discord Application (<a href="https://github.com/Wixonic/WixiBot" target="_blank" rel="noopener noreferrer">WixiBot</a>), and desktop application (<a href="https://github.com/Wixonic/Mercury" target="_blank" rel="noopener noreferrer">Mercury</a>).<br />
+			All these products are open-source and available on <a href="https://github.com/Wixonic" target="_blank" rel="noopener noreferrer">GitHub</a>.
+		</p>
+
+		<h2>General Principles</h2>
+
+		<p>
+			We believe privacy is a fundamental human right. We do not track, profile, sell, or monetize your personal information.<br />
+			We only process the minimal technical data strictly necessary to deliver, secure, and operate our services.
+		</p>
+
+		<h2>Websites & Infrastructure</h2>
+
+		<p>
+			Our websites are hosted on Google's <a href="https://firebase.google.com/" target="_blank" rel="noopener noreferrer">Firebase</a>, specifically their <a href="https://firebase.google.com/products/hosting" target="_blank" rel="noopener noreferrer">Hosting</a> service.<br />
+			Public site data is retrieved from <a href="https://firebase.google.com/products/firestore" target="_blank" rel="noopener noreferrer">Firebase Firestore</a>.
+		</p>
+
+		<p>
+			To protect our infrastructure against bot abuse and automated attacks, we use <a href="https://firebase.google.com/docs/app-check" target="_blank" rel="noopener noreferrer">Firebase App Check</a> powered by <a href="https://developers.google.com/recaptcha" target="_blank" rel="noopener noreferrer">Google reCAPTCHA v3</a>. reCAPTCHA evaluates technical interaction parameters (such as browser characteristics and request headers) strictly for security verification.
+		</p>
+
+		<p>
+			Our backend service (<b>Server</b>) handles request routing and security headers. It processes standard HTTP request metadata (such as IP address, host, and path) transiently in memory to serve requests and manage CORS origin policies.
+		</p>
+
+		<h2>WixiBot (Discord Application)</h2>
+
+		<p>
+			WixiBot processes minimal user information linked to your Discord User ID in order to provide statistics, levels, streaks, and achievements.
+		</p>
+
+		<h3>Data Collected</h3>
+
+		<p>
+			WixiBot stores the following data locally on our server:
+		</p>
+
+		<ul>
+			<li><b>Account Identifier</b>: Your Discord User ID.</li>
+			<li><b>Activity Statistics</b>: Aggregated counts of sent messages, reactions, forum posts, and stage events attended within guilds.</li>
+			<li><b>Progression & Streaks</b>: Total XP, current/best daily active streaks, and unlocked achievements.</li>
+			<li><b>Optional Information</b>: Discord presence/activity details (only if live recording is enabled in your settings) and birthday (day and month, if voluntarily set).</li>
+		</ul>
+
+		<h3>Manage and Delete your Data</h3>
+
+		<p>
+			You can disable activity recording at any time using the <span class="discord-inline-button">/settings</span> command and clicking <span class="discord-button primary">User Settings</span>.<br />
+			You can permanently delete all stored data using the <span class="discord-inline-button">/privacy</span> command and clicking <span class="discord-button danger">Delete my data</span>, or by contacting us at <a href="mailto:privacy@wixonic.fr">privacy@wixonic.fr</a>.
+		</p>
+
+		<h3>AI Services and Features</h3>
+
+		<p>
+			All AI services provided by WixiBot run <b>locally</b> on our private hardware using <a href="https://unsloth.ai/docs/new/studio" target="_blank" rel="noopener noreferrer">Unsloth Studio</a>.<br />
+			Your prompts and inputs are processed in real time and immediately discarded once generation completes. Your data is never saved, shared with third parties, or used to train AI models.
+		</p>
+
+		<p>
+			Deep research and search features query <a href="https://duckduckgo.com/about" target="_blank" rel="noopener noreferrer">DuckDuckGo's search API</a> without attaching personal user identifiers.
+		</p>
+
+		<h2>Mercury (Desktop Application)</h2>
+
+		<p>
+			Mercury is an alternative open-source Discord desktop client built with speed and privacy in mind.
+		</p>
+
+		<p>
+			<b>Zero Telemetry</b>: Mercury does <b>not</b> collect, log, or transmit any telemetry, analytics, or user tracking data to our servers. Furthermore, Mercury is engineered to send <b>no telemetry or tracking data to Discord</b> either.
+		</p>
+
+		<p>
+			<b>Local Storage Only</b>: Your Discord authorization token is stored exclusively on your local device using <a href="https://developer.mozilla.org/docs/Web/API/Window/localStorage" target="_blank" rel="noopener noreferrer">localStorage</a> and is used solely to communicate directly with official Discord APIs.
+		</p>
+
+		<h2>Caches, Cookies & Storage</h2>
+
+		<p>
+			<b>Websites</b> use <a href="https://developer.mozilla.org/docs/Web/API/Window/localStorage" target="_blank" rel="noopener noreferrer">localStorage</a> to cache static resources and API responses locally, reducing redundant network requests.<br />
+			<b>WixiBot</b> temporarily caches user profile objects in memory to minimize unnecessary calls to the <a href="https://docs.discord.com" target="_blank" rel="noopener noreferrer">Discord API</a>.<br />
+			We do not use tracking cookies, third-party analytics scripts, or advertising trackers across any of our services.
+		</p>
+
+		<h2>Contact Us</h2>
+
+		<p>
+			If you have any questions or concerns regarding this privacy policy or your personal data, feel free to email us at <a href="mailto:privacy@wixonic.fr">privacy@wixonic.fr</a>.
+		</p>
+
+	</section>
 
 </main>
 
