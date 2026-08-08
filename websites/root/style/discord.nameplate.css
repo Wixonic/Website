@@ -1,0 +1,39 @@
+body {
+	--discord-nameplate-background: 240, 6%, 14%;
+
+	--discord-nameplate-crimson-dark: 357, 100%, 28%;
+	--discord-nameplate-crimson-light: 357, 97%, 46%;
+
+	--discord-nameplate-berry-dark: 290, 45%, 41%;
+	--discord-nameplate-berry-light: 290, 74%, 47%;
+
+	--discord-nameplate-sky-dark: 198, 100%, 36%;
+	--discord-nameplate-sky-light: 198, 100%, 67%;
+
+	--discord-nameplate-teal-dark: 177, 85%, 21%;
+	--discord-nameplate-teal-light: 168, 77%, 71%;
+
+	--discord-nameplate-forest-dark: 88, 98%, 17%;
+	--discord-nameplate-forest-light: 88, 64%, 40%;
+
+	--discord-nameplate-bubble_gum-dark: 326, 69%, 55%;
+	--discord-nameplate-bubble_gum-light: 326, 93%, 66%;
+
+	--discord-nameplate-violet-dark: 273, 90%, 41%;
+	--discord-nameplate-violet-light: 273, 84%, 56%;
+
+	--discord-nameplate-cobalt-dark: 225, 99%, 38%;
+	--discord-nameplate-cobalt-light: 223, 100%, 63%;
+
+	--discord-nameplate-clover-dark: 134, 94%, 25%;
+	--discord-nameplate-clover-light: 115, 53%, 58%;
+
+	--discord-nameplate-lemon-dark: 49, 93%, 52%;
+	--discord-nameplate-lemon-light: 50, 100%, 50%;
+
+	--discord-nameplate-white-dark: 0, 0%, 100%;
+	--discord-nameplate-white-light: 0, 0%, 100%;
+
+	--discord-nameplate-black-dark: 0, 0%, 0%;
+	--discord-nameplate-black-light: 0, 0%, 0%;
+}

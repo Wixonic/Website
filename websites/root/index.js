@@ -198,9 +198,21 @@ addEventListener("DOMContentLoaded", async () => {
 		youBarElement.addEventListener("click", () => open(join(path.links, "/discord/"), "_blank", "noopener noreferrer"));
 
 		youBarElement.querySelector(".avatar image").setAttribute("href", profile.avatar);
+
 		if (profile.avatarDecoration) youBarElement.querySelector(".avatar-decoration image").setAttribute("href", profile.avatarDecoration);
-		youBarElement.querySelector(".username").textContent = profile.username;
+
+		const usernameElement = youBarElement.querySelector(".username");
+		usernameElement.textContent = profile.displayName;
+		usernameElement.setAttribute("data-username", profile.displayName);
+		usernameElement.classList.add(`discord-name-style-font-${profile.displayNameStyle.font_id}`, `discord-name-style-effect-${profile.displayNameStyle.effect_id}`);
+		usernameElement.style.setProperty("--discord-name-style-color-1", `#${profile.displayNameStyle.colors[0].toString(16).padStart(6, "0")}`);
+		if (profile.displayNameStyle.colors.length > 1) usernameElement.style.setProperty("--discord-name-style-color-2", `#${profile.displayNameStyle.colors[1].toString(16).padStart(6, "0")}`);
+
 		youBarElement.querySelector(".status-icon").setAttribute("class", `status-icon ${profile.presence.status}`);
+
+		const nameplateElement = youBarElement.querySelector(".nameplate");
+		nameplateElement.style.setProperty("--palette", `var(--discord-nameplate-${profile.nameplate.palette}-dark)`);
+		nameplateElement.src = profile.nameplate.url;
 
 		console.log(profile);
 	};
