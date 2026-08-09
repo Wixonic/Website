@@ -68,20 +68,22 @@ section.about {
 
 	display: grid;
 	grid-template-columns: 1fr 22.5rem;
+	gap: 1rem;
 }
 
 section.about article.discord {
 	position: relative;
 
 	width: 100%;
+	height: fit-content;
 
 	background: linear-gradient(90deg, hsl(252, 20%, 20%), hsl(252, 40%, 30%));
 
 	color: #FFF;
 
-	border-radius: 7px 7px 0.75rem 0.75rem;
+	border-radius: 7px;
 
-	margin: 1rem;
+	margin: auto 0;
 
 	overflow: hidden;
 }
@@ -234,6 +236,9 @@ section.about article.discord .you-bar .discord-icon {
 
 	opacity: 0.5;
 }
+
+
+section.about article.discord .activities {}
 
 @media (max-width: 45rem) {
 	section.about {
