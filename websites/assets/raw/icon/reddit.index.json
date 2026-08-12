@@ -1,0 +1,19 @@
+{
+	"ready": true,
+	"type": "image",
+	"name": "Reddit Icon",
+	"description": "Reddit Brand Icon",
+	"copyright": "Reddit, Inc. All rights reserved.",
+	"download": false,
+	"link": "https://redditbrand.lingoapp.com/s/Logo-d9x3n2",
+	"author": "Reddit, Inc.",
+	"files": [
+		{
+			"path": "reddit.svg",
+			"size": 8986,
+			"format": "svg",
+			"codec": "Scalable Vector Graphics",
+			"mime": "svg+xml"
+		}
+	]
+}

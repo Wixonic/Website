@@ -1,0 +1,18 @@
+{
+	"ready": true,
+	"type": "font",
+	"name": "Mona Sans",
+	"description": "GitHub font",
+	"copyright": "The Mona Sans Project Authors",
+	"download": true,
+	"link": "https://github.com/mona-sans",
+	"author": "The Mona Sans Project Authors",
+	"files": [
+		{
+			"path": "MonaSans/semi-bold.woff2",
+			"size": 60852,
+			"format": "woff2",
+			"style": "Semi-Bold"
+		}
+	]
+}

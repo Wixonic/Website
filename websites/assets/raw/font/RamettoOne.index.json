@@ -4,7 +4,7 @@
 	"name": "Rametto One",
 	"description": "Font used for headings and titles across the website.",
 	"copyright": "The Rametto One Project Authors — This Font Software is licensed under the <a href='https://openfontlicense.org' rel='noopener noreferrer'>SIL Open Font License, Version 1.1</a>",
-	"download": false,
+	"download": true,
 	"link": "https://github.com/googlefonts/RammettoFont",
 	"author": "Vernon Adams",
 	"files": [

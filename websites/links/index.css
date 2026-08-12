@@ -1,3 +1,23 @@
+@font-face {
+	font-family: "Mona Sans";
+
+	font-display: swap;
+	font-style: normal;
+
+	src: local("Mona Sans"),
+	url("{{ path.assets }}/raw/font/MonaSans/semi-bold.woff2") format("woff2");
+}
+
+@font-face {
+	font-family: "Reddit Sans Chocolate";
+
+	font-display: swap;
+	font-style: normal;
+
+	src: local("Reddit Sans Chocolate"),
+	url("{{ path.assets }}/raw/font/RedditSansChocolate/extra-bold.woff2") format("woff2");
+}
+
 body {
 	overflow: hidden;
 }
@@ -65,7 +85,23 @@ main>* img {
 }
 
 nav.other {
-	height: fit-content;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	width: 100%;
+	height: auto;
+	aspect-ratio: 2 / 1;
+}
+
+nav.other .container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 0.85rem;
+
+	width: 100%;
 }
 
 nav.other .separator {
@@ -76,8 +112,15 @@ nav.other .separator {
 	margin: 0 0.2rem;
 }
 
+nav.other .button {
+	width: fit-content;
+	height: fit-content;
+
+	font-size: 1.1rem;
+}
+
 nav.other .button .icon {
-	font-size: 1.2rem;
+	font-size: 1.5rem;
 }
 
 nav.other .button.youtube {
@@ -86,6 +129,38 @@ nav.other .button.youtube {
 
 nav.other .button.youtube .separator {
 	margin-left: 0.1rem;
+}
+
+nav.other .button.github {
+	--theme: 135, 11%, 7%;
+
+	font-family: "Mona Sans", var(--font-family);
+}
+
+nav.other .button.wakatime {
+	--theme: 223, 70%, 4%;
+}
+
+nav.other .button.wakatime .icon {
+	font-size: 1.2rem;
+}
+
+nav.other .button.reddit {
+	--theme: 16, 100%, 50%;
+
+	font-family: "Reddit Sans Chocolate", var(--font-family);
+}
+
+nav.other .button.reddit .separator {
+	margin-right: 0;
+}
+
+nav.other .button.twitch {
+	--theme: 264, 100%, 64%;
+}
+
+nav.other .button.twitch .icon {
+	font-size: 1.3rem;
 }
 
 footer {

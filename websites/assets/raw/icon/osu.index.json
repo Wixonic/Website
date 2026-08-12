@@ -1,0 +1,19 @@
+{
+	"ready": true,
+	"type": "image",
+	"name": "osu! Icon",
+	"description": "osu! Game Icon",
+	"copyright": "Dean Herbert",
+	"download": false,
+	"link": "https://osu.ppy.sh/wiki/Brand_identity_guidelines",
+	"author": "Dean Herbert",
+	"files": [
+		{
+			"path": "osu.svg",
+			"size": 4117,
+			"format": "svg",
+			"codec": "Scalable Vector Graphics",
+			"mime": "svg+xml"
+		}
+	]
+}

@@ -1,0 +1,18 @@
+{
+	"ready": true,
+	"type": "font",
+	"name": "Reddit Sans Chocolate",
+	"description": "Reddit font",
+	"copyright": "Reddit, Inc. All rights reserved.",
+	"download": false,
+	"link": "https://redditbrand.lingoapp.com/s/Typography-d03Ney",
+	"author": "Reddit, Inc.",
+	"files": [
+		{
+			"path": "RedditSansChocolate/extra-bold.woff2",
+			"size": 53388,
+			"format": "woff2",
+			"style": "Extra Bold"
+		}
+	]
+}

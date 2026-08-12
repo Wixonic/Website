@@ -4,7 +4,7 @@
 	"name": "VT323",
 	"description": "Pixelated monospace font used in the main website.",
 	"copyright": "The VT323 Project Authors (peter.hull@oikoi.com)",
-	"download": false,
+	"download": true,
 	"link": "https://github.com/phoikoi/VT323",
 	"author": "Peter Hull",
 	"files": [

@@ -1,0 +1,19 @@
+{
+	"ready": true,
+	"type": "image",
+	"name": "Twitch Icon",
+	"description": "Twitch Brand Icon",
+	"copyright": "Twitch Interactive, Inc. All rights reserved.",
+	"download": false,
+	"link": "https://brand.twitch.com",
+	"author": "Twitch Interactive, Inc.",
+	"files": [
+		{
+			"path": "twitch.svg",
+			"size": 828,
+			"format": "svg",
+			"codec": "Scalable Vector Graphics",
+			"mime": "svg+xml"
+		}
+	]
+}

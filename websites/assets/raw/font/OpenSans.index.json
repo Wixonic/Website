@@ -4,7 +4,7 @@
 	"name": "Open Sans",
 	"description": "Primary font used across the website.",
 	"copyright": "The Open Sans Project Authors",
-	"download": false,
+	"download": true,
 	"link": "https://github.com/googlefonts/opensans",
 	"author": "Steve Matteson",
 	"files": [

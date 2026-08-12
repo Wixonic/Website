@@ -1,0 +1,19 @@
+{
+	"ready": true,
+	"type": "image",
+	"name": "WakaTime Icon",
+	"description": "WakaTime Brand Icon",
+	"copyright": "WakaTime",
+	"download": false,
+	"link": "https://wakatime.com/legal/logos-and-trademark-usage",
+	"author": "WakaTime",
+	"files": [
+		{
+			"path": "wakatime.svg",
+			"size": 1515,
+			"format": "svg",
+			"codec": "Scalable Vector Graphics",
+			"mime": "svg+xml"
+		}
+	]
+}
