@@ -127,8 +127,6 @@ nav.other .button {
 
 nav.other .button .icon {
 	font-size: 1.5rem;
-
-	vertical-align: -0.05em;
 }
 
 nav.other .button i {
@@ -153,10 +151,6 @@ nav.other .button.wakatime {
 	--theme: 223, 70%, 4%;
 }
 
-nav.other .button.wakatime .icon {
-	font-size: 1.2rem;
-}
-
 nav.other .button.reddit {
 	--theme: 16, 100%, 50%;
 
@@ -169,10 +163,6 @@ nav.other .button.reddit .separator {
 
 nav.other .button.twitch {
 	--theme: 264, 100%, 64%;
-}
-
-nav.other .button.twitch .icon {
-	font-size: 1.3rem;
 }
 
 footer {

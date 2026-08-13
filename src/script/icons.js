@@ -48,7 +48,7 @@ export const parseIcon = (iconElement) => {
 
 	switch (iconElement.dataset.style) {
 		case "fill":
-			iconHTML = `<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><path fill="currentColor" d="${icon}"/></svg>`;
+			iconHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><path fill="currentColor" d="${icon}"/></svg>`;
 			break;
 
 		default:

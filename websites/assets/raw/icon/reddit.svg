@@ -1,6 +1,6 @@
-<svg class="icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 256 256">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-32 -32 320 320">
 
-	<path fill="#FF4500" d="M128,0L128,0C57.3,0,0,57.3,0,128l0,0c0,35.4,14.3,67.4,37.5,90.5l-24.4,24.4c-4.8,4.8-1.4,13.1,5.4,13.1H128
+	<path fill=" #FF4500" d="M128,0L128,0C57.3,0,0,57.3,0,128l0,0c0,35.4,14.3,67.4,37.5,90.5l-24.4,24.4c-4.8,4.8-1.4,13.1,5.4,13.1H128
 	l0,0c70.7,0,128-57.3,128-128l0,0C256,57.3,198.7,0,128,0z" />
 
 	<radialGradient id="gradient-1" cx="981.0251" cy="1.811" r="127.45" fx="981.0251" fy="-7.319" gradientTransform="matrix(0.47 0 0 -0.41 -260.07 108.3)" gradientUnits="userSpaceOnUse">
