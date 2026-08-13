@@ -12,6 +12,8 @@ section.projects nav article.project.github .title {
 	grid-area: 1 / 2 / 2 / 3;
 
 	gap: 0.15rem;
+
+	line-height: calc(1.25rem - 1px);
 }
 
 section.projects nav article.project.github .title .author {

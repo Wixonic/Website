@@ -33,7 +33,6 @@ const loadProject = {
 		blenderElement.classList.add("blender", "icon");
 		blenderElement.dataset.icon = "blender_community_badge";
 		blenderElement.dataset.style = "brand";
-		blenderElement.addEventListener("click", (event) => event.stopPropagation());
 
 		containerElement.append(titleElement, statusElement, summaryElement, blenderElement);
 		return containerElement;
@@ -142,7 +141,6 @@ const loadProject = {
 		githubElement.classList.add("github", "icon");
 		githubElement.dataset.icon = "github";
 		githubElement.dataset.style = "brand";
-		githubElement.addEventListener("click", (event) => event.stopPropagation());
 
 		containerElement.append(avatarElement, titleElement, statusElement, summaryElement, githubElement);
 		console.log(data);
