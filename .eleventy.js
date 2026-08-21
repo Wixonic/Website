@@ -1,4 +1,5 @@
 import esbuild from "esbuild";
+import fs from "fs";
 import * as fsp from "fs/promises";
 import path from "path";
 import htmlMinifier from "html-minifier";
@@ -58,7 +59,13 @@ const resolveAbsoluteCssPlugin = {
 			const websitesPath = path.resolve("websites");
 			if (args.importer.startsWith(websitesPath)) {
 				const siteName = path.relative(websitesPath, args.importer).split(path.sep)[0];
-				return { path: path.resolve(websitesPath, siteName, args.path.slice(1)) };
+				const siteFilePath = path.resolve(websitesPath, siteName, args.path.slice(1));
+				if (fs.existsSync(siteFilePath)) return { path: siteFilePath };
+
+				const srcFilePath = path.resolve(srcPath, args.path.slice(1));
+				if (fs.existsSync(srcFilePath)) return { path: srcFilePath };
+
+				return { path: siteFilePath };
 			}
 		});
 	}
