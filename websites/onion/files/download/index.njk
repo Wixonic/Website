@@ -1,0 +1,142 @@
+---
+layout: main.njk
+title: Onion Download | Wixonic
+description: Secure and anonymous file sharing platform.
+styles:
+- /files/download/index.css
+scripts:
+- /files/download/index.js
+---
+
+<header>
+
+	{% include "header.njk" %}
+
+</header>
+
+<main>
+
+	<section class="hero">
+
+		<h1>Download an Onion</h1>
+
+		<div id="loading" class="state-message">Loading file details...</div>
+
+		<div id="error" class="state-message hidden">
+
+			<p id="error-message">File not found or link has expired.</p>
+
+			<a class="button" href="{{ path.onion }}">Back to Onion</a>
+
+		</div>
+
+	</section>
+
+	<section id="card" class="card hidden">
+
+		<h2 class="file-title">
+
+			<span id="file-name" class="file-name"></span><span id="file-extension" class="file-extension"></span>
+
+		</h2>
+
+		<hr class="card-divider" />
+
+		<div class="card-stats">
+
+			<div class="stat-item">
+
+				<span class="stat-label">MIME TYPE</span>
+
+				<span id="file-mime-type" class="stat-value"></span>
+
+			</div>
+
+			<div class="stat-item">
+
+				<span class="stat-label">SIZE</span>
+
+				<span id="file-size" class="stat-value"></span>
+
+			</div>
+
+			<div class="stat-item">
+
+				<span class="stat-label">FIFO POSITION</span>
+
+				<span id="file-fifo-position" class="stat-value"></span>
+
+			</div>
+
+			<div id="stat-uploader" class="stat-item hidden">
+
+				<span class="stat-label">UPLOADER</span>
+
+				<div class="uploader-profile">
+
+					<div class="uploader-avatar-box">
+
+						<svg class="avatar-decoration hidden" viewBox="0 0 100 100" aria-hidden="true">
+							<image width="100" height="100" />
+						</svg>
+
+						<svg class="avatar" viewBox="0 0 100 100" aria-label="Uploader avatar">
+							<defs>
+								<mask id="uploader-avatar-mask">
+									<circle fill="white" cx="50" cy="50" r="50" />
+								</mask>
+							</defs>
+							<image width="100" height="100" mask="url(#uploader-avatar-mask)" />
+						</svg>
+
+					</div>
+
+					<span id="file-uploader" class="stat-value uploader-name"></span>
+
+				</div>
+
+			</div>
+
+			<div id="stat-expires" class="stat-item hidden">
+
+				<span class="stat-label">EXPIRES IN</span>
+
+				<span id="file-expiration" class="stat-value"></span>
+
+			</div>
+
+			<div id="stat-downloads" class="stat-item hidden">
+
+				<span class="stat-label">DOWNLOADS</span>
+
+				<span id="file-download-count" class="stat-value"></span>
+
+			</div>
+
+		</div>
+
+		<div id="card-description" class="card-description hidden">
+
+			<p id="file-description"></p>
+
+		</div>
+
+		<div class="card-actions">
+
+			<a id="download-button" class="button primary" href="#">Download</a>
+
+			<button id="copy-button" class="button" type="button">Copy Link</button>
+
+		</div>
+
+	</section>
+
+	<p>This content has not been verified. Please exercise caution when downloading or using any Onion files.</p>
+
+</main>
+
+<footer>
+
+	{% include "footer.njk" %}
+
+</footer>

@@ -93,6 +93,28 @@ styles:
 			Deep research and search features query <a href="https://duckduckgo.com/about" target="_blank" rel="noopener noreferrer">DuckDuckGo's search API</a> without attaching personal user identifiers.
 		</p>
 
+		<h2>Onion Storage</h2>
+
+		<p>
+			<a href="{{ path.onion }}" target="_blank" rel="noopener noreferrer">Onion</a> is a temporary file sharing service integrated with WixiBot, allowing users to upload and share files securely without Discord's attachment size limitations.
+		</p>
+
+		<p>
+			<b>Data Stored</b>: When a file is uploaded, we store the file payload locally on our server along with basic metadata: file name, size, MIME type, cryptographic hash (SHA-256 for deduplication and integrity check), uploader Discord ID and name, creation timestamp, and any optional description or access restrictions set by the uploader (public, restricted to specific Discord users or roles, or protected by a secret access key).
+		</p>
+
+		<p>
+			<b>Automatic Deletion & Retention</b>: Onion Storage is strictly temporary. Files are automatically and permanently deleted when their expiration date is reached, when their maximum download limit is reached, or when storage capacity requires purging older files on a First-In, First-Out (FIFO) basis. Unused upload slots expire automatically after 24 hours.
+		</p>
+
+		<p>
+			<b>Manage and Delete</b>: Uploaders can delete their uploaded files at any time using the <span class="discord-inline-button">/storage</span> command in WixiBot or by contacting us at <a href="mailto:privacy@wixonic.fr">privacy@wixonic.fr</a>.
+		</p>
+
+		<p>
+			<b>No Third-Party Access</b>: Uploaded files are hosted on our private infrastructure, are never analyzed, indexed, or shared with third parties, and are only accessible according to the permissions defined by the uploader.
+		</p>
+
 		<h2>Mercury (Desktop Application)</h2>
 
 		<p>

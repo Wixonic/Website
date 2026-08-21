@@ -1,0 +1,39 @@
+---
+layout: main.njk
+title: Onion Upload | Wixonic
+description: Secure and anonymous file sharing platform.
+styles:
+- /files/upload/index.css
+scripts:
+- /files/upload/index.js
+---
+
+<header>
+
+	{% include "header.njk" %}
+
+</header>
+
+<main>
+
+	<h1>Upload an Onion</h1>
+
+	<label for="upload">Select files</label>
+
+	<input id="upload" type="file" />
+
+	<p class="subtitle">Please select a file to upload.</p>
+
+	<h2>Disclaimer</h2>
+
+	<p>You are entirely responsible for the content you upload. <b>DO NOT UPLOAD ILLEGAL CONTENT</b>, or your account will be terminated, and you'll face legal consequences.</p>
+
+	<p>The content you upload might be subject to review and moderation. Do not upload sensitive or confidential content.</p>
+
+</main>
+
+<footer>
+
+	{% include "footer.njk" %}
+
+</footer>

@@ -1,0 +1,37 @@
+input {
+	display: none;
+}
+
+label {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	max-width: 95vw;
+	width: 100%;
+	height: calc(100vh - 30rem);
+
+	color: hsl(var(--theme));
+	font-size: 1.5rem;
+	font-weight: bold;
+
+	border: 0.4rem dashed hsl(var(--theme));
+	border-radius: 2rem;
+
+	cursor: pointer;
+
+	transition: background 0.15s var(--default-transition-function), transform 0.15s var(--default-transition-function);
+}
+
+label:hover {
+	background: hsl(var(--theme), 10%);
+
+	transform: scale(1.05);
+}
+
+.subtitle {
+	font-size: 0.9rem;
+	text-align: center;
+
+	opacity: 0.5;
+}

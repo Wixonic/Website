@@ -77,7 +77,8 @@ export default (config) => {
 
 		server: {
 			default: "http://127.0.0.1:1200",
-			discord: "http://127.0.0.1:1201"
+			discord: "http://127.0.0.1:1201",
+			onion: "http://127.0.0.1:1202"
 		},
 
 		github: {
@@ -98,7 +99,8 @@ export default (config) => {
 
 		server: {
 			default: "https://server.wixonic.fr",
-			discord: "https://discord.wixonic.fr"
+			discord: "https://discord.wixonic.fr",
+			onion: "https://api.onion.wixonic.fr"
 		},
 
 		github: {

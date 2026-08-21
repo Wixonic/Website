@@ -2,9 +2,15 @@ declare global {
 	const path: {
 		root: string;
 		assets: string;
+		onion: string;
 		links: string;
 		status: string;
-		server: string;
+
+		server: {
+			default: string;
+			discord: string;
+			onion: string;
+		};
 
 		github: {
 			username: string;
@@ -22,10 +28,11 @@ declare global {
 	};
 };
 
-export type LoggerFunction = (reason?: any, message?: any, trace?: any) => void;
+export type LoggerFunction = (reason?: string, message?: any, trace?: any) => void;
+export type LoggerFatalErrorFunction = (reason?: string, message?: string, trace?: string, userFacingMessage?: string) => void;
 
 export interface Logger {
-	fatalError: LoggerFunction;
+	fatalError: LoggerFatalErrorFunction;
 	error: LoggerFunction;
 	warn: LoggerFunction;
 };

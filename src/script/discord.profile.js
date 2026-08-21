@@ -24,10 +24,10 @@ import { request } from "/script/request.js";
 /** @returns {Promise<DiscordProfile|null>} */
 export const getDiscordProfile = async () => {
 	try {
-		const req = await request("GET", join(path.server.discord, "/profile/?id=1020454688467980308"), "json");
-		req.response.avatar = req.response.avatar.replace(".gif", ".webp")
-		req.response.avatarDecoration = req.response.avatarDecoration.replace(".png", ".webp")
-		return req.response
+		const profileRequest = await request("GET", join(path.server.discord, "/profile/?id=1020454688467980308"), "json");
+		if (profileRequest.response?.avatar) profileRequest.response.avatar = profileRequest.response.avatar.replace(/\.gif(\?.*)?$/i, ".webp$1");
+		if (profileRequest.response?.avatarDecoration) profileRequest.response.avatarDecoration = profileRequest.response.avatarDecoration.replace(/\.gif(\?.*)?$/i, ".webp$1").replace(/\.png(\?.*)?$/i, ".webp$1");
+		return profileRequest.response;
 	} catch (error) {
 		logger.warn("Failed to fetch Discord profile:", error);
 		return null;

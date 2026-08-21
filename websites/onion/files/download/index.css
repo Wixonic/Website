@@ -1,0 +1,156 @@
+@import url("/style/discord.name.css");
+
+main {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	background: hsl(var(--deep-background));
+
+	padding: 0 1.5rem 3rem 1.5rem;
+}
+
+section.hero {
+	background: hsl(var(--deep-background));
+
+	text-align: center;
+
+	padding: 1rem 1.5rem 0 1.5rem;
+}
+
+section.hero h1 {
+	margin: 0;
+}
+
+.state-message {
+	font-size: 1.1rem;
+	text-align: center;
+
+	margin: 2rem 0;
+	opacity: 0.8;
+}
+
+.card {
+	display: flex;
+	flex-direction: column;
+
+	width: 100%;
+	max-width: 45rem;
+
+	background: hsl(var(--background));
+	border-radius: 1rem;
+
+	margin: 1.5rem auto;
+	padding: 2rem 2.5rem;
+}
+
+.file-title {
+	font-size: 1.8rem;
+	font-weight: 900;
+	word-break: break-all;
+
+	margin: 0;
+}
+
+.file-extension {
+	opacity: 0.6;
+	color: hsl(var(--theme));
+}
+
+.card-divider {
+	width: 100%;
+
+	border: none;
+	border-top: 0.1rem solid hsla(var(--theme), 0.15);
+
+	margin: 1.25rem 0 1.5rem 0;
+}
+
+.card-stats {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+	gap: 1.5rem;
+}
+
+.stat-item {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+}
+
+.stat-label {
+	font-size: 0.75rem;
+	font-weight: 600;
+	letter-spacing: 0.05em;
+
+	opacity: 0.6;
+}
+
+.stat-value {
+	font-size: 1.1rem;
+	font-weight: bold;
+	word-break: break-all;
+}
+
+.uploader-profile {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+
+	margin-top: 0.25rem;
+}
+
+.uploader-avatar-box {
+	position: relative;
+
+	width: 2.75rem;
+	height: 2.75rem;
+}
+
+.uploader-avatar-box .avatar {
+	position: absolute;
+	top: 0.229rem;
+	left: 0.229rem;
+
+	width: 2.292rem;
+	height: 2.292rem;
+}
+
+.uploader-avatar-box .avatar-decoration {
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	width: 2.75rem;
+	height: 2.75rem;
+
+	z-index: 2;
+}
+
+.uploader-name {
+	font-size: 1.1rem;
+	font-weight: bold;
+	word-break: break-all;
+}
+
+.card-description {
+	font-size: 0.95rem;
+
+	background: hsla(var(--theme), 0.05);
+	border-radius: 0.75rem;
+
+	margin-top: 1.5rem;
+	padding: 0.75rem 1rem;
+}
+
+.card-description p {
+	margin: 0;
+}
+
+.card-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem;
+
+	margin-top: 2rem;
+}

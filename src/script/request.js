@@ -1,11 +1,20 @@
 import logger from "/script/logger.js";
 import storage from "/script/storage.js";
 
+class RequestError extends Error {
+	constructor(message, responseData = {}) {
+		super(message);
+		this.name = "RequestError";
+		Object.assign(this, responseData);
+	};
+};
+
 /**
  * @typedef {Object} Response
  * @property {Object.<string, string>} headers
  * @property {any} response
  * @property {number} status
+ * @property {string} statusText
  * @property {number} timestamp
  */
 
@@ -84,10 +93,10 @@ const request = (method, url, type = "text", mimeType = null, body = null, cache
 				}
 
 				if (xhr.status >= 200 && xhr.status < 300) resolve(responseData);
-				else reject(new Error(`[Request] Code ${xhr.status}`));
+				else reject(new RequestError(`[Request] Code ${xhr.status}`, responseData));
 			});
 
-			xhr.addEventListener("error", () => reject(new Error("Network error")));
+			xhr.addEventListener("error", () => reject(new RequestError("Network error")));
 
 			xhr.send(body);
 		} catch (unsafeError) {
@@ -97,4 +106,4 @@ const request = (method, url, type = "text", mimeType = null, body = null, cache
 	});
 };
 
-export { request };
+export { request, RequestError };
