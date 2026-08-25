@@ -18,16 +18,12 @@ scripts:
 
 	<section class="hi">
 
-		<a class="unlink" href="{{ path.assets }}/image/root/hi.webp" target="_blank">
+		<picture>
 
-			<picture>
+			<source media="(min-width: 1025px)" srcset="{{ path.assets }}/raw/image/root/hi.webp" />
+			<img src="{{ path.assets }}/raw/image/root/hi.min.webp" alt="A Wixi (my avatar) waving their hand" />
 
-				<source media="(min-width: 1025px)" srcset="{{ path.assets }}/raw/image/root/hi.webp" />
-				<img src="{{ path.assets }}/raw/image/root/hi.min.webp" alt="A Wixi (my avatar) waving their hand" />
-
-			</picture>
-
-		</a>
+		</picture>
 
 		<h1>Hi!</h1>
 

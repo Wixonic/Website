@@ -34,7 +34,11 @@ section.hero .button.primary:hover {
 	background: hsl(var(--deep-background));
 }
 
-section.hero h1 {
+section.hero .title {
+	color: hsl(var(--theme));
+	font-family: var(--title-font-family);
+	font-size: 2rem;
+
 	margin: 0;
 }
 

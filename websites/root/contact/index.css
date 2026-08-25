@@ -28,7 +28,11 @@ section.emergency .button.primary:hover {
 	background: hsl(var(--deep-background));
 }
 
-section.emergency h1 {
+section.emergency .title {
+	color: hsl(var(--theme));
+	font-family: var(--title-font-family);
+	font-size: 2rem;
+
 	margin: 0;
 }
 
