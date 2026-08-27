@@ -41,8 +41,8 @@
 	"/image/logo/text/default.jpeg": "/raw/image/logo/text.index.json",
 	"/image/logo/text/light.jpeg": "/raw/image/logo/text.index.json",
 	"/image/logo/text/dark.jpeg": "/raw/image/logo/text.index.json",
-	"/image/root/hi.min.webp": "/raw/image/root/hi.index.json",
 	"/image/root/hi.webp": "/raw/image/root/hi.index.json",
+	"/image/root/hi.min.webp": "/raw/image/root/hi.index.json",
 	"/image/root/links-arrow.webp": "/raw/image/root/links-arrow.index.json",
 	"/image/root/links-arrow.mobile.webp": "/raw/image/root/links-arrow.index.json",
 	"/minecraft/pack/hdshield.zip": "/raw/minecraft/pack/hdshield.index.json"

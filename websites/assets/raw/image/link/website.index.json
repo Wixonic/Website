@@ -12,7 +12,7 @@
 			"path": "website.webp",
 			"width": 2048,
 			"height": 1024,
-			"size": 316708,
+			"size": 87330,
 			"format": "webp",
 			"codec": "WebP",
 			"mime": "webp"
@@ -21,7 +21,7 @@
 			"path": "website.min.webp",
 			"width": 1024,
 			"height": 512,
-			"size": 91888,
+			"size": 20020,
 			"format": "webp",
 			"codec": "WebP",
 			"mime": "webp"
