@@ -151,6 +151,10 @@ nav.other .button.wakatime {
 	--theme: 223, 70%, 4%;
 }
 
+nav.other .button.osu {
+	--theme: 333, 100%, 70%;
+}
+
 nav.other .button.reddit {
 	--theme: 16, 100%, 50%;
 
