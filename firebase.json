@@ -103,8 +103,8 @@
 					"type": 301
 				},
 				{
-					"regex": "/discord/application(?:.*)",
-					"destination": "https://discord.com/oauth2/authorize?client_id=1481997058708865104",
+					"regex": "/discord/app(?:.*)",
+					"destination": "https://discord.com/discovery/applications/1481997058708865104",
 					"type": 301
 				},
 				{
