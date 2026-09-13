@@ -99,7 +99,7 @@
 				},
 				{
 					"regex": "/contact(?:.*)",
-					"destination": "https://wixonic.fr/help",
+					"destination": "https://wixonic.fr/contact",
 					"type": 301
 				},
 				{
@@ -119,7 +119,7 @@
 				},
 				{
 					"regex": "/help(?:.*)",
-					"destination": "https://wixonic.fr/help",
+					"destination": "https://wixonic.fr/contact",
 					"type": 301
 				},
 				{
