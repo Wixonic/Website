@@ -7,9 +7,13 @@
 		"testbuild": "dev=true clear=true npm run build"
 	},
 	"dependencies": {
-		"@11ty/eleventy": "3.1.2",
-		"esbuild": "0.28.1",
-		"html-minifier": "4.0.0"
+		"@11ty/eleventy": "^3.1.6",
+		"esbuild": "^0.28.2",
+		"html-minifier": "^4.0.0"
 	},
-	"type": "module"
+	"type": "module",
+	"allowScripts": {
+		"esbuild@0.28.2": true,
+		"fsevents@2.3.3": true
+	}
 }
