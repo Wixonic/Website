@@ -164,14 +164,14 @@ addEventListener("DOMContentLoaded", async () => {
 	const projectsContainer = projectsWrapper.querySelector("nav");
 
 	const projects = [
-		loadProject.github("Wixonic", "Mercury"),
-		loadProject.github("Wixonic", "TIPE"),
-		loadProject.github("Wixonic", "WixiBot"),
 		loadProject.blender({
 			status: "Writing",
 			redacted: ["title", "summary"]
 		}),
-		loadProject.github("Wixonic", "12th-Client"),
+		loadProject.github("Wixonic", "WixiBot"),
+		loadProject.github("Wixonic", "TIPE"),
+		loadProject.github("Wixonic", "WebCraft"),
+		loadProject.github("Wixonic", "WalkersChatEvent"),
 		loadProject.github("Wixonic", "YouTube-Alt")
 	];
 
