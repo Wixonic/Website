@@ -39,7 +39,7 @@ main {
 	padding: 0;
 
 	overflow-y: scroll;
-	scroll-snap-type: y proximity;
+	scroll-snap-type: y mandatory;
 
 	scrollbar-width: none;
 	-ms-overflow-style: none;
@@ -54,7 +54,7 @@ main>* {
 
 	max-width: 70rem !important;
 
-	scroll-snap-align: center;
+	scroll-snap-align: end;
 
 	opacity: 0.7;
 
