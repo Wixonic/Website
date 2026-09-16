@@ -153,6 +153,16 @@
 					"type": 301
 				},
 				{
+					"regex": "/instagram/clips(?:.*)",
+					"destination": "https://www.instagram.com/wixonic.clips",
+					"type": 301
+				},
+				{
+					"regex": "/instagram(?:.*)",
+					"destination": "https://www.instagram.com/wixonic12",
+					"type": 301
+				},
+				{
 					"regex": "/osu(?:.*)",
 					"destination": "https://osu.ppy.sh/users/36630136",
 					"type": 301
@@ -160,6 +170,16 @@
 				{
 					"regex": "/reddit(?:.*)",
 					"destination": "https://www.reddit.com/user/Wixonic12",
+					"type": 301
+				},
+				{
+					"regex": "/tiktok/clips(?:.*)",
+					"destination": "https://www.tiktok.com/@wixonic.clips",
+					"type": 301
+				},
+				{
+					"regex": "/tiktok(?:.*)",
+					"destination": "https://www.tiktok.com/@wixonic",
 					"type": 301
 				},
 				{
