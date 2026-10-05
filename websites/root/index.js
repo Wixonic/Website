@@ -240,13 +240,11 @@ addEventListener("DOMContentLoaded", async () => {
 		usernameElement.style.setProperty("--discord-name-style-color-1", `#${profile.displayNameStyle.colors[0].toString(16).padStart(6, "0")}`);
 		if (profile.displayNameStyle.colors.length > 1) usernameElement.style.setProperty("--discord-name-style-color-2", `#${profile.displayNameStyle.colors[1].toString(16).padStart(6, "0")}`);
 
-		youBarElement.querySelector(".status-icon").setAttribute("class", `status-icon${profile.presence.status}`);
+		youBarElement.querySelector(".status-icon").setAttribute("class", `status-icon ${profile.presence.status}`);
 
 		const nameplateElement = youBarElement.querySelector(".nameplate");
 		nameplateElement.style.setProperty("--palette", `var(--discord-nameplate-${profile.nameplate.palette}-dark)`);
 		nameplateElement.src = profile.nameplate.url;
-
-		console.log(profile);
 	};
 
 	if (discordProfile) updateDiscordPresence(discordProfile);
