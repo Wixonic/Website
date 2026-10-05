@@ -22,9 +22,7 @@ const carousels = {
 		97546,  // Ted Lasso
 		125988, // Silo
 		252107, // Star City
-		157368, // The New Look
-		93740,  // Foundation
-		225171  // Pluribus
+		157368 // The New Look
 	],
 	games: [
 
@@ -72,9 +70,10 @@ addEventListener("DOMContentLoaded", async () => {
 								title.classList.add("title");
 								title.innerHTML = data.original_name;
 
-								const poster = document.createElement("img");
-								poster.classList.add("poster");
+								const poster = new Image();
+								poster.addEventListener("load", () => element.classList.add("loaded"));
 								poster.src = TMDB_IMAGE(data.poster_path);
+								poster.classList.add("poster");
 
 								element.append(title, poster);
 
@@ -105,9 +104,10 @@ addEventListener("DOMContentLoaded", async () => {
 								title.classList.add("title");
 								title.innerHTML = data.original_title;
 
-								const poster = document.createElement("img");
-								poster.classList.add("poster");
+								const poster = new Image();
+								poster.addEventListener("load", () => element.classList.add("loaded"));
 								poster.src = TMDB_IMAGE(data.poster_path);
+								poster.classList.add("poster");
 
 								element.append(title, poster);
 

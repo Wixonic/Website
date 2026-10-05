@@ -42,3 +42,40 @@ section.projects nav article.project.github .status.public {
 section.projects nav article.project.github .status.archived {
 	--status-color: 40, 70%, 60%, 75%;
 }
+
+section.projects nav article.project .stars {
+	grid-area: 3 / 2;
+
+	display: grid;
+	grid-template-columns: 1rem auto;
+	grid-template-rows: 1fr;
+
+	font-size: 0.9rem;
+}
+
+section.projects nav article.project .stars .icon {
+	grid-area: 1 / 1;
+}
+
+section.projects nav article.project .stars .amount {
+	grid-area: 1 / 2;
+}
+
+section.projects nav article.project .wakatime {
+	grid-area: 3 / 3;
+
+	display: grid;
+	grid-template-columns: auto 1rem;
+	grid-template-rows: 1fr;
+
+	font-size: 0.9rem;
+	text-align: right;
+}
+
+section.projects nav article.project .wakatime .icon {
+	grid-area: 1 / 2;
+}
+
+section.projects nav article.project .wakatime .time {
+	grid-area: 1 / 1;
+}

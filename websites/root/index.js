@@ -114,12 +114,12 @@ const loadProject = {
 				starsAmountElement.classList.add("amount");
 				starsAmountElement.textContent = data.stargazers_count;
 
-				const starsSeparatorElement = document.createElement("span");
-				starsSeparatorElement.classList.add("icon");
-				starsSeparatorElement.dataset.icon = "star";
-				starsSeparatorElement.dataset.style = "fill";
+				const starsIconElement = document.createElement("span");
+				starsIconElement.classList.add("icon");
+				starsIconElement.dataset.icon = "star";
+				starsIconElement.dataset.style = "fill";
 
-				starsElement.append(starsAmountElement, starsSeparatorElement);
+				starsElement.append(starsAmountElement, starsIconElement);
 				containerElement.append(starsElement);
 			}
 
@@ -137,13 +137,58 @@ const loadProject = {
 			}
 		}
 
+		new Promise(async (resolve) => {
+			try {
+				const wakatimeCacheKey = `wakatime-${owner}_${repo}`;
+
+				let wakatimeResponse, wakatimeData;
+				const cached = storage.getItem(wakatimeCacheKey);
+				if (cached) {
+					const cache = JSON.parse(cached);
+					if (Date.now() - cache.timestamp < 1000 * 60 * 60) wakatimeResponse = {
+						ok: cache.ok
+					};
+					wakatimeData = cache.data;
+				}
+
+				if (!wakatimeResponse) {
+					try {
+						wakatimeResponse = await fetch(`https://proxy.corsfix.com/?https://wakatime.com/badge/github/${owner}/${repo}.svg`);
+						wakatimeData = (await wakatimeResponse.text()).match(/(\d*)\shrs/)[1];
+						if (wakatimeResponse.ok) storage.setItem(wakatimeCacheKey, JSON.stringify({ ok: wakatimeResponse.ok, timestamp: Date.now(), data: wakatimeData }));
+					} catch (error) {
+						wakatimeResponse = { ok: false };
+						logger.warn(`Failed to load time for project ${owner}/${repo}`, error.message, error.trace);
+					}
+				}
+
+				if (wakatimeResponse.ok) {
+					const wakatimeElement = document.createElement("div");
+					wakatimeElement.classList.add("wakatime");
+
+					const wakatimeAmountElement = document.createElement("span");
+					wakatimeAmountElement.classList.add("time");
+					wakatimeAmountElement.textContent = `${wakatimeData}h`;
+
+					const wakatimeIconElement = document.createElement("span");
+					wakatimeIconElement.classList.add("icon");
+					wakatimeIconElement.dataset.icon = "wakatime";
+					wakatimeIconElement.dataset.style = "brand";
+
+					wakatimeElement.append(wakatimeAmountElement, wakatimeIconElement);
+					containerElement.append(wakatimeElement);
+				}
+
+				resolve();
+			} catch { }
+		});
+
 		const githubElement = document.createElement("div");
 		githubElement.classList.add("github", "icon");
 		githubElement.dataset.icon = "github";
 		githubElement.dataset.style = "brand";
 
 		containerElement.append(avatarElement, titleElement, statusElement, summaryElement, githubElement);
-		console.log(data);
 		return containerElement;
 
 		/*
@@ -170,9 +215,9 @@ addEventListener("DOMContentLoaded", async () => {
 		}),
 		loadProject.github("Wixonic", "WixiBot"),
 		loadProject.github("Wixonic", "TIPE"),
-		loadProject.github("Wixonic", "WebCraft"),
 		loadProject.github("Wixonic", "WalkersChatEvent"),
-		loadProject.github("Wixonic", "YouTube-Alt")
+		loadProject.github("Wixonic", "YouTube-Alt"),
+		loadProject.github("Wixonic", "WebCraft"),
 	];
 
 	projectsContainer.append(...(await Promise.all(projects)));
@@ -202,14 +247,14 @@ addEventListener("DOMContentLoaded", async () => {
 		const usernameElement = youBarElement.querySelector(".username");
 		usernameElement.textContent = profile.displayName;
 		usernameElement.setAttribute("data-username", profile.displayName);
-		usernameElement.classList.add(`discord-name-style-font-${profile.displayNameStyle.font_id}`, `discord-name-style-effect-${profile.displayNameStyle.effect_id}`);
-		usernameElement.style.setProperty("--discord-name-style-color-1", `#${profile.displayNameStyle.colors[0].toString(16).padStart(6, "0")}`);
-		if (profile.displayNameStyle.colors.length > 1) usernameElement.style.setProperty("--discord-name-style-color-2", `#${profile.displayNameStyle.colors[1].toString(16).padStart(6, "0")}`);
+		usernameElement.classList.add(`discord- name - style - font - ${profile.displayNameStyle.font_id}`, `discord - name - style - effect - ${profile.displayNameStyle.effect_id} `);
+		usernameElement.style.setProperty("--discord-name-style-color-1", `#${profile.displayNameStyle.colors[0].toString(16).padStart(6, "0")} `);
+		if (profile.displayNameStyle.colors.length > 1) usernameElement.style.setProperty("--discord-name-style-color-2", `#${profile.displayNameStyle.colors[1].toString(16).padStart(6, "0")} `);
 
-		youBarElement.querySelector(".status-icon").setAttribute("class", `status-icon ${profile.presence.status}`);
+		youBarElement.querySelector(".status-icon").setAttribute("class", `status - icon ${profile.presence.status} `);
 
 		const nameplateElement = youBarElement.querySelector(".nameplate");
-		nameplateElement.style.setProperty("--palette", `var(--discord-nameplate-${profile.nameplate.palette}-dark)`);
+		nameplateElement.style.setProperty("--palette", `var(--discord - nameplate - ${profile.nameplate.palette} -dark)`);
 		nameplateElement.src = profile.nameplate.url;
 
 		console.log(profile);
