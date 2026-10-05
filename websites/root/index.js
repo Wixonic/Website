@@ -153,7 +153,7 @@ const loadProject = {
 
 				if (!wakatimeResponse) {
 					try {
-						wakatimeResponse = await fetch(`https://proxy.corsfix.com/?https://wakatime.com/badge/github/${owner}/${repo}.svg`);
+						wakatimeResponse = await fetch(`https://wakatime.com/badge/github/${owner}/${repo}.svg`);
 						wakatimeData = (await wakatimeResponse.text()).match(/(\d*)\shrs/)[1];
 						if (wakatimeResponse.ok) storage.setItem(wakatimeCacheKey, JSON.stringify({ ok: wakatimeResponse.ok, timestamp: Date.now(), data: wakatimeData }));
 					} catch (error) {
@@ -190,17 +190,6 @@ const loadProject = {
 
 		containerElement.append(avatarElement, titleElement, statusElement, summaryElement, githubElement);
 		return containerElement;
-
-		/*
-	<article class="project github">
-	
-	<div class="wakatime">
-		<span class="amount">54</span>
-		<span class="separator">hours</span>
-	</div>
-	
-	</article>
-		*/
 	}
 };
 
@@ -247,14 +236,14 @@ addEventListener("DOMContentLoaded", async () => {
 		const usernameElement = youBarElement.querySelector(".username");
 		usernameElement.textContent = profile.displayName;
 		usernameElement.setAttribute("data-username", profile.displayName);
-		usernameElement.classList.add(`discord- name - style - font - ${profile.displayNameStyle.font_id}`, `discord - name - style - effect - ${profile.displayNameStyle.effect_id} `);
-		usernameElement.style.setProperty("--discord-name-style-color-1", `#${profile.displayNameStyle.colors[0].toString(16).padStart(6, "0")} `);
-		if (profile.displayNameStyle.colors.length > 1) usernameElement.style.setProperty("--discord-name-style-color-2", `#${profile.displayNameStyle.colors[1].toString(16).padStart(6, "0")} `);
+		usernameElement.classList.add(`discord-name-style-font-${profile.displayNameStyle.font_id}`, `discord-name-style-effect-${profile.displayNameStyle.effect_id}`);
+		usernameElement.style.setProperty("--discord-name-style-color-1", `#${profile.displayNameStyle.colors[0].toString(16).padStart(6, "0")}`);
+		if (profile.displayNameStyle.colors.length > 1) usernameElement.style.setProperty("--discord-name-style-color-2", `#${profile.displayNameStyle.colors[1].toString(16).padStart(6, "0")}`);
 
-		youBarElement.querySelector(".status-icon").setAttribute("class", `status - icon ${profile.presence.status} `);
+		youBarElement.querySelector(".status-icon").setAttribute("class", `status-icon${profile.presence.status}`);
 
 		const nameplateElement = youBarElement.querySelector(".nameplate");
-		nameplateElement.style.setProperty("--palette", `var(--discord - nameplate - ${profile.nameplate.palette} -dark)`);
+		nameplateElement.style.setProperty("--palette", `var(--discord-nameplate-${profile.nameplate.palette}-dark)`);
 		nameplateElement.src = profile.nameplate.url;
 
 		console.log(profile);
