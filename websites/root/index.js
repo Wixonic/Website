@@ -153,7 +153,7 @@ const loadProject = {
 
 				if (!wakatimeResponse) {
 					try {
-						wakatimeResponse = await fetch(new URL(`/nocors/?url=${encodeURIComponent(`https://wakatime.com/badge/github/${owner}/${repo}.svg`)}`, path.server));
+						wakatimeResponse = await fetch(new URL(`/nocors/?url=${encodeURIComponent(`https://wakatime.com/badge/github/${owner}/${repo}.svg`)}`, path.server.default));
 						wakatimeData = (await wakatimeResponse.text()).match(/(\d*)\shrs/)[1];
 						if (wakatimeResponse.ok) storage.setItem(wakatimeCacheKey, JSON.stringify({ ok: wakatimeResponse.ok, timestamp: Date.now(), data: wakatimeData }));
 					} catch (error) {
