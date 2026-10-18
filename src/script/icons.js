@@ -22,8 +22,10 @@ export const icons = {
 		blender_community_badge: null,
 		discord: null,
 		github: null,
+		instagram: null,
 		osu: null,
 		reddit: null,
+		tiktok: null,
 		twitch: null,
 		wakatime: null,
 		youtube: null

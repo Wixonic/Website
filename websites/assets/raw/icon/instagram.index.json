@@ -1,0 +1,19 @@
+{
+	"ready": true,
+	"type": "image",
+	"name": "Instagram Icon",
+	"description": "Instragram Brand Icon",
+	"copyright": "Meta. All rights reserved.",
+	"download": false,
+	"link": "https://www.meta.com/brand/resources/instagram/instagram-brand/",
+	"author": "Meta",
+	"files": [
+		{
+			"path": "instagram.svg",
+			"size": 1763,
+			"format": "svg",
+			"codec": "Scalable Vector Graphics",
+			"mime": "svg+xml"
+		}
+	]
+}

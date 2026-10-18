@@ -112,6 +112,18 @@ nav.other .separator {
 	margin: 0 0.2rem;
 }
 
+nav.other .small {
+	transform: scale(0.9);
+}
+
+nav.other .smaller {
+	transform: scale(0.8);
+}
+
+nav.other .smallest {
+	transform: scale(0.7);
+}
+
 nav.other .button {
 	display: flex;
 	justify-content: center;
@@ -137,8 +149,20 @@ nav.other .button.youtube {
 	--theme: 348, 100%, 50%;
 }
 
-nav.other .button.youtube .separator {
+nav.other .button.instagram .separator {
 	margin-left: 0.1rem;
+}
+
+nav.other .button.instagram {
+	--theme: 0, 0%, 0%;
+}
+
+nav.other .button.tiktok .separator {
+	margin-left: 0.1rem;
+}
+
+nav.other .button.tiktok {
+	--theme: 0, 0%, 0%;
 }
 
 nav.other .button.github {
@@ -151,8 +175,8 @@ nav.other .button.wakatime {
 	--theme: 223, 70%, 4%;
 }
 
-nav.other .button.osu {
-	--theme: 333, 100%, 70%;
+nav.other .button.twitch {
+	--theme: 264, 100%, 64%;
 }
 
 nav.other .button.reddit {
@@ -165,8 +189,8 @@ nav.other .button.reddit .separator {
 	margin-right: 0;
 }
 
-nav.other .button.twitch {
-	--theme: 264, 100%, 64%;
+nav.other .button.osu {
+	--theme: 333, 100%, 70%;
 }
 
 footer {

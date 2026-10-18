@@ -1,0 +1,19 @@
+{
+	"ready": true,
+	"type": "image",
+	"name": "TikTok Icon",
+	"description": "TikTok Brand Icon",
+	"copyright": "TikTok. All rights reserved.",
+	"download": false,
+	"link": "https://www.tiktokbrandhub.com/visual-identity/logo#the-note",
+	"author": "TikTok",
+	"files": [
+		{
+			"path": "tiktok.svg",
+			"size": 1748,
+			"format": "svg",
+			"codec": "Scalable Vector Graphics",
+			"mime": "svg+xml"
+		}
+	]
+}
