@@ -56,10 +56,7 @@ const request = (method, url, type = "text", mimeType = null, body = null, cache
 			xhr.open(method, url, true);
 			xhr.responseType = type;
 
-			if (mimeType) {
-				xhr.overrideMimeType(mimeType);
-				xhr.setRequestHeader("Content-Type", mimeType);
-			}
+			if (mimeType) xhr.setRequestHeader("Content-Type", mimeType);
 
 			xhr.withCredentials = credentials;
 

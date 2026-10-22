@@ -10,15 +10,27 @@ addEventListener("DOMContentLoaded", async () => {
 	if (!id) return open(path.onion, "_self");
 
 	const input = document.getElementById("upload");
+	const subtitle = document.querySelector(".subtitle");
+	const originalSubtitle = subtitle ? subtitle.textContent : "";
+
 	input.addEventListener("change", async () => {
 		const file = input.files[0];
 		if (!file) return;
 
+		if (subtitle) subtitle.textContent = `Uploading ${file.name}... Please wait.`;
+		input.disabled = true;
+
 		try {
 			const req = await request("POST", `${join(path.server.onion, id, "upload")}?key=${key}&name=${encodeURIComponent(file.name)}`, "json", file.type || "application/octet-stream", file);
 			if (req.status === 200) open(join(path.onion, "files/download", id) + `?key=${key}`, "_self");
-			else logger.fatalError("Failed to upload file", `Status: ${req.status}`, undefined, `The server refused the file: ${req.status} - ${req.response}`);
+			else {
+				input.disabled = false;
+				if (subtitle) subtitle.textContent = originalSubtitle;
+				logger.fatalError("Failed to upload file", `Status: ${req.status}`, undefined, `The server refused the file: ${req.status} - ${req.response}`);
+			}
 		} catch (error) {
+			input.disabled = false;
+			if (subtitle) subtitle.textContent = originalSubtitle;
 			if (error instanceof RequestError) logger.fatalError("Failed to upload file", error.message, error.stack, `The server refused the file: ${error.status} - ${error.response?.error || error.response}`);
 			else logger.fatalError("Failed to upload file", error.message, error.stack);
 		}
