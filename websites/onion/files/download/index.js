@@ -101,9 +101,9 @@ addEventListener("DOMContentLoaded", async () => {
 			document.getElementById("card-description").classList.remove("hidden");
 		}
 
-		const downloadUrl = `${join(path.server.onion, fileIdentifier, "download")}${accessKey ? `?key=${encodeURIComponent(accessKey)}` : ""}`;
+		const downloadURL = `${join(path.server.onion, fileIdentifier, "download")}${accessKey ? `?key=${encodeURIComponent(accessKey)}` : ""}`;
 		const downloadButton = document.getElementById("download-button");
-		downloadButton.href = downloadUrl;
+		downloadButton.href = downloadURL;
 
 		const copyButton = document.getElementById("copy-button");
 		copyButton.addEventListener("click", async () => {
