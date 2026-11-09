@@ -1,0 +1,21 @@
+{
+	"ready": true,
+	"type": "image",
+	"name": "Background",
+	"description": null,
+	"copyright": "Wixonic",
+	"download": true,
+	"link": null,
+	"author": "Wixonic",
+	"files": [
+		{
+			"path": "background.webp",
+			"width": 2048,
+			"height": 2048,
+			"size": 422906,
+			"format": "webp",
+			"codec": "WebP",
+			"mime": "webp"
+		}
+	]
+}
