@@ -1,15 +1,79 @@
 ---
 layout: main.njk
 title: Homepage | Wixonic
-description: Learn more about Wixonic.
+description: Learn more about me, my art, my projects and more
 styles:
 - index.css
 ---
 
+<header>
+
+	{% include "header.njk" %}
+
+</header>
+
 <main>
 
-	<h1>Seems like you are a little early...</h1>
+	<section class="news">
 
-	<a class="button" href="{{ path.links }}">Get notified</a>
+		<h2 class="hidden">News</h2>
+
+		<article class="news-article pinned">
+
+			<h3>A New Look</h3>
+
+			<img src="{{ path.assets }}/raw/image/background.webp" alt="A simple star background." />
+
+			<p>New identity, new website, new logo, new me</p>
+
+		</article>
+
+		<article class="news-article">
+
+			<h3>Another one</h3>
+
+			<img src="{{ path.assets }}/raw/image/background.webp" alt="A simple star background." />
+
+			<p>More and more news?! They keep duplicating!</p>
+
+		</article>
+
+		<article class="news-article">
+
+			<h3>Another one</h3>
+
+			<img src="{{ path.assets }}/raw/image/background.webp" alt="A simple star background." />
+
+			<p>More and more news?! They keep duplicating!</p>
+
+		</article>
+
+		<article class="news-article">
+
+			<h3>Another one</h3>
+
+			<img src="{{ path.assets }}/raw/image/background.webp" alt="A simple star background." />
+
+			<p>More and more news?! They keep duplicating!</p>
+
+		</article>
+
+		<a href="{{ path.root }}/newsroom">See more</a>
+
+	</section>
+
+	<iframe class="FLow" src="{{ path.flow }}/embeds/@Wixonic" title="FLow profile embed for @Wixonic" loading="lazy"></iframe>
+
+	<section class="projects">
+
+
+
+	</section>
 
 </main>
+
+<footer>
+
+	{% include "footer.njk" %}
+
+</footer>

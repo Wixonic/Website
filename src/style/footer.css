@@ -6,8 +6,6 @@ footer {
 	width: 100%;
 	height: var(--footer-height);
 
-	background: hsl(var(--deep-background));
-
 	color: hsla(var(--text), 60%);
 	font-size: 0.8rem;
 

@@ -34,7 +34,7 @@ button.primary,
 	background: hsl(var(--theme));
 	box-shadow: 0 0.25rem 0.5rem hsla(var(--theme), 0.25);
 
-	color: white;
+	color: black;
 
 	border-color: hsla(0, 0%, 100%, 0.1);
 }

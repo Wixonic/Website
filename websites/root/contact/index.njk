@@ -1,7 +1,7 @@
 ---
 layout: main.njk
 title: Contact | Wixonic
-description: Find help or contact me.
+description: Get in touch with Wixonic through various means including FLow, Discord, and email.
 styles:
 - index.css
 ---
@@ -14,36 +14,45 @@ styles:
 
 <main>
 
-	<section class="emergency">
+	<h1>Contact</h1>
 
-		<div class="title">Emergency</div>
+	<p class="subtext">Pick what fits your needs.</p>
 
-		<div class="toolbar vertical">
+	<section class="card">
 
-			<div class="toolbar">
+		<h2>Realtime FLow Connection <span class="badge"><span class="icon" data-icon="speedometer" data-style="fill"></span> Fast</span></h2>
 
-				<a id="emergency-112" href="tel:112" class="button primary">Call 112</a>
-				<a id="emergency-911" href="tel:911" class="button primary">Call 911</a>
+		<p class="subtext">Direct encrypted connection with <a href="{{ path.flow }}/user/@Wixonic" target="_blank" rel="noopener noreferrer">@Wixonic</a> on <a href="{{ path.flow }}" target="_blank" rel="noopener noreferrer">FLow</a>, typically answered within minutes.</p>
 
-			</div>
-
-			<a id="emergency-emotional" href="https://findahelpline.com" class="button primary" target="_blank" rel="noopener noreferrer">Free emotional support</a>
-
-		</div>
-
-		<p>Find your local emergency services on <a id="emergency-list" href="https://en.wikipedia.org/wiki/List_of_emergency_telephone_numbers" target="_blank" rel="noopener noreferrer">Wikipedia</a>.</p>
+		<iframe class="FLow" src="{{ path.flow }}/embeds/@Wixonic/contact" title="FLow contact embed for @Wixonic" loading="lazy"></iframe>
 
 	</section>
 
 	<section>
 
-		<h1>Need help?</h1>
+		<a class="card unlink" href="{{ path.links }}/help/discord" target="_blank" rel="noopener noreferrer">
 
-		<p>You can <a href="{{ path.links }}/help/discord" target="_blank">create a ticket on Discord</a>.</p>
+			<h2>Discord <span class="badge"><span class="icon" data-icon="speedometer" data-style="fill"></span> Medium</span></h2>
 
-		<p>If you prefer to contact me another way, you can <a href="mailto:contact@wixonic.fr">send me an email</a>.</p>
+			<p>Directly contact staff by creating a ticket in my Discord server, usually answered within a few hours.</p>
 
-		<p>If you have privacy concerns, you can send me an email at <a href="mailto:privacy@wixonic.fr">this privacy email address</a>.</p>
+		</a>
+
+		<a class="card unlink" href="mailto:contact@wixonic.fr">
+
+			<h2>Email <span class="badge"><span class="icon" data-icon="speedometer" data-style="fill"></span> Slow</span></h2>
+
+			<p>General inquiries and non-urgent matters, expect a reply within a few days.</p>
+
+		</a>
+
+		<a class="card unlink" href="mailto:privacy@wixonic.fr">
+
+			<h2>Privacy Inquiries <span class="badge"><span class="icon" data-icon="speedometer" data-style="fill"></span> Slow</span></h2>
+
+			<p>For privacy-related matters exclusively. Expect a reply within a few days.</p>
+
+		</a>
 
 	</section>
 

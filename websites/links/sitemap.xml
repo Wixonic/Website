@@ -26,6 +26,11 @@
         <priority>0.2</priority>
     </url>
 	<url>
+        <loc>https://flow.wixonic.fr/</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.5</priority>
+    </url>
+	<url>
         <loc>https://camera.wixonic.fr/</loc>
         <changefreq>never</changefreq>
         <priority>0.1</priority>

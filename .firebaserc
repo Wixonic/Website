@@ -8,6 +8,9 @@
 				"assets": [
 					"assets-wixonic-v5-website"
 				],
+				"flow": [
+					"flow-wixonic-v5-website"
+				],
 				"onion": [
 					"onion-wixonic-v5-website"
 				],

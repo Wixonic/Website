@@ -6,11 +6,12 @@
 
 body {
 	/* COLORS */
-	--background: 252, 42%, 98%;
-	--deep-background: 252, 42%, 95%;
+	--background: 0, 0%, 0%;
+	--deep-background: 0, 0%, 0%;
+	--deep-background-image: url("{{ path.assets }}/raw/image/background.webp");
 
-	--text: 0, 0%, 0%;
-	--theme: 252, 42%, 62%;
+	--text: 0, 0%, 100%;
+	--theme: 0, 0%, 100%;
 	/* COLORS */
 
 	/* FONTS */
@@ -72,6 +73,9 @@ body {
 	min-height: 100vh;
 
 	background: hsl(var(--deep-background));
+	background-image: var(--deep-background-image);
+	background-repeat: repeat;
+	background-size: 1024px;
 
 	color: hsl(var(--text));
 	font-family: var(--font-family);

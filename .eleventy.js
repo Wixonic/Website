@@ -78,9 +78,10 @@ export default (config) => {
 	const pathConfig = isEmulator ? {
 		root: "http://127.0.0.1:2005",
 		assets: "http://127.0.0.1:2010",
-		onion: "http://127.0.0.1:2011",
-		links: "http://127.0.0.1:2012",
-		status: "http://127.0.0.1:2013",
+		flow: "http://127.0.0.1:2011",
+		onion: "http://127.0.0.1:2012",
+		links: "http://127.0.0.1:2013",
+		status: "http://127.0.0.1:2014",
 
 		server: {
 			default: "http://127.0.0.1:1200",
@@ -100,6 +101,7 @@ export default (config) => {
 	} : {
 		root: "https://wixonic.fr",
 		assets: "https://assets.wixonic.fr",
+		flow: "https://flow.wixonic.fr",
 		onion: "https://onion.wixonic.fr",
 		links: "https://go.wixonic.fr",
 		status: "https://status.wixonic.fr",
@@ -205,7 +207,7 @@ export default (config) => {
 
 		await esbuild.build({
 			...esbuildOptions,
-			entryPoints: ["src/404.css", "src/404.js"],
+			entryPoints: ["src/404.css"],
 			outdir: "build/",
 			outbase: "src"
 		});
@@ -221,7 +223,6 @@ export default (config) => {
 		for (const siteName of websites) {
 			await fsp.copyFile("build/.generated/404/index.html", `build/${siteName}/404.html`);
 			await fsp.copyFile("build/404.css", `build/${siteName}/404.css`);
-			await fsp.copyFile("build/404.js", `build/${siteName}/404.js`);
 		}
 
 		await fsp.rm("websites/.generated", { recursive: true, force: true });

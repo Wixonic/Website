@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: *
+
+Content-Signal: ai-train=no, search=yes, ai-input=yes
+Sitemap: https://flow.wixonic.fr/sitemap.xml

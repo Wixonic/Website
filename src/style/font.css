@@ -82,3 +82,8 @@ h4 {
 	-webkit-user-select: text;
 	user-select: text;
 }
+
+.subtext {
+	color: color-mix(hsl(var(--text)) 50%, hsl(var(--background)) 50%);
+	font-size: 0.9em;
+}

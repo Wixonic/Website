@@ -57,6 +57,30 @@
 			]
 		},
 		{
+			"target": "flow",
+			"public": "./build/flow",
+			"ignore": [
+				".DS_Store"
+			],
+			"rewrites": [
+				{
+					"source": "**",
+					"destination": "/index.html"
+				}
+			],
+			"headers": [
+				{
+					"source": "**",
+					"headers": [
+						{
+							"key": "Cache-Control",
+							"value": "max-age=7200, must-revalidate"
+						}
+					]
+				}
+			]
+		},
+		{
 			"target": "onion",
 			"public": "./build/onion",
 			"ignore": [
