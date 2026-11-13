@@ -79,46 +79,23 @@ export default (config) => {
 		root: "http://127.0.0.1:2005",
 		assets: "http://127.0.0.1:2010",
 		flow: "http://127.0.0.1:2011",
-		onion: "http://127.0.0.1:2012",
-		links: "http://127.0.0.1:2013",
-		status: "http://127.0.0.1:2014",
+		links: "http://127.0.0.1:2012",
+		status: "http://127.0.0.1:2013",
 
 		server: {
 			default: "http://127.0.0.1:1200",
-			discord: "http://127.0.0.1:1201",
-			onion: "http://127.0.0.1:1202"
-		},
-
-		github: {
-			username: "Wixonic"
-		},
-
-		firebase: {
-			version: "12.13.0",
-			isEmulator: true,
-			firestore: { domain: "127.0.0.1", port: 2002 }
+			flow: "http://127.0.0.1:1201"
 		}
 	} : {
 		root: "https://wixonic.fr",
 		assets: "https://assets.wixonic.fr",
 		flow: "https://flow.wixonic.fr",
-		onion: "https://onion.wixonic.fr",
 		links: "https://go.wixonic.fr",
 		status: "https://status.wixonic.fr",
 
 		server: {
 			default: "https://server.wixonic.fr",
-			discord: "https://discord.wixonic.fr",
-			onion: "https://api.onion.wixonic.fr"
-		},
-
-		github: {
-			username: "Wixonic"
-		},
-
-		firebase: {
-			version: "12.13.0",
-			isEmulator: false
+			flow: "https://api.flow.wixonic.fr"
 		}
 	};
 

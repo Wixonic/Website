@@ -1,0 +1,19 @@
+{
+	"ready": true,
+	"type": "image",
+	"name": "Gravatar Icon",
+	"description": "Gravatar Brand Icon",
+	"copyright": "Automattic",
+	"download": true,
+	"link": "https://commons.wikimedia.org/wiki/File:Gravatar_Icon.svg",
+	"author": "Automattic",
+	"files": [
+		{
+			"path": "gravatar.svg",
+			"size": 259,
+			"format": "svg",
+			"codec": "Scalable Vector Graphics",
+			"mime": "svg+xml"
+		}
+	]
+}

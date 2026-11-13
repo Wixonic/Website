@@ -11,9 +11,6 @@
 				"flow": [
 					"flow-wixonic-v5-website"
 				],
-				"onion": [
-					"onion-wixonic-v5-website"
-				],
 				"links": [
 					"redirects-wixonic-v5-website"
 				],

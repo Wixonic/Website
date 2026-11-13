@@ -1,5 +1,5 @@
-import { join } from "/script/path.js";
-import { request } from "/script/request.js";
+/* import { join } from "/script/path.js";
+import { request } from "/script/request.js"; */
 
 /** @typedef {import("/types.d.ts").LoggerFunction} LoggerFunction */
 
@@ -12,14 +12,14 @@ const fatalError = (reason = "No reason", message = "No message", trace = "No tr
 	if (fatalMessageElement) fatalMessageElement.textContent = userFacingMessage;
 	if (fatalElement) fatalElement.classList.remove("hidden");
 
-	request("POST", join(path.server.default, "error"), "json", "application/json", JSON.stringify({
+	/* request("POST", join(path.server.default, "error"), "json", "application/json", JSON.stringify({
 		location: location.href,
 		reason,
 		message,
 		trace
 	})).catch((error) => {
 		warn("Failed to report error", error.message, error.stack);
-	});
+	}); */
 };
 
 /** @type {LoggerFunction} */
