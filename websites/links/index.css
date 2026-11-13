@@ -3,20 +3,7 @@ body {
 }
 
 main {
-	position: absolute;
-	inset: 0;
-
-	display: flex;
-	flex-direction: column;
-
-	width: 100vw;
-	max-width: unset;
-	height: 100vh;
-
 	background: transparent;
-
-	margin: 0;
-	padding: 0;
 
 	overflow-y: scroll;
 	scroll-snap-type: y mandatory;
@@ -27,4 +14,118 @@ main {
 
 main::-webkit-scrollbar {
 	display: none;
+}
+
+nav {
+	height: 100%;
+}
+
+nav .simple-links {
+	display: flex;
+	flex-direction: column;
+	justify-content: end;
+	align-items: center;
+
+	gap: 2rem;
+
+	height: 100%;
+}
+
+nav .simple-links .button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	width: 1.5em;
+	height: 1.5em;
+
+	background: hsl(var(--background));
+	box-shadow: none;
+
+	color: hsl(var(--text));
+	font-size: inherit;
+
+	border: 0.1rem solid hsla(var(--text), 10%);
+	border-radius: 1.5em;
+
+	margin: 0;
+	padding: 0;
+}
+
+nav .simple-links .primary {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	gap: 0.5rem;
+
+	font-size: 3rem;
+}
+
+nav .simple-links .secondary {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	gap: 0.5rem;
+
+	font-size: 1.7rem;
+}
+
+nav .simple-links .button[data-icon="youtube"] {
+	background: hsl(348, 100%, 50%);
+
+	color: white;
+}
+
+nav .simple-links .button[data-icon="github"] {
+	background: hsl(135, 11%, 7%);
+
+	color: white;
+}
+
+nav .simple-links .button[data-icon="discord"] {
+	background: hsl(0, 0%, 12%);
+
+	color: hsl(235, 86%, 65%);
+}
+
+nav .simple-links .button[data-icon="instagram"] {
+	background: black;
+
+	color: white;
+}
+
+nav .simple-links .button[data-icon="tiktok"] {
+	background: black;
+
+	color: white;
+}
+
+nav .simple-links .button[data-icon="twitch"] {
+	background: hsl(264, 100%, 64%);
+}
+
+nav .simple-links .button[data-icon="wakatime"] {
+	background: white;
+
+	color: hsl(223, 70%, 4%);
+}
+
+nav .simple-links .button[data-icon="reddit"] {
+	background: #FF4500;
+
+	color: white;
+}
+
+nav .simple-links .button[data-icon="osu"] {
+	background: hsl(333, 100%, 70%);
+
+	color: white;
+}
+
+nav .simple-links .button[data-icon="gravatar"] {
+	background: white;
+
+	color: hsl(222, 74%, 44%);
 }
