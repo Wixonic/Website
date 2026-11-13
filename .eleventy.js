@@ -9,21 +9,62 @@ export const config = {
 	htmlTemplateEngine: "njk"
 };
 
-const findFiles = async (directory, extensions) => {
+const getEntryType = async (entry, fullPath) => {
+	if (!entry.isSymbolicLink()) return { isDirectory: entry.isDirectory(), isFile: entry.isFile() };
+
+	try {
+		const stat = await fsp.stat(fullPath);
+		return { isDirectory: stat.isDirectory(), isFile: stat.isFile() };
+	} catch (error) {
+		return { isDirectory: false, isFile: false };
+	}
+};
+
+const findFiles = async (directory, extensions, visited = new Set()) => {
 	const results = [];
+
+	let realDirectory;
+	try {
+		realDirectory = await fsp.realpath(directory);
+	} catch (error) {
+		return results;
+	}
+
+	if (visited.has(realDirectory)) return results;
+	visited.add(realDirectory);
 
 	try {
 		const entries = await fsp.readdir(directory, { withFileTypes: true });
 
 		for (const entry of entries) {
 			const fullPath = path.join(directory, entry.name);
+			const { isDirectory, isFile } = await getEntryType(entry, fullPath);
 
-			if (entry.isDirectory()) results.push(...await findFiles(fullPath, extensions));
-			else if (extensions.some((extension) => entry.name.endsWith(extension))) results.push(fullPath);
+			if (isDirectory) results.push(...await findFiles(fullPath, extensions, visited));
+			else if (isFile && extensions.some((extension) => entry.name.endsWith(extension))) results.push(fullPath);
 		}
 	} catch (error) { }
 
 	return results;
+};
+
+const listWebsites = async () => {
+	const websites = [];
+
+	try {
+		const entries = await fsp.readdir("websites", { withFileTypes: true });
+
+		for (const entry of entries) {
+			if (entry.name.startsWith(".")) continue;
+
+			const fullPath = path.join("websites", entry.name);
+			const { isDirectory } = await getEntryType(entry, fullPath);
+
+			if (isDirectory) websites.push(entry.name);
+		}
+	} catch (error) { }
+
+	return websites;
 };
 
 const createPathTokenPlugin = (pathConfig) => ({
@@ -150,9 +191,7 @@ export default (config) => {
 		await fsp.copyFile("src/404.njk", "websites/.generated/404.njk");
 
 		console.log("[ESBuild] Starting build...");
-		const websites = (await fsp.readdir("websites", { withFileTypes: true }))
-			.filter((entry) => entry.isDirectory() && !entry.name.startsWith("."))
-			.map((entry) => entry.name);
+		const websites = await listWebsites();
 
 		for (const siteName of websites) {
 			const siteDirectory = path.resolve(`websites/${siteName}`);
@@ -193,9 +232,7 @@ export default (config) => {
 	});
 
 	config.on("eleventy.after", async () => {
-		const websites = (await fsp.readdir("websites", { withFileTypes: true }))
-			.filter((entry) => entry.isDirectory() && !entry.name.startsWith("."))
-			.map((entry) => entry.name);
+		const websites = await listWebsites();
 
 		for (const siteName of websites) {
 			await fsp.copyFile("build/.generated/404/index.html", `build/${siteName}/404.html`);
