@@ -15,16 +15,6 @@ declare global {
 		github: {
 			username: string;
 		};
-
-		firebase: {
-			version: string;
-			isEmulator: boolean;
-
-			firestore?: {
-				domain: string;
-				port: number;
-			};
-		};
 	};
 };
 

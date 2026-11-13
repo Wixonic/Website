@@ -1,9 +1,0 @@
-rules_version = "2";
-
-service firebase.storage {
-	match /b/{bucket}/o {
-		function hasRole(role) {
-			return request.auth != null && role in request.auth.token && request.auth.token[role] == true;
-		}
-	}
-}
